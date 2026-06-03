@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aurora"
+version = "0.1.0"
+description = "Audio Understanding, Reasoning and Orchestration Research Architecture"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "djzoom" }]
+keywords = ["audio", "dsp", "speech", "music", "asr", "tts", "llm", "rag"]
+dependencies = [
+    "numpy>=1.24",
+]
+
+[project.optional-dependencies]
+# Heavier stacks are opt-in so the Audio Core stays dependency-light.
+dev = ["pytest>=7", "pytest-cov", "ruff", "black"]
+speech = ["torch", "torchaudio"]
+music = ["torch", "torchaudio"]
+llm = ["torch", "transformers"]
+rag = ["faiss-cpu"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "UP", "B"]
+
+[tool.black]
+line-length = 88
+target-version = ["py310"]

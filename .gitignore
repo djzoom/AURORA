@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+
+# Testing / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.ruff_cache/
+.mypy_cache/
+
+# ML artifacts
+*.ckpt
+*.pt
+*.pth
+*.onnx
+*.safetensors
+wandb/
+mlruns/
+lightning_logs/
+outputs/
+checkpoints/
+
+# Data (keep large corpora out of git)
+data/
+datasets/
+*.wav
+*.flac
+*.mp3
+*.npy
+*.npz
+!tests/**/*.wav
+
+# Notebooks
+.ipynb_checkpoints/
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
+*.swp
