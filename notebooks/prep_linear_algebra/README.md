@@ -10,7 +10,22 @@ jupyter lab     # 打开 notebooks/prep_linear_algebra/，从 p1 开始
 
 按 `Shift+Enter` 一格格运行，看到 **✏️ TODO** 就动手填，下面的检查格会打 ✅。
 
-## 课程表
+## 🎨 图形化分册（v1–v3，强烈推荐先看）
+
+受 **《The Art of Linear Algebra》**(Hiranabe & Strang) 启发，用统一配色把线代
+**画出来**——适合图形化思维、辅助记忆。由 `laviz.py` 工具包驱动。
+
+| 笔记 | 画了什么 |
+|---|---|
+| `v1_visual_multiply` | 矩阵 4 种看法 · 内积/外积 · **矩阵×向量=列的线性组合** · 矩阵×矩阵=秩1之和 |
+| `v2_visual_factorizations` | 五大分解 `LU · QR · QΛQᵀ · UΣVᵀ` 的色块图 |
+| `v3_aurora_as_matrices` | **桥接 Aurora**：DFT=矩阵、mel 滤波器组=矩阵、`X=W·x` |
+
+> `laviz.py` 是一个可复用的可视化工具包：`from laviz import *; style()`，
+> 可在任何 notebook 里画 `matrix_4ways / vec_times_vec / mat_times_vec /
+> mat_times_mat_rank1 / show_factorization / heatmap`。会自动选用系统中文字体。
+
+## 课程表（公式/计算分册）
 
 `p1–p6` 建直觉（连到 Aurora）；`p7–p10` **对齐 CQF 课件并复现其原例题**。
 

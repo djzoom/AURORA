@@ -37,11 +37,14 @@ jupyter lab                  # 浏览器里打开，进入 notebooks/week01/
 | 课程 | 内容 | 主要服务于 |
 |---|---|---|
 | `prep_complex_trig/` | 正弦、复数、欧拉、傅里叶直觉 | DSP / FFT（Month 1） |
-| `prep_linear_algebra/` | 向量、点积、矩阵、SVD | 几乎所有模块 |
+| `prep_linear_algebra/` | 向量、点积、矩阵、SVD（+CQF 对齐 +图形化） | 几乎所有模块 |
 | `prep_calculus/` | 导数、梯度、链式、梯度下降 | 深度学习训练（Month 2+） |
 | `prep_probability/` | 随机、分布、softmax、交叉熵 | ML 损失与生成（Month 2+） |
 
 每门课的细目见各自文件夹的 `README.md`。
+
+> 🎨 **图形化分册**：`prep_linear_algebra/` 里的 `v1–v3` + `laviz.py` 工具包，
+> 受《The Art of Linear Algebra》启发，把线代画成图（含 DFT/mel 的矩阵视角）。
 
 ## Audio Core 实践
 
