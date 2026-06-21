@@ -1,7 +1,7 @@
 .PHONY: install test lint format demo clean
 
 install:
-	pip install -e ".[dev]"
+	pip install -e ".[dev,notebooks]"
 
 test:
 	python -m pytest
