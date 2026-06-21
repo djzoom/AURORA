@@ -12,14 +12,35 @@ jupyter lab     # 打开 notebooks/prep_linear_algebra/，从 p1 开始
 
 ## 课程表
 
-| 笔记 | 学什么 | 连到 Aurora 哪里 |
+`p1–p6` 建直觉（连到 Aurora）；`p7–p10` **对齐 CQF 课件并复现其原例题**。
+
+| 笔记 | 学什么 | 连到 Aurora / CQF 对应 |
 |---|---|---|
-| `p1_vectors` | 向量、加法、缩放、几何 | 音频 = 向量；调音量 = 缩放 |
-| `p2_dot_product` | 点积、余弦相似度 | 音乐推荐；DFT 频点 = 点积 |
-| `p3_norms` | 长度、距离、归一化 | 特征归一化；kNN 推荐 |
-| `p4_matrices` | 矩阵 = 线性变换、矩阵乘 | 神经网络层 `Wx`；DFT 矩阵 |
-| `p5_special_matrices` | 转置、逆、正交矩阵 | FFT/DCT 正交 → 可逆、能量守恒 |
-| `p6_eigen_svd` | 特征值、PCA、SVD、低秩 | embedding 降维；推荐；LoRA |
+| `p1_vectors` | 向量、加法、缩放、几何 | 音频 = 向量 · CQF §2.1 |
+| `p2_dot_product` | 点积、余弦相似度、夹角 | 音乐推荐 · CQF §2.1.1 |
+| `p3_norms` | 长度、距离、归一化 | 特征归一化 · CQF §2.1.2 |
+| `p4_matrices` | 矩阵 = 线性变换、矩阵乘 | 神经网络层 `Wx` · CQF §2.2.1-2 |
+| `p5_special_matrices` | 转置、逆、正交矩阵 | FFT/DCT 正交 · CQF §2.2.3 / §2.5 |
+| `p6_eigen_svd` | 特征值、PCA、SVD、低秩 | embedding 降维；LoRA |
+| `p7_linear_systems` | 高斯消元、初等行变换、解的分类 | 最小二乘 · **CQF §2.3-2.4** |
+| `p8_determinant_inverse` | 行列式、余子式、伴随求逆 | 可逆性、白化 · **CQF §2.3** |
+| `p9_eigen_diagonalization` | 特征方程、对角化 `PᵀAP=D` | PCA · **CQF §2.6** |
+| `p10_invertibility` | 行列式/特征值判据、对角占优 | 数值稳定性 · **CQF §2.6.1** |
+
+### 📘 与 CQF 课件的对应
+
+`p7–p10` 直接复现 CQF "Introduction to Linear Algebra" (Chapter 2) 的**原例题**
+（相同矩阵、相同答案），可当这门课的**代码版同伴**：
+
+| CQF 章节 | 内容 | 对应 notebook |
+|---|---|---|
+| §2.1 向量 / 点积 / 范数 | 向量、点积、长度、夹角、距离 | p1, p2, p3 |
+| §2.2 矩阵 / 乘法 / 转置 | 矩阵运算、转置、对称 | p4, p5 |
+| §2.3-2.4 解线性方程组 | 增广矩阵、高斯消元、解的分类 | **p7** |
+| §2.3 矩阵的逆 | 行列式、子式、代数余子式、伴随 | **p8** |
+| §2.5 正交矩阵 | 旋转/反射、`P⁻¹=Pᵀ` | p5 |
+| §2.6 特征值 | 特征方程、对角化 `PᵀAP=D` | **p9** |
+| §2.6.1 可逆性判据 | det≠0 / 特征值≠0 / 对角占优 | **p10** |
 
 ## 这门课覆盖了 Aurora 全部核心数学吗？
 
