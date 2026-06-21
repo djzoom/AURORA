@@ -14,3 +14,7 @@ jupyter lab    # 打开 notebooks/prep_calculus/，从 c1 开始
 | `c4_gradient_descent` | 沿梯度下山、学习率、拟合直线 | 所有模型训练的内核 |
 
 每课：讲解 → numpy 演示 → ✏️ 填空 → 自动判卷 → 🔗 Aurora 连接。
+
+## 🎨 图形化分册
+
+`v1_visual_calculus.ipynb`（由 `cviz.py` 驱动）：导数=切线斜率、一维/二维梯度下降轨迹、学习率对比。

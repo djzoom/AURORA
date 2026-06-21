@@ -14,3 +14,7 @@ jupyter lab    # 打开 notebooks/prep_complex_trig/，从 x1 开始
 | `x4_fourier_intuition` | 正弦叠加 = 信号；方波 | 傅里叶变换在做的事 |
 
 每课：讲解 → numpy 演示 → ✏️ 填空 → 自动判卷 → 🔗 Aurora 连接。
+
+## 🎨 图形化分册
+
+`v1_visual_complex.ipynb`（由 `xviz.py` 驱动）：欧拉单位圆、正弦三要素、复数极坐标、DFT 单位根、正弦叠加成方波。

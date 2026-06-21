@@ -35,6 +35,9 @@ addopts = "-q"
 [tool.ruff]
 line-length = 88
 target-version = "py310"
+# notebooks/ holds teaching aids (viz modules) with deliberately compact,
+# plot-heavy one-liners; library code under src/ is what CI lints.
+extend-exclude = ["notebooks"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "W", "UP", "B"]

@@ -83,12 +83,26 @@ C = mfcc(x, sample_rate=16000, n_mfcc=13)              # (frames, 13)
 
 ---
 
+## Learning track (`notebooks/`)
+
+A code-first, **graphical** path for building the project from the ground up —
+math prep (linear algebra, calculus, probability, complex/trig) with visual
+notebooks inspired by *The Art of Linear Algebra*, then the Audio Core in
+`week01/`. See [`docs/LEARNING_PLAN.md`](docs/LEARNING_PLAN.md),
+[`docs/prep-checklist.md`](docs/prep-checklist.md) and
+[`notebooks/README.md`](notebooks/README.md).
+
+```bash
+pip install -e ".[notebooks]" && jupyter lab   # then open notebooks/
+```
+
 ## Repository layout
 
 ```
 src/aurora/        # the package, one sub-package per core
 tests/             # pytest suite (DSP validated against numpy)
-docs/              # design notes, ADRs, blog drafts
+notebooks/         # code-first learning track (math prep + Audio Core)
+docs/              # learning plan, checklists, notes, ADRs, blog drafts
 scripts/           # runnable demos
 .github/workflows/ # CI
 ```

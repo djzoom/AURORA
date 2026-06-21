@@ -14,3 +14,7 @@ jupyter lab    # 打开 notebooks/prep_probability/，从 s1 开始
 | `s4_softmax_crossentropy` | softmax、交叉熵损失 | 分类器输出层 + 训练损失 |
 
 每课：讲解 → numpy 演示 → ✏️ 填空 → 自动判卷 → 🔗 Aurora 连接。
+
+## 🎨 图形化分册
+
+`v1_visual_probability.ipynb`（由 `sviz.py` 驱动）：大数定律、均匀vs正态、高斯钟形、z-score 前后、softmax 柱状、交叉熵曲线。
