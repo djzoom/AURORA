@@ -13,11 +13,37 @@ jupyter lab                  # 浏览器里打开，进入 notebooks/week01/
 
 ## 用法
 
-- 进入 `week01/`，从 `day1_numpy.ipynb` 开始，按 `Shift+Enter` 一格格运行。
-- 看到 **✏️ TODO** 的代码格 = 你要改的地方；改完运行，下面的检查格会打 ✅ 或报错。
+- 按 `Shift+Enter` 一格格运行；看到 **✏️ TODO** 的代码格 = 你要改的地方，
+  改完运行，下面的检查格会打 ✅ 或报错。
 - 配套宏观地图：`docs/LEARNING_PLAN.md`；逐日清单：`docs/week-01-checklist.md`。
 
-## 目录
+## 学习顺序
+
+```
+① 数学前导（先打地基）        ② Audio Core 实践
+   prep_complex_trig  ─┐         week01/  day1 → day5
+   prep_linear_algebra ├─→ ──→   （信号 / FFT / mel / MFCC）
+   prep_calculus  ────┤              ↓
+   prep_probability ──┘          Month 1 吃透 Audio Core ...
+```
+
+**建议路径**：先过 `prep_complex_trig` + `prep_linear_algebra`（撑起 Audio Core），
+再做 `week01`；`prep_calculus` + `prep_probability` 可在快进 Month 2（深度学习）前补。
+
+## 数学前导课程（代码优先）
+
+四块地基，**足以支撑 Aurora 普通工程的核心数学**：
+
+| 课程 | 内容 | 主要服务于 |
+|---|---|---|
+| `prep_complex_trig/` | 正弦、复数、欧拉、傅里叶直觉 | DSP / FFT（Month 1） |
+| `prep_linear_algebra/` | 向量、点积、矩阵、SVD | 几乎所有模块 |
+| `prep_calculus/` | 导数、梯度、链式、梯度下降 | 深度学习训练（Month 2+） |
+| `prep_probability/` | 随机、分布、softmax、交叉熵 | ML 损失与生成（Month 2+） |
+
+每门课的细目见各自文件夹的 `README.md`。
+
+## Audio Core 实践
 
 ```
 week01/
