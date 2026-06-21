@@ -260,6 +260,27 @@ def show_factorization(A, mats, names, modes=None, title="矩阵分解"):
     return fig
 
 
+def arrows2d(vectors, labels=None, title=None, figsize=(5, 5)):
+    """把若干 2D 向量画成从原点出发的箭头(配色统一)。"""
+    style()
+    vs = [np.asarray(v, float).ravel() for v in vectors]
+    fig, ax = plt.subplots(figsize=figsize)
+    for i, v in enumerate(vs):
+        c = PALETTE[i % len(PALETTE)]
+        ax.annotate("", xy=(v[0], v[1]), xytext=(0, 0),
+                    arrowprops=dict(arrowstyle="-|>", color=c, lw=2.8))
+        if labels:
+            ax.text(v[0] * 1.06, v[1] * 1.06, labels[i], color=c,
+                    fontweight="bold", fontsize=11)
+    m = max(2.0, np.abs(np.array(vs)).max() * 1.35)
+    ax.set_xlim(-m, m); ax.set_ylim(-m, m); ax.set_aspect("equal")
+    ax.axhline(0, color="#ccc", lw=.8); ax.axvline(0, color="#ccc", lw=.8)
+    ax.grid(alpha=.3)
+    if title:
+        ax.set_title(title, fontweight="bold", color=INK)
+    fig.tight_layout(); return fig
+
+
 def heatmap(M, title=None, cmap="viridis", figsize=(6, 4), colorbar=True):
     """大矩阵用热力图(如 DFT 矩阵、mel 滤波器组)。"""
     style()
