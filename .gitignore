@@ -47,5 +47,5 @@ datasets/
 .vscode/
 *.swp
 
-# Week-1 learning exercise figures (generated locally)
-scripts/learn/figs/
+# Jupyter
+.ipynb_checkpoints/
