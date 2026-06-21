@@ -56,3 +56,6 @@ week01/
 ├── day4_euler.ipynb      复数 / 欧拉公式 / FFT 旋转因子
 └── day5_windows.ipynb    读 io.py·windows.py，对比窗函数
 ```
+
+> 🎨 每天末尾配一张统一观感的图（由 `week01/aviz.py` 驱动，用 Aurora 自己的 DSP）：
+> 波形/采样、混叠、旋转因子、窗函数，以及 day5 的 **STFT 分帧 → 频谱 → mel 滤波**。
