@@ -21,42 +21,42 @@ training, no DSP, no systems — that has near-zero interview value.
 
 ---
 
-## Month 1 — Audio Core  ·  *Audio Analysis Engine*
+## Phase 1 — Audio Core  ·  *Audio Analysis Engine*  `notebooks/5_audio_dsp/` L32–L53
 Code is already written (`src/aurora/audio/`); the goal is to **understand it to
-the point you could re-derive every line from a blank file**. Weekly detail in
-`docs/week-NN-checklist.md`.
+the point you could re-derive every line from a blank file**.
+Daily detail in `docs/week-01-checklist.md` (L32–L42) and `docs/week-02-checklist.md` (L37–L42).
 - [x] FFT / DFT / IFFT from scratch (radix-2 Cooley-Tukey), validated vs numpy
 - [x] Windows (Hann/Hamming/Blackman), STFT, magnitude & power spectrograms
 - [x] Mel scale + triangular filterbank, log-mel, MFCC (own DCT-II)
 - [x] WAV I/O from scratch, signal generators, test suite, CI
-- [ ] **W1** Signals, sampling, complex numbers / Euler; read `io.py`, `windows.py`
-- [ ] **W2** Re-implement `transforms.py` from blank; blog: "Writing the FFT from scratch"
-- [ ] **W3** Re-implement `stft.py`/`mel.py`; spectrogram visualization CLI (real heatmaps)
-- [ ] **W4** MFCC/DCT; MFCC on real LibriSpeech audio (cross-checked vs librosa); add a feature
+- [ ] **L32–L36** Signals, sampling, complex numbers / Euler; read `io.py`, `windows.py`
+- [ ] **L37–L42** Re-implement `transforms.py` from blank; blog: "Writing the FFT from scratch"
+- [ ] **L43–L48** Re-implement `stft.py`/`mel.py`; spectrogram visualization CLI (real heatmaps)
+- [ ] **L49–L53** MFCC/DCT; MFCC on real LibriSpeech audio (cross-checked vs librosa); add a feature
 
-## Month 2 — ML / Deep-Learning Foundations  ·  *First Trained Model*
-- [ ] From-scratch autograd + MLP, backprop by hand (Karpathy "Zero to Hero")
-- [ ] PyTorch fundamentals; CNN / RNN / attention basics
-- [ ] Train a keyword-spotting classifier on Speech Commands using **your own mel features**
+## Phase 2 — ML / Deep-Learning Foundations  ·  *First Trained Model*  `notebooks/6_deep_learning/` L54–L65
+- [ ] From-scratch autograd + MLP, backprop by hand (Karpathy "Zero to Hero")  → L54–L58
+- [ ] PyTorch fundamentals; CNN / RNN / attention basics  → L59–L61
+- [ ] Train a keyword-spotting classifier on Speech Commands using **your own mel features**  → L62–L64
 - [ ] Blog: from linear regression to backprop, in your own words
 
-## Month 3 — Speech Core (ASR)  ·  *Caption Engine*
+## Phase 3 — Speech Core (ASR)  ·  *Caption Engine*  `notebooks/7_asr/` L66–L71
 - [ ] CTC loss + attention internals; WER evaluation harness
 - [ ] Whisper-small fine-tune on LibriSpeech (cloud GPU)
 - [ ] (stretch) streaming ASR with chunked / causal attention
 
-## Month 4 — Music Core  ·  *Music Intelligence Engine*  (your strength area)
+## Phase 4 — Music Core  ·  *Music Intelligence Engine*  `notebooks/8_music/` L72–L76
 - [ ] Music embedding model (song → vector), à la Spotify
 - [ ] Recommendation: user likes → neighbors → recommendations
 - [ ] (stretch) MusicGen fine-tune
 
-## Month 5 — LLM + RAG + Agent  ·  *Podcast Intelligence Engine*
+## Phase 5 — LLM + RAG + Agent  ·  *Podcast Intelligence Engine*  `notebooks/9_llm/` L77–L82
 - [ ] Local inference: Llama / Qwen / Mistral (no GPT API)
 - [ ] Transformer/attention internals, LoRA fine-tuning
 - [ ] RAG over audiobooks / music theory / podcasts (FAISS)
 - [ ] Podcast Agent
 
-## Month 6 — Integration + Cloud + MLOps  ·  *Aurora v1*
+## Phase 6 — Integration + Cloud + MLOps  ·  *Aurora v1*  `notebooks/10_integration/` L83–L85
 - [ ] Polish **one** end-to-end demo (e.g. mic → ASR → LLM response)
 - [ ] Docker, CI/CD, Weights & Biases experiment tracking, basic monitoring
 - [ ] Aurora v1 deployed; package the evidence chain for interviews

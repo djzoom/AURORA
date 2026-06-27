@@ -1,61 +1,195 @@
-# notebooks/ — 交互式教学
+# notebooks/ — 85 节交互式音频 AI 课程
 
-用 Jupyter 一格一格地学：左边读讲解、右边改代码、立刻看输出。比 `.py` 脚本更适合入门。
+用 Jupyter 一格一格地学：左边读讲解、右边改代码、立刻看输出。
 
 ## 启动
 
 ```bash
-make install                 # 含 Jupyter（notebooks 这个可选依赖）
-# 或单独装: pip install -e ".[notebooks]"
-
-jupyter lab                  # 浏览器里打开，进入 notebooks/week01/
+cd /Users/z/AURORA
+python -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev,notebooks]"
+python -m ipykernel install --user --name aurora --display-name "Python (AURORA)"
+jupyter lab
 ```
+
+打开 Notebook 后在右上角选内核 `Python (AURORA)`。如果内核列表里没有，先完成 L01。
 
 ## 用法
 
-- 按 `Shift+Enter` 一格格运行；看到 **✏️ TODO** 的代码格 = 你要改的地方，
-  改完运行，下面的检查格会打 ✅ 或报错。
-- 配套宏观地图：`docs/LEARNING_PLAN.md`；逐日清单：`docs/week-01-checklist.md`。
+按 `Shift+Enter` 逐格运行。看到 **✏️ TODO** = 你要填的代码；填完运行，下面的检查格打 ✅ 或报错。
 
-## 学习顺序
+---
 
-```
-① 数学前导（先打地基）        ② Audio Core 实践
-   prep_complex_trig  ─┐         week01/  day1 → day5
-   prep_linear_algebra ├─→ ──→   （信号 / FFT / mel / MFCC）
-   prep_calculus  ────┤              ↓
-   prep_probability ──┘          Month 1 吃透 Audio Core ...
-```
+## 课程序列（L01 → L85）
 
-**建议路径**：先过 `prep_complex_trig` + `prep_linear_algebra`（撑起 Audio Core），
-再做 `week01`；`prep_calculus` + `prep_probability` 可在快进 Month 2（深度学习）前补。
+### 🏁 Phase 0 · 基础前导  `0_foundation/`  L01–L03
 
-## 数学前导课程（代码优先）
+| 课号 | 课程标题 |
+|---|---|
+| L01 | 点燃引擎 — 搭建你的 AI 研究环境 |
+| L02 | 万物皆数 — Python 与 NumPy 极速入门 |
+| L03 | 鸟瞰全局 — 从正弦波到大语言模型 |
 
-四块地基，**足以支撑 Aurora 普通工程的核心数学**：
+---
 
-| 课程 | 内容 | 主要服务于 |
-|---|---|---|
-| `prep_complex_trig/` | 正弦、复数、欧拉、傅里叶直觉 | DSP / FFT（Month 1） |
-| `prep_linear_algebra/` | 向量、点积、矩阵、SVD（+CQF 对齐 +图形化） | 几乎所有模块 |
-| `prep_calculus/` | 导数、梯度、链式、梯度下降 | 深度学习训练（Month 2+） |
-| `prep_probability/` | 随机、分布、softmax、交叉熵 | ML 损失与生成（Month 2+） |
+### 📐 Phase 1 · 复数与三角  `1_complex_trig/`  L04–L08
 
-每门课的细目见各自文件夹的 `README.md`。
+| 课号 | 课程标题 |
+|---|---|
+| L04 | 声音的骨架 — 正弦波三要素 |
+| L05 | 旋转即数字 — 复数的几何本质 |
+| L06 | 大自然最美公式 — 欧拉公式 |
+| L07 | 万物皆正弦 — 傅里叶直觉 |
+| L08 🎨 | 看见旋转 — 复数平面可视化 |
 
-> 🎨 **图形化分册**：`prep_linear_algebra/` 里的 `v1–v3` + `laviz.py` 工具包，
-> 受《The Art of Linear Algebra》启发，把线代画成图（含 DFT/mel 的矩阵视角）。
+---
 
-## Audio Core 实践
+### 🔢 Phase 2 · 线性代数  `2_linear_algebra/`  L09–L21
 
-```
-week01/
-├── day1_numpy.ipynb      时间轴 / numpy 流畅度
-├── day2_sine.ipynb       自己实现正弦波，和仓库对答案
-├── day3_aliasing.ipynb   Nyquist 与混叠
-├── day4_euler.ipynb      复数 / 欧拉公式 / FFT 旋转因子
-└── day5_windows.ipynb    读 io.py·windows.py，对比窗函数
-```
+| 课号 | 课程标题 |
+|---|---|
+| L09 | 有方向的量 — 向量代数 |
+| L10 | 听懂相似 — 点积与投影 |
+| L11 | 量化距离 — 向量范数 |
+| L12 | 空间变换机器 — 矩阵乘法 |
+| L13 | 矩阵特工 — 正交、对称与正定 |
+| L14 | 矩阵的灵魂 — 特征值与 SVD |
+| L15 | 方程组求解 — 高斯消元 |
+| L16 | 翻转矩阵 — 行列式与逆 |
+| L17 | 换个坐标系 — 特征分解 |
+| L18 | 奇异点分析 — 可逆性与秩 |
+| L19 🎨 | 变换可见 — 矩阵乘法图解 |
+| L20 🎨 | 分解图谱 — LU / QR / SVD 图解 |
+| L21 🎨 | 矩阵即滤波 — Aurora 的线代视角 |
 
-> 🎨 每天末尾配一张统一观感的图（由 `week01/aviz.py` 驱动，用 Aurora 自己的 DSP）：
-> 波形/采样、混叠、旋转因子、窗函数，以及 day5 的 **STFT 分帧 → 频谱 → mel 滤波**。
+---
+
+### ∂ Phase 3 · 微积分  `3_calculus/`  L22–L26
+
+| 课号 | 课程标题 |
+|---|---|
+| L22 | 瞬间的斜率 — 导数 |
+| L23 | 多维下坡 — 梯度 |
+| L24 | 误差回传 — 链式法则 |
+| L25 | 下山算法 — 梯度下降 |
+| L26 🎨 | 看见下山 — 微积分可视化 |
+
+---
+
+### 🎲 Phase 4 · 概率统计  `4_probability/`  L27–L31
+
+| 课号 | 课程标题 |
+|---|---|
+| L27 | 不确定中找规律 — 概率基础 |
+| L28 | 数据的画像 — 均值、方差与标准化 |
+| L29 | 随机的形状 — 常见概率分布 |
+| L30 | 神经网络的裁判 — Softmax 与交叉熵 |
+| L31 🎨 | 分布可见 — 概率与损失可视化 |
+
+---
+
+### 🔊 Phase 5 · Audio DSP  `5_audio_dsp/`  L32–L53
+
+| 课号 | 课程标题 |
+|---|---|
+| L32 | 信号的语言 — NumPy 信号操作基础 |
+| L33 | 制造声音 — 正弦波生成与采样 |
+| L34 | 声音的幻觉 — Nyquist 定理与混叠 |
+| L35 | 旋转因子 — 欧拉公式遇见 FFT |
+| L36 | 减少泄漏 — 窗函数原理与实战 |
+| L37 | 频率解码 — DFT 暴力实现 |
+| L38 | 蝴蝶之翼 — FFT 蝶形分治 |
+| L39 | 亲手写 FFT — Cooley-Tukey 实现 |
+| L40 | 看见频率 — 频谱分析实战 |
+| L41 | 加窗全流程 — 完整 FFT 管线 |
+| L42 🎨 | 频谱可见 — FFT 图形化 |
+| L43 | 给声音加时间戳 — STFT 原理 |
+| L44 | 亲手写 STFT — 分帧 + 加窗 + FFT |
+| L45 | 声音的照片 — 声谱图生成 |
+| L46 | 像耳朵一样听 — Mel 频率尺度 |
+| L47 | 亲手写 Mel — 三角滤波器组 |
+| L48 🎨 | 时频图解 — STFT 与 Mel 谱可视化 |
+| L49 | 去相关 — DCT 离散余弦变换 |
+| L50 | 声音的 DNA — MFCC 完整流水线 |
+| L51 | 真实世界 — MFCC 工程实战 |
+| L52 | 特征提取收口 — Audio Core 完结 |
+| L53 🎨 | 系数可见 — MFCC 图形化 |
+
+---
+
+### 🧠 Phase 6 · 深度学习  `6_deep_learning/`  L54–L65
+
+| 课号 | 课程标题 |
+|---|---|
+| L54 | 从零微分 — Value 计算图 |
+| L55 | 信号向前 — 前向传播拆解 |
+| L56 | 误差向后 — 反向传播手推 |
+| L57 | 搭起神经网 — MLP 从零实现 |
+| L58 | 让模型学习 — 训练循环 |
+| L59 | PyTorch 破冰 — Tensor 基础 |
+| L60 | 自动求梯度 — autograd 机制 |
+| L61 | 搭层用层 — nn.Module 实战 |
+| L62 | 喂数据 — Dataset 与 DataLoader |
+| L63 | 听声分类 — 音频分类模型 |
+| L64 | 打通训练 — 评估与混淆矩阵 |
+| L65 🎨 | 训练可见 — Loss 曲线与梯度流 |
+
+---
+
+### 🎙️ Phase 7 · 语音识别  `7_asr/`  L66–L71
+
+| 课号 | 课程标题 |
+|---|---|
+| L66 | 机器听懂话 — ASR 系统全览 |
+| L67 | 对齐之道 — CTC 损失原理 |
+| L68 | Whisper 解剖 — Encoder-Decoder 架构 |
+| L69 | 让 Whisper 听中文 — LoRA 微调 |
+| L70 | 错哪儿了 — WER 评估与误差分析 |
+| L71 🎨 | 声文之路 — ASR 流水线图形化 |
+
+---
+
+### 🎵 Phase 8 · 音乐理解  `8_music/`  L72–L76
+
+| 课号 | 课程标题 |
+|---|---|
+| L72 | 音乐的特征脸 — 色度、节拍与能量 |
+| L73 | 歌曲变向量 — 音乐嵌入 |
+| L74 | 找相似的歌 — 向量检索 |
+| L75 | 你可能也喜欢 — 音乐推荐系统 |
+| L76 🎨 | 相似地图 — 音乐特征可视化 |
+
+---
+
+### 💬 Phase 9 · LLM + RAG  `9_llm/`  L77–L82
+
+| 课号 | 课程标题 |
+|---|---|
+| L77 | 注意力机制 — Transformer 从零复现 |
+| L78 | 低秩微调 — LoRA 原理与实现 |
+| L79 | 让大模型本地跑 — 推理引擎 |
+| L80 | 检索增强 — RAG 流水线 |
+| L81 | 会用工具的 AI — Agent 实现 |
+| L82 🎨 | 注意力可见 — Transformer 图解 |
+
+---
+
+### 🚀 Phase 10 · 整合交付  `10_integration/`  L83–L85
+
+| 课号 | 课程标题 |
+|---|---|
+| L83 | 流水线集成 — 语音到语言 |
+| L84 | 工程化你的 AI — MLOps 基础 |
+| L85 | 压轴演出 — Aurora v1 全景 Demo |
+
+---
+
+## 配套文档
+
+- 宏观路线：`docs/LEARNING_PLAN.md`
+- 里程碑追踪：`ROADMAP.md`
+- 数学前导打卡：`docs/prep-checklist.md`
+- DSP 阶段打卡：`docs/week-01-checklist.md`（L32–L36）、`docs/week-02-checklist.md`（L37–L42）
+
+> 🎨 标记的课程为图形化视觉课，无编码任务，通过参数实验建立直觉。
