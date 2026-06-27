@@ -1,4 +1,4 @@
-# notebooks/ — 85 节交互式音频 AI 课程
+# notebooks/ — 94 节交互式音频 AI 课程
 
 用 Jupyter 一格一格地学：左边读讲解、右边改代码、立刻看输出。
 
@@ -21,7 +21,7 @@ jupyter lab
 
 ---
 
-## 课程序列（L01 → L85）
+## 课程序列（L01 → L94）
 
 ### 🏁 Phase 0 · 基础前导  `0_foundation/`  L01–L03
 
@@ -137,51 +137,60 @@ jupyter lab
 
 ---
 
-### 🎙️ Phase 7 · 语音识别  `7_asr/`  L66–L71
+### 🎙️ Phase 7 · 语音识别  `7_asr/`  L66–L75
 
 | 课号 | 课程标题 |
 |---|---|
 | L66 | ASR 系统全览 — 声学模型 → 语言模型 → 解码器，端到端 vs 经典流水线 |
-| L67 | CTC 损失 — 不固定位置的序列对齐，前向算法计算 P(y\|x) |
-| L68 | Whisper 架构解析 — Log-Mel 输入、Transformer Encoder-Decoder、多任务头 |
-| L69 | Whisper 微调 — LoRA 低秩注入 vs 全参数，中文 / 方言数据适配实战 |
-| L70 | WER 评估 — 词错误率（插入 / 删除 / 替换），jiwer 对比逐句分析 |
-| L71 🎨 | ASR 流水线图形化 — 波形 → 声谱图 → token → 文字路径可视化 |
+| L67 | Edit Distance 从零实现 — Levenshtein 动态规划，WER 的数学基础 |
+| L68 | CTC 对齐原理 — blank 符号、单调路径与标签折叠 |
+| L69 | CTC 前向算法 — 所有路径概率求和，O(T×2L) 纯 NumPy 实现 |
+| L70 | Whisper 架构解析 — Log-Mel 输入、Transformer Encoder-Decoder、多任务头 |
+| L71 | Whisper 解码策略 — 贪婪解码与 beam search 从原理到实现 |
+| L72 | Whisper 微调 — LoRA 低秩注入 vs 全参数，中文 / 方言数据适配实战 |
+| L73 | WER 评估 — 词错误率（插入 / 删除 / 替换），jiwer 对比逐句分析 |
+| L74 | ASR 错误分析 — 替换/删除/插入模式，从 WER 到可改进方向 |
+| L75 🎨 | ASR 流水线图形化 — 波形 → 声谱图 → token → 文字路径可视化 |
 
 ---
 
-### 🎵 Phase 8 · 音乐理解  `8_music/`  L72–L76
+### 🎵 Phase 8 · 音乐理解  `8_music/`  L76–L82
 
 | 课号 | 课程标题 |
 |---|---|
-| L72 | 音乐特征工程 — 色度（chroma）、节拍、RMS 能量、过零率提取 |
-| L73 | 音乐嵌入向量 — 对比学习：相似风格靠近，不同流派拉远 |
-| L74 | 向量相似度检索 — 余弦相似度 vs 点积 vs L2，FAISS 暴力搜索 |
-| L75 | 音乐推荐系统 — 用户喜好 → 嵌入向量 → k-NN 邻居 → 推荐列表 |
-| L76 🎨 | 音乐特征可视化 — 色度图、节拍图、相似度热力图动态展示 |
+| L76 | 音乐理论速成 — 音高、音程、色度轮与十二平均律 |
+| L77 | 音乐特征工程 — chroma、RMS 能量、ZCR，调用 aurora.music 从零实现 |
+| L78 | 节拍追踪从零实现 — onset 包络、自相关与 BPM 估计 |
+| L79 | 音乐嵌入向量 — 对比学习：相似风格靠近，不同流派拉远 |
+| L80 | 向量相似度检索 — 余弦相似度 vs 点积 vs L2，纯 NumPy k-NN 实现 |
+| L81 | 音乐推荐系统 — 用户喜好 → 嵌入向量 → k-NN 邻居 → 推荐列表 |
+| L82 🎨 | 音乐特征可视化 — 色度图、节拍图、相似度热力图动态展示 |
 
 ---
 
-### 💬 Phase 9 · LLM + RAG  `9_llm/`  L77–L82
+### 💬 Phase 9 · LLM + RAG  `9_llm/`  L83–L91
 
 | 课号 | 课程标题 |
 |---|---|
-| L77 | Transformer 从零复现 — 多头注意力 + 位置编码 + Feed-Forward 完整实现 |
-| L78 | LoRA 低秩适配 — W = W₀ + BA，用 0.1% 参数量精调 GPT-style 模型 |
-| L79 | 本地大模型推理 — KV-Cache 原理、top-k / top-p 采样、量化推理 |
-| L80 | RAG 流水线 — 文档切片 → embedding → FAISS 检索 → LLM 生成 + 引用 |
-| L81 | Tool-calling Agent — 工具定义、函数调用解析、多步推理循环 |
-| L82 🎨 | 注意力图解 — 多头注意力权重热力图，LoRA 低秩结构可视化 |
+| L83 | Transformer 从零复现 — 多头注意力 + 位置编码 + Feed-Forward 完整实现 |
+| L84 | LoRA 低秩适配 — W = W₀ + BA，用 0.1% 参数量精调 GPT-style 模型 |
+| L85 | KV-Cache 从零实现 — 键值缓存矩阵更新，O(seq²)→O(seq) 加速 |
+| L86 | 采样策略从零实现 — temperature / top-k / top-p，纯 NumPy |
+| L87 | 量化与本地推理 — INT8 量化原理，连接 HuggingFace 轻量推理 |
+| L88 | TF-IDF 检索从零实现 — 词频逆文档频率，纯 NumPy 向量检索 |
+| L89 | RAG 完整流水线 — 文档切片 + TF-IDF 检索 + 提示词构建 + 生成 |
+| L90 | Tool-calling Agent — 工具定义、函数调用解析、多步推理循环 |
+| L91 🎨 | 注意力图解 — 多头注意力权重热力图，LoRA 低秩结构可视化 |
 
 ---
 
-### 🚀 Phase 10 · 整合交付  `10_integration/`  L83–L85
+### 🚀 Phase 10 · 整合交付  `10_integration/`  L92–L94
 
 | 课号 | 课程标题 |
 |---|---|
-| L83 | 端到端流水线 — 麦克风 → ASR → LLM → 文本回答，全链路组装 |
-| L84 | MLOps 基础 — W&B 实验追踪、模型版本管理、Docker 打包与部署脚本 |
-| L85 | Aurora v1 全景 Demo — 综合展示所有能力，面试材料与证据链整理 |
+| L92 | 端到端流水线 — 麦克风 → ASR → LLM → 文本回答，全链路组装 |
+| L93 | MLOps 基础 — W&B 实验追踪、模型版本管理、Docker 打包与部署脚本 |
+| L94 | Aurora v1 全景 Demo — 综合展示所有能力，面试材料与证据链整理 |
 
 ---
 

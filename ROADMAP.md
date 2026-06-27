@@ -40,23 +40,30 @@ Daily detail in `docs/week-01-checklist.md` (L32–L42) and `docs/week-02-checkl
 - [ ] Train a keyword-spotting classifier on Speech Commands using **your own mel features**  → L62–L64
 - [ ] Blog: from linear regression to backprop, in your own words
 
-## Phase 3 — Speech Core (ASR)  ·  *Caption Engine*  `notebooks/7_asr/` L66–L71
-- [ ] CTC loss + attention internals; WER evaluation harness
-- [ ] Whisper-small fine-tune on LibriSpeech (cloud GPU)
+## Phase 3 — Speech Core (ASR)  ·  *Caption Engine*  `notebooks/7_asr/` L66–L75
+- [ ] Edit distance from scratch (Levenshtein DP) → L67; WER evaluation harness → L73
+- [ ] CTC alignment intuition + forward algorithm (pure NumPy) → L68–L69
+- [ ] Whisper architecture + decoding strategies (greedy / beam search) → L70–L71
+- [ ] Whisper-small fine-tune on LibriSpeech (cloud GPU) → L72
+- [ ] ASR error analysis: substitution / deletion / insertion patterns → L74
 - [ ] (stretch) streaming ASR with chunked / causal attention
 
-## Phase 4 — Music Core  ·  *Music Intelligence Engine*  `notebooks/8_music/` L72–L76
-- [ ] Music embedding model (song → vector), à la Spotify
-- [ ] Recommendation: user likes → neighbors → recommendations
+## Phase 4 — Music Core  ·  *Music Intelligence Engine*  `notebooks/8_music/` L76–L82
+- [ ] Music theory primer: pitch classes, chroma wheel, MIDI ↔ Hz → L76
+- [ ] From-scratch features: chromagram, onset envelope, beat tracking (aurora.music) → L77–L78
+- [ ] Music embedding model (song → vector), contrastive learning → L79
+- [ ] Similarity search + recommendation: pure NumPy k-NN (no faiss) → L80–L81
 - [ ] (stretch) MusicGen fine-tune
 
-## Phase 5 — LLM + RAG + Agent  ·  *Podcast Intelligence Engine*  `notebooks/9_llm/` L77–L82
-- [ ] Local inference: Llama / Qwen / Mistral (no GPT API)
-- [ ] Transformer/attention internals, LoRA fine-tuning
-- [ ] RAG over audiobooks / music theory / podcasts (FAISS)
-- [ ] Podcast Agent
+## Phase 5 — LLM + RAG + Agent  ·  *Podcast Intelligence Engine*  `notebooks/9_llm/` L83–L91
+- [ ] Transformer from scratch; LoRA low-rank adaptation → L83–L84
+- [ ] KV-Cache from scratch (pure NumPy) → L85; sampling strategies (top-k/top-p) → L86
+- [ ] INT8 quantization from scratch; optional HuggingFace local inference → L87
+- [ ] TF-IDF retrieval from scratch (no faiss, no sentence-transformers) → L88
+- [ ] RAG pipeline: chunk → TF-IDF index → cosine retrieve → prompt → generate → L89
+- [ ] Tool-calling Agent → L90
 
-## Phase 6 — Integration + Cloud + MLOps  ·  *Aurora v1*  `notebooks/10_integration/` L83–L85
+## Phase 6 — Integration + Cloud + MLOps  ·  *Aurora v1*  `notebooks/10_integration/` L92–L94
 - [ ] Polish **one** end-to-end demo (e.g. mic → ASR → LLM response)
 - [ ] Docker, CI/CD, Weights & Biases experiment tracking, basic monitoring
 - [ ] Aurora v1 deployed; package the evidence chain for interviews
