@@ -1,6 +1,11 @@
 # 10岁儿童视角通关测试报告（数学能力尚可版）
 
-测试对象：`/Users/z/AURORA/notebooks/` 下全部 33 个 notebook。
+> ⚠️ **历史文档**：本报告针对旧命名方案（`prep_complex_trig/x1_trig.ipynb` 等）编写。
+> 现行课程已全面重命名为 L01–L94 体系，开场五课为 L01_motivation / L02_sound_digital /
+> L03_spectrogram / L04_trig / L05_complex_numbers。报告结论与建议仍有参考价值，
+> 但文件路径与当前结构不符，请以现行 notebooks/ 目录为准。
+
+测试对象：`/Users/z/AURORA/notebooks/` 下全部 33 个 notebook（旧版本）。
 
 测试方式：我故意扮演一个注意力稀缺、数学理解能力尚可、但编程经验和调试经验有限的 10 岁学习者。他能理解基本数量关系和简单公式，但不一定知道怎样把数学关系翻译成代码，也不一定知道 TODO、断言、报错、shape、notebook 运行顺序是什么意思。不提前填答案，不自动理解 TODO，不把技术报错翻译成人话。
 

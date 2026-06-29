@@ -8,18 +8,20 @@
 ## 推荐顺序
 
 ```
-L01–L03  0_foundation   环境先跑通
-L04–L08  1_complex_trig ┐ 撑起 Audio Core（先学）
-L09–L21  2_linear_algebra ┘
+L01–L05  0_foundation + 1_complex_trig 开头   动机、声音、谱图、三角、复数
+L06–L08  1_complex_trig 其余  ┐ 撑起 Audio Core（先学）
+L09–L21  2_linear_algebra     ┘
         ↓  做 L32–L36 Audio DSP 入门
 L22–L26  3_calculus     ┐ 进深度学习前补
 L27–L31  4_probability  ┘
 ```
 
-## ⓪ 基础前导 `0_foundation/`
-- [ ] `L01_environment` 环境配置、内核选择、依赖验证
-- [ ] `L02_python_numpy` Notebook 操作、变量/函数/数组最小动作
-- [ ] `L03_course_map` 全课程地图与面试能力对照
+## ⓪ 开场五课 `0_foundation/` + `1_complex_trig/` 前两课
+- [ ] `L01_motivation`    动机与路线图：Aurora 原则、11 模块路径、月通关标志、`check_imports`
+- [ ] `L02_sound_digital` 声音的数字表示：`samples_count`、`make_time_axis`、`make_sine`、`signal_summary`
+- [ ] `L03_spectrogram`   谱图直觉：先看图，不推公式，为 L37-L41 种下视觉印象
+- [ ] `L04_trig`          正弦三要素：A·sin(2πft+φ)，实现 `sinusoid`，和弦叠加 demo
+- [ ] `L05_complex_numbers` 复数模与相位：实现 `magnitude_phase`，FFT 输出复数预览
 
 ## ① 复数与三角 `1_complex_trig/`
 - [ ] 🎨 `L08_visual_complex` 看图建立直觉

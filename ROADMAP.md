@@ -61,11 +61,14 @@ Daily detail in `docs/week-01-checklist.md` (L32–L42) and `docs/week-02-checkl
 - [ ] INT8 quantization from scratch; optional HuggingFace local inference → L87
 - [ ] TF-IDF retrieval from scratch (no faiss, no sentence-transformers) → L88
 - [ ] RAG pipeline: chunk → TF-IDF index → cosine retrieve → prompt → generate → L89
-- [ ] Tool-calling Agent → L90
+- [ ] Conversational RAG: session memory, source attribution, Podcast Q&A → L90
 
-## Phase 6 — Integration + Cloud + MLOps  ·  *Aurora v1*  `notebooks/10_integration/` L92–L94
-- [ ] Polish **one** end-to-end demo (e.g. mic → ASR → LLM response)
-- [ ] Docker, CI/CD, Weights & Biases experiment tracking, basic monitoring
+## Phase 6 — Integration + Cloud + MLOps  ·  *Aurora v1*  `notebooks/10_integration/` L92–L99
+- [ ] Polish **one** end-to-end demo (e.g. mic → ASR → LLM response) → L92–L94
+- [ ] Docker, CI/CD, Weights & Biases experiment tracking, basic monitoring → L93
+- [ ] Research skills: three-pass reading, paper structure, submission & academic collaboration → L95
+- [ ] Whiteboard practice + interview prep → L96–L97
+- [ ] Retrospective + next steps → L98–L99
 - [ ] Aurora v1 deployed; package the evidence chain for interviews
 
 > **Deferred** (not realistic at depth in six months from a beginner start):

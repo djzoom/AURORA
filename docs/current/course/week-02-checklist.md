@@ -1,7 +1,7 @@
 # L37–L42 逐日打卡 — 傅里叶变换（FFT）
 
-> 目标：从数学定义出发彻底理解 DFT，手写蝶形递归 FFT 并通过 numpy.fft 验证，
-> 能完整读懂 `src/aurora/audio/fft.py` 的每一行，并用 FFT 做真实信号的频谱分析。
+> 目标：从数学定义出发彻底理解 DFT，手写蝶形迭代 FFT（Cooley-Tukey 位反转）并通过 numpy.fft 验证，
+> 能完整读懂 `src/aurora/audio/transforms.py` 的每一行，并用 FFT 做真实信号的频谱分析。
 > 每天结束前 `git commit`。打勾方式：把 `[ ]` 改成 `[x]`。
 
 ## 准备（L37 开始前 15 分钟）

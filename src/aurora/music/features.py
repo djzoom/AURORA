@@ -1,6 +1,7 @@
 """aurora.music.features — music feature extraction from scratch using aurora.audio primitives."""
 import numpy as np
 from aurora.audio.stft import stft
+from aurora.audio.transforms import fft_frequencies
 
 MIDI_A4 = 69
 FREQ_A4 = 440.0
@@ -27,7 +28,7 @@ def chroma_vector(power_spectrum: np.ndarray, sample_rate: int, n_fft: int = 204
         (12,) float64 chroma vector, L1-normalised.
     """
     n_bins = power_spectrum.shape[0]
-    freqs = np.fft.rfftfreq(n_fft, d=1.0 / sample_rate)[:n_bins]
+    freqs = fft_frequencies(sample_rate, n_fft)[:n_bins]
     chroma = np.zeros(12)
     for f, energy in zip(freqs, power_spectrum):
         if f <= 0:

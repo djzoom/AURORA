@@ -40,3 +40,6 @@ def knn_search(query: np.ndarray, database: np.ndarray, k: int = 5) -> tuple:
     order = np.argsort(scores[part])[::-1]
     idx = part[order]
     return idx, scores[idx]
+
+
+find_similar = knn_search  # notebook-facing alias (L80 teaches this name)

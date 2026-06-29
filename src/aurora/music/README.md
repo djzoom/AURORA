@@ -1,6 +1,6 @@
 # Music Core
 
-> **Status:** planned. Part of the Aurora architecture.
+> **Status:** implemented. `features.py` (chromagram, onset, beat tracking) and `similarity.py` (cosine k-NN) are built.
 
 Music intelligence: song embeddings (song -> vector, Spotify-style), a
 recommendation model (likes -> neighbors -> recommendations), and MusicGen

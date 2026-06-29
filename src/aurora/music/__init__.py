@@ -10,7 +10,7 @@ beat_track                  — BPM estimation via autocorrelation
 
 cosine_similarity           — similarity between two vectors
 pairwise_cosine             — (n,d) → (n,n) similarity matrix
-knn_search                  — top-k retrieval by cosine similarity
+knn_search / find_similar    — top-k retrieval by cosine similarity (two names, same function)
 """
 from aurora.music.features import (
     chromagram,
@@ -20,7 +20,7 @@ from aurora.music.features import (
     onset_envelope,
     beat_track,
 )
-from aurora.music.similarity import cosine_similarity, pairwise_cosine, knn_search
+from aurora.music.similarity import cosine_similarity, pairwise_cosine, knn_search, find_similar
 
 __all__ = [
     "chromagram",
@@ -32,4 +32,5 @@ __all__ = [
     "cosine_similarity",
     "pairwise_cosine",
     "knn_search",
+    "find_similar",
 ]

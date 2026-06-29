@@ -1,6 +1,6 @@
 # LLM Core
 
-> **Status:** planned. Part of the Aurora architecture.
+> **Status:** implemented. `kvcache.py`, `retrieve.py`, `sample.py` are built and usable.
 
 Local LLM inference and adaptation — Llama / Qwen / Mistral run locally (no
 GPT API). Transformer & attention internals, LoRA fine-tuning, RLHF basics.

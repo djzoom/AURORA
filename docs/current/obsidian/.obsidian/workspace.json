@@ -1,0 +1,54 @@
+{
+  "main": {
+    "id": "main",
+    "type": "split",
+    "children": [
+      {
+        "id": "leaf1",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "INDEX.md",
+            "mode": "preview"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "left",
+    "type": "split",
+    "children": [
+      {
+        "id": "nav",
+        "type": "tabs",
+        "children": [
+          {"id":"files","type":"leaf","state":{"type":"file-explorer","state":{}}},
+          {"id":"tags","type":"leaf","state":{"type":"tag","state":{}}}
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 220
+  },
+  "right": {
+    "id": "right",
+    "type": "split",
+    "children": [
+      {
+        "id": "rp",
+        "type": "tabs",
+        "children": [
+          {"id":"bl","type":"leaf","state":{"type":"backlink","state":{"file":"INDEX.md"}}},
+          {"id":"ol","type":"leaf","state":{"type":"outline","state":{"file":"INDEX.md"}}}
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 250
+  },
+  "active": "leaf1",
+  "lastOpenFiles": ["INDEX.md","annotation-audit.md","domains/audio-dsp.md"]
+}
