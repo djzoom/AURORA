@@ -167,3 +167,42 @@ def irfft(x: np.ndarray, n: int) -> np.ndarray:
 def fft_frequencies(sample_rate: float, n_fft: int) -> np.ndarray:
     """Center frequency (Hz) of each ``rfft`` bin for a length-``n_fft`` frame."""
     return np.linspace(0.0, sample_rate / 2.0, n_fft // 2 + 1)
+
+
+def normalize_features(x: np.ndarray, eps: float = 1e-8) -> np.ndarray:
+    """Z-score normalise a feature matrix per frequency dimension.
+
+    Each column (frequency bin / feature dimension) is shifted to zero mean
+    and scaled to unit variance independently.  This prevents high-energy
+    frequency bands from dominating gradient updates during training.
+
+    Parameters
+    ----------
+    x:
+        Array of shape ``(n_frames, n_features)`` or ``(n_features,)``.
+        A 1-D input is treated as a single frame.
+    eps:
+        Small constant added to the standard deviation to avoid division by
+        zero for constant-valued dimensions.
+
+    Returns
+    -------
+    np.ndarray
+        Normalised array with the same shape as ``x``.  Each feature
+        dimension has (approximately) zero mean and unit variance.
+
+    Examples
+    --------
+    >>> import numpy as np
+    >>> from aurora.audio.transforms import normalize_features
+    >>> x = np.array([[1.0, 100.0], [2.0, 200.0], [3.0, 300.0]])
+    >>> y = normalize_features(x)
+    >>> np.allclose(y.mean(axis=0), 0.0, atol=1e-10)
+    True
+    >>> np.allclose(y.std(axis=0), 1.0, atol=1e-6)
+    True
+    """
+    x = np.asarray(x, dtype=np.float64)
+    mu = x.mean(axis=0)
+    sigma = x.std(axis=0)
+    return (x - mu) / (sigma + eps)

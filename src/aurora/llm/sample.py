@@ -17,6 +17,48 @@ def softmax(logits: np.ndarray, temperature: float = 1.0) -> np.ndarray:
     return exp / exp.sum()
 
 
+def softmax_cross_entropy(logits: np.ndarray, target: int) -> float:
+    """Combined softmax + cross-entropy loss using the log-sum-exp trick.
+
+    Computes  loss = -logit[target] + log( Σ exp(logit[i]) )
+    which is mathematically identical to  -log( softmax(logit)[target] )
+    but numerically stable because we never materialise large ``exp`` values.
+
+    Parameters
+    ----------
+    logits:
+        Raw (un-normalised) class scores from the final linear layer.
+        Shape ``(n_classes,)``.
+    target:
+        Ground-truth class index (0-based).
+
+    Returns
+    -------
+    float
+        Scalar cross-entropy loss ≥ 0.  Loss → 0 when the model assigns all
+        probability to the correct class; loss → ∞ as confidence in the
+        correct class approaches zero.
+
+    Examples
+    --------
+    >>> import numpy as np
+    >>> from aurora.llm.sample import softmax_cross_entropy
+    >>> # Perfect prediction: logit for class 0 >> others → loss near 0
+    >>> loss = softmax_cross_entropy(np.array([10.0, 0.0, 0.0]), target=0)
+    >>> loss < 0.0001
+    True
+    >>> # Worst case: all probability on wrong class → high loss
+    >>> loss2 = softmax_cross_entropy(np.array([0.0, 0.0, 10.0]), target=0)
+    >>> loss2 > 9.0
+    True
+    """
+    logits = np.asarray(logits, dtype=np.float64)
+    # Shift for numerical stability (does not change the result)
+    shifted = logits - logits.max()
+    log_sum_exp = np.log(np.sum(np.exp(shifted)))
+    return float(log_sum_exp - shifted[int(target)])
+
+
 def greedy_decode(logits: np.ndarray) -> int:
     """Pick the single token with the highest logit (deterministic)."""
     return int(np.argmax(logits))

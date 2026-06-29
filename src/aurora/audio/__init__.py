@@ -29,6 +29,7 @@ from .transforms import (
     idft,
     ifft,
     irfft,
+    normalize_features,
     rfft,
 )
 from .windows import blackman, get_window, hamming, hann
@@ -47,6 +48,7 @@ __all__ = [
     "rfft",
     "irfft",
     "fft_frequencies",
+    "normalize_features",
     # windows
     "hann",
     "hamming",
