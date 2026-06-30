@@ -5,7 +5,7 @@
 ## 启动
 
 ```bash
-cd /Users/z/AURORA
+cd AURORA
 python -m venv .venv
 source .venv/bin/activate
 pip install -e ".[dev,notebooks]"
@@ -27,9 +27,9 @@ jupyter lab
 
 | 课号 | 课程标题 |
 |---|---|
-| L01 | 环境配置 — conda/venv、Jupyter 内核选择、`import aurora` 一次跑通 |
-| L02 | NumPy 速成 — 数组、dtype、广播与切片，30 分钟能写信号处理代码 |
-| L03 | 全课程地图 — 从正弦波到 Transformer，99 课能力路径与面试证据链对照 |
+| L01 | Aurora 是什么 — 从正弦波到 Whisper，6 个月路线图与核心动机 |
+| L02 | 声音的数字表示 — 采样定理、PCM 数组、第一个可听正弦波 |
+| L03 | 谱图直觉 — 在学 FFT 之前先读懂时频图的三个轴 |
 
 ---
 
@@ -201,9 +201,18 @@ jupyter lab
 
 ## 配套文档
 
-- 宏观路线：`docs/LEARNING_PLAN.md`
-- 里程碑追踪：`ROADMAP.md`
-- 数学前导打卡：`docs/prep-checklist.md`
-- DSP 阶段打卡：`docs/week-01-checklist.md`（L32–L36）、`docs/week-02-checklist.md`（L37–L42）
+- 宏观路线：[`docs/current/course/LEARNING_PLAN.md`](../docs/current/course/LEARNING_PLAN.md)
+- 里程碑追踪：[`ROADMAP.md`](../ROADMAP.md)
+- 数学前导打卡：[`docs/current/course/prep-checklist.md`](../docs/current/course/prep-checklist.md)
+- DSP 阶段打卡：[`docs/current/course/week-01-checklist.md`](../docs/current/course/week-01-checklist.md)（L32–L36）
+- 逐课审计：[`docs/current/audit/INDEX.md`](../docs/current/audit/INDEX.md)
+
+## 验收
+
+所有 99 个 notebook 均通过机器验收：
+
+```bash
+python scripts/validate_pipeline.py   # JSON + 语法 + audio pipeline 全部 PASSED
+```
 
 > 🎨 标记的课程为图形化视觉课，无编码任务，通过参数实验建立直觉。

@@ -10,8 +10,8 @@ interviewers at audio/voice/music AI teams. Every milestone produces a
 > genuine senior-track groundwork — not a finished senior. The signal is
 > **depth, not volume**: a few correct, hand-implemented, well-explained
 > artifacts beat a pile of API glue. Personal study plan and daily checklists
-> live in [`docs/LEARNING_PLAN.md`](docs/LEARNING_PLAN.md) and
-> [`docs/week-01-checklist.md`](docs/week-01-checklist.md).
+> live in [`docs/current/course/LEARNING_PLAN.md`](docs/current/course/LEARNING_PLAN.md) and
+> [`docs/current/course/week-01-checklist.md`](docs/current/course/week-01-checklist.md).
 
 ## Anti-pattern
 
@@ -21,55 +21,62 @@ training, no DSP, no systems — that has near-zero interview value.
 
 ---
 
+## Phase 0 — Foundation + Math Prep  `notebooks/0_foundation/` + `1–4_*/` L01–L31
+- [x] 99-lesson course written, audited, and corrected (all pass `validate_pipeline.py`)
+- [x] L01–L03 Foundation: Aurora motivation, sound digitisation, spectrogram intuition
+- [x] L04–L08 Trig/complex: sine waves, complex numbers, Euler's formula, Fourier intuition
+- [x] L09–L21 Linear algebra: vectors → matrices → SVD → visual transforms
+- [x] L22–L26 Calculus: derivatives, gradients, chain rule, gradient descent
+- [x] L27–L31 Probability: distributions, softmax, cross-entropy
+
 ## Phase 1 — Audio Core  ·  *Audio Analysis Engine*  `notebooks/5_audio_dsp/` L32–L53
-Code is already written (`src/aurora/audio/`); the goal is to **understand it to
-the point you could re-derive every line from a blank file**.
-Daily detail in `docs/week-01-checklist.md` (L32–L42) and `docs/week-02-checklist.md` (L37–L42).
+Daily detail in [`docs/current/course/week-01-checklist.md`](docs/current/course/week-01-checklist.md).
 - [x] FFT / DFT / IFFT from scratch (radix-2 Cooley-Tukey), validated vs numpy
 - [x] Windows (Hann/Hamming/Blackman), STFT, magnitude & power spectrograms
 - [x] Mel scale + triangular filterbank, log-mel, MFCC (own DCT-II)
 - [x] WAV I/O from scratch, signal generators, test suite, CI
-- [ ] **L32–L36** Signals, sampling, complex numbers / Euler; read `io.py`, `windows.py`
-- [ ] **L37–L42** Re-implement `transforms.py` from blank; blog: "Writing the FFT from scratch"
-- [ ] **L43–L48** Re-implement `stft.py`/`mel.py`; spectrogram visualization CLI (real heatmaps)
-- [ ] **L49–L53** MFCC/DCT; MFCC on real LibriSpeech audio (cross-checked vs librosa); add a feature
+- [x] **L32–L53** All Audio DSP notebooks corrected and audited
+- [ ] MFCC on real LibriSpeech audio (cross-checked vs librosa) — practical exercise
+- [ ] Blog: "Writing the FFT from scratch"
 
 ## Phase 2 — ML / Deep-Learning Foundations  ·  *First Trained Model*  `notebooks/6_deep_learning/` L54–L65
-- [ ] From-scratch autograd + MLP, backprop by hand (Karpathy "Zero to Hero")  → L54–L58
-- [ ] PyTorch fundamentals; CNN / RNN / attention basics  → L59–L61
-- [ ] Train a keyword-spotting classifier on Speech Commands using **your own mel features**  → L62–L64
+- [x] From-scratch autograd + MLP, backprop by hand (Karpathy "Zero to Hero") → L54–L58
+- [x] PyTorch fundamentals; CNN / attention basics → L59–L61
+- [x] KWS Dataset + DataLoader (shape bug fixed: mel.T gives CNN-ready (40, T)) → L62
+- [x] CNN keyword-spotting model defined → L63
+- [ ] Train KWS classifier on Speech Commands (cloud GPU run)
 - [ ] Blog: from linear regression to backprop, in your own words
 
 ## Phase 3 — Speech Core (ASR)  ·  *Caption Engine*  `notebooks/7_asr/` L66–L75
-- [ ] Edit distance from scratch (Levenshtein DP) → L67; WER evaluation harness → L73
-- [ ] CTC alignment intuition + forward algorithm (pure NumPy) → L68–L69
-- [ ] Whisper architecture + decoding strategies (greedy / beam search) → L70–L71
+- [x] Edit distance from scratch (Levenshtein DP) → L67; WER evaluation → L73
+- [x] CTC alignment intuition + forward algorithm (pure NumPy) → L68–L69
+- [x] Whisper architecture + decoding strategies (greedy / beam search) → L70–L71
 - [ ] Whisper-small fine-tune on LibriSpeech (cloud GPU) → L72
-- [ ] ASR error analysis: substitution / deletion / insertion patterns → L74
+- [x] ASR error analysis: substitution / deletion / insertion patterns → L74
 - [ ] (stretch) streaming ASR with chunked / causal attention
 
 ## Phase 4 — Music Core  ·  *Music Intelligence Engine*  `notebooks/8_music/` L76–L82
-- [ ] Music theory primer: pitch classes, chroma wheel, MIDI ↔ Hz → L76
-- [ ] From-scratch features: chromagram, onset envelope, beat tracking (aurora.music) → L77–L78
-- [ ] Music embedding model (song → vector), contrastive learning → L79
-- [ ] Similarity search + recommendation: pure NumPy k-NN (no faiss) → L80–L81
+- [x] Music theory primer: pitch classes, chroma wheel, MIDI ↔ Hz → L76
+- [x] From-scratch features: chromagram, onset envelope, beat tracking (aurora.music) → L77–L78
+- [x] Music embedding model skeleton (MusicEncoder, triplet_loss, NT-Xent) → L79
+- [x] Similarity search + recommendation: pure NumPy k-NN → L80–L81
 - [ ] (stretch) MusicGen fine-tune
 
 ## Phase 5 — LLM + RAG + Agent  ·  *Podcast Intelligence Engine*  `notebooks/9_llm/` L83–L91
-- [ ] Transformer from scratch; LoRA low-rank adaptation → L83–L84
-- [ ] KV-Cache from scratch (pure NumPy) → L85; sampling strategies (top-k/top-p) → L86
-- [ ] INT8 quantization from scratch; optional HuggingFace local inference → L87
-- [ ] TF-IDF retrieval from scratch (no faiss, no sentence-transformers) → L88
-- [ ] RAG pipeline: chunk → TF-IDF index → cosine retrieve → prompt → generate → L89
-- [ ] Conversational RAG: session memory, source attribution, Podcast Q&A → L90
+- [x] Transformer from scratch; LoRA low-rank adaptation → L83–L84
+- [x] KV-Cache from scratch (pure NumPy) → L85; sampling strategies (top-k/top-p) → L86
+- [x] INT8 quantization from scratch; HuggingFace local inference → L87
+- [x] TF-IDF retrieval from scratch (no faiss, no sentence-transformers) → L88
+- [x] RAG pipeline: chunk → TF-IDF index → cosine retrieve → prompt → generate → L89
+- [x] Conversational RAG agent → L90
 
 ## Phase 6 — Integration + Cloud + MLOps  ·  *Aurora v1*  `notebooks/10_integration/` L92–L99
-- [ ] Polish **one** end-to-end demo (e.g. mic → ASR → LLM response) → L92–L94
-- [ ] Docker, CI/CD, Weights & Biases experiment tracking, basic monitoring → L93
-- [ ] Research skills: three-pass reading, paper structure, submission & academic collaboration → L95
-- [ ] Whiteboard practice + interview prep → L96–L97
-- [ ] Retrospective + next steps → L98–L99
-- [ ] Aurora v1 deployed; package the evidence chain for interviews
+- [x] End-to-end pipeline notebook (mic → ASR → LLM) → L92
+- [x] MLOps: W&B tracking, Docker, CI/CD → L93
+- [x] Aurora v1 demo + evidence chain → L94
+- [x] Research skills, whiteboard practice, interview prep → L95–L97
+- [x] Retrospective + next steps → L98–L99
+- [ ] Aurora v1 deployed to cloud; live demo URL
 
 > **Deferred** (not realistic at depth in six months from a beginner start):
 > TTS voice-cloning training, full realtime **< 500 ms** pipeline, large-scale

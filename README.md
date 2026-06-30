@@ -35,16 +35,12 @@ Design · Cloud · Research.**
 
 ```
 Aurora
-├── Audio Core        DSP from scratch: FFT, STFT, mel, MFCC          ✅ implemented
-├── Speech Core       ASR (Conformer / Whisper fine-tune), streaming  ▢ planned
-├── TTS Core          VITS / FastSpeech2, voice cloning               ▢ planned
-├── Music Core        embeddings, recommendation, MusicGen            ▢ planned
-├── LLM Core          local Llama/Qwen/Mistral, LoRA, agents          ▢ planned
-├── RAG               FAISS/Qdrant knowledge system                   ▢ planned
-├── Multimodal Core   audio+video: transcript, chapters, summary      ▢ planned
-├── Realtime Core     mic → ASR → LLM → TTS, <500ms                    ▢ planned
-├── Research Core     one paper reproduced per week                    ▢ planned
-└── MLOps Core        Docker, K8s, CI/CD, MLflow, W&B                  ▢ planned
+├── aurora.audio      FFT / STFT / Mel / MFCC / WAV — fully implemented ✅
+├── aurora.llm        KV-Cache / sampling / TF-IDF / RAG — implemented  ✅
+├── aurora.music      features / similarity / embed — implemented        ✅
+├── aurora.speech     metrics (WER) — partial; ASR training planned      ▷
+├── aurora.realtime   mic → ASR → LLM → TTS pipeline — planned          ▢
+└── aurora.mlops      Docker / W&B / CI — planned                       ▢
 ```
 
 See [`ROADMAP.md`](ROADMAP.md) for the full six-month plan.
@@ -85,35 +81,43 @@ C = mfcc(x, sample_rate=16000, n_mfcc=13)              # (frames, 13)
 
 ## Learning track (`notebooks/`)
 
-A code-first, **graphical** path for building the project from the ground up —
-math prep (linear algebra, calculus, probability, complex/trig) with visual
-notebooks inspired by *The Art of Linear Algebra*, then the Audio Core in
-`week01/`. See [`docs/LEARNING_PLAN.md`](docs/LEARNING_PLAN.md),
-[`docs/prep-checklist.md`](docs/prep-checklist.md) and
-[`notebooks/README.md`](notebooks/README.md).
+99 interactive lessons, L01 → L99, taking the full project from scratch through
+10 phases: foundation → trig/complex → linear algebra → calculus → probability
+→ audio DSP → deep learning → ASR → music → LLM/RAG → integration.
+
+Each lesson: read the explanation, fill in the `✏️ TODO`, watch the `✅`
+checker pass. See [`notebooks/README.md`](notebooks/README.md) for the full
+course map and [`docs/current/course/LEARNING_PLAN.md`](docs/current/course/LEARNING_PLAN.md)
+for the week-by-week study plan.
 
 ```bash
-pip install -e ".[notebooks]" && jupyter lab   # then open notebooks/
+pip install -e ".[notebooks]" && jupyter lab   # start at notebooks/0_foundation/L01_motivation.ipynb
 ```
+
+All 99 notebooks pass `python scripts/validate_pipeline.py` (JSON integrity +
+Python syntax + audio pipeline shape assertions).
 
 ## Repository layout
 
 ```
-src/aurora/        # the package, one sub-package per core
-tests/             # pytest suite (DSP validated against numpy)
-notebooks/         # code-first learning track (math prep + Audio Core)
-docs/              # learning plan, checklists, notes, ADRs, blog drafts
-scripts/           # runnable demos
-.github/workflows/ # CI
+src/aurora/              # the package, one sub-package per core
+tests/                   # pytest suite (DSP validated against numpy)
+notebooks/               # 99-lesson interactive course (L01–L99)
+docs/current/            # active audit, standards, course materials
+docs/current/audit/      # per-lesson audit + professor review
+docs/archive/            # historical snapshots
+scripts/                 # runnable demos and validation tools
+.github/workflows/       # CI
 ```
 
 ## Development
 
 ```bash
-make install   # editable install with dev deps
-make test      # run pytest
-make lint      # ruff
-make format    # black
+make install                        # editable install with dev deps
+make test                           # run pytest
+make lint                           # ruff
+make format                         # black
+python scripts/validate_pipeline.py # notebook acceptance gate (JSON + syntax + pipeline)
 ```
 
 ## License
