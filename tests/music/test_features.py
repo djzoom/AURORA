@@ -1,6 +1,5 @@
 """Tests for aurora.music.features."""
 import numpy as np
-import pytest
 from aurora.music.features import (
     chromagram, chroma_vector, rms_envelope, zero_crossing_rate, onset_envelope, beat_track
 )
@@ -92,11 +91,31 @@ def test_onset_envelope_nonneg():
     assert np.all(env >= 0)
 
 
-def test_beat_track_returns_bpm():
-    # A realistic signal for beat tracking
+def make_pulse(bpm=120.0, sr=SR, duration=4.0):
+    """Impulse train at a known BPM — gives beat_track a clean ground truth."""
+    n = int(sr * duration)
+    sig = np.zeros(n, dtype=np.float64)
+    beat_interval = int(sr * 60.0 / bpm)
+    for i in range(0, n, beat_interval):
+        if i < n:
+            sig[i] = 1.0
+    return sig
+
+
+def test_beat_track_known_bpm():
+    target_bpm = 120.0
+    sig = make_pulse(bpm=target_bpm, sr=SR, duration=4.0)
+    bpm, beat_times = beat_track(sig, sample_rate=SR)
+    assert abs(bpm - target_bpm) / target_bpm < 0.10, (
+        f"beat_track returned {bpm:.1f} BPM, expected {target_bpm} ± 10%"
+    )
+    assert len(beat_times) >= 4, "Should detect at least 4 beats in 4-second signal"
+
+
+def test_beat_track_returns_tuple():
     sig = make_sine(440.0)
     result = beat_track(sig, sample_rate=SR)
-    # beat_track returns (bpm, beat_times) tuple
-    bpm = result[0] if isinstance(result, tuple) else result
-    assert isinstance(bpm, (int, float, np.floating, np.integer))
+    assert isinstance(result, tuple) and len(result) == 2
+    bpm, beat_times = result
     assert bpm > 0
+    assert isinstance(beat_times, np.ndarray)

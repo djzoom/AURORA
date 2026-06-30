@@ -62,3 +62,24 @@ def test_values_preserved():
     assert np.allclose(k_out[0, 1], 3.0)
     assert np.allclose(v_out[0, 0], 2.0)
     assert np.allclose(v_out[0, 1], 4.0)
+
+
+def test_accumulated_values_match_concatenation():
+    """KVCache must produce identical output to manual np.concatenate along seq dim."""
+    cache = KVCache(n_heads=2, head_dim=8)
+    rng = np.random.default_rng(42)
+
+    k_tokens, v_tokens = [], []
+    for _ in range(5):
+        k_new = rng.standard_normal((2, 1, 8))
+        v_new = rng.standard_normal((2, 1, 8))
+        k_tokens.append(k_new)
+        v_tokens.append(v_new)
+        k_out, v_out = cache.update(layer=0, new_k=k_new, new_v=v_new)
+
+    k_ref = np.concatenate(k_tokens, axis=1)  # (2, 5, 8)
+    v_ref = np.concatenate(v_tokens, axis=1)
+
+    assert k_out.shape == k_ref.shape, f"K shape {k_out.shape} != {k_ref.shape}"
+    assert np.allclose(k_out, k_ref, atol=1e-12), "K cache differs from np.concatenate reference"
+    assert np.allclose(v_out, v_ref, atol=1e-12), "V cache differs from np.concatenate reference"

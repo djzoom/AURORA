@@ -50,13 +50,29 @@ def _code_cells(nb: dict) -> list[str]:
 
 
 def _filter_magic(src: str) -> str:
-    """Remove lines that are Jupyter magics or top-level awaits."""
+    """Remove Jupyter magics/awaits; preserve block structure to avoid false SyntaxErrors.
+
+    Two cases handled:
+    - Cell magic (%%foo): skip the entire remainder of the cell — the body is
+      non-Python content (HTML, bash, etc.) that would fail ast.parse.
+    - Line magic / shell / help / await: replace with `pass` at the same
+      indentation level so that enclosing try/if/for blocks stay syntactically
+      valid (bare deletion would produce "expected an indented block").
+    """
     lines = []
+    skip_cell_magic_body = False
     for line in src.splitlines():
         stripped = line.lstrip()
-        if stripped.startswith(_MAGIC_PREFIXES):
+        # Cell magic (%%foo) — drop this line and all subsequent lines in cell
+        if stripped.startswith("%%"):
+            skip_cell_magic_body = True
             continue
-        if stripped.startswith("await "):
+        if skip_cell_magic_body:
+            continue
+        # Line magic / shell / help / top-level await — replace with `pass`
+        if stripped.startswith(_MAGIC_PREFIXES) or stripped.startswith("await "):
+            indent = len(line) - len(stripped)
+            lines.append(" " * indent + "pass  # <filtered magic>")
             continue
         lines.append(line)
     return "\n".join(lines)
@@ -171,19 +187,33 @@ def check_pipeline() -> list[str]:
     except Exception as exc:
         failures.append(f"mfcc: {exc}")
 
-    # ── step 4: DataLoader shape (L62 fix validation) ────────────────────────
+    # ── step 4: time-major orientation check (catches feature-major regression) ─
+    # aurora.audio.mel must return (n_frames, n_mels), NOT (n_mels, n_frames).
+    # We use n_fft=2048, hop=512 so n_frames = 1+16000//512 = 32 ≠ n_mels = 40,
+    # making the two orientations distinguishable.
     try:
         from aurora.audio.mel import mel_spectrogram as _mel
 
-        raw_mel = _mel(signal, sample_rate=SR, n_fft=2048, hop_length=512, n_mels=40)
-        # L62 KWSDataset.__getitem__ must transpose to (n_mels, n_frames) for CNN
-        cnn_input = raw_mel.T  # (40, n_frames)
-        if cnn_input.shape[0] != 40:
+        N_MELS_CNN, HOP_CNN = 40, 512
+        raw_mel = _mel(signal, sample_rate=SR, n_fft=2048,
+                       hop_length=HOP_CNN, n_mels=N_MELS_CNN)
+        expected_frames = 1 + len(signal) // HOP_CNN  # 32 for 1s@16kHz hop=512
+        if raw_mel.shape != (expected_frames, N_MELS_CNN):
             failures.append(
-                f"CNN input shape[0]={cnn_input.shape[0]}, expected 40 (n_mels dim)"
+                f"mel_spectrogram (hop=512) shape {raw_mel.shape}, "
+                f"expected ({expected_frames}, {N_MELS_CNN}) — "
+                f"check time-major vs feature-major"
             )
+        else:
+            # CNN DataLoader: .T must yield (n_mels, n_frames)
+            cnn_input = raw_mel.T
+            if cnn_input.shape[0] != N_MELS_CNN:
+                failures.append(
+                    f"CNN input (mel.T) shape[0]={cnn_input.shape[0]}, "
+                    f"expected {N_MELS_CNN}"
+                )
     except Exception as exc:
-        failures.append(f"DataLoader shape check: {exc}")
+        failures.append(f"DataLoader orientation check: {exc}")
 
     return failures
 
