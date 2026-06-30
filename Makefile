@@ -1,4 +1,4 @@
-.PHONY: install test lint format demo clean
+.PHONY: install test lint format demo check audit-drift clean
 
 install:
 	pip install -e ".[dev,notebooks]"
@@ -14,6 +14,14 @@ format:
 
 demo:
 	python scripts/demo_audio.py
+
+# Full acceptance gate: JSON + syntax + audio pipeline + multi-core pipelines + structural checks
+check:
+	python scripts/validate_pipeline.py
+
+# Course upgrade: show which notebooks have been edited since their audit doc was last updated
+audit-drift:
+	python scripts/audit_drift.py
 
 clean:
 	rm -rf .pytest_cache .ruff_cache **/__pycache__ *.egg-info build dist
