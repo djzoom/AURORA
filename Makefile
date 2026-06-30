@@ -1,4 +1,4 @@
-.PHONY: install test lint format demo check audit-drift clean
+.PHONY: install test lint format demo check audit-drift nav-cells clean
 
 install:
 	pip install -e ".[dev,notebooks]"
@@ -22,6 +22,10 @@ check:
 # Course upgrade: show which notebooks have been edited since their audit doc was last updated
 audit-drift:
 	python scripts/audit_drift.py
+
+# Regenerate prev/next navigation cells in all 99 notebooks (idempotent)
+nav-cells:
+	python scripts/add_nav_cells.py
 
 clean:
 	rm -rf .pytest_cache .ruff_cache **/__pycache__ *.egg-info build dist
