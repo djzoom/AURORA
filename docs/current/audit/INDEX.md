@@ -16,21 +16,20 @@
 | 🟡 Minor 问题（原始） | 404 |
 | A- | 1 课（L96）|
 | B+ | 9 课 |
-| B  | 71 课 |
-| B- | 18 课 |
+| B  | 83 课 |
+| B- | 6 课 |
 | C+ 及以下 | 0 课 |
 
-> 重新评级日期：2026-06-30 · 评级方法：逐课读取 notebook，按统一 rubric 评分（NIE桩/真实Aurora连接/数值断言/推导深度）
-> 上一版（2026-06-29）：A-×4，B+×3，B×68，B-×24
-> 本版变化（2026-06-30 桩修复）：升级 13 课，降级 29 课（发现系统性问题）
-> 桩修复（2026-06-30）：24 门 B- 升至 B（pass/return None/Ellipsis→NotImplementedError + 幻影路径修复）
+> 最新更新：2026-06-30（第三轮修复：内容对齐、Aurora 连接、断言补充）
+> 第二轮（2026-06-30）：24 门 B- → B（NIE 桩修复 + 幻影路径修复）
+> 第一轮（2026-06-30）：全课重新评级，统一 rubric（NIE/真实 Aurora 连接/数值断言/推导深度）
 
 
 ## 逐课报告（per_lesson/）
 
 | 课节 | 标题 | 评级 |
 |------|------|------|
-| [L01.md](per_lesson/L01.md) | Aurora 是什么——从正弦波（sine wave）到 Whisper，6 个月的路线图 | B- |
+| [L01.md](per_lesson/L01.md) | Aurora 是什么——从正弦波（sine wave）到 Whisper，6 个月的路线图 | B |
 | [L02.md](per_lesson/L02.md) | 声音的数字表示——采样、数组、第一个可听正弦波 | B |
 | [L03.md](per_lesson/L03.md) | 谱图（spectrogram）直觉——在学 FFT 之前先看结果 | B+ |
 | [L04.md](per_lesson/L04.md) | 正弦波三要素 — 频率决定音高、振幅决定响度、相位决定起点，亲手实现 | B |
@@ -47,14 +46,14 @@
 | [L15.md](per_lesson/L15.md) | 高斯消元（Gaussian elimination） — 方程组 Ax=b 的消元过程，行阶梯形（REF）与解 | B |
 | [L16.md](per_lesson/L16.md) | 行列式（determinant）与逆矩阵（inverse matrix）— det(A) 的几何含义（面积缩放 | B+ |
 | [L17.md](per_lesson/L17.md) | 特征分解（eigendecomposition） A=PDP⁻¹ — 换坐标系让矩阵乘法变成标量乘法 | B |
-| [L18.md](per_lesson/L18.md) | 可逆性与秩（rank）— 秩 = 信息量，零空间（null space）= 被压缩的方向，奇异矩阵诊断 | B- |
+| [L18.md](per_lesson/L18.md) | 可逆性与秩（rank）— 秩 = 信息量，零空间（null space）= 被压缩的方向，奇异矩阵诊断 | B |
 | [L19.md](per_lesson/L19.md) | 矩阵变换图解 — 旋转、缩放、剪切的动态视觉演示 | B |
 | [L20.md](per_lesson/L20.md) | 分解图谱 — LU / QR / SVD 三种分解的几何意义对比 | B |
 | [L21.md](per_lesson/L21.md) | 矩阵即滤波 — DFT 矩阵 / Mel 矩阵：音频处理 = 矩阵乘法 | B- |
-| [L22.md](per_lesson/L22.md) | 导数（derivative）— 切线斜率、极限定义、数值微分 vs 解析微分 | B- |
+| [L22.md](per_lesson/L22.md) | 导数（derivative）— 切线斜率、极限定义、数值微分 vs 解析微分 | B |
 | [L23.md](per_lesson/L23.md) | 梯度（gradient） — 多元函数的"最陡上坡"方向，偏导与梯度向量的计算 | B |
-| [L24.md](per_lesson/L24.md) | 链式法则（chain rule） — 函数套函数的求导，反向传播（backpropagation，BP）的数学 | B- |
-| [L25.md](per_lesson/L25.md) | 梯度下降 — 用一条直线拟合数据，从损失函数到权重更新公式 | B- |
+| [L24.md](per_lesson/L24.md) | 链式法则（chain rule） — 函数套函数的求导，反向传播（backpropagation，BP）的数学 | B |
+| [L25.md](per_lesson/L25.md) | 梯度下降 — 用一条直线拟合数据，从损失函数到权重更新公式 | B |
 | [L26.md](per_lesson/L26.md) | 微积分可视化 — 切线、等高线与梯度下降轨迹动态演示 | B |
 | [L27.md](per_lesson/L27.md) | 概率基础 — 事件、条件概率、独立性与大数定律 | B |
 | [L28.md](per_lesson/L28.md) | 均值方差标准化 — 描述性统计、z-score 标准化与分布比较 | B |
@@ -77,7 +76,7 @@
 | [L45.md](per_lesson/L45.md) | 声谱图（spectrogram）生成 — magnitude_spectrogram，pcolormesh 热 | B |
 | [L46.md](per_lesson/L46.md) | Mel 频率尺度 — 人耳对数感知，mel = 2595·log₁₀(1+f/700)，三角滤波器 | B |
 | [L47.md](per_lesson/L47.md) | 亲手写 Mel 滤波器 — mel_filterbank 从公式到 NumPy，与仓库输出对齐 | B |
-| [L48.md](per_lesson/L48.md) | 时频图解 — 线性谱 / Mel 谱 / 对数 Mel 谱三者视觉对比 | B- |
+| [L48.md](per_lesson/L48.md) | 时频图解 — 线性谱 / Mel 谱 / 对数 Mel 谱三者视觉对比 | B |
 | [L49.md](per_lesson/L49.md) | DCT-II 离散余弦变换 — 去相关原理，纯 NumPy 实现替代 scipy.fft.dct | B |
 | [L50.md](per_lesson/L50.md) | MFCC 完整流水线 — 信号 → STFT → Mel → log → DCT，每步输出形状确认 | B |
 | [L51.md](per_lesson/L51.md) | MFCC 工程实战 — 在真实 WAV 音频上提取特征，librosa 对答案 | B |
@@ -85,9 +84,9 @@
 | [L53.md](per_lesson/L53.md) | MFCC 图形化 — 波形 → 声谱图 → Mel 谱 → 倒谱系数，逐层图示 | B |
 | [L54.md](per_lesson/L54.md) | Value 计算图 — 标量自动微分：前向值 + 反向梯度，手写 add / mul 节点 | B |
 | [L55.md](per_lesson/L55.md) | 前向传播（forward pass）拆解 — 算子（operator）节点：`__pow__`、`relu`、 | B |
-| [L56.md](per_lesson/L56.md) | 反向传播（backpropagation）手推 — 链式法则（chain rule）逐层展开，梯度（gradi | B- |
+| [L56.md](per_lesson/L56.md) | 反向传播（backpropagation）手推 — 链式法则（chain rule）逐层展开，梯度（gradi | B |
 | [L57.md](per_lesson/L57.md) | MLP 从零搭建 — 手写全连接层、激活函数、前向 / 反向完整实现 | B |
-| [L58.md](per_lesson/L58.md) | 训练循环（training loop） — loss 计算、optimizer.step、收敛曲线，拟合 ma | B- |
+| [L58.md](per_lesson/L58.md) | 训练循环（training loop） — loss 计算、optimizer.step、收敛曲线，拟合 ma | B |
 | [L59.md](per_lesson/L59.md) | PyTorch Tensor 基础 — 与 NumPy 互转、device、requires_grad | B |
 | [L60.md](per_lesson/L60.md) | autograd 机制 — grad_fn 计算图，backward()，retain_grad 与梯度累积 | B |
 | [L61.md](per_lesson/L61.md) | nn.Module 实战 — Linear / ReLU / Sequential，参数管理与模型保存 | B |
@@ -98,25 +97,25 @@
 | [L66.md](per_lesson/L66.md) | ASR 系统全览 — 声学模型 → 语言模型 → 解码器，端到端 vs 经典流水线 | B |
 | [L67.md](per_lesson/L67.md) | Edit Distance 从零实现 — Levenshtein 动态规划，WER 的数学基础 | B+ |
 | [L68.md](per_lesson/L68.md) | CTC 对齐原理 — blank 符号、单调路径与标签折叠 | B |
-| [L69.md](per_lesson/L69.md) | CTC 前向算法 — 所有路径概率求和，O(T×2L) 纯 NumPy 实现 | B- |
+| [L69.md](per_lesson/L69.md) | CTC 前向算法 — 所有路径概率求和，O(T×2L) 纯 NumPy 实现 | B |
 | [L70.md](per_lesson/L70.md) | Whisper 架构解析 — Log-Mel 输入、Transformer Encoder-Decoder、多 | B+ |
 | [L71.md](per_lesson/L71.md) | Whisper 解码策略 — 贪婪解码与 Beam Search 从原理到实现 | B |
 | [L72.md](per_lesson/L72.md) | Whisper 微调（fine-tuning） — LoRA 低秩注入 vs 全参数，中文 / 方言数据适配实 | B |
 | [L73.md](per_lesson/L73.md) | WER 评估 — 词错误率（插入 / 删除 / 替换），jiwer 对比逐句分析 | B |
 | [L74.md](per_lesson/L74.md) | ASR 错误分析 — 替换/删除/插入模式，从 WER 到可改进方向 | B |
-| [L75.md](per_lesson/L75.md) | ASR 流水线图形化 — 波形 → 声谱图 → token → 文字路径可视化 | B- |
+| [L75.md](per_lesson/L75.md) | ASR 流水线图形化 — 波形 → 声谱图 → token → 文字路径可视化 | B |
 | [L76.md](per_lesson/L76.md) | 音乐理论速成 — 音高、音程、色度（chroma）轮与十二平均律 | B |
 | [L77.md](per_lesson/L77.md) | 音乐特征工程 — chroma、RMS 能量、ZCR，调用 aurora.music 从零实现 | B |
 | [L78.md](per_lesson/L78.md) | 节拍追踪从零实现 — onset 包络、自相关与 BPM 估计 | B |
 | [L79.md](per_lesson/L79.md) | 音乐嵌入向量（embedding）— 对比学习（contrastive learning）：相似风格靠近，不同 | B+ |
 | [L80.md](per_lesson/L80.md) | 向量相似度检索 — 余弦相似度 vs 点积 vs L2，纯 NumPy k-NN 实现 | B |
 | [L81.md](per_lesson/L81.md) | 音乐推荐系统 — 用户喜好 → 嵌入向量 → k-NN 邻居 → 推荐列表 | B |
-| [L82.md](per_lesson/L82.md) | 音乐特征可视化 — 色度（chroma）图、节拍图、相似度热力图动态展示 | B- |
+| [L82.md](per_lesson/L82.md) | 音乐特征可视化 — 色度（chroma）图、节拍图、相似度热力图动态展示 | B |
 | [L83.md](per_lesson/L83.md) | Transformer 从零复现 — 多头注意力 + 位置编码 + Feed-Forward 完整实现 | B |
 | [L84.md](per_lesson/L84.md) | LoRA 低秩适配 — W = W₀ + BA，用 0.1% 参数量精调 GPT-style 模型 | B |
 | [L85.md](per_lesson/L85.md) | KV-Cache 从零实现 — 键值缓存矩阵更新，O(seq²)→O(seq) 加速 | B+ |
 | [L86.md](per_lesson/L86.md) | 采样策略从零实现 — temperature / top-k / top-p，纯 NumPy | B+ |
-| [L87.md](per_lesson/L87.md) | 量化与本地推理 — INT8 量化原理，连接 HuggingFace 轻量推理 | B- |
+| [L87.md](per_lesson/L87.md) | 量化与本地推理 — INT8 量化原理，连接 HuggingFace 轻量推理 | B |
 | [L88.md](per_lesson/L88.md) | TF-IDF 检索从零实现 — 词频逆文档频率，纯 NumPy 向量检索 | B |
 | [L89.md](per_lesson/L89.md) | RAG 完整流水线 — 文档切片（Document Chunking）+ TF-IDF 检索 + 提示词（Pr | B |
 | [L90.md](per_lesson/L90.md) | 对话式 RAG — 会话记忆（Conversation Memory）、来源归因与 Podcast Q&A 流 | B |
