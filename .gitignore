@@ -49,3 +49,4 @@ datasets/
 
 # Jupyter
 .ipynb_checkpoints/
+.codex/
