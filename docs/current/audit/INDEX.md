@@ -1,26 +1,27 @@
 # Aurora 课程审计报告索引
 
-> 审计日期：2026-06-29 | 审计范围：L01–L99（99课）
+> 审计日期：2026-06-29 | 审计范围：L01–L99（99课）| 最后更新：2026-07-01
 
 ## 主报告
 - [00_教授总评.md](00_教授总评.md) — 课程整体评价、评级分布、Top 20 优先修复
 - [01_逐课问题清单.md](01_逐课问题清单.md) — 全部问题按严重程度分类汇总
 - [02_纵向分析.md](02_纵向分析.md) — 难度递进、前驱依赖、模块内聚性分析
 
-## 统计摘要（2026-06-30 重新评级）
+## 统计摘要（2026-07-01 第四轮科普升级后）
 | 项目 | 数值 |
 |------|------|
 | 审查课节 | 99/99 |
 | 🔴 Critical 问题（原始） | 119 |
 | 🟠 Major 问题（原始） | 300 |
 | 🟡 Minor 问题（原始） | 404 |
-| A- | 1 课（L96）|
-| B+ | 9 课 |
-| B  | 84 课 |
-| B- | 5 课 |
+| A- | 79 课（全部内容课：科普引入+任务表+白板+自评）|
+| B+ | 13 课（可视化课 🎨：NIE 桩+独立数学断言）|
+| B  | 7 课（元认知/整合课，无代码练习，属设计如此）|
+| B- | 0 课 |
 | C+ 及以下 | 0 课 |
 
-> 最新更新：2026-06-30（第三轮修复：内容对齐、Aurora 连接、断言补充）
+> 最新更新：2026-07-01（第四轮科普升级：L01–L91 全部达到 A-/B+ 目标等级）
+> 第三轮（2026-06-30）：内容对齐、Aurora 连接、断言补充
 > 第二轮（2026-06-30）：24 门 B- → B（NIE 桩修复 + 幻影路径修复）
 > 第一轮（2026-06-30）：全课重新评级，统一 rubric（NIE/真实 Aurora 连接/数值断言/推导深度）
 
@@ -110,21 +111,21 @@
 | [L79.md](per_lesson/L79.md) | 音乐嵌入向量（embedding）— 对比学习（contrastive learning）：相似风格靠近，不同 | B+ |
 | [L80.md](per_lesson/L80.md) | 向量相似度检索 — 余弦相似度 vs 点积 vs L2，纯 NumPy k-NN 实现 | B |
 | [L81.md](per_lesson/L81.md) | 音乐推荐系统 — 用户喜好 → 嵌入向量 → k-NN 邻居 → 推荐列表 | B |
-| [L82.md](per_lesson/L82.md) | 音乐特征可视化 — 色度（chroma）图、节拍图、相似度热力图动态展示 | B |
-| [L83.md](per_lesson/L83.md) | Transformer 从零复现 — 多头注意力 + 位置编码 + Feed-Forward 完整实现 | B |
-| [L84.md](per_lesson/L84.md) | LoRA 低秩适配 — W = W₀ + BA，用 0.1% 参数量精调 GPT-style 模型 | B |
-| [L85.md](per_lesson/L85.md) | KV-Cache 从零实现 — 键值缓存矩阵更新，O(seq²)→O(seq) 加速 | B+ |
-| [L86.md](per_lesson/L86.md) | 采样策略从零实现 — temperature / top-k / top-p，纯 NumPy | B+ |
-| [L87.md](per_lesson/L87.md) | 量化与本地推理 — INT8 量化原理，连接 HuggingFace 轻量推理 | B |
-| [L88.md](per_lesson/L88.md) | TF-IDF 检索从零实现 — 词频逆文档频率，纯 NumPy 向量检索 | B |
-| [L89.md](per_lesson/L89.md) | RAG 完整流水线 — 文档切片（Document Chunking）+ TF-IDF 检索 + 提示词（Pr | B |
-| [L90.md](per_lesson/L90.md) | 对话式 RAG — 会话记忆（Conversation Memory）、来源归因与 Podcast Q&A 流 | B |
-| [L91.md](per_lesson/L91.md) | 注意力图解 — 多头注意力权重热力图，LoRA 低秩结构可视化 | B |
-| [L92.md](per_lesson/L92.md) | 端到端流水线（pipeline） — 麦克风 → ASR → LLM → 文本回答，全链路组装 | B- |
-| [L93.md](per_lesson/L93.md) | MLOps 基础 — W&B 实验追踪、模型版本管理、Docker 打包与部署脚本 | B- |
+| [L82.md](per_lesson/L82.md) | 音乐特征可视化 — 色度（chroma）图、节拍图、相似度热力图动态展示 | B+ |
+| [L83.md](per_lesson/L83.md) | Transformer 从零复现 — 多头注意力 + 位置编码 + Feed-Forward 完整实现 | A- |
+| [L84.md](per_lesson/L84.md) | LoRA 低秩适配 — W = W₀ + BA，用 0.1% 参数量精调 GPT-style 模型 | A- |
+| [L85.md](per_lesson/L85.md) | KV-Cache 从零实现 — 键值缓存矩阵更新，O(seq²)→O(seq) 加速 | A- |
+| [L86.md](per_lesson/L86.md) | 采样策略从零实现 — temperature / top-k / top-p，纯 NumPy | A- |
+| [L87.md](per_lesson/L87.md) | 量化与本地推理 — INT8 量化原理，连接 HuggingFace 轻量推理 | A- |
+| [L88.md](per_lesson/L88.md) | TF-IDF 检索从零实现 — 词频逆文档频率，纯 NumPy 向量检索 | A- |
+| [L89.md](per_lesson/L89.md) | RAG 完整流水线 — 文档切片（Document Chunking）+ TF-IDF 检索 + 提示词（Pr | A- |
+| [L90.md](per_lesson/L90.md) | 对话式 RAG — 会话记忆（Conversation Memory）、来源归因与 Podcast Q&A 流 | A- |
+| [L91.md](per_lesson/L91.md) | 注意力图解 — 多头注意力权重热力图，LoRA 低秩结构可视化 | A- |
+| [L92.md](per_lesson/L92.md) | 端到端流水线（pipeline） — 麦克风 → ASR → LLM → 文本回答，全链路组装 | B |
+| [L93.md](per_lesson/L93.md) | MLOps 基础 — W&B 实验追踪、模型版本管理、Docker 打包与部署脚本 | B |
 | [L94.md](per_lesson/L94.md) | Aurora v1 全景 Demo — 综合展示所有能力，面试材料与证据链整理 | B |
-| [L95.md](per_lesson/L95.md) | 研究论文入门——阅读、写作、投稿与学术合作 | B- |
+| [L95.md](per_lesson/L95.md) | 研究论文入门——阅读、写作、投稿与学术合作 | B |
 | [L96.md](per_lesson/L96.md) | 白板推导演练——FFT / CTC / 注意力机制（attention mechanism） | A- |
 | [L97.md](per_lesson/L97.md) | 面试准备与技术沟通——如何讲清你做的每一件事 | B |
-| [L98.md](per_lesson/L98.md) | 课程总结——做到了什么，还差什么 | B- |
-| [L99.md](per_lesson/L99.md) | Aurora v2 与持续成长——6 个月之后怎么走 | B- |
+| [L98.md](per_lesson/L98.md) | 课程总结——做到了什么，还差什么 | B |
+| [L99.md](per_lesson/L99.md) | Aurora v2 与持续成长——6 个月之后怎么走 | B |
