@@ -64,6 +64,7 @@ Daily detail in [`docs/current/course/week-01-checklist.md`](docs/current/course
 - [ ] (stretch) MusicGen fine-tune
 
 ## Phase 5 — LLM + RAG + Agent  ·  *Podcast Intelligence Engine*  `notebooks/9_llm/` L83–L91
+- [x] All 91 content notebooks upgraded to A-/B+ grade (popular-science narrative, structured task intros, whiteboard challenges, self-evals) — 2026-07-01
 - [x] Transformer from scratch; LoRA low-rank adaptation → L83–L84
 - [x] KV-Cache from scratch (pure NumPy) → L85; sampling strategies (top-k/top-p) → L86
 - [x] INT8 quantization from scratch; HuggingFace local inference → L87
