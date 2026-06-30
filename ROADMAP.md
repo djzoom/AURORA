@@ -23,6 +23,7 @@ training, no DSP, no systems — that has near-zero interview value.
 
 ## Phase 0 — Foundation + Math Prep  `notebooks/0_foundation/` + `1–4_*/` L01–L31
 - [x] 99-lesson course written, audited, and corrected (all pass `validate_pipeline.py`)
+- [x] All 91 content notebooks upgraded to A-/B+ (popular-science narrative + whiteboard + self-eval) — 2026-07-01
 - [x] L01–L03 Foundation: Aurora motivation, sound digitisation, spectrogram intuition
 - [x] L04–L08 Trig/complex: sine waves, complex numbers, Euler's formula, Fourier intuition
 - [x] L09–L21 Linear algebra: vectors → matrices → SVD → visual transforms

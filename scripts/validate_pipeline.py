@@ -406,8 +406,11 @@ def check_structure(notebooks: list[Path]) -> list[str]:
             first_line = first_src.split("\n")[0]
             if first_line.startswith("#"):
                 upper_line = first_line.upper()
-                # Accept 'L01', 'L01 ·', 'L01·', 'L01.' etc.
-                if lnum not in upper_line:
+                # Accept 'L01', 'L01 ·', 'L01·', 'L01.' or '第1课', '第01课' etc.
+                n = int(lnum[1:])  # numeric part of filename, e.g. 1 for L01
+                old_ok = lnum in upper_line
+                new_ok = f"第{n}课" in first_line or f"第{n:02d}课" in first_line
+                if not old_ok and not new_ok:
                     failures.append(
                         f"{nb_path.name}: title L-number mismatch "
                         f"(filename={lnum}, title='{first_line[:60]}')"
