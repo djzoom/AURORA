@@ -5,7 +5,7 @@
 **No API wrappers.** If a core capability can be implemented, implement it.
 NumPy-as-array-container is fine; importing a black box that *is* the feature
 (librosa for STFT, an ElevenLabs call for TTS) is not. See
-[`docs/adr/0001-no-api-wrappers.md`](docs/adr/0001-no-api-wrappers.md).
+[`docs/current/adr/0001-no-api-wrappers.md`](docs/current/adr/0001-no-api-wrappers.md).
 
 ## Setup
 
@@ -30,7 +30,9 @@ make test     # pytest
   matching `[project.optional-dependencies]` extra.
 - Mirror the source tree under `tests/`.
 - Update `ROADMAP.md` checkboxes when a milestone lands; a blog draft in
-  `docs/blog/` is part of "done" for each milestone.
+  `docs/current/blog/` is part of "done" for each milestone.
+- Run `python scripts/validate_pipeline.py` before merging — it checks notebook
+  JSON validity, Python syntax in all code cells, and audio pipeline shapes.
 
 ## Commits & branches
 

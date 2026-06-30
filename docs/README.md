@@ -14,7 +14,9 @@
 
 ## 当前课程辅助文档
 
-- `current/course/`：学习计划和周检查表
+- `current/course/LEARNING_PLAN.md`：6 个月学习计划
+- `current/course/cloud_gpu_plan.md`：云 GPU 教学规划（Colab/RunPod/Lambda 配置指南）
+- `current/course/week-01-checklist.md`、`week-02-checklist.md`：逐周打卡
 - `current/adr/`：仍有效的架构决策记录
 - `current/obsidian/`：术语库和标注审计
 - `current/notes/`：私人/工作笔记

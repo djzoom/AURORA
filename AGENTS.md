@@ -18,11 +18,13 @@ in the tests. Do **not** introduce librosa or `scipy.signal` for these.
 ## Layout
 
 ```
-src/aurora/<core>/   one sub-package per architecture core (audio is built out)
-tests/<core>/        mirrors the source tree; DSP is checked against numpy
-scripts/             runnable demos
-docs/adr/            architecture decision records
-docs/blog/           technical write-ups (a deliverable, not an afterthought)
+src/aurora/<core>/        one sub-package per architecture core (audio is built out)
+tests/<core>/             mirrors the source tree; DSP is checked against numpy
+scripts/                  runnable demos and validation tools
+docs/current/adr/         architecture decision records
+docs/current/blog/        technical write-ups (a deliverable, not an afterthought)
+docs/current/audit/       per-lesson audit reports and professor review
+docs/current/course/      learning plan, checklists, cloud GPU plan
 ```
 
 ## Conventions
@@ -37,9 +39,10 @@ docs/blog/           technical write-ups (a deliverable, not an afterthought)
 ## Workflow
 
 ```bash
-make install   # editable install + dev deps
-make test      # pytest
-make demo      # scripts/demo_audio.py
+make install                        # editable install + dev deps
+make test                           # pytest
+make demo                           # scripts/demo_audio.py
+python scripts/validate_pipeline.py # notebook acceptance gate (JSON + syntax + pipeline)
 ```
 
 ## Roadmap
