@@ -2,8 +2,8 @@
 
 Usage: import aurora.aviz as aviz  (or:  from aurora import aviz)
 """
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
 _STYLE_APPLIED = False
 

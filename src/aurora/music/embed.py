@@ -120,7 +120,8 @@ def nt_xent_loss(
 
     .. math::
 
-        L = -\\frac{1}{2B} \\sum_{i} \\log \\frac{\\exp(s_{i,j}/\\tau)}{\\sum_{k \\neq i} \\exp(s_{i,k}/\\tau)}
+        L = -\\frac{1}{2B} \\sum_{i} \\log
+            \\frac{\\exp(s_{i,j}/\\tau)}{\\sum_{k \\neq i} \\exp(s_{i,k}/\\tau)}
 
     where :math:`j` is the positive partner of :math:`i` and :math:`s` is
     cosine similarity. The inputs should already be L2-normalized.

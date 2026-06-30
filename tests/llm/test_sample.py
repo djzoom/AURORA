@@ -1,7 +1,7 @@
 """Tests for aurora.llm.sample — decoding strategies."""
 import numpy as np
-import pytest
-from aurora.llm.sample import softmax, greedy_decode, top_k_sample, top_p_sample
+
+from aurora.llm.sample import greedy_decode, softmax, top_k_sample, top_p_sample
 
 
 def test_softmax_sums_to_one():

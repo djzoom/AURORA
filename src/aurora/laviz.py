@@ -2,8 +2,8 @@
 
 Usage: from aurora.laviz import style, arrows2d, ...
 """
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
 _PAL = ['#2A9D8F', '#E9C46A', '#F4A261', '#E76F51', '#264653', '#A8DADC']
 
@@ -71,7 +71,7 @@ def arrows2d(vectors, labels=None, colors=None, title=''):
     ax.axvline(0, color='k', lw=0.5)
     ax.set_aspect('equal')
 
-    for vec, lbl, col in zip(vecs, labels, colors):
+    for vec, lbl, col in zip(vecs, labels, colors, strict=False):
         ax.annotate('', xy=vec, xytext=(0, 0),
                     arrowprops=dict(arrowstyle='->', color=col,
                                    lw=2, mutation_scale=18))
@@ -199,7 +199,7 @@ def matrix_4ways(A):
     fig, axes = plt.subplots(1, 4, figsize=(14, max(3, m)))
     titles = ['① 整体', '② 元素值', '③ 列视角', '④ 行视角']
 
-    for ax, ttl in zip(axes, titles):
+    for ax, ttl in zip(axes, titles, strict=False):
         ax.imshow(A, **kw)
         ax.set_title(ttl, fontsize=11)
         ax.set_xticks([])
@@ -246,7 +246,7 @@ def show_factorization(A, factors, labels, modes=None, title=''):
 
     fig, axes = plt.subplots(1, len(all_mats),
                               figsize=(3 * len(all_mats), 4))
-    for ax, M, lbl, col in zip(axes, all_mats, all_labels, all_colors):
+    for ax, M, lbl, col in zip(axes, all_mats, all_labels, all_colors, strict=False):
         _mat_ax(ax, M, lbl, color=col, **kw)
 
     plt.suptitle(title or f'A = {" @ ".join(labels)}', fontsize=13)

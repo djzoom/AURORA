@@ -1,8 +1,7 @@
 """Tests for aurora.llm.retrieve — TF-IDF sparse retrieval."""
 import numpy as np
-import pytest
-from aurora.llm.retrieve import build_tfidf, cosine_retrieve, tokenize
 
+from aurora.llm.retrieve import build_tfidf, cosine_retrieve, tokenize
 
 DOCS = [
     "the cat sat on the mat",

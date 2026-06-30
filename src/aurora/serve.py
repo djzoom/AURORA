@@ -7,8 +7,9 @@ It currently prints version/health info and exits.  Replace with a real
 FastAPI/Flask app when deploying Aurora as a service.
 """
 
-from aurora import __version__  # type: ignore[import]
 import sys
+
+from aurora import __version__  # type: ignore[import]
 
 
 def main() -> None:

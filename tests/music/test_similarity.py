@@ -1,7 +1,12 @@
 """Tests for aurora.music.similarity — cosine similarity and k-NN search."""
 import numpy as np
-import pytest
-from aurora.music.similarity import cosine_similarity, pairwise_cosine, knn_search, find_similar
+
+from aurora.music.similarity import (
+    cosine_similarity,
+    find_similar,
+    knn_search,
+    pairwise_cosine,
+)
 
 
 def test_cosine_similarity_identical():

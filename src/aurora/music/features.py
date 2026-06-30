@@ -1,5 +1,9 @@
-"""aurora.music.features — music feature extraction from scratch using aurora.audio primitives."""
+"""aurora.music.features — music feature extraction from scratch.
+
+Uses aurora.audio primitives; no librosa or scipy.signal.
+"""
 import numpy as np
+
 from aurora.audio.stft import stft
 from aurora.audio.transforms import fft_frequencies
 
@@ -13,7 +17,9 @@ def hz_to_midi(freq: np.ndarray) -> np.ndarray:
     return 12.0 * np.log2(np.maximum(freq, 1e-8) / FREQ_A4) + MIDI_A4
 
 
-def chroma_vector(power_spectrum: np.ndarray, sample_rate: int, n_fft: int = 2048) -> np.ndarray:
+def chroma_vector(
+    power_spectrum: np.ndarray, sample_rate: int, n_fft: int = 2048
+) -> np.ndarray:
     """12-bin chroma vector from a single power spectrum frame.
 
     Maps each FFT bin to its nearest MIDI pitch, accumulates energy into the
@@ -30,7 +36,7 @@ def chroma_vector(power_spectrum: np.ndarray, sample_rate: int, n_fft: int = 204
     n_bins = power_spectrum.shape[0]
     freqs = fft_frequencies(sample_rate, n_fft)[:n_bins]
     chroma = np.zeros(12)
-    for f, energy in zip(freqs, power_spectrum):
+    for f, energy in zip(freqs, power_spectrum, strict=False):
         if f <= 0:
             continue
         midi = hz_to_midi(np.array([f]))[0]
@@ -58,7 +64,9 @@ def chromagram(
     return np.array([chroma_vector(frame, sample_rate, n_fft) for frame in power])
 
 
-def rms_envelope(signal: np.ndarray, frame_len: int = 2048, hop: int = 512) -> np.ndarray:
+def rms_envelope(
+    signal: np.ndarray, frame_len: int = 2048, hop: int = 512
+) -> np.ndarray:
     """Root-mean-square energy per frame.
 
     Returns:
@@ -69,7 +77,9 @@ def rms_envelope(signal: np.ndarray, frame_len: int = 2048, hop: int = 512) -> n
     return np.sqrt(np.mean(frames**2, axis=1))
 
 
-def zero_crossing_rate(signal: np.ndarray, frame_len: int = 2048, hop: int = 512) -> np.ndarray:
+def zero_crossing_rate(
+    signal: np.ndarray, frame_len: int = 2048, hop: int = 512
+) -> np.ndarray:
     """Zero-crossing rate per frame (fraction of samples where sign changes).
 
     Returns:
@@ -89,7 +99,9 @@ def onset_envelope(
     n_fft: int = 2048,
     hop_length: int = 512,
 ) -> np.ndarray:
-    """Spectral flux onset envelope: sum of positive first differences of magnitude spectra.
+    """Spectral flux onset envelope.
+
+    Sum of positive first differences of magnitude spectra.
 
     Returns:
         (n_frames - 1,) float64 array.

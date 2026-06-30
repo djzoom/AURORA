@@ -12,8 +12,14 @@ cosine_retrieve          — sparse retrieval by cosine similarity
 tokenize                 — simple ASCII + CJK tokenizer
 """
 from aurora.llm.kvcache import KVCache
-from aurora.llm.sample import softmax, softmax_cross_entropy, greedy_decode, top_k_sample, top_p_sample
 from aurora.llm.retrieve import build_tfidf, cosine_retrieve, tokenize
+from aurora.llm.sample import (
+    greedy_decode,
+    softmax,
+    softmax_cross_entropy,
+    top_k_sample,
+    top_p_sample,
+)
 
 __all__ = [
     "KVCache",

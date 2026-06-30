@@ -2,9 +2,10 @@
 
 No faiss. No sentence-transformers. No pretrained models.
 """
-import numpy as np
 import re
 from collections import Counter
+
+import numpy as np
 
 
 def tokenize(text: str) -> list:

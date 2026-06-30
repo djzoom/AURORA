@@ -10,21 +10,26 @@ beat_track                  — BPM estimation via autocorrelation
 
 cosine_similarity           — similarity between two vectors
 pairwise_cosine             — (n,d) → (n,n) similarity matrix
-knn_search / find_similar    — top-k retrieval by cosine similarity (two names, same function)
+knn_search / find_similar    — top-k retrieval by cosine similarity (aliases)
 
-MusicEncoder                — CNN encoder: mel spectrogram → fixed-length embedding (L79)
+MusicEncoder                — CNN encoder: mel spectrogram → embedding (L79)
 triplet_loss                — Triplet Loss for metric learning (L79)
 nt_xent_loss                — NT-Xent / SimCLR contrastive loss (L79)
 """
 from aurora.music.features import (
-    chromagram,
+    beat_track,
     chroma_vector,
+    chromagram,
+    onset_envelope,
     rms_envelope,
     zero_crossing_rate,
-    onset_envelope,
-    beat_track,
 )
-from aurora.music.similarity import cosine_similarity, pairwise_cosine, knn_search, find_similar
+from aurora.music.similarity import (
+    cosine_similarity,
+    find_similar,
+    knn_search,
+    pairwise_cosine,
+)
 
 __all__ = [
     "chromagram",
@@ -41,7 +46,7 @@ __all__ = [
 
 # torch-dependent embedding API (requires pip install aurora[music])
 try:
-    from aurora.music.embed import MusicEncoder, triplet_loss, nt_xent_loss
+    from aurora.music.embed import MusicEncoder, nt_xent_loss, triplet_loss
     __all__ += ["MusicEncoder", "triplet_loss", "nt_xent_loss"]
 except ImportError:
     pass  # torch not available; install with: pip install aurora[music]

@@ -85,7 +85,7 @@ def top_k_sample(logits: np.ndarray, k: int = 50, temperature: float = 1.0) -> i
 
 
 def top_p_sample(logits: np.ndarray, p: float = 0.9, temperature: float = 1.0) -> int:
-    """Nucleus sampling: sample from the smallest set of tokens summing to probability p.
+    """Nucleus sampling: sample from the smallest token set summing to probability p.
 
     Algorithm (Holtzman et al. 2020 "The Curious Case of Neural Text Degeneration"):
       1. Sort tokens by probability descending.

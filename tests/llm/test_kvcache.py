@@ -1,6 +1,6 @@
 """Tests for aurora.llm.kvcache."""
 import numpy as np
-import pytest
+
 from aurora.llm.kvcache import KVCache
 
 
@@ -81,5 +81,5 @@ def test_accumulated_values_match_concatenation():
     v_ref = np.concatenate(v_tokens, axis=1)
 
     assert k_out.shape == k_ref.shape, f"K shape {k_out.shape} != {k_ref.shape}"
-    assert np.allclose(k_out, k_ref, atol=1e-12), "K cache differs from np.concatenate reference"
-    assert np.allclose(v_out, v_ref, atol=1e-12), "V cache differs from np.concatenate reference"
+    assert np.allclose(k_out, k_ref, atol=1e-12), "K cache differs from np.concatenate"
+    assert np.allclose(v_out, v_ref, atol=1e-12), "V cache differs from np.concatenate"

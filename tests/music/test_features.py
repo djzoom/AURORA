@@ -1,9 +1,14 @@
 """Tests for aurora.music.features."""
 import numpy as np
-from aurora.music.features import (
-    chromagram, chroma_vector, rms_envelope, zero_crossing_rate, onset_envelope, beat_track
-)
 
+from aurora.music.features import (
+    beat_track,
+    chroma_vector,
+    chromagram,
+    onset_envelope,
+    rms_envelope,
+    zero_crossing_rate,
+)
 
 SR = 8000
 DURATION = 1.0

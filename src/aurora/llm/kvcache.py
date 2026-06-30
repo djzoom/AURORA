@@ -57,5 +57,6 @@ class KVCache:
     def flops_saved(self, d_model: int) -> int:
         """Approximate FLOPs saved vs naive recomputation at current seq length."""
         T = self.seq_len()
-        # each past token's K/V projection costs 2 * d_model² FLOPs; we avoided T of them
+        # each past token's K/V projection costs 2 * d_model² FLOPs;
+        # we avoided T of them
         return 2 * T * d_model * d_model

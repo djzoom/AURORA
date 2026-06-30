@@ -7,7 +7,7 @@ Implements:
 
 from __future__ import annotations
 
-from typing import Sequence
+from collections.abc import Sequence
 
 
 def edit_distance(a: Sequence, b: Sequence) -> int:
@@ -73,7 +73,7 @@ def corpus_wer(references: list[str], hypotheses: list[str]) -> float:
         raise ValueError("references and hypotheses must have the same length")
     total_errors = 0
     total_words = 0
-    for ref, hyp in zip(references, hypotheses):
+    for ref, hyp in zip(references, hypotheses, strict=False):
         ref_words = ref.lower().split()
         hyp_words = hyp.lower().split()
         total_words += len(ref_words)
