@@ -16,8 +16,8 @@
 | 🟡 Minor 问题（原始） | 404 |
 | A- | 1 课（L96）|
 | B+ | 9 课 |
-| B  | 83 课 |
-| B- | 6 课 |
+| B  | 84 课 |
+| B- | 5 课 |
 | C+ 及以下 | 0 课 |
 
 > 最新更新：2026-06-30（第三轮修复：内容对齐、Aurora 连接、断言补充）
@@ -49,7 +49,7 @@
 | [L18.md](per_lesson/L18.md) | 可逆性与秩（rank）— 秩 = 信息量，零空间（null space）= 被压缩的方向，奇异矩阵诊断 | B |
 | [L19.md](per_lesson/L19.md) | 矩阵变换图解 — 旋转、缩放、剪切的动态视觉演示 | B |
 | [L20.md](per_lesson/L20.md) | 分解图谱 — LU / QR / SVD 三种分解的几何意义对比 | B |
-| [L21.md](per_lesson/L21.md) | 矩阵即滤波 — DFT 矩阵 / Mel 矩阵：音频处理 = 矩阵乘法 | B- |
+| [L21.md](per_lesson/L21.md) | 矩阵即滤波 — DFT 矩阵 / Mel 矩阵：音频处理 = 矩阵乘法 | B |
 | [L22.md](per_lesson/L22.md) | 导数（derivative）— 切线斜率、极限定义、数值微分 vs 解析微分 | B |
 | [L23.md](per_lesson/L23.md) | 梯度（gradient） — 多元函数的"最陡上坡"方向，偏导与梯度向量的计算 | B |
 | [L24.md](per_lesson/L24.md) | 链式法则（chain rule） — 函数套函数的求导，反向传播（backpropagation，BP）的数学 | B |
