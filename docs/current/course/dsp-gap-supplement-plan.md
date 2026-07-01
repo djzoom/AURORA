@@ -10,7 +10,7 @@
 > L53→L54 见 [`ml-gap-supplement-plan.md`](ml-gap-supplement-plan.md)；
 > L68→L69 见 [`asr-gap-supplement-plan.md`](asr-gap-supplement-plan.md)。
 >
-> **状态**：🟡 执行中（2026-07-01）— P0 Week1（L36–L39）✅ 已落地待复审；P0 Week2（L42–L45）✅ 已落地待复审；P1 L31→L32 ✅ 已落地待复审；P1 L48–L51 / P2 📋 待做
+> **状态**：🟡 执行中（2026-07-01）— P0 Week1（L36–L39）✅ 已落地复审通过（L31–L40 polish）；P0 Week2（L42–L45）✅ 已落地待复审；P1 L31→L32 ✅ 已落地复审通过；P1 L48–L51 / P2（L03/L07/L21 回调源）📋 待做
 
 ---
 
@@ -127,7 +127,7 @@
 | 课节 | 修改项 | 类型 | 优先级 | 状态 |
 |------|--------|------|--------|------|
 | L32 | 开篇「回顾 L03」格 + 可选示意图 code cell | 模块桥接 | P1 | ✅ 已落地待复审 |
-| L35 | 开篇回调 L07 方波叠加（2 分钟） | 时间回调 | P2 | 📋 |
+| L35 | 开篇回调 L07 方波叠加（2 分钟） | 时间回调 | P2 | ✅ 已落地（L31–L40 polish） |
 | L36 | 附录 A「分治预习」；periodic vs symmetric 窗对照表 | 断崖桥接 | P0 | ✅ 已落地 |
 | L37 | 开篇 L21 复习桥；收束 L 编号复查；删跳 L42 引用 | 断崖桥接 | P0 | ✅ 已落地 |
 | L38 | 附录 B 递归/迭代对照；N=4 手写蝶形草稿格；回调 L06/L35 | 断崖桥接 | P0 | ✅ 已落地 |
@@ -552,4 +552,4 @@ pipeline_checklist = {
 
 ---
 
-*下一步：人工复审 L31–L32 diff → P1 L48–L51（`apply_dsp_p1_l48_l51_supplement.py` 待写）→ P2 时间回调。已落地脚本：`apply_l36_supplement.py`、`apply_dsp_week1_l37_l39_supplement.py`、`apply_dsp_week2_l42_l45_supplement.py`、`apply_dsp_p1_l31_l32_supplement.py`。*
+*下一步：P1 L48–L51（`apply_dsp_p1_l48_l51_supplement.py` 待写）→ P2 时间回调（L03/L07/L21 源课 + Obsidian）。已落地脚本：`apply_l36_supplement.py`、`apply_dsp_week1_l37_l39_supplement.py`、`apply_dsp_week2_l42_l45_supplement.py`、`apply_dsp_p1_l31_l32_supplement.py`、`apply_l31_l40_polish.py`（L31–L40 白板桥 + 答案泄漏修复 + L35 L07 回调）。*
