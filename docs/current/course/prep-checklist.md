@@ -50,6 +50,18 @@ L27–L31  4_probability  ┘
 - [ ] `L29_distributions` 分布 / 高斯
 - [ ] `L30_softmax_crossentropy` softmax / 交叉熵
 
+## L31 → L32 切换（约 20 分钟）
+
+进入 Audio DSP 前，不需要重学完整数学，只要把「样本 / 数组 / 坐标」三件事对齐：
+
+- [ ] 重读 L03 的谱图图像直觉：横轴时间、纵轴频率、亮度能量。
+- [ ] 重读 L01 或 L02 中「1 秒 @ 16 kHz = 16000 个采样点」的说明。
+- [ ] 运行一次：`python -c "import aurora; import numpy; print('ok')"`，确认环境仍可用。
+- [ ] 读完 L31 末尾「进入 L32 前的心理切换」。
+- [ ] 带着问题打开 L32：`第 n 个采样点发生在第几秒？`
+
+完成后再进入 `L32_numpy_signals`。如果卡住，先不要急着查 FFT，L32-L34 只是在给声音数组搭地基。
+
 ## 收尾
 - [ ] 每门课写一篇短笔记（用 `docs/notes/` 模板，可放 Obsidian）
 - [ ] 进入 `L32_numpy_signals`（`5_audio_dsp/`）开始 Audio Core
