@@ -51,6 +51,7 @@
 - [ ] 读：逐行读 `src/aurora/audio/windows.py`（Hann/Hamming/Blackman 公式）
 - [ ] 画：把三种窗函数画在同一张图上，观察形状差异
 - [ ] 自测（通关标志）：合上代码，能口述 `sine` 和 Hann 窗各在做什么
+- [ ] 预习：读 L36 附录 A，能口述 `signal → window → xw → DFT/FFT`
 - [ ] 日志：博客《什么是数字信号 · 下》定稿，放 `docs/blog/`
 - [ ] 更新 `ROADMAP.md` 的 Month-1 checkpoint
 - [ ] commit + `git push`
