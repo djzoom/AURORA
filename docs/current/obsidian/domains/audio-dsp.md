@@ -12,6 +12,16 @@ Terms drawn from modules 0 (Foundation), 1 (Complex & Trig), and 5 (Audio DSP).
 
 ---
 
+## 跃升点导航
+
+- `L03` → `L32`：[[../../../notebooks/0_foundation/L03_spectrogram.ipynb|L03 谱图三轴]] → [[../../../notebooks/4_probability/L31_visual_probability.ipynb|L32 进入 L32 前的心理切换]]
+- `L07` → `L35`：[[../../../notebooks/1_complex_trig/L07_fourier_intuition.ipynb|L07 方波与谐波]] → [[../../../notebooks/5_audio_dsp/L35_euler_fft.ipynb|L35 开课前 2 分钟复习：方波 = 谐波叠加]]
+- `L21` → `L37`：[[../../../notebooks/2_linear_algebra/L21_aurora_matrices.ipynb|L21 矩阵即滤波]] → [[../../../notebooks/5_audio_dsp/L37_dft.ipynb|L37 复习桥 · L21 的 DFT 矩阵]]
+- `L21` → `L47`：[[../../../notebooks/2_linear_algebra/L21_aurora_matrices.ipynb|L21 矩阵即滤波]] → [[../../../notebooks/5_audio_dsp/L47_mel_implement.ipynb|L47 开课前 2 分钟复习：矩阵乘法就是滤波]]
+- `L35` → `L38`：[[../../../notebooks/5_audio_dsp/L35_euler_fft.ipynb|L35 欧拉公式与 FFT]] → [[../../../notebooks/5_audio_dsp/L38_fft_butterfly.ipynb|L38 开课前 2 分钟复习：方波 = 谐波叠加]]
+- `L46` → `L47`：[[../../../notebooks/5_audio_dsp/L46_mel.ipynb|L46 Mel 频率尺度]] → [[../../../notebooks/5_audio_dsp/L47_mel_implement.ipynb|L47 三角滤波器三锚点]]
+- `L48` → `L49` → `L50` → `L51`：[[../../../notebooks/5_audio_dsp/L48_visual_stft.ipynb|L48 时频图解]] → [[../../../notebooks/5_audio_dsp/L49_dct.ipynb|L49 DCT 差异表]] → [[../../../notebooks/5_audio_dsp/L50_mfcc.ipynb|L50 MFCC 流水线清单]] → [[../../../notebooks/5_audio_dsp/L51_real_audio.ipynb|L51 真实 WAV 工程桥接]]
+
 ## Signal Basics
 
 ### 正弦波 (Sinusoid / Sine Wave)

@@ -12,6 +12,13 @@ Terms drawn from module 7 (ASR, L66–L75).
 
 ---
 
+## 跃升点导航
+
+- `L67` → `L68` → `L69` → `L70`：[[../../../notebooks/7_asr/L67_edit_distance.ipynb|L67 编辑距离]] → [[../../../notebooks/7_asr/L68_ctc_alignment.ipynb|L68 附录 C：L69 预习]] → [[../../../notebooks/7_asr/L69_ctc_forward.ipynb|L69 复习桥]] → [[../../../notebooks/7_asr/L70_whisper_arch.ipynb|L70 Whisper 架构解析]]
+- Tags: `#跃升点` `#面试高频`
+
+---
+
 ## 评估指标
 
 ### 词错率 (Word Error Rate / WER)

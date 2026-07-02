@@ -8,7 +8,7 @@
 >
 > **关联**：总索引 [`gap-supplement-plan.md`](gap-supplement-plan.md)
 >
-> **状态**：📋 下一步计划（2026-07-01）
+> **状态**：🟡 已落地待复审（2026-07-01）— L53→L54 / L55–L59 / week-03 / deep-learning 导航已回写
 
 ---
 
@@ -331,8 +331,8 @@ L62 的 KWS 训练最终使用 PyTorch autograd，但 L54 是理解 `backward()`
 ## 9. 执行顺序
 
 ```
-周 5：L53 附录 A/B + L54 复习桥 + 半步 A + solutions/L54
-周 6：L54 边界测试 + Aurora 连接文案 + week-03-checklist + L55/L58 衔接
+周 5：L53 附录 A/B + L54 复习桥 + 半步 A + solutions/L54 — ✅ 已落地待复审（2026-07-01）
+周 6：L54 边界测试 + Aurora 连接文案 + week-03-checklist + L55/L58 衔接 — ✅ 已落地待复审（2026-07-01）
 ```
 
 *完成后在 `ROADMAP.md` Phase 2 备注 `supplement L53–L54 ✓`。*

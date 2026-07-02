@@ -12,6 +12,14 @@ Terms drawn from module 6 (Deep Learning, L54–L65).
 
 ---
 
+## 跃升点导航
+
+- `L53` → `L54`：[[../../../notebooks/5_audio_dsp/L53_visual_mfcc.ipynb|L53 附录 A：前向特征 → 反向学习]] → [[../../../notebooks/6_deep_learning/L54_value_autograd.ipynb|L54 复习桥 · L24 链式法则]]
+- `L54` → `L55` → `L58` → `L59`：[[../../../notebooks/6_deep_learning/L54_value_autograd.ipynb|L54 模式对照表]] → [[../../../notebooks/6_deep_learning/L55_forward_pass.ipynb|L55 开篇回调]] → [[../../../notebooks/6_deep_learning/L58_training_loop.ipynb|L58 零件清点]] → [[../../../notebooks/6_deep_learning/L59_tensor_basics.ipynb|L59 模式切换]]
+- Tags: `#跃升点` `#面试高频`
+
+---
+
 ## 自动微分与计算图
 
 ### 计算图 (Computation Graph)

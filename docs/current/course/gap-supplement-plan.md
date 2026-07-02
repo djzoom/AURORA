@@ -5,7 +5,7 @@
 > **背景**：`docs/current/audit/02_纵向分析.md` 识别三处**全课级断崖**（Δ认知 ≥ 2）；
 > Audio DSP 段另有六处**模块内跃升**。单课 A- 评级 ≠ 纵向连贯。
 >
-> **状态**：📋 执行中（2026-07-01）
+> **状态**：🟡 执行中（2026-07-01）— DSP / ML / ASR 三份分计划已落地待复审
 
 ---
 
@@ -13,9 +13,9 @@
 
 | 文档 | ROADMAP Phase | 课节 | 最陡跃升 | 状态 |
 |------|---------------|------|----------|------|
-| [`dsp-gap-supplement-plan.md`](dsp-gap-supplement-plan.md) | Phase 0 片段 + **Phase 1** | L03–L07、L21、L31–L53 | L37→L39、L43→L44 等 6 处 | 📋 P0–P2 待落地 |
-| [`ml-gap-supplement-plan.md`](ml-gap-supplement-plan.md) | **Phase 2** | L22–L25、L53–L58 | **L53→L54**（全课最陡，Δ=3） | 📋 待落地 |
-| [`asr-gap-supplement-plan.md`](asr-gap-supplement-plan.md) | **Phase 3** | L24、L27、L67–L71 | **L68→L69**（数学密度最高） | 📋 待落地 |
+| [`dsp-gap-supplement-plan.md`](dsp-gap-supplement-plan.md) | Phase 0 片段 + **Phase 1** | L03–L07、L21、L31–L53 | L37→L39、L43→L44 等 6 处 | 🟡 P0/P1/P2 已落地待复审 |
+| [`ml-gap-supplement-plan.md`](ml-gap-supplement-plan.md) | **Phase 2** | L22–L25、L53–L58 | **L53→L54**（全课最陡，Δ=3） | 🟡 已落地待复审 |
+| [`asr-gap-supplement-plan.md`](asr-gap-supplement-plan.md) | **Phase 3** | L24、L27、L67–L71 | **L68→L69**（数学密度最高） | 🟡 已落地待复审 |
 
 **未单列计划**（优先级低于上述三处）：L89→L90 检索范式切换、L92 幻影模块集成——待 DSP/ML/ASR 三计划完成后评估。
 

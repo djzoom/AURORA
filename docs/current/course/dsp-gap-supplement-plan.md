@@ -10,7 +10,7 @@
 > L53→L54 见 [`ml-gap-supplement-plan.md`](ml-gap-supplement-plan.md)；
 > L68→L69 见 [`asr-gap-supplement-plan.md`](asr-gap-supplement-plan.md)。
 >
-> **状态**：🟡 执行中（2026-07-01）— P0 Week1（L36–L39）✅ 已落地复审通过（L31–L40 polish）；P0 Week2（L42–L45）✅ 已落地待复审；P1 L31→L32 ✅ 已落地复审通过；P1 L48–L51 / P2（L03/L07/L21 回调源）📋 待做
+> **状态**：🟡 执行中（2026-07-01）— P0 Week1（L36–L39）✅ 已落地复审通过（L31–L40 polish）；P0 Week2（L42–L45）✅ 已落地待复审；P1 L31→L32 ✅ 已落地复审通过；P1 L48–L51 ✅ 已落地待复审；P2（L03/L07/L21/L35/L46/L47 回调源 + Obsidian）✅ 已落地待复审
 
 ---
 
@@ -136,16 +136,16 @@
 | L43 | 「零件清点」格；参数量化表 + 实测 `n_frames` | 断崖桥接 | P0 | ✅ 已落地 |
 | L44 | 常见失败模式；半步「单帧 STFT」；`solutions/L44_*.md` | 断崖桥接 + B3/B4 | P0 | ✅ 已落地；solutions 已有 |
 | L45 | shape 备忘口诀（与 L50 一致） | 断崖桥接 | P0 | ✅ 已落地 |
-| L46 | 末尾三角滤波器手绘练习（markdown） | 次级跃升 | P2 | 📋 |
-| L47 | 开篇 L21 矩阵滤波回调；推理路线删全文 for 循环 | 次级 + B1 | P2 | 📋 |
-| L48 | 末尾 DCT/倒谱动机预告（与 L49 二选一） | 断崖桥接 | P1 | 📋 |
-| L49 | FFT vs DCT 差异表；`_dct_ii_ref` 移出验证 cell；`solutions/L49_*.md` | 断崖桥接 + B4 | P1 | 📋 |
-| L50 | 流水线 checklist cell；每键「卡住回 Lxx」 | 断崖桥接 | P1 | 📋 |
-| L51 | 真实 WAV 坑 + librosa 定位 + ROADMAP 项说明 | 工程桥接 | P1 | 📋 |
+| L46 | 末尾三角滤波器手绘练习（markdown） | 次级跃升 | P2 | ✅ 已落地待复审 |
+| L47 | 开篇 L21 矩阵滤波回调；推理路线删全文 for 循环 | 次级 + B1 | P2 | ✅ 已落地待复审 |
+| L48 | 末尾 DCT/倒谱动机预告（与 L49 二选一） | 断崖桥接 | P1 | ✅ 已落地待复审 |
+| L49 | FFT vs DCT 差异表；`_dct_ii_ref` 移出验证 cell；`solutions/L49_*.md` | 断崖桥接 + B4 | P1 | ✅ 已落地待复审 |
+| L50 | 流水线 checklist cell；每键「卡住回 Lxx」 | 断崖桥接 | P1 | ✅ 已落地待复审 |
+| L51 | 真实 WAV 坑 + librosa 定位 + ROADMAP 项说明 | 工程桥接 | P1 | ✅ 已落地待复审 |
 | — | `week-01-checklist.md`：L32 准备、L36 末预习 L37 | checklist | P1 | ✅ 已落地 |
 | — | `week-02-checklist.md`：L37 前准备 + L42–L44 桥接项 | checklist | P0 | ✅ 已落地 |
 | — | `prep-checklist.md`：L31→L32 切换 20 分钟 | checklist | P1 | ✅ 已落地待复审 |
-| — | `obsidian/domains/audio-dsp.md`：跃升点导航节 | 汇总 | P2 | 📋 |
+| — | `obsidian/domains/audio-dsp.md`：跃升点导航节 | 汇总 | P2 | ✅ 已落地待复审 |
 
 **Phase 1 本文件内无需改内容（维持 A-）**：L33、L34、L40、L41、L52（仅引用复查）。
 
@@ -552,4 +552,4 @@ pipeline_checklist = {
 
 ---
 
-*下一步：P1 L48–L51（`apply_dsp_p1_l48_l51_supplement.py` 待写）→ P2 时间回调（L03/L07/L21 源课 + Obsidian）。已落地脚本：`apply_l36_supplement.py`、`apply_dsp_week1_l37_l39_supplement.py`、`apply_dsp_week2_l42_l45_supplement.py`、`apply_dsp_p1_l31_l32_supplement.py`、`apply_l31_l40_polish.py`（L31–L40 白板桥 + 答案泄漏修复 + L35 L07 回调）。*
+*下一步：人工复审 L48–L51 / P2 回调与泄漏扫描，确认导航与 solutions 同步。已落地脚本：`apply_l36_supplement.py`、`apply_dsp_week1_l37_l39_supplement.py`、`apply_dsp_week2_l42_l45_supplement.py`、`apply_dsp_p1_l31_l32_supplement.py`、`apply_l31_l40_polish.py`（L31–L40 白板桥 + 答案泄漏修复 + L35 L07 回调）、`apply_dsp_remaining_supplement.py`。*
