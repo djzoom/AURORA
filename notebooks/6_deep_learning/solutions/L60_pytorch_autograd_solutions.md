@@ -8,15 +8,13 @@
 def verify_gradients():
     a = torch.tensor(2.0, requires_grad=True)
     b = torch.tensor(3.0, requires_grad=True)
-    L = a * b * b + a
+    L = 2 * a * b + 3 * b
     L.backward()
-    da_torch = a.grad.item()
-    db_torch = b.grad.item()
-    da_ref = 3.0**2 + 1      # b^2 + 1 = 10.0（别忘了 +a 项的偏导为 1）
-    db_ref = 2 * 2.0 * 3.0  # 2ab = 12.0
-    print(f'torch  dL/da={da_torch:.4f}  dL/db={db_torch:.4f}')
-    print(f'解析値 dL/da={da_ref:.4f}    dL/db={db_ref:.4f}')
-    print(f'误差   dL/da={abs(da_torch-da_ref):.2e}  dL/db={abs(db_torch-db_ref):.2e}')
-    return da_torch, db_torch
+    da, db = a.grad.item(), b.grad.item()
+    da_ref = 2 * 3.0        # dL/da = 2b = 6.0
+    db_ref = 2 * 2.0 + 3.0  # dL/db = 2a + 3 = 7.0
+    assert abs(da - da_ref) < 1e-6, f'dL/da 应为 {da_ref}，实际 {da}'
+    assert abs(db - db_ref) < 1e-6, f'dL/db 应为 {db_ref}，实际 {db}'
+    print(f'a.grad={da}, b.grad={db}')
+    return da, db
 ```
-
