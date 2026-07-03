@@ -1,6 +1,6 @@
 # L67–L71 逐日打卡 — CTC 与 Whisper 入门
 
-> 配套 [`asr-gap-supplement-plan.md`](asr-gap-supplement-plan.md)。课号不变。
+> 配套 [`asr-gap-supplement-plan.md`](../../archive/2026-07/asr-gap-supplement-plan.md)（已完成，归档）。课号不变。
 
 ---
 

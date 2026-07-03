@@ -1,6 +1,6 @@
 # L53–L58 逐日打卡 — 计算图与 MLP
 
-> 配套 [`ml-gap-supplement-plan.md`](ml-gap-supplement-plan.md)。课号不变；预习项与 notebook 附录标题一致。
+> 配套 [`ml-gap-supplement-plan.md`](../../archive/2026-07/ml-gap-supplement-plan.md)（已完成，归档）。课号不变；预习项与 notebook 附录标题一致。
 
 ---
 
