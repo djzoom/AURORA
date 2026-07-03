@@ -138,6 +138,10 @@ pip install -e ".[dev,notebooks]" && jupyter lab
 全部 99 课通过 `python scripts/validate_pipeline.py`（JSON 完整性 + Python 语法 +
 音频流水线形状断言），并经 2026-07 两轮独立复审（Opus 4.8 + Fable 5）逐课两态执行验证。
 
+> 📚 **术语与知识图谱**：[`docs/current/obsidian/INDEX.md`](docs/current/obsidian/INDEX.md)
+> —— 中英双语词汇表 + 每个术语的「生命周期 / 依赖 / 易混淆 / 白板要求」概念页 +
+> [面试冲刺图](docs/current/obsidian/interview/Audio-AI.md)。用 Obsidian 打开即见知识网。
+
 带上好奇心就够了。我们白板见。 🎧
 
 ## Repository layout
@@ -148,6 +152,8 @@ tests/                   # pytest suite (DSP validated against numpy)
 notebooks/               # 99-lesson interactive course (L01–L99)
 docs/current/            # active audit, standards, course materials
 docs/current/audit/      # per-lesson audit + professor review
+docs/current/obsidian/   # bilingual glossary + knowledge graph (concepts/lessons/interview)
+docs/current/course/     # learning plan, getting-started, checklists
 docs/archive/            # historical snapshots
 scripts/                 # runnable demos and validation tools
 .github/workflows/       # CI
