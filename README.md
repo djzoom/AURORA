@@ -81,7 +81,26 @@ C = mfcc(x, sample_rate=16000, n_mfcc=13)              # (frames, 13)
 
 ## Learning track — 99 lessons, from a sine wave to Whisper
 
-> **中文课程 · 邀请你一同学习 (a bilingual, from-scratch course — come learn with us)**
+**A from-scratch, bilingual (中/英) course.** 99 lessons over ~6 months take you from
+generating a single sine wave to the internals of Whisper — every algorithm **hand-written
+in NumPy** (FFT · STFT · Mel · MFCC · backprop · attention · CTC · KV-Cache · RAG),
+validated to `< 1e-10` against reference implementations. **No API wrappers, no black boxes.**
+
+- **Verified twice** — every lesson passes a two-state gate (student state stops only at the
+  exercise; answer state runs to `exit 0`), across two independent review rounds (Opus 4.8 + Fable 5).
+- **Teaching-first** — question → analogy → story, *then* the formula; every term glossed 中文（English）.
+- **Interview-grade** — when asked to derive FFT or explain CTC on a whiteboard, you've written it yourself.
+
+**Start here:** beginners → [`GETTING_STARTED`](docs/current/course/GETTING_STARTED.md) ·
+course map → [`notebooks/README.md`](notebooks/README.md) ·
+knowledge graph → [`docs/current/obsidian/INDEX.md`](docs/current/obsidian/INDEX.md).
+
+```bash
+pip install -e ".[dev,notebooks]" && jupyter lab   # then open notebooks/0_foundation/L01_motivation.ipynb
+```
+
+<details>
+<summary><b>🇨🇳 中文完整邀请（点开展开 · full Chinese invitation）</b></summary>
 
 ### 先问你一个问题
 
@@ -143,6 +162,8 @@ pip install -e ".[dev,notebooks]" && jupyter lab
 > [面试冲刺图](docs/current/obsidian/interview/Audio-AI.md)。用 Obsidian 打开即见知识网。
 
 带上好奇心就够了。我们白板见。 🎧
+
+</details>
 
 ## Repository layout
 

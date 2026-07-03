@@ -1,0 +1,7 @@
+# Language-stats tuning (GitHub Linguist)
+# The 99-lesson notebooks and docs are *course material*, not the codebase.
+# Mark them as documentation so the language bar reflects the from-scratch
+# src/aurora Python engineering rather than being dominated by Jupyter.
+notebooks/**  linguist-documentation
+*.ipynb       linguist-documentation
+docs/**       linguist-documentation
