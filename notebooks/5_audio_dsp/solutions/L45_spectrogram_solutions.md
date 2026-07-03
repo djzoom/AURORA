@@ -25,5 +25,7 @@ def plot_spectrogram(x, sr, win_len=1024, hop=256):
     ax.set_title("频谱图 (dB 幅度)")
     plt.tight_layout()
     plt.show()
+
+    return dB  # 验证格要求返回 dB 矩阵（shape (win_len//2+1, n_frames)）
 ```
 
