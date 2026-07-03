@@ -92,6 +92,16 @@ def test_mel_spectrogram_shape():
     assert np.all(M >= 0.0)
 
 
+def test_mel_spectrogram_non_power_of_two_n_fft():
+    # Whisper parameters: n_fft=400 (zero-padded to a 512-point FFT grid
+    # internally). The filterbank must be built on the padded grid.
+    x = chirp(200.0, 4000.0, 1.0, 16000)
+    M = mel_spectrogram(x, 16000, n_fft=400, hop_length=160, n_mels=80)
+    assert M.shape == (1 + 16000 // 160, 80)  # center=True -> n_samples//hop + 1
+    assert np.all(M >= 0.0)
+    assert np.all(np.isfinite(M))
+
+
 # ------------------------------------------------------------------ mfcc ----
 def test_dct_matches_scipy_formula():
     # Compare against the explicit orthonormal DCT-II reference.

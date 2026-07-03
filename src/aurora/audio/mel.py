@@ -83,8 +83,12 @@ def mel_spectrogram(
     """Mel spectrogram of shape ``(n_frames, n_mels)``."""
     power = power_spectrogram(
         signal, n_fft=n_fft, hop_length=hop_length, **stft_kwargs
-    )  # (n_frames, n_fft//2 + 1)
-    fb = mel_filterbank(n_mels, n_fft, sample_rate, fmin, fmax)
+    )  # (n_frames, fft_len//2 + 1)
+    # The STFT zero-pads non-power-of-two n_fft up to the next power of two
+    # (our radix-2 FFT requires it), so derive the actual FFT grid from the
+    # spectrogram itself; e.g. Whisper's n_fft=400 is computed on a 512 grid.
+    fft_len = 2 * (power.shape[1] - 1)
+    fb = mel_filterbank(n_mels, fft_len, sample_rate, fmin, fmax)
     return power @ fb.T
 
 
