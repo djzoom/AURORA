@@ -83,6 +83,51 @@ with open(os.path.join(OBS, "concepts", "_lifecycle.md"), "w", encoding="utf-8")
         ls = appears[zh]; en, ab = term[zh]
         f.write(f"| {zh}（{en}） | [[{ls[0]}]] | {' → '.join('[['+x+']]' for x in ls)} | {len(ls)} |\n")
 
+# --- interview/ aggregation (derived from the concept pages) ---
+COMPANIES = ["OpenAI", "Google", "DeepMind", "Meta", "Apple", "Apple-Audio", "NVIDIA",
+             "Anthropic", "ElevenLabs", "HuggingFace", "Microsoft", "Adobe", "Suno",
+             "Cartesia", "AssemblyAI", "Hume"]
+cpages = []
+for f in glob.glob(os.path.join(OBS, "concepts", "*.md")):
+    name = os.path.basename(f)[:-3]
+    if name.startswith("_"):
+        continue
+    txt = open(f, encoding="utf-8").read()
+    fm = txt.split("---", 2)[1] if txt.startswith("---") else ""
+    def g(k):
+        m = re.search(rf"^{k}:\s*(.+)$", fm, re.M); return m.group(1).strip() if m else ""
+    stars = g("whiteboard").count("★")
+    m1 = re.search(r"⚡ 一句话[^：]*：(.+)", txt)
+    one = (m1.group(1).strip() if m1 else "").replace("|", "/")
+    tags = set(re.findall(r"#([A-Za-z\-]+)", txt))
+    cpages.append(dict(name=name, stars=stars, domain=g("domain"), fs=g("first_seen"),
+                       mas=g("mastered"), one=one, comps=[c for c in COMPANIES if c in tags]))
+os.makedirs(os.path.join(OBS, "interview"), exist_ok=True)
+
+cpages.sort(key=lambda c: (-c["stars"], c["domain"], c["name"]))
+with open(os.path.join(OBS, "interview", "Audio-AI.md"), "w", encoding="utf-8") as f:
+    f.write("---\ntags: [aurora, interview, MOC]\n---\n\n# 🎧 Audio AI 面试冲刺图 (Interview Sprint Map)\n\n")
+    f.write("[[../INDEX|← Master Index]]\n\n> 按「白板要求」优先级排的面试冲刺清单（自动生成自 concept 页）。\n")
+    f.write("> ★★★★★ = 面试必须闭卷推导 + 手写代码；先啃这些。\n\n")
+    for lvl, label in [(5, "★★★★★ 必推导（最高优先，先啃）"), (4, "★★★★ 必掌握"), (3, "★★★ 理解即可")]:
+        rows = [c for c in cpages if c["stars"] == lvl]
+        if not rows: continue
+        f.write(f"## {label}\n\n| 概念 | 一句话 | 首次→掌握 | 相关公司 |\n|---|---|---|---|\n")
+        for c in rows:
+            f.write(f"| [[../concepts/{c['name']}\\|{c['name']}]] | {c['one']} | [[{c['fs']}]]→[[{c['mas']}]] | {' '.join('#'+x for x in c['comps'])} |\n")
+        f.write("\n")
+
+with open(os.path.join(OBS, "interview", "By-Company.md"), "w", encoding="utf-8") as f:
+    f.write("---\ntags: [aurora, interview, MOC]\n---\n\n# 按公司分组的面试知识图 (By Company)\n\n[[../INDEX|← Master Index]]\n\n")
+    for comp in COMPANIES:
+        rows = sorted([c for c in cpages if comp in c["comps"]], key=lambda c: -c["stars"])
+        if not rows: continue
+        f.write(f"## {comp}（{len(rows)}）\n")
+        for c in rows:
+            f.write(f"- {'★'*c['stars']} [[../concepts/{c['name']}\\|{c['name']}]]\n")
+        f.write("\n")
+
+print(f"interview/ built: {len(cpages)} concept pages aggregated")
 print(f"terms={len(term)}  lessons={len(allL)}  lessons/ + concepts/_lifecycle.md written")
 print("top-reused terms:")
 for zh in sorted(appears, key=lambda z: -len(appears[z]))[:8]:
