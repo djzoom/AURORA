@@ -93,6 +93,7 @@ validated to `< 1e-10` against reference implementations. **No API wrappers, no 
 - **You genuinely understand it** — because you've *written* it. So when you need to show that — to a teammate, in an interview, or just to yourself — the derivation is already in your hands.
 
 **Start here:** beginners → [`GETTING_STARTED`](docs/current/course/GETTING_STARTED.md) ·
+questions → [`FAQ`](docs/current/course/FAQ.md) ·
 course map → [`notebooks/README.md`](notebooks/README.md) ·
 knowledge graph → [`docs/current/obsidian/INDEX.md`](docs/current/obsidian/INDEX.md).
 
