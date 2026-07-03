@@ -127,7 +127,7 @@
 | [L87.md](per_lesson/L87.md) | 把 7B 模型塞进笔记本——INT8 量化（quantization）原理与本地推理 | A- |
 | [L88.md](per_lesson/L88.md) | 教机器大海捞针——TF-IDF（词频×逆文档频率）检索，纯 NumPy 从零写起 | A- |
 | [L89.md](per_lesson/L89.md) | 给 LLM 一座图书馆——RAG 完整流水线：切片（Chunking）、检索、提示词（Prompt）、生成 | A- |
-| [L90.md](per_lesson/L90.md) | 让机器记住对话、答有出处——对话式 RAG：会话记忆（Conversation Memory）与 Podcast 问答引擎 | A- |
+| [L90.md](per_lesson/L90.md) | 让机器记住对话、答有出处，还会自己动手——对话式 RAG 与工具调用 Agent（ReAct） | A- |
 | [L91.md](per_lesson/L91.md) | 看见模型在"看"哪里——Self-Attention 权重热力图（Heatmap）与 LoRA 低秩结构图解 | A- |
 | [L92.md](per_lesson/L92.md) | 六个月的模块第一次合体——端到端流水线（pipeline）：麦克风 → ASR → LLM → 回答 | B |
 | [L93.md](per_lesson/L93.md) | 让实验永不"失忆"——MLOps：W&B 实验追踪（experiment tracking）、模型版本管理与 Docker 打包 | B |

@@ -183,7 +183,7 @@ jupyter lab
 | L87 | 量化与本地推理 — INT8 量化原理，连接 HuggingFace 轻量推理 |
 | L88 | TF-IDF 检索从零实现 — 词频逆文档频率，纯 NumPy 向量检索 |
 | L89 | RAG 完整流水线 — 文档切片 + TF-IDF 检索 + 提示词构建 + 生成 |
-| L90 | 对话式 RAG — 会话记忆、来源归因与 Podcast Q&A 流水线 |
+| L90 | 对话式 RAG 与工具调用 Agent（ReAct）— 会话记忆、来源归因 + Thought/Action/Observation 循环 |
 | L91 🎨 | 注意力图解 — 多头注意力权重热力图，LoRA 低秩结构可视化 |
 
 ---
