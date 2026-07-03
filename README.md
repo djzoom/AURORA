@@ -65,7 +65,7 @@ against reference implementations — **no librosa, no SciPy DSP.**
 
 ```bash
 pip install -e ".[dev]"
-pytest                      # 38 tests, FFT validated against numpy
+pytest                      # 82 tests, FFT validated against numpy
 python scripts/demo_audio.py
 ```
 
@@ -79,23 +79,62 @@ C = mfcc(x, sample_rate=16000, n_mfcc=13)              # (frames, 13)
 
 ---
 
-## Learning track (`notebooks/`)
+## Learning track — 99 lessons, from a sine wave to Whisper
 
-99 interactive lessons, L01 → L99, taking the full project from scratch through
-10 phases: foundation → trig/complex → linear algebra → calculus → probability
-→ audio DSP → deep learning → ASR → music → LLM/RAG → integration.
+> **中文课程 · 邀请你一同学习 (a bilingual, from-scratch course — come learn with us)**
 
-Each lesson: read the explanation, fill in the `✏️ TODO`, watch the `✅`
-checker pass. See [`notebooks/README.md`](notebooks/README.md) for the full
-course map and [`docs/current/course/LEARNING_PLAN.md`](docs/current/course/LEARNING_PLAN.md)
-for the week-by-week study plan.
+### 先问你一个问题
+
+你写过 `import whisper`，一行 `model.transcribe()`，几秒就把语音变成了文字。
+**它到底是怎么做到的？** 声音怎么变成数字？为什么要做傅里叶变换（Fourier transform）？
+注意力机制（attention）凭什么"看得懂"一句话？
+
+如果这些问题让你心里一紧——这门课就是为你写的。
+
+### 这是什么
+
+**Aurora 学习轨道**是一套从零开始的音频 AI 课程：**99 节课、6 个月、一条主线**——
+从你亲手生成的第一条正弦波（sine wave），一路走到能听懂 99 种语言的 Whisper，
+再到会检索、会对话的 RAG 系统。它只有一条铁律，写在每一页上：**拒绝黑盒（no black boxes）。**
+FFT、STFT、梅尔滤波器（mel filterbank）、MFCC、CTC、多头注意力（multi-head attention）、
+KV-Cache、RAG——**全部用 NumPy 手写**，再与 `numpy.fft`／参考公式逐点比对，误差压到 `< 1e-10`。
+
+### 这趟旅程
+
+每节课都有一个会让你想点开的名字，因为每一步都在解决一个真实的困惑：
+
+- 🧮 **数学地基**：「每一帧声音都是一支箭」——向量、矩阵、特征值、梯度，全落到音频语境；"你的耳机每秒都在做矩阵乘法"。
+- 🌊 **音频 DSP**：「一个频率一个频率地审问信号」→「把 N² 折成 N log N」，亲手重写 1965 年改变世界的 FFT，最后「搭出 Whisper 的耳朵」。
+- 🧠 **深度学习**：「亲手点燃自动微分」→「让梯度逆流而上」手推反向传播 →「从一个神经元到一张网」，训出你自己的关键词识别模型。
+- 🎙️ **语音识别**：「100 帧如何吐出 5 个字」（CTC）→「只动 0.5% 的参数，教会 Whisper 你的方言」（LoRA）。
+- 🎵 **音乐 AI**：「教 AI 跟着音乐点头」→「一亿首歌里找知音」——从零实现节拍追踪与音乐嵌入。
+- 🤖 **大模型**：「一个公式撑起大模型时代」（Transformer）→「ChatGPT 为什么越答越快」（KV-Cache）→「给 LLM 一座图书馆」（RAG）。
+- 🚀 **整合收官**：「六个月的模块第一次合体」→ 白板推导演练 → 面试准备 →「终点亦是起点」。
+
+### 它为什么不一样
+
+- **每一课都能跑，而且验证过两次。** 每节课都过"两态执行门"：学生态只在你该动手处停下，答案态从头到尾 `exit 0`——不是"看起来对"，是**真的能跑通**。
+- **科普风讲解。** 问题先行、类比先行、故事先行，公式随后；数学不是拿来吓人的，是拿来"啊，原来如此"的。
+- **中英双语术语。** 每个专业名词第一次出现都带上英文（和缩写），既读懂中文直觉，又无缝对接英文论文与面试。
+- **面试级的底气。** 面试官让你在白板上推导 FFT 或解释 CTC 时，你不会慌——因为你**亲手写过**。
+
+### 一起学吧
+
+一个人啃 99 节硬核课容易半途而废；但如果有人和你一起在同一条正弦波上出发、在同一个蝶形图前卡住、
+又在同一个"啊原来如此"的瞬间会心一笑——这条路会好走得多，也有意思得多。
 
 ```bash
-pip install -e ".[notebooks]" && jupyter lab   # start at notebooks/0_foundation/L01_motivation.ipynb
+pip install -e ".[notebooks]" && jupyter lab
+# 从第 1 课开始：notebooks/0_foundation/L01_motivation.ipynb
+#   「拒绝黑盒——从一条正弦波亲手造出 Whisper 的 6 个月远征」
 ```
 
-All 99 notebooks pass `python scripts/validate_pipeline.py` (JSON integrity +
-Python syntax + audio pipeline shape assertions).
+完整课程地图见 [`notebooks/README.md`](notebooks/README.md)；周计划见
+[`docs/current/course/LEARNING_PLAN.md`](docs/current/course/LEARNING_PLAN.md)。
+全部 99 课通过 `python scripts/validate_pipeline.py`（JSON 完整性 + Python 语法 +
+音频流水线形状断言），并经 2026-07 两轮独立复审（Opus 4.8 + Fable 5）逐课两态执行验证。
+
+带上好奇心就够了。我们白板见。 🎧
 
 ## Repository layout
 
