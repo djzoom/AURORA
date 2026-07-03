@@ -6,6 +6,9 @@
 
 ```python
 def cosine_similarity(a, b):
-    return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
+    na = np.linalg.norm(a)
+    nb = np.linalg.norm(b)
+    if na == 0 or nb == 0:
+        raise ValueError("零向量没有方向，无法计算余弦相似度")
+    return np.dot(a, b) / (na * nb)
 ```
-

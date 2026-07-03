@@ -5,6 +5,9 @@
 ## 参考实现 1
 
 ```python
-return v / np.linalg.norm(v)
+def normalize(v):
+    n = np.linalg.norm(v)
+    if n == 0:
+        return v          # 零向量没有方向，返回全零，避免除零产生 nan
+    return v / n
 ```
-

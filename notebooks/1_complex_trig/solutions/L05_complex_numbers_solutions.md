@@ -6,6 +6,9 @@
 
 ```python
 def magnitude_phase(z):
-    return abs(z), np.angle(z)
+    # 按练习要求：仅用 z.real, z.imag, np.sqrt, np.arctan2，不直接调 abs/np.angle
+    mag = np.sqrt(z.real**2 + z.imag**2)   # |z| = √(a²+b²)
+    phase = np.arctan2(z.imag, z.real)     # atan2 覆盖四象限，返回 (-π, π]
+    return mag, phase
 ```
 

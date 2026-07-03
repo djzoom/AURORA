@@ -2,7 +2,18 @@
 
 > ⚠️ 请先独立完成练习，再查看参考实现。
 
-## 参考实现 1
+## 参考实现 1 — extract_null_vector
+
+```python
+def extract_null_vector(B):
+    """返回矩阵 B 的（最小奇异值对应）零空间向量 v。"""
+    B = np.asarray(B, float)
+    # SVD：B = U · diag(s) · Vt，最小奇异值对应 Vt 的最后一行
+    U, s, Vt = np.linalg.svd(B)
+    return Vt[-1]
+```
+
+## 参考实现 2 — is_sdd
 
 ```python
 def is_sdd(A):
@@ -15,4 +26,3 @@ def is_sdd(A):
 # off  = np.sum(np.abs(A), axis=1) - diag
 # return bool(np.all(diag > off))
 ```
-

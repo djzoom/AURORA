@@ -12,3 +12,11 @@ def matvec(A, x):
     return out
 ```
 
+## 参考实现 2
+
+```python
+def matmul(A, B):
+    """矩阵 × 矩阵：对 B 的每一列调用 matvec(A, col)，再横向拼接。"""
+    return np.column_stack([matvec(A, B[:, j]) for j in range(B.shape[1])])
+```
+
