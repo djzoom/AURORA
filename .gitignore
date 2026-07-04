@@ -50,3 +50,6 @@ datasets/
 # Jupyter
 .ipynb_checkpoints/
 .codex/
+
+# Stray artifact written by L76 chroma-wheel cell on execution
+notebooks/8_music/chroma_wheel.png
