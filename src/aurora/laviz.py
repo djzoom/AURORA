@@ -85,71 +85,95 @@ def arrows2d(vectors, labels=None, colors=None, title=''):
 
 def vec_times_vec(a, b):
     """
-    Visualize the outer product a ⊗ bᵀ as a heatmap.
-    Left panel = column vector a, right panel = row vector bᵀ,
-    centre panel = the (m×n) result.
+    Visualize vector × vector in BOTH views (matching L19):
+    (v1) inner product  aᵀ · b → scalar
+    (v2) outer product  a ⊗ bᵀ → rank-1 matrix
     """
-    a = np.asarray(a, float)
-    b = np.asarray(b, float)
+    a = np.asarray(a, float).ravel()
+    b = np.asarray(b, float).ravel()
+    inner = float(a @ b)
     outer = np.outer(a, b)
-    vmax = max(abs(outer).max(), 1e-9)
+    vmax = max(abs(outer).max(), abs(inner), 1e-9)
     kw = dict(cmap='RdBu_r', vmin=-vmax, vmax=vmax, aspect='auto')
 
-    fig, axes = plt.subplots(
-        1, 3, figsize=(10, 3),
-        gridspec_kw={'width_ratios': [1, max(len(b), 2), 1]},
-    )
+    fig = plt.figure(figsize=(10, 6))
+    rows = fig.add_gridspec(2, 1, hspace=0.6)
 
-    # Column vector a
-    _mat_ax(axes[0], a.reshape(-1, 1), 'a', **kw)
-    axes[0].set_title('a', fontsize=11, color='#264653', fontweight='bold')
+    # ── (v1) inner product: row · column = scalar ──────────────────────
+    gs1 = rows[0].subgridspec(1, 3, width_ratios=[max(len(a), 2), 1, 1])
+    ax = fig.add_subplot(gs1[0])
+    _mat_ax(ax, a.reshape(1, -1), 'aᵀ (行)', **kw)
+    ax = fig.add_subplot(gs1[1])
+    _mat_ax(ax, b.reshape(-1, 1), 'b (列)', **kw)
+    ax = fig.add_subplot(gs1[2])
+    _mat_ax(ax, np.array([[inner]]), '(v1) 内积\n= a·b (标量)',
+            color='#E76F51', **kw)
 
-    # Outer product
-    im = _mat_ax(axes[1], outer, 'a ⊗ bᵀ  (外积)', **kw)
-    axes[1].set_xlabel('b 的分量 →', fontsize=9)
-    axes[1].set_ylabel('← a 的分量', fontsize=9)
-    plt.colorbar(im, ax=axes[1], shrink=0.8)
+    # ── (v2) outer product: column · row = rank-1 matrix ───────────────
+    gs2 = rows[1].subgridspec(1, 3, width_ratios=[1, max(len(b), 2), 1])
+    ax = fig.add_subplot(gs2[0])
+    _mat_ax(ax, a.reshape(-1, 1), 'a (列)', **kw)
+    ax_mid = fig.add_subplot(gs2[1])
+    im = _mat_ax(ax_mid, outer, '(v2) 外积  a ⊗ bᵀ  (秩1矩阵)', **kw)
+    ax_mid.set_xlabel('b 的分量 →', fontsize=9)
+    ax_mid.set_ylabel('← a 的分量', fontsize=9)
+    plt.colorbar(im, ax=ax_mid, shrink=0.8)
+    ax = fig.add_subplot(gs2[2])
+    _mat_ax(ax, b.reshape(1, -1), 'bᵀ (行)', **kw)
 
-    # Row vector b
-    _mat_ax(axes[2], b.reshape(1, -1), 'bᵀ', **kw)
-
-    plt.suptitle('向量外积  a ⊗ bᵀ', fontsize=13)
-    plt.tight_layout()
+    plt.suptitle('向量 × 向量 — 2 种：(v1) 内积 = 标量  /  (v2) 外积 = 秩1矩阵',
+                 fontsize=13)
     plt.show()
 
 
 def mat_times_vec(A, x):
     """
-    Visualize A @ x as a linear combination of A's columns.
-    Shows each scaled column plus the sum (= result).
+    Visualize A @ x in BOTH views (matching L19):
+    (Mv1) each row of A · x = one dot product per output entry
+    (Mv2) linear combination of A's columns (each scaled column + the sum)
     """
     A = np.asarray(A, float)
-    x = np.asarray(x, float)
+    x = np.asarray(x, float).ravel()
     m, n = A.shape
     result = A @ x
 
-    vmax = max(abs(A).max(), abs(result).max(), 1e-9)
+    vmax = max(abs(A).max(), abs(x).max(), abs(result).max(), 1e-9)
     kw = dict(cmap='RdBu_r', vmin=-vmax, vmax=vmax, aspect='auto')
 
-    # [A] | [x[0]*col0] ... [x[n-1]*col_{n-1}] | [Ax]
-    ratios = [n] + [1] * n + [1]
-    fig, axes = plt.subplots(1, n + 2, figsize=(2.5 * (n + 2), max(3, m)),
-                              gridspec_kw={'width_ratios': ratios})
+    fig = plt.figure(figsize=(2.5 * (n + 2), 2 * max(3, m)))
+    rows = fig.add_gridspec(2, 1, hspace=0.5)
 
-    _mat_ax(axes[0], A, 'A', **kw)
-    axes[0].set_xticks(range(n))
-    axes[0].set_yticks([])
+    # ── (Mv1) each row · x = a dot product ─────────────────────────────
+    gs1 = rows[0].subgridspec(1, 3, width_ratios=[n, 1, 1])
+    ax = fig.add_subplot(gs1[0])
+    _mat_ax(ax, A, 'A (按行读)', **kw)
+    for i in range(m):                      # highlight the rows
+        ax.axhline(i, color=_PAL[i % len(_PAL)], lw=3, alpha=0.5)
+    ax = fig.add_subplot(gs1[1])
+    _mat_ax(ax, x.reshape(-1, 1), 'x', **kw)
+    ax = fig.add_subplot(gs1[2])
+    _mat_ax(ax, result.reshape(-1, 1), '(Mv1) = Ax\n每行·x = 点积',
+            color='#E76F51', **kw)
+
+    # ── (Mv2) linear combination of A's columns ────────────────────────
+    gs2 = rows[1].subgridspec(1, n + 2, width_ratios=[n] + [1] * n + [1])
+    ax = fig.add_subplot(gs2[0])
+    _mat_ax(ax, A, 'A (按列读)', **kw)
+    ax.set_xticks(range(n))
+    ax.set_yticks([])
 
     for j in range(n):
         col = (A[:, j] * x[j]).reshape(-1, 1)
-        _mat_ax(axes[j + 1], col,
+        ax = fig.add_subplot(gs2[j + 1])
+        _mat_ax(ax, col,
                 f'×{x[j]:.2g}\n(列{j})', color=_PAL[j % len(_PAL)], **kw)
 
-    _mat_ax(axes[-1], result.reshape(-1, 1), '= Ax',
+    ax = fig.add_subplot(gs2[-1])
+    _mat_ax(ax, result.reshape(-1, 1), '(Mv2) = Ax\n列的线性组合',
             color='#264653', **kw)
 
-    plt.suptitle('矩阵 × 向量 = 各列的线性组合', fontsize=13)
-    plt.tight_layout()
+    plt.suptitle('矩阵 × 向量 — 2 种：(Mv1) 行点积  /  (Mv2) 列的线性组合',
+                 fontsize=13)
     plt.show()
 
 
