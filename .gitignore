@@ -53,3 +53,8 @@ datasets/
 
 # Stray artifact written by L76 chroma-wheel cell on execution
 notebooks/8_music/chroma_wheel.png
+
+# Local-only dev log + its exports (never pushed)
+DEV_SUMMARY_*.md
+docs/current/_dist/html/DEV_SUMMARY*
+docs/current/_dist/pdf/DEV_SUMMARY*
