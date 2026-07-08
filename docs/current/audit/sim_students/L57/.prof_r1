@@ -1,0 +1,16 @@
+完成！已根据三位学生（laochen、linda、xiaoyu）的学习日志逐条修订 L57 notebook，处理 13 条关键问题，新增 11 个讲解 cell（markdown + code），全部符合科普风格、代码可运行。
+
+**修订内容概览**：
+- ✅ zip() 配对讲解 + 代码示例
+- ✅ Value 最小示例（1+1=2）展示计算图机制  
+- ✅ 参数数量详细推导（Neuron → Layer → MLP）
+- ✅ 房价预测例子说明为什么最后一层要 nonlin=False
+- ✅ tanh vs relu 对比表格与梯度对照
+- ✅ Layer "智能返回"的接口设计讲解
+- ✅ sum() Value(0.0) 起始值的必要性与错误示例
+- ✅ backward() 链式法则自动化的逐步讲解  
+- ✅ parameters() 拍平的三大理由
+- ✅ 计算图节点精确计数方法（逐层分解）
+- ✅ 梯度传播的两个验证例子
+
+修订记录已写入 `/Users/z/AURORA/docs/current/audit/sim_students/L57/professor_review.md`，逐条映射学生问题→改动内容与位置。

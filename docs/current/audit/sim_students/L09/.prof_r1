@@ -1,0 +1,3 @@
+Notebook validated successfully. Summary:
+
+处理了 3 位学生共 10 条问题，全部在其原文卡住位置附近插入了新的 markdown+可运行代码 cell（未删改任何原有内容）：①箭头↔数组/点(已有,确认覆盖) ②基向量为什么可行/独立性(线性组合演示后) ③‖v‖符号与L1/L2范数由来(norm演示后) ④长度公式√(v₁²+v₂²)的来历(同③处) ⑤高维方向/13维反转的代数意义(scale推理路线后) ⑥`matrix[i]`vs`[i:i+1]`shape陷阱(Aurora连接后) ⑦`A@v`矩阵变换直觉(arrows2d演示后) ⑧线性组合的几何意义/EQ混音应用(练习B后) ⑨负数缩放180度对比图(箭头图后) ⑩`np.allclose`与浮点精度(scale测试前)。notebook 已通过 `nbformat` 校验、`validate_pipeline.py --json --syntax` 及手动全量执行验证；修订说明已写入 `docs/current/audit/sim_students/L09/professor_review.md`。

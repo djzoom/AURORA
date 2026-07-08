@@ -1,0 +1,3 @@
+That's fine, those are just scratch files outside the repo — no cleanup needed there.
+
+处理了第2轮遗留的2条问题：老陈·问题4（在 `9cd2cf27` 单元末尾追加反射填充的精确规则+对照表，并新增可运行 code cell 用字母/数字数组验证 `reflect` vs `symmetric`，同时读取 aurora 源码确认用的是 `reflect`）；琳达·问题6（在 `c4279126` 单元追加图示引导文字，并新增可运行 code cell 画出无窗/有窗信号的时域与dB频域对比图，量化主瓣宽度与旁瓣高度差异）。已通过 nbformat 校验和全量顺序执行验证，修订说明已追加到 `professor_review.md`。

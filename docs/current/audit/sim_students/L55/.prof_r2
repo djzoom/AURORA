@@ -1,0 +1,1 @@
+Second-round revision complete: fixed 1 outstanding issue (小雨问题5 — chain rule 3-terms-to-2-terms gap) by expanding cell `f412af9d` ("参数实验") with an identity-function/生活类比 explanation of why `∂L/∂output=1` drops out, inserted exactly where the student got stuck. Notebook validated with nbformat; revision logged in `professor_review.md`.

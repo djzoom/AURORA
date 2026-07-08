@@ -1,0 +1,1 @@
+第 2 轮修订完成：处理了 2 条遗留问题——琳达问题5（新增 Cell `2848aa2f`，在"概念1"后用电风扇拍照类比讲清采样定理与 sr/2）、琳达问题6（在 Cell `cell-l45-0460` 导入 `_stft` 处补上注释）；顺带修复了执行验证中发现的 Cell `3a6f992a` 引号冲突导致的 SyntaxError（上一轮遗留的真实 bug）。notebook 已通过 nbformat 合法性校验和全量执行验证（除设计上留白的自评 cell 外无报错），修订说明已追加到 professor_review.md。

@@ -1,0 +1,1 @@
+修订完成。共处理 3 位学生日志中的 11 类问题（线性无关定义、det=0几何直觉+可视化、特征值=缩放因子的图示、det=特征值乘积、SDD可逆性证明、SVD原理与零空间提取、满秩vs秩亏澄清、Jacobi公式推导与残差含义、Jacobi代码逐行拆解、谱半径定义、DFT酉矩阵可逆性），在 notebook 中对应位置共插入 13 个新 cell（含可运行的可视化/验证代码）并在 `b1654259` 处追加谱半径说明；notebook 通过 `nbformat` 校验且 `nbconvert --execute` 全量跑通（唯一失败是原有需学生手填的自评格，属既有行为非本次改动）；修订说明已写入 `docs/current/audit/sim_students/L18/professor_review.md`。

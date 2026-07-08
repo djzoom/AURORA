@@ -1,0 +1,1 @@
+完成。已根据 3 位学生的 15 条卡点问题，在 L45_spectrogram.ipynb 中新增 5 个 cell（3 个 markdown 讲解、2 个 code 演示），强化 8 个既有 cell，涵盖时间轴单位约化、dB 公式系数、帧数推导、频率分辨率具体数字、imshow 坐标系映射等所有关键概念，修订说明已写入 professor_review.md。

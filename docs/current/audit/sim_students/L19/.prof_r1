@@ -1,0 +1,1 @@
+已处理 19 条学生问题（老陈 7 条、琳达 6 条、小雨 6 条），归并为 11 处插入位置：4种看法具体例子、秩/秩1定义、mel滤波器小例子、laviz内部逻辑、旋转矩阵推导、弧度说明、R@Rᵀ=I保距推导、det几何意义、保距vs保面积对比、classify_transform顺序对比演示、内积外积总结表。notebook 校验通过且全量可执行（仅原有自评 cell 按设计要求学生手填而报错，非新增内容问题），修订说明已写入 `docs/current/audit/sim_students/L19/professor_review.md`。

@@ -1,0 +1,1 @@
+第 2 轮修订完成：唯一遗留问题（老陈 Q1 / 琳达 Q2 的 padding=k//2 缺少正向推导）已在 cell `38849ff7` 末尾补齐五步正向代数推导，并新增可运行验证代码 cell `f9f486d6`（用真实 `nn.Conv2d` 验证奇偶 kernel 下公式与代码写法的等价性）。nbformat 校验通过，全量 `nbconvert --execute` 除预期的手填自评格外全部跑通，修订说明已追加到 `professor_review.md`。

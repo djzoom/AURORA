@@ -1,0 +1,1 @@
+11条问题（去重后，覆盖3人日志共22处提问）已全部处理：在 `f1367898`/`0c3a82ff` 前（DFT公式来源、欧拉公式速查+逐步演算、共轭转置与酉矩阵）、`l21-l37-bridge` 后（FFT为何更快）、`6dd94ccf`/`2dc9f17e` 前后（mel端点数量、1e-9与全零行退化）、`8c9b830f` 后（三角滤波器design rationale）、`d2745f77` 后（DCT简化说明）、`111f2e19` 后（滤波器重叠量化）共新增18个markdown/code cell，并在练习cell `b8b893e0` 内追加澄清注释（未删减原内容）。notebook已通过nbformat校验且新增代码经nbconvert实际执行验证可运行；修订对照已写入 `professor_review.md`。

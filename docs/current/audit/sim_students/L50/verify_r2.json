@@ -1,0 +1,9 @@
+{
+ "all_resolved": false,
+ "unresolved": [
+  "notebook的代码cell缺少运行结果的保存/展示（cell output为空或未捕获）",
+  "这影响了三位学生对\"频谱→log-mel→DCT\"可视化流程的理解",
+  "**琳达问题5**：代码在(b1854bdd)但需要运行才能看到\"log-mel谱vs DCT系数\"的柱状图",
+  "**小雨问题6**：代码在(b1854bdd/f4344fb8/3ff85df2)但无运行结果截图/数值表格（如第5帧的具体DCT系数值、Chirp信号的热图等）"
+ ]
+}

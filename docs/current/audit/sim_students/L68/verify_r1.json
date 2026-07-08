@@ -1,0 +1,27 @@
+{
+ "all_resolved": true,
+ "unresolved": [
+  "✅ 条件概率记号 `p(π_t | t)` —— Cell \"7017878a\" 有中文类比说明",
+  "✅ 为什么求和而不取最大 —— Cell \"7017878a\" 用掷骰子类比、图示对比详解",
+  "✅ 压缩率公式推导 `((V-1)/V)²` —— Cell \"c8953a0b\" 三步分解推导",
+  "✅ 去重序序必须先于去blank —— Cell \"3d7a2aa2\" 用反例 `[a, ∅, a, b]` 说明",
+  "✅ logits vs log_probs —— Cell \"ed88bcdf\" 说明单调性、argmax等价性",
+  "✅ 单调路径约束定义 —— Cell \"monotonic-paths-explanation\" 正错对比",
+  "✅ 独立性假设证明 —— Cell \"c8953a0b\" 给出严格推导",
+  "✅ 路径数组合公式 —— Cell \"a2f8c371\" 给出 `V^T` 公式，Cell \"60676cc0\" 代码计数",
+  "✅ 两步独立性严格证明 —— Cell \"c8953a0b\" 用联合概率证明了独立近似精确性",
+  "✅ 单调性自动满足的逻辑 —— Cell \"monotonic-paths-explanation\" 说明collapse不改变顺序",
+  "✅ 去重与去blank能否颠倒 —— Cell \"3d7a2aa2\" 反例清晰",
+  "✅ blank分隔设计动机 —— Cell \"fc6c7f43\"/\"⚠️常见误解\" 说明两个作用；学生理解为什么顺序不能反时自然明白动机",
+  "✅ 求和 vs 取最大 —— Cell \"7017878a\" 详解",
+  "✅ ∏∑符号陌生 —— Cell \"57d9ba83\"/\"7017878a\" 有中文标注",
+  "✅ 路径总数 V^T —— Cell \"a2f8c371\" 给具体例子\"T=5, V=4 → 1024\"",
+  "✅ 列表推导式难 —— Cell \"787730a3\" 给完整for循环版本；Cell \"92398b76\" 明确说可参考上一cell",
+  "✅ 去重复代码不清 —— Cell \"787730a3\" 详细for循环实现",
+  "✅ 压缩率公式推导 —— Cell \"c8953a0b\" 分步讲解",
+  "✅ 贪婪何时出错 —— Cell \"46b93135\" 给具体数字例子（帧级logits矩阵+期望vs实际路径）",
+  "✅ 单调性是必须的吗 —— Cell \"monotonic-paths-explanation\" 说\"基本假设\"，解释语音时序",
+  "✅ 不需帧级标注原因 —— Cell \"b70ae737\" 有传统vs CTC对比表格",
+  "✅ log域和logaddexp —— Cell \"ed88bcdf\" 有为什么（下溢）、公式、预告L69"
+ ]
+}

@@ -1,0 +1,1 @@
+Notebook grew from 26 to 48 cells (22 new cells) covering all 11 consolidated knowledge points; validated with `nbformat` and confirmed runnable via `nbconvert --execute` (only the original, unmodified self-assessment cell errors, as by design). Details of each student-question → fix mapping are in `docs/current/audit/sim_students/L20/professor_review.md`.

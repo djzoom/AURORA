@@ -1,0 +1,12 @@
+{
+ "all_resolved": true,
+ "unresolved": [
+  "Cell `babec738`：偏导记号澄清 ✓",
+  "Cell `3fc2a0be`：前向vs拓扑箭头方向 ✓",
+  "Cell `67a56715`：递归过程表格演示 ✓",
+  "Cell `47545642`：泰勒展开说明数值微分 ✓",
+  "Cell `b1ac4e19`：外积、Hadamard积、维度推导 ✓",
+  "Cell `cc1f4ba4`：ReLU掩码详细解释 + 数值例子 ✓",
+  "Cell `6a0a7949`：外积和Hadamard积代码演示 ✓"
+ ]
+}

@@ -1,0 +1,1 @@
+完成！本次修订共处理了**9 条学生核心困难**（为什么平方、z-score 代数证明、重复值计算、正态分布参数、keepdims 和 1e-8 技巧、axis 含义与结果形状、ddof 参数、梯度与标准化、多维验证），在 L28 notebook 中插入了 9 个新的 markdown cell（平方的解释、z-score 证明、手算技巧、正态分布知识、NumPy 技巧、ddof 详解、多维验证）和 1 个新的代码 cell（axis 对比演示），并重写了参数实验部分的说明文字，同时修订说明已保存至 professor_review.md。

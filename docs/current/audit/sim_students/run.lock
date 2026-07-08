@@ -1,0 +1,10 @@
+{
+ "pid": 21957,
+ "started_at": "2026-07-08 18:00:45",
+ "host": "jiafeizhongdeMacBook-Pro.local",
+ "lesson_parallel": 1,
+ "student_model": "claude-haiku-4-5-20251001",
+ "prof_model_r1": "claude-haiku-4-5-20251001",
+ "prof_model": "claude-sonnet-5",
+ "verify_model": "claude-haiku-4-5-20251001"
+}

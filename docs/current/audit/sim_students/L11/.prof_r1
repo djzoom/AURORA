@@ -1,0 +1,3 @@
+Notebook validated and full execution test passed (only the two pre-existing intentional student-facing errors remain: unimplemented `normalize` and the unfilled self-assessment).
+
+已处理 3 位学生共 19 条问题（合并重复后 8 个知识点）：在 L∞/切比雪夫命名处、L∞≤L2≤L1 推导+单位球图、‖v‖与|v|符号答疑、距离几何图解(a,b,b-a)、normalize推理段(零向量约定+sum/max反例+齐次性证明)、Lp通用公式段、梯度铺垫+L1/L2求导推导+梯度下降数值模拟、MSE与余弦相似度等价性验证、收束段矩阵列范数预告等9处位置插入了20+个新cell，notebook校验通过且全部新代码实测可运行，修订说明已写入 `docs/current/audit/sim_students/L11/professor_review.md`。

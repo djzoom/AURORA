@@ -1,0 +1,1 @@
+完成修订！**处理了 10 类共性问题（矩阵乘法、register_buffer、参数追踪、子模块、Sequential 限制、super().__init__、状态初始化、等价性验证、state_dict 加载）**，在 L61 notebook 中新增 5 个 markdown cell、3 个 code cell、替换修改 4 个 cell，逐条对应学生卡点位置，已验证合法性并记录在 professor_review.md 中。

@@ -1,0 +1,3 @@
+That's fine, it's just a scratch temp file outside the repo — no cleanup needed there.
+
+Processed the 1 outstanding round-2 issue (老陈问题5 — bin 映射原理未讲清), confirming the other 14 items already existed in the notebook from round 1. Changes: appended a teaser in `cell-l40-0370`, inserted new markdown cell `8c5fd428` (bin 边界/范围推导 + sr=8000,N=256 具体数字) and code cell `3459648c` (可运行验证) after `233d7209`, appended a "分辨率提高=格子变窄" paragraph to `58cb3ec4`, and fixed a pre-existing syntax error (nested quotes) in `35c454fa` that was breaking `validate_pipeline.py`'s syntax gate. Notebook validated (JSON structure + `ast.parse` on all code cells) and `professor_review.md` updated with the full changelog.

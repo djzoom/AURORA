@@ -1,0 +1,26 @@
+{
+ "all_resolved": true,
+ "unresolved": [
+  "logits 和 softmax → ✅ \"预备知识\"cell 详细讲解，含物理含义和为什么用指数",
+  "对数概率相加 vs 相乘 → ✅ \"数值演示\"cell 直接展示 0.1^100≈0 的下溢，log 版本 -230 的安全性",
+  "Beam Search 数据结构 → ✅ \"任务2\"详细伪代码讲清\"W×V 个候选\"、completed 列表的作用",
+  "sum(context) % 137 → ✅ \"插曲\"cell 和 fake_lm 注释详细讲解原理",
+  "对数概率比较大小 → ✅ \"数值演示\"和\"Python细节速成班\"清晰展示负数比较（-42.1 > -45.3 的含义）",
+  "np.argmax 和 list 操作 → ✅ \"Python细节速成班\"cell 逐条讲解",
+  "softmax 减 max → ✅ \"预备知识\"cell 含具体例子（logits=[1000,1001,999]）和数学公式",
+  "sum(context) % 137 → ✅ 已讲",
+  "width×width vs width×VOCAB_SIZE → ✅ \"任务2\"伪代码明确\"for token_id in range(VOCAB_SIZE)\"，表格标注\"W×V\"",
+  "为什么 1e-12 → ✅ beam_search 文档详解\"浮点精度有限、log(0)=-∞、1e-12 保险系数\"",
+  "Beam 最优性保证 → ✅ \"Beam Search 的最优性保证\"markdown cell 分两层面讲清",
+  "logits - logits.max() → ✅ 已讲",
+  "RandomState(sum(context) % 137) → ✅ fake_lm 注释详细讲了\"确定的伪随机\"原理",
+  "EOT 是什么 → ✅ \"插曲\"cell 专门讲\"特殊 token、停止信号\"，以及\"4 步\"和\"+2.0\"的任意性",
+  "Beam 从 W 扩展成 W×V 再取 top-W → ✅ \"任务2\"的 4 步算法表详细讲",
+  "对数概率为什么代表\"好\"或\"坏\" → ✅ \"数值演示\"清晰展示 -0.105 vs -2.3 的对应关系",
+  "数值演示（直接展示计算结果和现象）",
+  "详细的代码注释（fake_lm、softmax、beam_search 的文档字符串）",
+  "关键概念的专题阐述（预备知识、插曲、最优性保证）",
+  "Python 细节的逐条讲解",
+  "完整的伪代码和表格"
+ ]
+}

@@ -1,0 +1,1 @@
+**完成！处理了 18 条学生问题，在 7 个关键位置插入新的markdown cell（矩阵乘法顺序、低秩子空间、编辑距离伪码、q/v选择理由、两矩阵设计、WER>1.0诊断、n_fft/hop_length计算）+ 修改 3 个markdown section（LoRA初始化、梯度累积/有效batch、WER解释）+ 详化 3 处代码注释（lora_alpha、-100标记、CER实现逻辑）。修订说明已写入 professor_review.md，notebook 通过格式验证（32 cells）。**

@@ -1,0 +1,26 @@
+{
+ "all_resolved": true,
+ "unresolved": [
+  "✅ 内存连续性：`.is_contiguous()` 检查法 + `.contiguous()` 修复法已详述（Cell 3565342c）",
+  "✅ cat vs stack：明确对比 + MFCC打包实例说明（Cell 3565342c）",
+  "✅ unsqueeze(1) 位置：Conv2d `(B,C,H,W)` 约定及历史背景已解释（Section 4）",
+  "✅ 梯度默认累加：mini-batch 梯度累积真实场景演示（Cell ee42fb95）",
+  "✅ einsum 规则：完整规则 + 速查表 + 4 个代码例子验证（Section 3 & Cell 3565342c）",
+  "✅ DAG 与反向传播：ASCII 图示 + 链式法则推导 + `grad_fn` 打印方法（Section 2 & Cell a659945f）",
+  "✅ 非标量 backward()：数学原理解释（梯度歧义问题）+ 两种解决方案代码（Cell a659945f）",
+  "✅ einsum：同老陈问题5",
+  "✅ 零拷贝机制：改原数组→Tensor跟变的代码演示 + 指向同一缓冲区原理（Cell 5e428a47）",
+  "✅ 梯度累加理由：同老陈问题4",
+  "✅ float32 vs float64：GPU硬件设计（单精度单元数多）+ 内存带宽 + 精度需求分析 + 显存限制（Section 1 & Cell a44819c6）",
+  "✅ 梯度累加机制：同老陈问题4",
+  "✅ 共享内存概念：代码对比演示（torch.from_numpy 共享 vs torch.tensor 复制），指导原则清楚（Cell 5e428a47）",
+  "✅ einsum 下标：完整规则 + 多维代码例子（矩阵乘法、转置、批量、点积）（Section 3 & Cell 3565342c）",
+  "✅ CNN 输入格式：ASCII 示意图 + 维度对应表（B/C/H/W 含义明确）（Section 4）",
+  "✅ float32 vs float64：同琳达问题6",
+  "✅ mel_to_batch requires_grad：明确说明应为 `False` + 理由（固定特征不需反向求导）（Section 4）",
+  "每个概念都有**原理解释**（Why），不是单纯说法则",
+  "配以**代码演示和验证**",
+  "给出**实际应用场景**（如 mini-batch、MFCC 打包）",
+  "提供**检查/修复方法**（如 `.is_contiguous()`）"
+ ]
+}

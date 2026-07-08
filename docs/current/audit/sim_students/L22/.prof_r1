@@ -1,0 +1,1 @@
+已修订 `L22_derivatives.ipynb`（新增 15 个 cell，只增不删），覆盖三位学生共 7 类问题：泰勒展开推导（O(h²) vs O(h)，老陈/琳达/小雨）、灾难性消去的具体浮点数例子（老陈/琳达/小雨）、最优 h≈1e-5 的完整推导（老陈/琳达/小雨）、"lim"符号与有限h的关系（老陈/琳达/小雨）、常见导数表的手推（小雨）、numeric_derivative 容差1e-8的原因（小雨）、最优h是否随函数变化（琳达）；已用 `jupyter nbconvert --execute` 验证全部新 cell（含 TODO 补全版）无报错，nbformat 校验通过；修订说明已写入 `docs/current/audit/sim_students/L22/professor_review.md`。

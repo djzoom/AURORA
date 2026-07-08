@@ -1,0 +1,1 @@
+**修订完成**：L66 notebook 现已针对学生的 18 条具体卡点进行了 9 处修改（新增 6 个解释性 cell + 强化 3 个代码 cell），涵盖 HMM/GMM 概念、下采样直观含义、log-Mel 每步处理、STFT 帧数推导、Mel 公式、DP 伪代码与手工例子、Cross-attention 细节，所有代码通过验证，修订说明已记录到 professor_review.md。

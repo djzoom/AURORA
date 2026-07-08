@@ -1,0 +1,1 @@
+第2轮修订完成：处理了老陈的4条遗留问题，在notebook中新增4个cell——`bf3accaa`后插入encoder/decoder命名解释（问题2）、`3cb14a02`后插入自回归+beam search说明（问题4、7,共用一个cell）及可运行的贪心vs beam search对比代码（问题7）、`02dba5dd`后插入编辑距离代价为何统一为1的说明（问题6）；notebook校验通过，新增代码已实际运行验证，修订说明已追加至`professor_review.md`。

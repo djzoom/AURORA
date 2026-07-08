@@ -1,0 +1,8 @@
+完成！已修订 L59 notebook 以解决三位学生的 11 条核心困惑：
+
+**处理内容**：
+- **老陈 5 题** → 补充内存连续性(.is_contiguous/contiguous)、cat vs stack 场景、unsqueeze 位置原理、梯度累加理由、einsum 完整规则
+- **琳达 6 题** → 加入 DAG 图示、非标量 backward 数学原理、einsum 详细推导、from_numpy 零拷贝机制、梯度累积场景、float 硬件原因
+- **小雨 6 题** → 生活化讲解梯度累加、内存共享类比、einsum 视觉图解、CNN (B,C,H,W) 与 MFCC 映射、float 精度对比、mel_to_batch requires_grad 设计
+
+**修订位置** → 5 个 markdown 位置扩写 + 5 个新代码 cell，在学生卡住处精准铺垫，已验证合法性 ✅

@@ -1,0 +1,13 @@
+完成！已处理 **12 条学生问题**，修订内容：
+
+| 改动位置 | 内容 | 覆盖问题 |
+|---------|------|---------|
+| **新增 cell §1** | 极大似然 + one-hot 编码定义 | 为什么只看真实类别、one-hot 突然出现 |
+| **新增 cell §2** | KL 散度定义 & H(p,q)=H(p)+D_KL 推导 | KL 定义、推导、H(p) 为什么固定 |
+| **新增 cell §3** | Shannon 熵信息论故事 & 0·log 0 极限 | 熵为何设计成这样、对数衡量信息 |
+| **代码注释 §3** | 对数换底公式、np.log vs log2 说明 | Numpy 函数陌生、换底应用 |
+| **新增 cell §4** | 梯度推导 4 步详展（对数法则、链式法则、分情况） | 推导步子太长、链式法则不明确 |
+| **新增 cell §5** | np.asarray、np.log vs np.log2 快速参考 | Numpy 函数作用、何时用哪个 log |
+| **新增 cell §6** | softmax 为何压低错误类别（指数性质 + 对比表） | softmax 自动压低机制不清 |
+
+修订说明已写入 `/Users/z/AURORA/docs/current/audit/sim_students/L30/professor_review.md`。Notebook 格式验证通过 ✅

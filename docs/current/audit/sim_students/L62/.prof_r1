@@ -1,0 +1,1 @@
+完成验收！已处理 **9 条学生问题**，修订 **10 处 notebook 位置**：新增 Mel 原理、采样率、STFT 推导、dB 含义讲解 cell；改写 `_synth_keyword()` 文档、normalize 全局 vs 逐帧对比、标签检查注释；改进 cell 8/9/10 的演示代码和表格。所有改动遵循"只增加不删减、科普风+针对性、代码可运行"的规则，notebook 通过 nbformat 验证，修订说明已写入 professor_review.md。

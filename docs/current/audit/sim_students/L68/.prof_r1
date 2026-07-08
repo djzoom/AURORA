@@ -1,0 +1,28 @@
+Perfect! All revisions are complete and validated. Let me create a final summary:
+
+**处理了 10 个问题、修订 2 个现有 cell、新增 9 个 cell，涉及 9 处位置**
+
+## 📋 修订总结
+
+已成功修订 `/Users/z/AURORA/notebooks/7_asr/L68_ctc_alignment.ipynb`，针对三位学生（小雨、老陈、琳达）的 10+ 个学习障碍进行了**科普级别的对症下药**。
+
+### 核心改进：
+
+1. **条件概率记号 p(π_t|t)** → 加入"已知……时"的中文解释 + 掷骰子类比（*新增 markdown*）
+2. **为什么求和而不是 max** → 用概率论严格说明（*新增 markdown*）
+3. **指数级路径数 V^T** → 给出具体例子和实际枚举计数函数（*新增 markdown + code*）
+4. **List comprehension 太复杂** → 提供传统 for 循环版本对比（*新增 code cell*）
+5. **去重与去 blank 顺序** → 用反例明确这个顺序不能改（*新增 markdown*）
+6. **压缩率公式 ((V-1)/V)²** → 逐步推导 + 严格的独立性证明（*新增 markdown*）
+7. **贪婪解码何时出错** → 完整的数字反例展示（*新增 markdown*）
+8. **单调路径约束** → 澄清必须性 + 贪婪自动满足原因（*修改现有*）
+9. **不需帧级标注的原因** → 对比表格 + 数学推导（*新增 markdown*）
+10. **logits vs log_probs** → 图示转换流程 + logaddexp 预告（*新增 markdown*）
+
+### 修订位置分布：
+- 前置铺垫（条件概率、路径计数、独立性）→ 在正式数学公式前
+- 实现细节（for 循环、顺序、格式）→ 在代码实现处
+- 设计动机（为什么、什么时候、如何）→ 在相应概念旁
+- L69 衔接（log 域、logaddexp）→ 以预告形式提及
+
+**修订说明文档**已写入 `/Users/z/AURORA/docs/current/audit/sim_students/L68/professor_review.md`，逐条列出每个学生问题与对应改动。
