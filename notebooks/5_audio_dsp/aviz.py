@@ -9,27 +9,49 @@ import matplotlib.pyplot as plt
 
 from aurora.audio import (blackman, hamming, hann, mel_filterbank,
                           mel_spectrogram, power_spectrogram)
+from aurora._plot_theme import DARK_THEME, apply_theme
 
 PALETTE = ["#2A9D8F", "#E76F51", "#E9C46A", "#577590", "#8AB17D", "#BC6C8E"]
-INK, PAPER = "#22333B", "#FBF8F3"
+_THEME = DARK_THEME
+INK, AXIS, GRID, SURFACE, SHADOW, PAPER = (
+    _THEME.ink,
+    _THEME.axis,
+    _THEME.grid,
+    _THEME.surface,
+    _THEME.shadow,
+    _THEME.paper,
+)
 
 
 def _cjk():
     from matplotlib import font_manager as fm
     have = {f.name for f in fm.fontManager.ttflist}
-    for n in ("Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei",
+    for n in ("PingFang SC", "Arial Unicode MS", "Source Han Sans CN", "Source Han Sans CN Normal",
+              "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei",
               "PingFang SC", "SimHei", "WenQuanYi Zen Hei", "Droid Sans Fallback"):
         if n in have:
             return n
     return None
 
 
-def style():
-    cjk = _cjk()
+def _sync_theme(theme):
+    global INK, AXIS, GRID, SURFACE, SHADOW, PAPER
+    INK = theme.ink
+    AXIS = theme.axis
+    GRID = theme.grid
+    SURFACE = theme.surface
+    SHADOW = theme.shadow
+    PAPER = theme.paper
+
+
+def style(theme: str | None = None):
+    theme_spec = apply_theme(theme, cjk_font=_cjk(), figure_size=(9, 3.2), font_size=11)
+    _sync_theme(theme_spec)
     plt.rcParams.update({
-        "figure.facecolor": PAPER, "axes.facecolor": PAPER, "savefig.facecolor": PAPER,
-        "font.sans-serif": ([cjk] if cjk else []) + ["DejaVu Sans"],
-        "font.family": "sans-serif", "axes.unicode_minus": False, "font.size": 11,
+        "axes.spines.top": False,
+        "axes.spines.right": False,
+        "axes.grid": True,
+        "grid.alpha": 0.25,
     })
 
 
@@ -43,7 +65,7 @@ def waveform(x, title="波形 = 一串采样点", stem=False, figsize=(9, 3.2)):
         ax.plot(x, "o", color=PALETTE[0], ms=4)
     else:
         ax.plot(x, color=PALETTE[0], lw=1.5)
-    ax.axhline(0, color="#ccc", lw=.6); ax.grid(alpha=.3)
+    ax.axhline(0, color=AXIS, lw=.6); ax.grid(alpha=.3)
     ax.set_xlabel("采样点 n"); ax.set_ylabel("幅度")
     ax.set_title(title, fontweight="bold", color=INK)
     fig.tight_layout(); return fig
@@ -77,7 +99,7 @@ def twiddles(N=8, figsize=(5, 5)):
         ax.annotate(f"k={i}", (w[i].real, w[i].imag),
                     (w[i].real * 1.13, w[i].imag * 1.13), fontsize=8, ha="center")
     ax.set_aspect("equal"); ax.set_xlim(-1.4, 1.4); ax.set_ylim(-1.4, 1.4)
-    ax.axhline(0, color="#ccc", lw=.6); ax.axvline(0, color="#ccc", lw=.6)
+    ax.axhline(0, color=AXIS, lw=.6); ax.axvline(0, color=AXIS, lw=.6)
     ax.set_title(f"{N} 个旋转因子 = FFT 的积木", fontweight="bold", color=INK)
     fig.tight_layout(); return fig
 

@@ -5,18 +5,62 @@ Usage: from aurora.laviz import style, arrows2d, ...
 import matplotlib.pyplot as plt
 import numpy as np
 
+from aurora._plot_theme import DARK_THEME, apply_theme
+
 _PAL = ['#2A9D8F', '#E9C46A', '#F4A261', '#E76F51', '#264653', '#A8DADC']
+_THEME = DARK_THEME
+INK = _THEME.ink
+AXIS = _THEME.axis
+GRID = _THEME.grid
+SURFACE = _THEME.surface
+SHADOW = _THEME.shadow
+LEGEND_FACE = _THEME.legend_face
+LEGEND_EDGE = _THEME.legend_edge
+PAPER = _THEME.paper
 
 
-def style():
+def _cjk_font():
+    from matplotlib import font_manager as fm
+
+    have = {f.name for f in fm.fontManager.ttflist}
+    for name in (
+        'PingFang SC',
+        'Arial Unicode MS',
+        'Source Han Sans CN',
+        'Source Han Sans CN Normal',
+        'Heiti SC',
+        'PingFang SC',
+        'Noto Sans CJK SC',
+        'SimHei',
+        'WenQuanYi Zen Hei',
+        'Droid Sans Fallback',
+    ):
+        if name in have:
+            return name
+    return None
+
+
+def _sync_theme(theme):
+    global INK, AXIS, GRID, SURFACE, SHADOW, LEGEND_FACE, LEGEND_EDGE, PAPER
+    INK = theme.ink
+    AXIS = theme.axis
+    GRID = theme.grid
+    SURFACE = theme.surface
+    SHADOW = theme.shadow
+    LEGEND_FACE = theme.legend_face
+    LEGEND_EDGE = theme.legend_edge
+    PAPER = theme.paper
+
+
+def style(theme: str | None = None):
     """Apply a clean, readable matplotlib style."""
+    theme_spec = apply_theme(theme, cjk_font=_cjk_font(), figure_size=(6, 6), font_size=11)
+    _sync_theme(theme_spec)
     plt.rcParams.update({
-        'figure.figsize': (6, 6),
         'axes.spines.top': False,
         'axes.spines.right': False,
         'axes.grid': True,
         'grid.alpha': 0.2,
-        'font.size': 11,
     })
 
 
@@ -30,8 +74,9 @@ def _annotate_cells(ax, M, fontsize=9):
                     ha='center', va='center', fontsize=fontsize)
 
 
-def _mat_ax(ax, M, title='', color='#264653', fontsize=9, **kw):
+def _mat_ax(ax, M, title='', color=None, fontsize=9, **kw):
     """Draw matrix M on ax with imshow + cell labels and a colored border."""
+    color = color or INK
     vmax = max(abs(M).max(), 1e-9)
     defaults = dict(cmap='RdBu_r', vmin=-vmax, vmax=vmax, aspect='auto')
     defaults.update(kw)
@@ -67,8 +112,8 @@ def arrows2d(vectors, labels=None, colors=None, title=''):
     fig, ax = plt.subplots(figsize=(5, 5))
     ax.set_xlim(-lim, lim)
     ax.set_ylim(-lim, lim)
-    ax.axhline(0, color='k', lw=0.5)
-    ax.axvline(0, color='k', lw=0.5)
+    ax.axhline(0, color=AXIS, lw=0.5)
+    ax.axvline(0, color=AXIS, lw=0.5)
     ax.set_aspect('equal')
 
     for vec, lbl, col in zip(vecs, labels, colors, strict=False):
@@ -170,7 +215,7 @@ def mat_times_vec(A, x):
 
     ax = fig.add_subplot(gs2[-1])
     _mat_ax(ax, result.reshape(-1, 1), '(Mv2) = Ax\n列的线性组合',
-            color='#264653', **kw)
+            color=INK, **kw)
 
     plt.suptitle('矩阵 × 向量 — 2 种：(Mv1) 行点积  /  (Mv2) 列的线性组合',
                  fontsize=13)
@@ -264,7 +309,7 @@ def show_factorization(A, factors, labels, modes=None, title=''):
 
     all_mats = [A] + factors
     all_labels = ['A'] + list(labels)
-    all_colors = ['#264653'] + list(modes)
+    all_colors = [INK] + list(modes)
     vmax = max(abs(M).max() for M in all_mats)
     kw = dict(cmap='RdBu_r', vmin=-vmax, vmax=vmax, aspect='auto')
 

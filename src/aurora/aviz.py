@@ -5,18 +5,63 @@ Usage: import aurora.aviz as aviz  (or:  from aurora import aviz)
 import matplotlib.pyplot as plt
 import numpy as np
 
+from aurora._plot_theme import DARK_THEME, apply_theme
+
 _STYLE_APPLIED = False
+_THEME = DARK_THEME
+INK = _THEME.ink
+AXIS = _THEME.axis
+GRID = _THEME.grid
+SURFACE = _THEME.surface
+SHADOW = _THEME.shadow
+LEGEND_FACE = _THEME.legend_face
+LEGEND_EDGE = _THEME.legend_edge
+PAPER = _THEME.paper
 
 
-def style():
+def _cjk_font():
+    from matplotlib import font_manager as fm
+
+    have = {f.name for f in fm.fontManager.ttflist}
+    for name in (
+        'PingFang SC',
+        'Arial Unicode MS',
+        'Source Han Sans CN',
+        'Source Han Sans CN Normal',
+        'Arial Unicode MS',
+        'Heiti SC',
+        'PingFang SC',
+        'Noto Sans CJK SC',
+        'SimHei',
+        'WenQuanYi Zen Hei',
+        'Droid Sans Fallback',
+    ):
+        if name in have:
+            return name
+    return None
+
+
+def _sync_theme(theme):
+    global INK, AXIS, GRID, SURFACE, SHADOW, LEGEND_FACE, LEGEND_EDGE, PAPER
+    INK = theme.ink
+    AXIS = theme.axis
+    GRID = theme.grid
+    SURFACE = theme.surface
+    SHADOW = theme.shadow
+    LEGEND_FACE = theme.legend_face
+    LEGEND_EDGE = theme.legend_edge
+    PAPER = theme.paper
+
+
+def style(theme: str | None = None):
     """Apply a clean, readable matplotlib style."""
+    theme_spec = apply_theme(theme, cjk_font=_cjk_font(), figure_size=(10, 4), font_size=12)
+    _sync_theme(theme_spec)
     plt.rcParams.update({
-        'figure.figsize': (10, 4),
         'axes.spines.top': False,
         'axes.spines.right': False,
         'axes.grid': True,
         'grid.alpha': 0.25,
-        'font.size': 12,
     })
 
 
@@ -29,7 +74,7 @@ def waveform(signal, stem=False, title='', sr=16000):
         markerline, stemlines, baseline = ax.stem(t, signal)
         plt.setp(stemlines, linewidth=0.8)
         plt.setp(markerline, markersize=4)
-        plt.setp(baseline, linewidth=0.5, color='k')
+        plt.setp(baseline, linewidth=0.5, color=INK)
     else:
         ax.plot(t, signal)
     ax.set_xlabel('时间 (s)')
@@ -58,10 +103,10 @@ def aliasing(f_signal, f_sample):
             label=f'原始信号 {f_signal} Hz')
     ax.plot(t_fine, y_alias, 'C1--', lw=2,
             label=f'混叠频率 {f_alias} Hz')
-    ml, sl, bl = ax.stem(t_samp, y_samp, basefmt='k-')
+    ml, sl, bl = ax.stem(t_samp, y_samp, basefmt='-')
     plt.setp(sl, linewidth=0.8, color='C2', alpha=0.8)
     plt.setp(ml, markersize=6, color='C2', label=f'采样点 @ {f_sample} Hz')
-    plt.setp(bl, linewidth=0.5)
+    plt.setp(bl, linewidth=0.5, color=INK)
     ax.legend(fontsize=10)
     ax.set_xlabel('时间 (s)')
     ax.set_title(
@@ -78,15 +123,15 @@ def twiddles(N):
 
     theta = np.linspace(0, 2 * np.pi, 300)
     fig, ax = plt.subplots(figsize=(5, 5))
-    ax.plot(np.cos(theta), np.sin(theta), 'k-', alpha=0.18, lw=1)
+    ax.plot(np.cos(theta), np.sin(theta), color=AXIS, alpha=0.18, lw=1)
     sc = ax.scatter(tw.real, tw.imag, c=k, cmap='hsv', s=90, zorder=5)
     plt.colorbar(sc, ax=ax, label='k')
     for k_i, w in enumerate(tw):
-        ax.plot([0, w.real], [0, w.imag], 'k-', alpha=0.2, lw=0.8)
+        ax.plot([0, w.real], [0, w.imag], color=AXIS, alpha=0.2, lw=0.8)
         ax.annotate(f'k={k_i}', xy=(w.real, w.imag),
                     xytext=(8, 4), textcoords='offset points', fontsize=9)
-    ax.axhline(0, color='k', lw=0.4)
-    ax.axvline(0, color='k', lw=0.4)
+    ax.axhline(0, color=AXIS, lw=0.4)
+    ax.axvline(0, color=AXIS, lw=0.4)
     ax.set_aspect('equal')
     ax.set_title(f'N={N} 旋转因子  $e^{{-2\\pi i k/N}}$')
     ax.set_xlabel('实部')
@@ -123,7 +168,7 @@ def framing(signal, frame_len=256, hop=128, n_frames=5):
     t = np.arange(len(signal))
 
     fig, ax = plt.subplots(figsize=(12, 3))
-    ax.plot(t, signal, 'k-', lw=0.8, alpha=0.4)
+    ax.plot(t, signal, color=INK, lw=0.8, alpha=0.4)
     max_frames = (len(signal) - frame_len) // hop + 1
     for i in range(min(n_frames, max_frames)):
         start = i * hop

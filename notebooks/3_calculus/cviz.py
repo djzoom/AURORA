@@ -7,26 +7,49 @@ from __future__ import annotations
 import numpy as np
 import matplotlib.pyplot as plt
 
+from aurora._plot_theme import DARK_THEME, apply_theme
+
 PALETTE = ["#2A9D8F", "#E76F51", "#E9C46A", "#577590", "#8AB17D", "#BC6C8E"]
-INK, PAPER = "#22333B", "#FBF8F3"
+_THEME = DARK_THEME
+INK, AXIS, GRID, SURFACE, SHADOW, PAPER = (
+    _THEME.ink,
+    _THEME.axis,
+    _THEME.grid,
+    _THEME.surface,
+    _THEME.shadow,
+    _THEME.paper,
+)
 
 
 def _cjk():
     from matplotlib import font_manager as fm
     have = {f.name for f in fm.fontManager.ttflist}
-    for n in ("Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei",
+    for n in ("PingFang SC", "Arial Unicode MS", "Source Han Sans CN", "Source Han Sans CN Normal",
+              "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei",
               "PingFang SC", "SimHei", "WenQuanYi Zen Hei", "Droid Sans Fallback"):
         if n in have:
             return n
     return None
 
 
-def style():
-    cjk = _cjk()
+def _sync_theme(theme):
+    global INK, AXIS, GRID, SURFACE, SHADOW, PAPER
+    INK = theme.ink
+    AXIS = theme.axis
+    GRID = theme.grid
+    SURFACE = theme.surface
+    SHADOW = theme.shadow
+    PAPER = theme.paper
+
+
+def style(theme: str | None = None):
+    theme_spec = apply_theme(theme, cjk_font=_cjk(), figure_size=(6, 4), font_size=11)
+    _sync_theme(theme_spec)
     plt.rcParams.update({
-        "figure.facecolor": PAPER, "axes.facecolor": PAPER, "savefig.facecolor": PAPER,
-        "font.sans-serif": ([cjk] if cjk else []) + ["DejaVu Sans"],
-        "font.family": "sans-serif", "axes.unicode_minus": False, "font.size": 11,
+        "axes.spines.top": False,
+        "axes.spines.right": False,
+        "axes.grid": True,
+        "grid.alpha": 0.3,
     })
 
 
@@ -40,7 +63,7 @@ def tangent(f, df, x0=1.5, span=(-1, 3)):
     ax.plot(xs, f(x0) + slope * (xs - x0), color=PALETTE[1], lw=2, ls="--",
             label=f"切线 (斜率=f'({x0})={slope:.2f})")
     ax.plot([x0], [f(x0)], "o", color=PALETTE[1], ms=9)
-    ax.legend(fontsize=9); ax.grid(alpha=.3); ax.axhline(0, color="#ccc", lw=.6)
+    ax.legend(fontsize=9); ax.grid(alpha=.3); ax.axhline(0, color=AXIS, lw=.6)
     ax.set_title("导数 = 切线的斜率 = 变化率", fontweight="bold", color=INK)
     fig.tight_layout(); return fig
 
