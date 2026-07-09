@@ -44,9 +44,9 @@ __all__ = [
     "find_similar",
 ]
 
-# torch-dependent embedding API (requires pip install aurora[music])
+# torch-dependent embedding API (requires pip install -e ".[music]" in this repo)
 try:
     from aurora.music.embed import MusicEncoder, nt_xent_loss, triplet_loss
     __all__ += ["MusicEncoder", "triplet_loss", "nt_xent_loss"]
 except ImportError:
-    pass  # torch not available; install with: pip install aurora[music]
+    pass  # torch not available; install with: pip install -e ".[music]"

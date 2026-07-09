@@ -37,11 +37,14 @@ Cloud · Research** — the real thing, not a wrapper over someone else's model.
 ```
 Aurora
 ├── aurora.audio      FFT / STFT / Mel / MFCC / WAV — fully implemented ✅
-├── aurora.llm        KV-Cache / sampling / TF-IDF / RAG — implemented  ✅
-├── aurora.music      features / similarity / embed — implemented        ✅
-├── aurora.speech     metrics (WER) — partial; ASR training planned      ▷
-├── aurora.realtime   mic → ASR → LLM → TTS pipeline — planned          ▢
-└── aurora.mlops      Docker / W&B / CI — planned                       ▢
+├── aurora.music      chroma / onset / beat / similarity / embed — implemented ✅
+├── aurora.llm        KV-Cache / sampling / TF-IDF / RAG — implemented ✅
+├── aurora.speech     edit distance / WER — implemented; ASR training planned ▷
+├── aurora.rag        retrieval orchestration over current TF-IDF primitives ▢
+├── aurora.realtime   mic → ASR → LLM → TTS pipeline — planned ▢
+├── aurora.tts        speech synthesis / voice cloning — planned ▢
+├── aurora.multimodal audio + video understanding — planned ▢
+└── aurora.mlops      Docker / W&B / CI — planned ▢
 ```
 
 See [`ROADMAP.md`](ROADMAP.md) for the full six-month plan.
@@ -96,6 +99,8 @@ validated to `< 1e-10` against reference implementations. **No API wrappers, no 
 questions → [`FAQ`](docs/current/course/FAQ.md) ·
 course map → [`notebooks/README.md`](notebooks/README.md) ·
 knowledge graph → [`docs/current/obsidian/INDEX.md`](docs/current/obsidian/INDEX.md).
+
+- companion RPG → [`Aurora Quest`](aurora-quest/index.html) · 8-bit 辅助教学站点，推送到 `main` 后会自动热更新到 GitHub Pages。
 
 ```bash
 pip install -e ".[dev,notebooks]" && jupyter lab   # then open notebooks/0_foundation/L01_motivation.ipynb

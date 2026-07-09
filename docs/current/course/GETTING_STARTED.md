@@ -98,8 +98,8 @@ python -m ipykernel install --user --name aurora --display-name "Python (AURORA)
 ```
 
 > 🔸 **关于 PyTorch**：前 53 课（数学地基 + 音频 DSP）**只用 numpy，不需要 torch**。
-> 等你学到**深度学习模块（第 59 课起）**，再回来补一句 `pip install -e ".[speech,llm]"` 装 torch 即可。
-> 现在不用装，省时间省空间。
+> 等你学到**深度学习模块（第 59 课起）**，或者后面的**音乐嵌入 / ASR / 本地 LLM** 章节，
+> 再按需补装 `pip install -e ".[speech,music,llm]"` 即可。现在不用装，省时间省空间。
 
 ---
 
@@ -180,7 +180,8 @@ make test                               # 运行 82 项测试（FFT 等对齐 nu
 | Jupyter 内核列表里没有 `Python (AURORA)` | 第 4 步的 `ipykernel install` 没跑，或 Jupyter 没重启。补跑那条命令，关掉浏览器标签重新 `jupyter lab`。 |
 | 运行代码格报 `ModuleNotFoundError: numpy` | 内核选错了。右上角切成 `Python (AURORA)`。 |
 | 运行到某格 `NotImplementedError` / 报错 | 多半是**你还没填的 ✏️ TODO**——这是设计好的，去把那格补上。 |
-| 学到深度学习课 `No module named 'torch'` | 到第 59 课了才需要 torch：`pip install -e ".[speech,llm]"`。 |
+| 发现课程里有 bug / 错误 | 直接邮件到 `dev@0xGarfield.com`，附课号、文件名、复现步骤和截图；如果方便，也可以同时提 Issue。 |
+| 学到深度学习课 `No module named 'torch'` | 到第 59 课了才需要 torch；如果继续学音乐嵌入、ASR 或本地 LLM，再按需装 `pip install -e ".[speech,music,llm]"`。 |
 | 图画不出来 / matplotlib 卡住 | 确认装了 `notebooks` 附加包（第 4 步）；notebook 里的图会内嵌显示，无需额外操作。 |
 | `pip install` 很慢或失败 | 网络问题；可换国内镜像：`pip install -e ".[dev,notebooks]" -i https://pypi.tuna.tsinghua.edu.cn/simple`。 |
 

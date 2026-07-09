@@ -18,7 +18,7 @@ try:
 except ImportError as _err:
     raise ImportError(
         "torch is required for aurora.music.embed. "
-        "Install it with:  pip install 'aurora[music]'"
+        'Install it with:  pip install -e ".[music]"'
     ) from _err
 
 

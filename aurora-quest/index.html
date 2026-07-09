@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="Aurora Quest 是 AURORA 课程的 8-bit 辅助教学 RPG，推送即发布，点击就能开始学。"
+    />
+    <meta name="theme-color" content="#08111f" />
+    <title>Aurora Quest | AURORA 辅助课程 RPG</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="glow glow-a" aria-hidden="true"></div>
+      <div class="glow glow-b" aria-hidden="true"></div>
+
+      <header class="hero panel">
+        <div class="hero-copy">
+          <p class="eyebrow">AURORA QUEST · 8-bit 辅助教学</p>
+          <h1>把课程打成一场可以通关的冒险</h1>
+          <p class="hero-text" id="hero-text">
+            欢迎来到 Aurora Quest。我们不靠黑盒起飞，先从采样、复数和三角函数出发，
+            把声音拆成数组、把数组拆成旋转、把旋转拆成代码。你会一路走过傅里叶、
+            梯度、CTC、Whisper、RAG 和最终整合，最后把整条链路亲手拼起来。
+          </p>
+          <div class="hero-actions">
+            <button class="primary" id="start-button" type="button">开始冒险</button>
+            <button class="secondary" id="resume-button" type="button">继续存档</button>
+            <button class="ghost" id="reset-button" type="button">清空进度</button>
+            <a class="ghost link" href="mailto:dev@0xGarfield.com?subject=AURORA%20Quest%20Bug%20Report"
+              >报 bug</a
+            >
+          </div>
+          <p class="hero-note">
+            推送到 GitHub 后会自动重新生成课程快照并发布到 Pages。改课程，地图会变；
+            改游戏，不会反向改课程正文。
+          </p>
+        </div>
+
+        <aside class="hero-status">
+          <div class="status-badge">
+            <span class="status-label">当前关卡</span>
+            <strong id="current-stage">序章 · 欢迎入学</strong>
+          </div>
+          <div class="status-grid">
+            <div class="stat-card">
+              <span>Lv</span>
+              <strong id="player-level">1</strong>
+            </div>
+            <div class="stat-card">
+              <span>XP</span>
+              <strong id="player-xp">0</strong>
+            </div>
+            <div class="stat-card">
+              <span>完成</span>
+              <strong id="player-clear">0/7</strong>
+            </div>
+            <div class="stat-card">
+              <span>连击</span>
+              <strong id="player-streak">0</strong>
+            </div>
+          </div>
+          <div class="xp-meter" aria-label="经验值进度">
+            <div class="xp-meter-fill" id="xp-fill"></div>
+          </div>
+          <p class="status-foot">热部署状态：推送即上线 · GitHub Pages</p>
+        </aside>
+      </header>
+
+      <main class="workspace">
+        <section class="panel story-panel">
+          <div class="panel-head">
+            <div>
+              <p class="panel-kicker">讲课中的战斗</p>
+              <h2 id="stage-title">序章：欢迎来到 AURORA Quest</h2>
+            </div>
+            <div class="boss-chip" id="boss-chip">黑盒守门人 · HP 100</div>
+          </div>
+
+          <div class="stage-narrative" id="stage-narrative"></div>
+          <p class="source-note" id="phase-source"></p>
+
+          <div class="question-card">
+            <div class="question-meta">
+              <span id="question-count">问题 1 / 3</span>
+              <span id="question-hint-pill">先想一想，再出手</span>
+            </div>
+            <h3 id="question-prompt">问题会在这里出现。</h3>
+            <div class="choices" id="choice-list"></div>
+          </div>
+
+          <div class="battle-log">
+            <div class="battle-log-head">
+              <span>战斗日志</span>
+              <button class="mini" id="next-button" type="button" disabled>进入下一章</button>
+            </div>
+            <div id="battle-log-list" class="log-list" aria-live="polite"></div>
+          </div>
+        </section>
+
+        <aside class="side-column">
+          <section class="panel roster-panel">
+            <div class="panel-head compact">
+              <div>
+                <p class="panel-kicker">角色面板</p>
+                <h2>你现在拥有的钥匙</h2>
+              </div>
+            </div>
+            <div id="inventory-list" class="inventory-list"></div>
+          </section>
+
+          <section class="panel roadmap-panel">
+            <div class="panel-head compact">
+              <div>
+                <p class="panel-kicker">课程地图</p>
+                <h2>月度主线</h2>
+              </div>
+            </div>
+            <div id="roadmap-list" class="roadmap-list"></div>
+          </section>
+        </aside>
+      </main>
+
+      <section class="panel curriculum-panel">
+        <div class="panel-head compact">
+          <div>
+            <p class="panel-kicker">课程同步</p>
+            <h2>开场五课 · 地基 · 逐日打卡</h2>
+          </div>
+          <div class="sync-note">来源：`docs/current/course/`</div>
+        </div>
+
+        <div class="curriculum-grid">
+          <div class="curriculum-block">
+            <h3>开场五课</h3>
+            <div id="opening-lessons" class="chip-stack"></div>
+          </div>
+          <div class="curriculum-block">
+            <h3>数学地基</h3>
+            <div id="foundation-tracks" class="chip-stack"></div>
+          </div>
+          <div class="curriculum-block wide">
+            <h3>逐日打卡</h3>
+            <div id="weekly-checkpoints" class="weekly-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <p>
+          课程改动会刷新地图与标题，游戏玩法独立。若发现 bug，请发到
+          <a href="mailto:dev@0xGarfield.com">dev@0xGarfield.com</a>。
+        </p>
+        <p class="footer-note">
+          推送到 `main` 后，GitHub Actions 会自动重新生成课程快照并发布到 GitHub Pages。
+        </p>
+      </footer>
+    </div>
+
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>

@@ -22,7 +22,7 @@ notebooks = ["jupyterlab", "ipykernel", "nbformat", "matplotlib"]
 speech = ["torch", "torchaudio"]
 music = ["torch", "torchaudio"]
 llm = ["torch", "transformers"]
-rag = ["faiss-cpu"]
+rag = []
 
 [tool.setuptools.packages.find]
 where = ["src"]
