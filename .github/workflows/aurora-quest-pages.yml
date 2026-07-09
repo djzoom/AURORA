@@ -43,6 +43,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    if: ${{ github.repository_visibility == 'public' }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

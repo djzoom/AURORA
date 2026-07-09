@@ -100,7 +100,7 @@ questions → [`FAQ`](docs/current/course/FAQ.md) ·
 course map → [`notebooks/README.md`](notebooks/README.md) ·
 knowledge graph → [`docs/current/obsidian/INDEX.md`](docs/current/obsidian/INDEX.md).
 
-- companion RPG → [`Aurora Quest`](aurora-quest/index.html) · 8-bit 辅助教学站点，推送到 `main` 后会自动热更新到 GitHub Pages。
+- companion RPG → [`Aurora Quest`](aurora-quest/index.html) · 8-bit 辅助教学站点，推送到 `main` 后会自动生成快照；仓库公开且 Pages 可用时会热更新到 GitHub Pages。
 
 ```bash
 pip install -e ".[dev,notebooks]" && jupyter lab   # then open notebooks/0_foundation/L01_motivation.ipynb
