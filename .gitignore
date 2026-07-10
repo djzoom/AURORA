@@ -28,9 +28,10 @@ lightning_logs/
 outputs/
 checkpoints/
 
-# Data (keep large corpora out of git)
-data/
-datasets/
+# Data (keep large corpora out of git — root-level only, so nested source
+# dirs like aurora-quest/src/data/ are not swallowed)
+/data/
+/datasets/
 *.wav
 *.flac
 *.mp3
