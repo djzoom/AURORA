@@ -305,11 +305,19 @@
           <a class="pixel-btn" href="./index.html">⟵ Aurora Quest</a>
           <a
             class="pixel-btn"
+            href="https://github.com/djzoom/AURORA/tree/main/notebooks"
+            target="_blank"
+            rel="noopener"
+            >📚 99 课地图</a
+          >
+          <a
+            class="pixel-btn"
             href="https://github.com/djzoom/AURORA/blob/main/docs/current/course/VIDEO_LIBRARY.md"
             target="_blank"
             rel="noopener"
             >源文档 (Markdown)</a
           >
+          <button class="pixel-btn" id="share-button" type="button">🔗 分享</button>
         </nav>
       </header>
 
@@ -602,6 +610,28 @@
         if (event.key === "/" && document.activeElement !== searchInput) {
           event.preventDefault();
           searchInput.focus();
+        }
+      });
+
+      // 分享：优先系统分享面板（移动端），否则复制链接到剪贴板并给出反馈。
+      const shareBtn = document.getElementById("share-button");
+      shareBtn.addEventListener("click", async () => {
+        const data = {
+          title: document.title,
+          text: "AURORA 视频资料库：92 条名师名校教程，逐条对齐 L01–L99，从正弦波刷到 Whisper。",
+          url: location.href,
+        };
+        try {
+          if (navigator.share) {
+            await navigator.share(data);
+            return;
+          }
+          await navigator.clipboard.writeText(data.url);
+          const original = shareBtn.textContent;
+          shareBtn.textContent = "✓ 已复制链接";
+          setTimeout(() => (shareBtn.textContent = original), 2000);
+        } catch {
+          /* 用户取消系统分享等，静默即可 */
         }
       });
 

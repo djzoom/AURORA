@@ -89,9 +89,39 @@
           补充学习 → <a href="./video-library.html">📺 视频资料库</a>。
           发现 bug？<a href="mailto:dev@0xGarfield.com?subject=AURORA%20Quest%20Bug%20Report">告诉我们</a>。
         </p>
+        <p>
+          课程入口：<a href="https://github.com/djzoom/AURORA" target="_blank" rel="noopener">GitHub 仓库</a> ·
+          <a href="https://github.com/djzoom/AURORA/tree/main/notebooks" target="_blank" rel="noopener">📚 99 课地图</a> ·
+          <a href="https://github.com/djzoom/AURORA/blob/main/docs/current/course/GETTING_STARTED.md" target="_blank" rel="noopener">🔰 新手上路</a> ·
+          <a href="#" id="share-link">🔗 分享本页</a>
+        </p>
       </footer>
     </div>
 
+    <script>
+      // 分享：优先系统分享面板（移动端），否则复制链接并就地反馈。
+      document.getElementById("share-link").addEventListener("click", async (event) => {
+        event.preventDefault();
+        const link = event.currentTarget;
+        const data = {
+          title: document.title,
+          text: "Aurora Quest：把 99 课音频 AI 课程打成一场 8-bit 冒险。",
+          url: location.href,
+        };
+        try {
+          if (navigator.share) {
+            await navigator.share(data);
+            return;
+          }
+          await navigator.clipboard.writeText(data.url);
+          const original = link.textContent;
+          link.textContent = "✓ 已复制链接";
+          setTimeout(() => (link.textContent = original), 2000);
+        } catch {
+          /* 用户取消系统分享等，静默即可 */
+        }
+      });
+    </script>
     <script type="module" src="./src/app.js"></script>
   </body>
 </html>
