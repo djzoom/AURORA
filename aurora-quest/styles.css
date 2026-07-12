@@ -606,29 +606,48 @@ button:disabled {
 .pixel-map {
   --map-zoom: 1;
   position: relative;
-  width: max-content;
-  min-width: 100%;
-  padding: 12px 14px 16px 12px;
+  width: 640px;
+  padding: 12px 14px 16px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   transform: scale(var(--map-zoom));
   transform-origin: 0 0;
 }
 
-/* 纵向像素道路：把城门与地形区串成一条远征路线 */
-.pixel-map::before {
-  content: "";
-  position: absolute;
-  left: 26px;
-  top: 12px;
-  bottom: 16px;
-  width: 4px;
-  background: repeating-linear-gradient(
-    180deg,
-    var(--line) 0 8px,
-    transparent 8px 14px
-  );
+/* 版面行：并列 = 可并行学的同层地基 */
+.map-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.map-row.cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.map-row.cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.map-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+/* 流线：依赖走向的字符画（│ 顺承 · ╲╱ 汇流 · ╱│╲ 三岔 · ╲│╱ 合流） */
+.map-flow {
+  font-family: var(--mono);
+  text-align: center;
+  color: rgba(140, 197, 255, 0.55);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 10px;
+  line-height: 1;
+  text-indent: 10px; /* 抵消 letter-spacing 造成的视觉偏移 */
+  user-select: none;
 }
 
 /* 章节色带：城门与地形区共用（border-left 提示所属章节） */
@@ -643,11 +662,10 @@ button:disabled {
 .map-gate {
   position: relative;
   z-index: 1;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 8px;
-  width: max-content;
-  max-width: 100%;
+  width: 100%;
   padding: 6px 12px 6px 8px;
   font-family: var(--mono);
   font-size: 0.78rem;
@@ -659,6 +677,12 @@ button:disabled {
   box-shadow: 0 3px 0 var(--ink);
   cursor: pointer;
   text-align: left;
+}
+
+.gate-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .gate-icon {
@@ -693,13 +717,11 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* 课程地形区（生物群系）：区名 + 石砖路 */
+/* 课程地形区（生物群系）：比喻地名 + 阶段名 + 石砖路 + 承接路标 + 风物志 */
 .biome {
   position: relative;
   z-index: 1;
-  margin-left: 44px;
-  width: max-content;
-  max-width: 520px;
+  flex: 1;
   padding: 7px 10px 9px;
   background: color-mix(in srgb, var(--chapter-tint, var(--line)) 7%, var(--panel));
   border: 2px solid var(--line);
@@ -724,6 +746,13 @@ button:disabled {
   display: flex;
   align-items: baseline;
   gap: 8px;
+  flex-wrap: wrap;
+}
+
+.zone-name {
+  font-weight: 400;
+  color: var(--chapter-tint, var(--muted));
+  font-size: 0.68rem;
 }
 
 .zone-head small {
@@ -732,11 +761,28 @@ button:disabled {
   font-size: 0.66rem;
 }
 
+/* 「◀ 承接」路标：Phase 之间的概念依赖（顺序主线由流线承担） */
+.zone-deps {
+  margin: 6px 0 0;
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  color: var(--amber);
+  opacity: 0.85;
+  line-height: 1.6;
+}
+
+/* 风物志：放大到街道级才看到的一句比喻说明 */
+.zone-flavor {
+  margin: 3px 0 0;
+  font-size: 0.68rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
 .tiles {
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
-  max-width: 496px;
 }
 
 /* 课程石砖：一课一块，放大后课号可读 */
@@ -762,6 +808,27 @@ button:disabled {
 
 .biome.active .tile {
   color: var(--cyan-strong);
+}
+
+/* ---- LOD：地图比例即层级切换（由 ui.js 依 --map-zoom 打 data-lod） ----
+   far  = 大陆视图：石砖缩成色点，只看 Phase 拓扑（城门 + 地形 + 依赖流线）
+   mid  = 地区视图：区名 / 课号域 / ◀承接 路标可读，砖号可辨
+   near = 街道视图：每块 Lesson 石砖 + 风物志全细节 */
+.pixel-map[data-lod="far"] .tile {
+  width: 12px;
+  height: 10px;
+  font-size: 0;
+}
+
+.pixel-map[data-lod="far"] .zone-deps,
+.pixel-map[data-lod="far"] .zone-flavor,
+.pixel-map[data-lod="far"] .zone-name,
+.pixel-map[data-lod="far"] .zone-head small {
+  display: none;
+}
+
+.pixel-map[data-lod="mid"] .zone-flavor {
+  display: none;
 }
 
 .map-caption {

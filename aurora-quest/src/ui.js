@@ -5,7 +5,7 @@
 
 import courseSnapshot from "./course-snapshot.generated.js";
 import { QUESTS, XP_PER_LEVEL } from "./data/quests.js";
-import { MAP_ZONES } from "./data/worldmap.js";
+import { MAP_ZONES, MAP_LAYOUT } from "./data/worldmap.js";
 import { drawSprite, SPRITE_BY_QUEST } from "./sprites.js";
 import {
   levelFromXp,
@@ -142,13 +142,20 @@ function renderCompleteState(state, quest) {
 // ---- 冒险地图（像素世界地图：Boss 城门 + 11 个课程地形区 + 99 块课程石砖）-------
 
 // 缩放只是视觉状态，不进存档；控件是静态 DOM，模块加载时接线一次。
-let mapZoom = 1;
+// 初始比例 = 大陆视图（far LOD）：先看 Phase 拓扑全貌，放大才进入街道级细节。
+let mapZoom = window.matchMedia("(max-width: 760px)").matches ? 0.6 : 0.7;
 const MAP_ZOOM_MIN = 0.6;
 const MAP_ZOOM_MAX = 2.2;
 const MAP_ZOOM_STEP = 0.2;
 
 function applyMapZoom() {
   els.roadmapList?.style.setProperty("--map-zoom", String(mapZoom));
+  // LOD（制图学细节分级）：比例就是层级切换——
+  // far = 大陆视图（只看 Phase 拓扑：城门 + 地形轮廓 + 依赖走向）
+  // mid = 地区视图（区名 / 课号域 / ◀承接 路标可读）
+  // near = 街道视图（每块 Lesson 石砖的 L## 与风物志清晰）
+  const lod = mapZoom < 0.75 ? "far" : mapZoom < 1.3 ? "mid" : "near";
+  els.roadmapList?.setAttribute("data-lod", lod);
   const readout = document.getElementById("map-zoom-val");
   if (readout) readout.textContent = `${Math.round(mapZoom * 100)}%`;
 }
@@ -164,54 +171,112 @@ document.getElementById("map-zoom-out")?.addEventListener("click", () => nudgeMa
 
 const lessonCode = (n) => `L${String(n).padStart(2, "0")}`;
 
+// 章节状态 → CSS 类（gate 与其地形区共用同一套 locked/active/completed 视觉）
+function questStateCls(state, unlock, index) {
+  const completed = phaseIsComplete(state, index);
+  const active = index === state.activePhaseIndex;
+  const locked = index > unlock;
+  return { completed, active, locked, cls: `${completed ? " completed" : ""}${active ? " active" : ""}${locked ? " locked" : ""}` };
+}
+
+// Boss 城门：保留原节点交互（点击切章、锁定禁用）
+function buildGate(state, unlock, index, onSelectPhase) {
+  const quest = QUESTS[index];
+  const { completed, locked, cls } = questStateCls(state, unlock, index);
+  const gate = document.createElement("button");
+  gate.type = "button";
+  gate.className = `map-gate chapter-${index}${cls}`;
+  gate.title = locked ? "锁定中" : quest.title;
+  gate.setAttribute("aria-label", quest.title);
+  gate.disabled = locked || index === state.activePhaseIndex;
+  const gateIcon = document.createElement("span");
+  gateIcon.className = "gate-icon";
+  gateIcon.textContent = completed ? "🏰" : locked ? "🔒" : "⚔️";
+  const gateName = document.createElement("span");
+  gateName.className = "gate-name";
+  gateName.textContent = index === 0 ? quest.title : `${quest.title}｜${quest.boss}`;
+  gate.append(gateIcon, gateName);
+  gate.addEventListener("click", () => onSelectPhase(index));
+  return gate;
+}
+
+// 地形区：比喻地名 + 阶段名 + 课号砖 + 「◀ 承接」依赖注记（体现课程互相关系）
+function buildBiome(state, unlock, zoneKey) {
+  const zone = MAP_ZONES[zoneKey];
+  const { cls } = questStateCls(state, unlock, zone.questIndex);
+  const biome = document.createElement("section");
+  biome.className = `biome chapter-${zone.questIndex}${cls}`;
+
+  const head = document.createElement("h3");
+  head.className = "zone-head";
+  head.textContent = `${zone.icon} ${zone.terrain}`;
+  const nameTag = document.createElement("span");
+  nameTag.className = "zone-name";
+  nameTag.textContent = zone.name;
+  const rangeTag = document.createElement("small");
+  rangeTag.textContent = `${lessonCode(zone.range[0])}–${lessonCode(zone.range[1])}`;
+  head.append(nameTag, rangeTag);
+
+  const tiles = document.createElement("div");
+  tiles.className = "tiles";
+  for (let n = zone.range[0]; n <= zone.range[1]; n += 1) {
+    const tile = document.createElement("span");
+    tile.className = "tile";
+    tile.textContent = lessonCode(n);
+    tiles.appendChild(tile);
+  }
+
+  biome.append(head, tiles);
+
+  if (zone.deps.length) {
+    const deps = document.createElement("p");
+    deps.className = "zone-deps";
+    deps.textContent = `◀ 承接 ${zone.deps.map((k) => `${MAP_ZONES[k].icon}${MAP_ZONES[k].terrain}`).join(" · ")}`;
+    biome.appendChild(deps);
+  }
+  const flavor = document.createElement("p");
+  flavor.className = "zone-flavor";
+  flavor.textContent = zone.flavor;
+  biome.appendChild(flavor);
+  return biome;
+}
+
 function renderLevelMap(state, onSelectPhase) {
   const unlock = unlockedIndex(state);
   els.roadmapList.innerHTML = "";
-  QUESTS.forEach((quest, index) => {
-    const completed = phaseIsComplete(state, index);
-    const active = index === state.activePhaseIndex;
-    const locked = index > unlock;
-    const stateCls = `${completed ? " completed" : ""}${active ? " active" : ""}${locked ? " locked" : ""}`;
 
-    // Boss 城门：保留原节点交互（点击切章、锁定禁用）
-    const gate = document.createElement("button");
-    gate.type = "button";
-    gate.className = `map-gate chapter-${index}${stateCls}`;
-    gate.title = locked ? "锁定中" : quest.title;
-    gate.setAttribute("aria-label", quest.title);
-    gate.disabled = locked || active;
-    const gateIcon = document.createElement("span");
-    gateIcon.className = "gate-icon";
-    gateIcon.textContent = completed ? "🏰" : locked ? "🔒" : "⚔️";
-    const gateName = document.createElement("span");
-    gateName.className = "gate-name";
-    gateName.textContent = index === 0 ? quest.title : `${quest.title}｜${quest.boss}`;
-    gate.append(gateIcon, gateName);
-    gate.addEventListener("click", () => onSelectPhase(index));
-    els.roadmapList.appendChild(gate);
-
-    // 该章覆盖的课程地形区：区名 + 课号范围 + 每课一块石砖（放大可读 L##）
-    MAP_ZONES.filter((zone) => zone.questIndex === index).forEach((zone) => {
-      const biome = document.createElement("section");
-      biome.className = `biome chapter-${index}${stateCls}`;
-      const head = document.createElement("h3");
-      head.className = "zone-head";
-      head.textContent = `${zone.icon} ${zone.name}`;
-      const rangeTag = document.createElement("small");
-      rangeTag.textContent = `${lessonCode(zone.range[0])}–${lessonCode(zone.range[1])}`;
-      head.appendChild(rangeTag);
-      const tiles = document.createElement("div");
-      tiles.className = "tiles";
-      for (let n = zone.range[0]; n <= zone.range[1]; n += 1) {
-        const tile = document.createElement("span");
-        tile.className = "tile";
-        tile.textContent = lessonCode(n);
-        tiles.appendChild(tile);
+  for (const row of MAP_LAYOUT) {
+    if (row.flow) {
+      // 流线行：纯装饰字符，画出汇流/分岔的依赖走向
+      const flow = document.createElement("div");
+      flow.className = "map-flow";
+      flow.setAttribute("aria-hidden", "true");
+      flow.textContent = row.flow;
+      els.roadmapList.appendChild(flow);
+      continue;
+    }
+    if (row.gate !== undefined) {
+      const gateRow = document.createElement("div");
+      gateRow.className = "map-row";
+      gateRow.appendChild(buildGate(state, unlock, row.gate, onSelectPhase));
+      els.roadmapList.appendChild(gateRow);
+      continue;
+    }
+    const zoneRow = document.createElement("div");
+    zoneRow.className = `map-row cols-${row.zones.length}`;
+    for (const zoneKey of row.zones) {
+      const zone = MAP_ZONES[zoneKey];
+      const cell = document.createElement("div");
+      cell.className = "map-cell";
+      // 自带城门的区块（营地/熔炉/三王国/城堡）：城门贴在区块顶部
+      if (zone.gate !== undefined) {
+        cell.appendChild(buildGate(state, unlock, zone.gate, onSelectPhase));
       }
-      biome.append(head, tiles);
-      els.roadmapList.appendChild(biome);
-    });
-  });
+      cell.appendChild(buildBiome(state, unlock, zoneKey));
+      zoneRow.appendChild(cell);
+    }
+    els.roadmapList.appendChild(zoneRow);
+  }
   applyMapZoom();
 
   // 地图说明：当前章节 + 对应课程里程碑（来自 LEARNING_PLAN 生成的快照——改课程，地图会变）
