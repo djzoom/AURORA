@@ -25,6 +25,10 @@ jupyter lab
 
 按 `Shift+Enter` 逐格运行。看到 **✏️ TODO** = 你要填的代码；填完运行，下面的检查格打 ✅ 或报错。
 
+> 📺 卡住了？[**视频资料库**](../docs/current/course/VIDEO_LIBRARY.md) 收录 92 条名师名校
+> YouTube 教程（Karpathy · 3Blue1Brown · Valerio Velardo · 李宏毅…），逐条对齐 L01–L99 课号：
+> 先看直觉课 → 再看手写实现课 → 回来接着写。
+
 
 
 ## 前言

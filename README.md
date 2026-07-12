@@ -98,7 +98,8 @@ validated to `< 1e-10` against reference implementations. **No API wrappers, no 
 **Start here:** beginners → [`GETTING_STARTED`](docs/current/course/GETTING_STARTED.md) ·
 questions → [`FAQ`](docs/current/course/FAQ.md) ·
 course map → [`notebooks/README.md`](notebooks/README.md) ·
-knowledge graph → [`docs/current/obsidian/INDEX.md`](docs/current/obsidian/INDEX.md).
+knowledge graph → [`docs/current/obsidian/INDEX.md`](docs/current/obsidian/INDEX.md) ·
+video library → [`VIDEO_LIBRARY`](docs/current/course/VIDEO_LIBRARY.md).
 
 - companion RPG → [`Aurora Quest`](aurora-quest/index.html) · 8-bit 辅助教学站点，推送到 `main` 后会自动生成快照；仓库公开且 Pages 可用时会热更新到 GitHub Pages。
 
@@ -167,6 +168,10 @@ pip install -e ".[dev,notebooks]" && jupyter lab
 > 📚 **术语与知识图谱**：[`docs/current/obsidian/INDEX.md`](docs/current/obsidian/INDEX.md)
 > —— 中英双语词汇表 + 每个术语的「生命周期 / 依赖 / 易混淆 / 白板要求」概念页 +
 > [面试冲刺图](docs/current/obsidian/interview/Audio-AI.md)。用 Obsidian 打开即见知识网。
+
+> 📺 **视频资料库**：[`docs/current/course/VIDEO_LIBRARY.md`](docs/current/course/VIDEO_LIBRARY.md)
+> —— 92 条名师名校 YouTube 教程（Karpathy · 3Blue1Brown · 李宏毅 · MIT…），逐条对齐
+> L01–L99；卡住时按课号回查。可交互筛选版随 Aurora Quest 一起部署（`video-library.html`）。
 
 带上好奇心就够了。我们白板见。 🎧
 

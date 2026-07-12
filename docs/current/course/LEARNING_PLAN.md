@@ -3,6 +3,8 @@
 > 这是一份**个人学习计划**，不是项目宣传文档。它诚实地按"完全不懂 + 全职
 > 40h/周 + 有云 GPU 预算"的真实情况重排。配套的可追踪 checklist 见 `ROADMAP.md`，
 > 每周的逐日打卡见 `docs/current/course/week-NN-checklist.md`。
+> 补充视频片单见 [`VIDEO_LIBRARY.md`](VIDEO_LIBRARY.md)——92 条名师名校 YouTube
+> 教程，逐条对齐 L01–L99，卡住时按课号回查。
 
 ## 0. 先校准预期（最重要的一节）
 

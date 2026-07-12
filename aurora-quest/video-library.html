@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta
+      name="description"
+      content="AURORA 视频资料库：92 条名师名校 YouTube 教程，按 L01–L99 课程阶段对齐，可搜索、可按难度/语言筛选。"
+    />
+    <meta name="theme-color" content="#08111f" />
+    <title>视频资料库 | AURORA Video Library</title>
+    <style>
+      /* 与 Aurora Quest 同一设计语言：深空 CRT + 霓虹调色板，硬直角 + 像素描边。
+         独立成页（不依赖 styles.css），避免和游戏样式互相牵连。 */
+      :root {
+        color-scheme: dark;
+        --bg: #060b18;
+        --panel: #0b1428;
+        --panel-deep: #070d1d;
+        --line: rgba(140, 197, 255, 0.28);
+        --text: #edf7ff;
+        --muted: #9fb4cb;
+        --cyan: #66e8ff;
+        --cyan-strong: #b8fbff;
+        --amber: #ffc85e;
+        --magenta: #ff6f91;
+        --green: #8ff3a5;
+        --mono: "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        --sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC",
+          system-ui, sans-serif;
+        --max: 1080px;
+      }
+      * { box-sizing: border-box; }
+      html {
+        min-height: 100%;
+        background:
+          radial-gradient(circle at 24% 12%, rgba(102, 232, 255, 0.13), transparent 30%),
+          radial-gradient(circle at 78% 85%, rgba(255, 111, 145, 0.1), transparent 28%),
+          linear-gradient(180deg, #050814 0%, #081223 52%, #04070e 100%);
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--text);
+        font-family: var(--sans);
+        overflow-x: hidden;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background: repeating-linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.03),
+          rgba(255, 255, 255, 0.03) 1px,
+          transparent 1px,
+          transparent 4px
+        );
+        z-index: 2;
+      }
+      .shell {
+        position: relative;
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 20px 16px 60px;
+        z-index: 1;
+      }
+      .pixel-panel {
+        background: var(--panel);
+        border: 2px solid var(--line);
+        box-shadow: 0 0 0 2px var(--panel-deep), 6px 6px 0 rgba(0, 0, 0, 0.55);
+      }
+
+      /* 顶栏 */
+      .topbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px 16px;
+        padding: 14px 18px;
+        margin-bottom: 16px;
+      }
+      .logo {
+        font-family: var(--mono);
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        color: var(--cyan-strong);
+        text-shadow: 0 0 12px rgba(102, 232, 255, 0.45);
+        font-size: 1.05rem;
+      }
+      .logo small { color: var(--muted); font-weight: 400; letter-spacing: 0.05em; }
+      .topbar-links { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+      .pixel-btn {
+        font-family: var(--mono);
+        font-size: 0.78rem;
+        color: var(--text);
+        background: var(--panel-deep);
+        border: 2px solid var(--line);
+        padding: 6px 12px;
+        cursor: pointer;
+        text-decoration: none;
+        box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+        transition: transform 60ms steps(2, end);
+      }
+      .pixel-btn:hover { color: var(--cyan-strong); border-color: var(--cyan); transform: translate(-1px, -1px); }
+      .pixel-btn:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5); }
+
+      /* 简介条 */
+      .intro {
+        padding: 12px 18px;
+        margin-bottom: 16px;
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.7;
+      }
+      .intro strong { color: var(--amber); }
+      .intro .k { font-family: var(--mono); color: var(--cyan); }
+
+      /* 控制区 */
+      .controls {
+        padding: 14px 18px;
+        margin-bottom: 20px;
+        display: grid;
+        gap: 12px;
+      }
+      .search-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+      #search {
+        flex: 1;
+        min-width: 220px;
+        font-family: var(--mono);
+        font-size: 0.9rem;
+        color: var(--text);
+        background: var(--panel-deep);
+        border: 2px solid var(--line);
+        padding: 9px 12px;
+        outline: none;
+      }
+      #search:focus { border-color: var(--cyan); box-shadow: 0 0 10px rgba(102, 232, 255, 0.25); }
+      #phase-select {
+        font-family: var(--mono);
+        font-size: 0.8rem;
+        color: var(--text);
+        background: var(--panel-deep);
+        border: 2px solid var(--line);
+        padding: 9px 8px;
+        max-width: 100%;
+      }
+      .chip-row { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; }
+      .chip-group { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+      .chip-label { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); letter-spacing: 0.08em; }
+      .chip {
+        font-family: var(--mono);
+        font-size: 0.74rem;
+        color: var(--muted);
+        background: transparent;
+        border: 2px solid var(--line);
+        padding: 4px 10px;
+        cursor: pointer;
+      }
+      .chip[aria-pressed="true"] { color: var(--ink, #04070e); background: var(--cyan); border-color: var(--cyan); font-weight: 700; }
+      .chip.amber[aria-pressed="true"] { background: var(--amber); border-color: var(--amber); }
+      .count-line { font-family: var(--mono); font-size: 0.76rem; color: var(--muted); }
+      .count-line strong { color: var(--green); }
+
+      /* 阶段分组 */
+      .phase-block { margin-bottom: 26px; }
+      .phase-title {
+        font-family: var(--mono);
+        font-size: 0.92rem;
+        color: var(--amber);
+        letter-spacing: 0.06em;
+        margin: 0 0 10px;
+        padding-left: 12px;
+        border-left: 4px solid var(--amber);
+        text-shadow: 0 0 10px rgba(255, 200, 94, 0.35);
+      }
+      .cards { display: grid; grid-template-columns: 1fr; gap: 14px; }
+      @media (min-width: 760px) { .cards { grid-template-columns: 1fr 1fr; } }
+
+      /* 资源卡片 */
+      .card { padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
+      .card.top-pick { border-color: rgba(255, 200, 94, 0.6); }
+      .card-title { margin: 0; font-size: 0.98rem; line-height: 1.45; color: var(--cyan-strong); }
+      .card-title .medal { margin-right: 4px; }
+      .card-instructor { font-size: 0.8rem; color: var(--muted); }
+      .badges { display: flex; flex-wrap: wrap; gap: 5px; }
+      .badge {
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        padding: 2px 7px;
+        border: 1px solid var(--line);
+        color: var(--muted);
+        white-space: nowrap;
+      }
+      .badge.align { color: var(--green); border-color: rgba(143, 243, 165, 0.5); }
+      .badge.diff { color: var(--magenta); border-color: rgba(255, 111, 145, 0.5); }
+      .badge.lang { color: var(--cyan); border-color: rgba(102, 232, 255, 0.45); }
+      .card-covers { font-size: 0.8rem; color: var(--muted); line-height: 1.65; margin: 0; }
+      .card-why { font-size: 0.8rem; color: var(--text); line-height: 1.65; margin: 0; }
+      .card-why::before { content: "▸ "; color: var(--amber); }
+      .card-links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+      .link-btn {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        text-decoration: none;
+        color: var(--cyan);
+        border: 2px solid rgba(102, 232, 255, 0.45);
+        padding: 4px 9px;
+        background: var(--panel-deep);
+      }
+      .link-btn:hover { color: var(--ink, #04070e); background: var(--cyan); }
+      .warn { font-family: var(--mono); font-size: 0.7rem; color: var(--amber); }
+      .empty { padding: 30px; text-align: center; color: var(--muted); font-family: var(--mono); }
+
+      .footer { margin-top: 34px; text-align: center; color: var(--muted); font-size: 0.76rem; font-family: var(--mono); line-height: 1.8; }
+      .footer a { color: var(--cyan); }
+      kbd {
+        font-family: var(--mono);
+        border: 1px solid var(--line);
+        padding: 0 5px;
+        font-size: 0.72rem;
+        background: var(--panel-deep);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar pixel-panel">
+        <span class="logo">AURORA&nbsp;视频资料库 <small>· VIDEO LIBRARY</small></span>
+        <nav class="topbar-links">
+          <a class="pixel-btn" href="./index.html">⟵ Aurora Quest</a>
+          <a
+            class="pixel-btn"
+            href="https://github.com/djzoom/AURORA/blob/main/docs/current/course/VIDEO_LIBRARY.md"
+            target="_blank"
+            rel="noopener"
+            >源文档 (Markdown)</a
+          >
+        </nav>
+      </header>
+
+      <section class="intro pixel-panel">
+        <strong>从正弦波到 Whisper，全程有名师陪你手写。</strong>
+        92 条精选 YouTube 教程（Karpathy · 3Blue1Brown · Valerio Velardo · 李宏毅 · MIT · Harvard…），
+        逐条对齐 AURORA 课程 <span class="k">L01–L99</span>。在 notebook 里卡住时，按课号回来找对应视频：
+        先看直觉课 → 再看手写实现课 → 回 notebook 自己写一遍。按 <kbd>/</kbd> 快速搜索。
+      </section>
+
+      <section class="controls pixel-panel" aria-label="搜索与筛选">
+        <div class="search-row">
+          <input
+            id="search"
+            type="search"
+            placeholder="搜索标题 / 讲师 / 主题（如 FFT、KV-Cache、李宏毅…）"
+            aria-label="搜索资源"
+          />
+          <select id="phase-select" aria-label="按课程阶段筛选">
+            <option value="">全部阶段</option>
+          </select>
+        </div>
+        <div class="chip-row">
+          <div class="chip-group" id="diff-chips" role="group" aria-label="按难度筛选">
+            <span class="chip-label">难度</span>
+            <button class="chip" data-value="" aria-pressed="true">全部</button>
+            <button class="chip" data-value="入门" aria-pressed="false">入门</button>
+            <button class="chip" data-value="进阶" aria-pressed="false">进阶</button>
+            <button class="chip" data-value="高级" aria-pressed="false">高级</button>
+          </div>
+          <div class="chip-group" id="lang-chips" role="group" aria-label="按语言筛选">
+            <span class="chip-label">语言</span>
+            <button class="chip" data-value="" aria-pressed="true">全部</button>
+            <button class="chip" data-value="中文" aria-pressed="false">中文</button>
+            <button class="chip" data-value="英文" aria-pressed="false">英文</button>
+          </div>
+          <div class="chip-group">
+            <button class="chip amber" id="top-pick-chip" aria-pressed="false">🥇 只看首选</button>
+          </div>
+          <span class="count-line" id="count-line" aria-live="polite"></span>
+        </div>
+      </section>
+
+      <main id="library" aria-label="视频资源列表"></main>
+
+      <footer class="footer">
+        <p>
+          数据源：<a
+            href="https://github.com/djzoom/AURORA/blob/main/docs/current/course/VIDEO_LIBRARY.md"
+            target="_blank"
+            rel="noopener"
+            >docs/current/course/VIDEO_LIBRARY.md</a
+          >（改 Markdown 后跑 <kbd>node scripts/generate_video_library_data.mjs</kbd> 重新生成）。
+          ⚠️ = 单视频直链未逐一核实，以频道 + 搜索关键词为准。
+        </p>
+      </footer>
+    </div>
+
+    <script type="module">
+      import { videoLibrary } from "./src/video-library.generated.js";
+
+      const state = { query: "", phase: "", diff: "", lang: "", topPick: false };
+
+      const searchInput = document.getElementById("search");
+      const phaseSelect = document.getElementById("phase-select");
+      const countLine = document.getElementById("count-line");
+      const container = document.getElementById("library");
+
+      for (const phase of videoLibrary.phases) {
+        const option = document.createElement("option");
+        option.value = phase;
+        // 下拉里去掉长括号注释，保持紧凑
+        option.textContent = phase.replace(/（[^）]*）/g, "").trim();
+        phaseSelect.appendChild(option);
+      }
+
+      function matches(item) {
+        if (state.phase && item.phase !== state.phase) return false;
+        if (state.diff && !item.diffLevels.includes(state.diff)) return false;
+        if (state.lang && !item.langTags.includes(state.lang)) return false;
+        if (state.topPick && !item.topPick) return false;
+        if (state.query) {
+          for (const term of state.query.toLowerCase().split(/\s+/)) {
+            if (term && !item.searchable.includes(term)) return false;
+          }
+        }
+        return true;
+      }
+
+      function badge(text, cls = "") {
+        return text ? `<span class="badge ${cls}">${text}</span>` : "";
+      }
+
+      function renderCard(item) {
+        const badges = [
+          badge(item.align, "align"),
+          badge(item.difficulty, "diff"),
+          badge(item.langTags.join(" / "), "lang"),
+          badge(item.type),
+          badge(item.duration),
+        ].join("");
+        const links = item.urls
+          .map(
+            ({ url, label }) =>
+              `<a class="link-btn" href="${url}" target="_blank" rel="noopener">▶ ${label}</a>`
+          )
+          .join("");
+        return `<article class="card pixel-panel${item.topPick ? " top-pick" : ""}">
+          <h3 class="card-title">${item.topPick ? '<span class="medal">🥇</span>' : ""}${item.title}</h3>
+          <div class="card-instructor">${item.instructor ?? ""}</div>
+          <div class="badges">${badges}</div>
+          ${item.covers ? `<p class="card-covers">${item.covers}</p>` : ""}
+          ${item.why ? `<p class="card-why">${item.why}</p>` : ""}
+          <div class="card-links">${links}</div>
+          ${item.unverified ? '<span class="warn">⚠️ 部分直链未核实，以频道 + 搜索关键词为准</span>' : ""}
+        </article>`;
+      }
+
+      function render() {
+        const visible = videoLibrary.items.filter(matches);
+        countLine.innerHTML = `显示 <strong>${visible.length}</strong> / ${videoLibrary.count} 条`;
+        if (!visible.length) {
+          container.innerHTML = '<div class="empty pixel-panel">没有匹配的资源 —— 换个关键词试试？</div>';
+          return;
+        }
+        const blocks = [];
+        for (const phase of videoLibrary.phases) {
+          const cards = visible.filter((item) => item.phase === phase);
+          if (!cards.length) continue;
+          blocks.push(`<section class="phase-block">
+            <h2 class="phase-title">${phase}</h2>
+            <div class="cards">${cards.map(renderCard).join("")}</div>
+          </section>`);
+        }
+        container.innerHTML = blocks.join("");
+      }
+
+      searchInput.addEventListener("input", () => {
+        state.query = searchInput.value.trim();
+        render();
+      });
+      phaseSelect.addEventListener("change", () => {
+        state.phase = phaseSelect.value;
+        render();
+      });
+
+      function wireChips(groupId, key) {
+        const group = document.getElementById(groupId);
+        group.addEventListener("click", (event) => {
+          const chip = event.target.closest(".chip");
+          if (!chip) return;
+          state[key] = chip.dataset.value;
+          for (const other of group.querySelectorAll(".chip")) {
+            other.setAttribute("aria-pressed", String(other === chip));
+          }
+          render();
+        });
+      }
+      wireChips("diff-chips", "diff");
+      wireChips("lang-chips", "lang");
+
+      const topPickChip = document.getElementById("top-pick-chip");
+      topPickChip.addEventListener("click", () => {
+        state.topPick = !state.topPick;
+        topPickChip.setAttribute("aria-pressed", String(state.topPick));
+        render();
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "/" && document.activeElement !== searchInput) {
+          event.preventDefault();
+          searchInput.focus();
+        }
+      });
+
+      render();
+    </script>
+  </body>
+</html>

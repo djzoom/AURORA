@@ -35,6 +35,9 @@ jobs:
       - name: Generate course snapshot
         run: node scripts/generate_aurora_quest_data.mjs
 
+      - name: Generate video library data
+        run: node scripts/generate_video_library_data.mjs
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
