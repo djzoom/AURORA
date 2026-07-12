@@ -101,7 +101,7 @@ course map → [`notebooks/README.md`](notebooks/README.md) ·
 knowledge graph → [`docs/current/obsidian/INDEX.md`](docs/current/obsidian/INDEX.md) ·
 video library → [`VIDEO_LIBRARY`](docs/current/course/VIDEO_LIBRARY.md).
 
-- companion RPG → [`Aurora Quest`](aurora-quest/index.html) · 8-bit 辅助教学站点，推送到 `main` 后会自动生成快照；仓库公开且 Pages 可用时会热更新到 GitHub Pages。
+- companion RPG → **[Aurora Quest（在线可玩）](https://djzoom.github.io/AURORA/)** · 8-bit 辅助教学站点，含像素世界地图（99 课 · 依赖拓扑 · 缩放看细节）与[交互版视频资料库](https://djzoom.github.io/AURORA/video-library.html)（92 条名师课 + 打卡）；推送 `main` 自动部署。
 
 ```bash
 pip install -e ".[dev,notebooks]" && jupyter lab   # then open notebooks/0_foundation/L01_motivation.ipynb
