@@ -73,8 +73,17 @@
       <!-- 底部：冒险地图 + 战利品 -->
       <section class="belt">
         <div class="pixel-panel map-panel">
-          <h2 class="panel-title">冒险地图</h2>
-          <div id="roadmap-list" class="level-map"></div>
+          <div class="map-head">
+            <h2 class="panel-title">冒险地图</h2>
+            <div class="map-zoom" role="group" aria-label="地图缩放">
+              <button class="pixel-btn ghost" id="map-zoom-out" type="button" aria-label="缩小">−</button>
+              <span id="map-zoom-val">100%</span>
+              <button class="pixel-btn ghost" id="map-zoom-in" type="button" aria-label="放大">＋</button>
+            </div>
+          </div>
+          <div class="map-viewport">
+            <div id="roadmap-list" class="pixel-map"></div>
+          </div>
           <p class="map-caption" id="map-caption"></p>
         </div>
         <div class="pixel-panel loot-panel">
@@ -93,9 +102,36 @@
           课程入口：<a href="https://github.com/djzoom/AURORA" target="_blank" rel="noopener">GitHub 仓库</a> ·
           <a href="https://github.com/djzoom/AURORA/tree/main/notebooks" target="_blank" rel="noopener">📚 99 课地图</a> ·
           <a href="https://github.com/djzoom/AURORA/blob/main/docs/current/course/GETTING_STARTED.md" target="_blank" rel="noopener">🔰 新手上路</a> ·
-          <a href="#" id="share-link">🔗 分享本页</a>
+          <a href="#" class="share-action" id="share-link">🔗 分享本页</a>
         </p>
       </footer>
+
+      <!-- 「更多」页：移动端 Tab 独占一屏；桌面隐藏（桌面的等价信息在页脚） -->
+      <section class="more-panel pixel-panel" aria-label="关于与链接">
+        <h2 class="panel-title">关于 AURORA</h2>
+        <p class="more-blurb">
+          从一条正弦波，到 Whisper 内部——99 课全部亲手写，MIT 全面开源。
+          <strong>No API wrappers.</strong> 这个游戏是课程的 8-bit 陪练。
+        </p>
+        <div class="more-author">
+          <span class="more-avatar" aria-hidden="true">GF</span>
+          <div class="more-author-body">
+            <strong>加菲众 0xGarfield</strong>
+            <small>Speech &amp; Audio ML · Building AURORA</small>
+          </div>
+        </div>
+        <div class="more-links">
+          <a class="pixel-btn" href="https://github.com/djzoom/AURORA" target="_blank" rel="noopener">🐙 GitHub 仓库</a>
+          <a class="pixel-btn" href="https://x.com/DJWZ" target="_blank" rel="noopener">𝕏 作者 Twitter · @DJWZ</a>
+          <a class="pixel-btn" href="https://0xgarfield.com" target="_blank" rel="noopener">🌐 0xgarfield.com</a>
+          <a class="pixel-btn" href="./video-library.html">📺 视频资料库（92 条名师课）</a>
+          <a class="pixel-btn" href="https://github.com/djzoom/AURORA/tree/main/notebooks" target="_blank" rel="noopener">📚 99 课地图</a>
+          <a class="pixel-btn" href="https://github.com/djzoom/AURORA/blob/main/docs/current/course/GETTING_STARTED.md" target="_blank" rel="noopener">🔰 新手上路</a>
+          <button class="pixel-btn primary share-action" type="button">🔗 分享本页</button>
+          <a class="pixel-btn ghost" href="mailto:dev@0xGarfield.com?subject=AURORA%20Quest%20Bug%20Report">🐛 反馈 Bug</a>
+        </div>
+        <p class="more-note">键盘：1–4 作答 · Enter 下一章 · M 静音 ｜ MIT · 全面开源</p>
+      </section>
 
       <!-- 移动端分页 Tab（桌面隐藏）：战斗独占一屏，次要信息分页呈现 -->
       <nav class="mobile-tabs pixel-panel" aria-label="页面分区">
@@ -117,8 +153,9 @@
         }
       });
 
-      // 分享：优先系统分享面板（移动端），否则复制链接并就地反馈。
-      document.getElementById("share-link").addEventListener("click", async (event) => {
+      // 分享（页脚链接 + 「更多」页按钮共用）：优先系统分享面板，否则复制链接并就地反馈。
+      for (const trigger of document.querySelectorAll(".share-action")) {
+        trigger.addEventListener("click", async (event) => {
         event.preventDefault();
         const link = event.currentTarget;
         const data = {
@@ -138,7 +175,8 @@
         } catch {
           /* 用户取消系统分享等，静默即可 */
         }
-      });
+        });
+      }
     </script>
     <script type="module" src="./src/app.js"></script>
   </body>

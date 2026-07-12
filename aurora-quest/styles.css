@@ -560,70 +560,208 @@ button:disabled {
   padding: 16px 18px 14px;
 }
 
-.level-map {
+/* ---- 像素世界地图：Boss 城门 + 课程地形区 + 99 块课程石砖 -------------------
+   依据课程结构（11 阶段 · L01–L99，见 src/data/worldmap.js）绘制；
+   缩放由 --map-zoom 驱动（＋/− 控件），放大后每块石砖的课号清晰可读。 */
+
+.map-head {
   display: flex;
   align-items: center;
-  gap: 20px;
-  padding: 8px 4px 10px;
-  overflow-x: auto;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
-.map-node {
-  position: relative;
-  flex: none;
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
+.map-zoom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--mono);
-  font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.74rem;
   color: var(--muted);
-  background: var(--panel-deep);
-  border: 2px solid var(--line);
-  box-shadow: 0 3px 0 var(--ink);
 }
 
-/* 节点连线 */
-.map-node:not(:first-child)::before {
+.map-zoom .pixel-btn {
+  padding: 2px 10px;
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+#map-zoom-val {
+  min-width: 44px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.map-viewport {
+  margin-top: 8px;
+  max-height: 400px;
+  overflow: auto;
+  border: 2px solid var(--line);
+  background:
+    radial-gradient(circle at 30% 12%, rgba(102, 232, 255, 0.06), transparent 40%),
+    var(--panel-deep);
+}
+
+.pixel-map {
+  --map-zoom: 1;
+  position: relative;
+  width: max-content;
+  min-width: 100%;
+  padding: 12px 14px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transform: scale(var(--map-zoom));
+  transform-origin: 0 0;
+}
+
+/* 纵向像素道路：把城门与地形区串成一条远征路线 */
+.pixel-map::before {
   content: "";
   position: absolute;
-  left: -22px;
-  top: 50%;
-  width: 20px;
-  height: 3px;
-  background: var(--line);
+  left: 26px;
+  top: 12px;
+  bottom: 16px;
+  width: 4px;
+  background: repeating-linear-gradient(
+    180deg,
+    var(--line) 0 8px,
+    transparent 8px 14px
+  );
 }
 
-.map-node.completed {
+/* 章节色带：城门与地形区共用（border-left 提示所属章节） */
+.chapter-0 { --chapter-tint: var(--cyan); }
+.chapter-1 { --chapter-tint: var(--amber); }
+.chapter-2 { --chapter-tint: var(--magenta); }
+.chapter-3 { --chapter-tint: var(--green); }
+.chapter-4 { --chapter-tint: var(--cyan-strong); }
+.chapter-5 { --chapter-tint: #d9a5ff; }
+.chapter-6 { --chapter-tint: #ff9d5c; }
+
+.map-gate {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: max-content;
+  max-width: 100%;
+  padding: 6px 12px 6px 8px;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text);
+  background: var(--panel);
+  border: 2px solid var(--line);
+  border-left: 6px solid var(--chapter-tint, var(--line));
+  box-shadow: 0 3px 0 var(--ink);
+  cursor: pointer;
+  text-align: left;
+}
+
+.gate-icon {
+  font-size: 1rem;
+}
+
+.map-gate.completed {
   color: var(--ink);
   background: var(--green);
   border-color: var(--green);
 }
 
-.map-node.completed:not(:first-child)::before {
-  background: var(--green);
-}
-
-.map-node.active {
+.map-gate.active {
   color: var(--ink);
   background: var(--amber);
   border-color: var(--amber);
-  animation: node-pulse 1.2s steps(2) infinite;
+  animation: gate-pulse 1.2s steps(2) infinite;
 }
 
-/* active 节点因不可点而 disabled，但它是“当前位置”高亮，不能被禁用样式调暗 */
-.map-node.active:disabled {
+/* active 城门因不可点而 disabled，但它是“当前位置”高亮，不能被调暗 */
+.map-gate.active:disabled {
   opacity: 1;
   cursor: default;
 }
 
-@keyframes node-pulse {
+@keyframes gate-pulse {
   50% { box-shadow: 0 3px 0 var(--ink), 0 0 14px rgba(255, 200, 94, 0.75); }
 }
 
-.map-node.locked {
+.map-gate.locked {
   opacity: 0.38;
+  cursor: not-allowed;
+}
+
+/* 课程地形区（生物群系）：区名 + 石砖路 */
+.biome {
+  position: relative;
+  z-index: 1;
+  margin-left: 44px;
+  width: max-content;
+  max-width: 520px;
+  padding: 7px 10px 9px;
+  background: color-mix(in srgb, var(--chapter-tint, var(--line)) 7%, var(--panel));
+  border: 2px solid var(--line);
+  border-left: 6px solid var(--chapter-tint, var(--line));
+}
+
+.biome.locked {
+  opacity: 0.42;
+}
+
+.biome.active {
+  border-color: rgba(255, 200, 94, 0.55);
+  border-left-color: var(--chapter-tint);
+}
+
+.zone-head {
+  margin: 0 0 6px;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.zone-head small {
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 0.66rem;
+}
+
+.tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  max-width: 496px;
+}
+
+/* 课程石砖：一课一块，放大后课号可读 */
+.tile {
+  width: 30px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0;
+  color: var(--muted);
+  background: var(--panel-deep);
+  border: 1px solid var(--line);
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.45);
+}
+
+.biome.completed .tile {
+  color: var(--green);
+  background: rgba(143, 243, 165, 0.14);
+  border-color: rgba(143, 243, 165, 0.55);
+}
+
+.biome.active .tile {
+  color: var(--cyan-strong);
 }
 
 .map-caption {
@@ -689,10 +827,76 @@ button:disabled {
 
 /* ---- 响应式 ------------------------------------------------------------------ */
 
-/* ---- 移动端分页 Tab（桌面隐藏，见下方 media query） ---------------------- */
+/* ---- 移动端分页 Tab 与「更多」页（桌面隐藏，见下方 media query） ---------- */
 
-.mobile-tabs {
+.mobile-tabs,
+.more-panel {
   display: none;
+}
+
+.more-blurb {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+.more-blurb strong {
+  color: var(--amber);
+}
+
+.more-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: var(--panel-deep);
+  border: 2px solid var(--line);
+}
+
+.more-avatar {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-weight: 700;
+  color: var(--ink);
+  background: var(--amber);
+  border: 2px solid var(--line);
+  box-shadow: 0 3px 0 var(--ink);
+}
+
+.more-author-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.more-author-body small {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+}
+
+.more-links {
+  display: grid;
+  gap: 8px;
+}
+
+.more-links .pixel-btn {
+  text-align: center;
+  text-decoration: none;
+  padding: 10px 8px;
+}
+
+.more-note {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.8;
 }
 
 /* ---- 移动端：App 式固定视口 ----------------------------------------------
@@ -824,12 +1028,10 @@ button:disabled {
 
   body[data-tab="map"] .belt,
   body[data-tab="loot"] .belt {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     flex: 1;
     min-height: 0;
-    overflow-y: auto;
-    align-content: start;
   }
 
   body[data-tab="map"] .loot-panel,
@@ -837,13 +1039,35 @@ button:disabled {
     display: none;
   }
 
-  body[data-tab="more"] .footer {
-    display: block;
+  /* 地图页：面板撑满一屏，地图视口占据剩余高度（缩放/平移都在视口内） */
+  body[data-tab="map"] .map-panel {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  body[data-tab="map"] .map-viewport {
+    flex: 1;
+    min-height: 0;
+    max-height: none;
+  }
+
+  body[data-tab="loot"] .loot-panel {
     flex: 1;
     min-height: 0;
     overflow-y: auto;
-    font-size: 0.85rem;
-    line-height: 2.1;
+  }
+
+  /* 更多页：独占一屏的关于/链接页（桌面用页脚，此面板仅移动端出现） */
+  body[data-tab="more"] .more-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 14px 14px 18px;
   }
 
   /* 底部 Tab 栏：像素手柄风，避开 iOS 手势条 */

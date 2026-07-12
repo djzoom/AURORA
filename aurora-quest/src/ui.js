@@ -5,6 +5,7 @@
 
 import courseSnapshot from "./course-snapshot.generated.js";
 import { QUESTS, XP_PER_LEVEL } from "./data/quests.js";
+import { MAP_ZONES } from "./data/worldmap.js";
 import { drawSprite, SPRITE_BY_QUEST } from "./sprites.js";
 import {
   levelFromXp,
@@ -138,7 +139,30 @@ function renderCompleteState(state, quest) {
     state.activePhaseIndex === QUESTS.length - 1 ? "重新复盘" : "进入下一章";
 }
 
-// ---- 冒险地图（横向关卡节点）--------------------------------------------------
+// ---- 冒险地图（像素世界地图：Boss 城门 + 11 个课程地形区 + 99 块课程石砖）-------
+
+// 缩放只是视觉状态，不进存档；控件是静态 DOM，模块加载时接线一次。
+let mapZoom = 1;
+const MAP_ZOOM_MIN = 0.6;
+const MAP_ZOOM_MAX = 2.2;
+const MAP_ZOOM_STEP = 0.2;
+
+function applyMapZoom() {
+  els.roadmapList?.style.setProperty("--map-zoom", String(mapZoom));
+  const readout = document.getElementById("map-zoom-val");
+  if (readout) readout.textContent = `${Math.round(mapZoom * 100)}%`;
+}
+
+function nudgeMapZoom(direction) {
+  const next = mapZoom + direction * MAP_ZOOM_STEP;
+  mapZoom = Math.min(MAP_ZOOM_MAX, Math.max(MAP_ZOOM_MIN, Number(next.toFixed(2))));
+  applyMapZoom();
+}
+
+document.getElementById("map-zoom-in")?.addEventListener("click", () => nudgeMapZoom(1));
+document.getElementById("map-zoom-out")?.addEventListener("click", () => nudgeMapZoom(-1));
+
+const lessonCode = (n) => `L${String(n).padStart(2, "0")}`;
 
 function renderLevelMap(state, onSelectPhase) {
   const unlock = unlockedIndex(state);
@@ -147,16 +171,48 @@ function renderLevelMap(state, onSelectPhase) {
     const completed = phaseIsComplete(state, index);
     const active = index === state.activePhaseIndex;
     const locked = index > unlock;
-    const node = document.createElement("button");
-    node.type = "button";
-    node.className = `map-node${completed ? " completed" : ""}${active ? " active" : ""}${locked ? " locked" : ""}`;
-    node.textContent = index === 0 ? "序" : String(index);
-    node.title = locked ? "锁定中" : quest.title;
-    node.setAttribute("aria-label", quest.title);
-    node.disabled = locked || active;
-    node.addEventListener("click", () => onSelectPhase(index));
-    els.roadmapList.appendChild(node);
+    const stateCls = `${completed ? " completed" : ""}${active ? " active" : ""}${locked ? " locked" : ""}`;
+
+    // Boss 城门：保留原节点交互（点击切章、锁定禁用）
+    const gate = document.createElement("button");
+    gate.type = "button";
+    gate.className = `map-gate chapter-${index}${stateCls}`;
+    gate.title = locked ? "锁定中" : quest.title;
+    gate.setAttribute("aria-label", quest.title);
+    gate.disabled = locked || active;
+    const gateIcon = document.createElement("span");
+    gateIcon.className = "gate-icon";
+    gateIcon.textContent = completed ? "🏰" : locked ? "🔒" : "⚔️";
+    const gateName = document.createElement("span");
+    gateName.className = "gate-name";
+    gateName.textContent = index === 0 ? quest.title : `${quest.title}｜${quest.boss}`;
+    gate.append(gateIcon, gateName);
+    gate.addEventListener("click", () => onSelectPhase(index));
+    els.roadmapList.appendChild(gate);
+
+    // 该章覆盖的课程地形区：区名 + 课号范围 + 每课一块石砖（放大可读 L##）
+    MAP_ZONES.filter((zone) => zone.questIndex === index).forEach((zone) => {
+      const biome = document.createElement("section");
+      biome.className = `biome chapter-${index}${stateCls}`;
+      const head = document.createElement("h3");
+      head.className = "zone-head";
+      head.textContent = `${zone.icon} ${zone.name}`;
+      const rangeTag = document.createElement("small");
+      rangeTag.textContent = `${lessonCode(zone.range[0])}–${lessonCode(zone.range[1])}`;
+      head.appendChild(rangeTag);
+      const tiles = document.createElement("div");
+      tiles.className = "tiles";
+      for (let n = zone.range[0]; n <= zone.range[1]; n += 1) {
+        const tile = document.createElement("span");
+        tile.className = "tile";
+        tile.textContent = lessonCode(n);
+        tiles.appendChild(tile);
+      }
+      biome.append(head, tiles);
+      els.roadmapList.appendChild(biome);
+    });
   });
+  applyMapZoom();
 
   // 地图说明：当前章节 + 对应课程里程碑（来自 LEARNING_PLAN 生成的快照——改课程，地图会变）
   const quest = currentQuest(state);
