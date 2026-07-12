@@ -31,6 +31,7 @@ const distDir = path.join(questDir, "dist");
 const MODULE_ORDER = [
   "src/course-snapshot.generated.js",
   "src/data/quests.js",
+  "src/data/worldmap.js",
   "src/sprites.js",
   "src/audio.js",
   "src/state.js",
@@ -67,9 +68,10 @@ async function main() {
   const bundledScript = `(() => {\n"use strict";\n${modules.join("\n\n")}\n})();`;
 
   // Extract the <body> inner markup from index.html and drop the external <script> tag.
-  const bodyMatch = indexHtml.match(/<body>([\s\S]*?)<\/body>/i);
+  const bodyMatch = indexHtml.match(/<body([^>]*)>([\s\S]*?)<\/body>/i);
   if (!bodyMatch) throw new Error("could not find <body> in index.html");
-  const bodyInner = bodyMatch[1]
+  const bodyAttrs = bodyMatch[1] ?? "";
+  const bodyInner = bodyMatch[2]
     .replace(/\s*<script type="module"[^>]*><\/script>/i, "")
     .trim();
 
@@ -88,7 +90,7 @@ async function main() {
     <title>Aurora Quest | AURORA 辅助课程 RPG</title>
     ${styleTag}
   </head>
-  <body>
+  <body${bodyAttrs}>
     ${bodyInner}
     ${scriptTag}
   </body>

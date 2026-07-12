@@ -607,47 +607,39 @@ button:disabled {
   --map-zoom: 1;
   position: relative;
   width: 640px;
-  padding: 12px 14px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 8%, rgba(255, 184, 90, 0.14), transparent 18%),
+    radial-gradient(circle at 50% 50%, rgba(102, 232, 255, 0.12), transparent 30%),
+    linear-gradient(180deg, rgba(6, 19, 37, 0.9), rgba(4, 8, 18, 0.98));
   transform: scale(var(--map-zoom));
   transform-origin: 0 0;
+  box-shadow: inset 0 0 0 2px rgba(4, 7, 14, 0.55);
 }
 
-/* 版面行：并列 = 可并行学的同层地基 */
-.map-row {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 8px;
+.pixel-map::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(18, 52, 86, 0.28) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(18, 52, 86, 0.28) 1px, transparent 1px);
+  background-size: 16px 16px;
+  opacity: 0.45;
 }
 
-.map-row.cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.map-row.cols-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.map-cell {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  min-width: 0;
-}
-
-/* 流线：依赖走向的字符画（│ 顺承 · ╲╱ 汇流 · ╱│╲ 三岔 · ╲│╱ 合流） */
-.map-flow {
-  font-family: var(--mono);
-  text-align: center;
-  color: rgba(140, 197, 255, 0.55);
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 10px;
-  line-height: 1;
-  text-indent: 10px; /* 抵消 letter-spacing 造成的视觉偏移 */
-  user-select: none;
+.pixel-map::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 19% 28%, rgba(79, 166, 106, 0.18), transparent 15%),
+    radial-gradient(circle at 76% 28%, rgba(154, 98, 255, 0.18), transparent 15%),
+    radial-gradient(circle at 50% 50%, rgba(102, 232, 255, 0.2), transparent 13%),
+    radial-gradient(circle at 50% 70%, rgba(216, 86, 101, 0.18), transparent 12%),
+    radial-gradient(circle at 79% 81%, rgba(154, 98, 255, 0.16), transparent 13%);
 }
 
 /* 章节色带：城门与地形区共用（border-left 提示所属章节） */
@@ -659,176 +651,226 @@ button:disabled {
 .chapter-5 { --chapter-tint: #d9a5ff; }
 .chapter-6 { --chapter-tint: #ff9d5c; }
 
-.map-gate {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.quest-map-routes,
+.quest-map-nodes {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  padding: 6px 12px 6px 8px;
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  font-weight: 700;
+  height: 100%;
+}
+
+.quest-map-routes {
+  z-index: 1;
+}
+
+.quest-map-nodes {
+  z-index: 2;
+}
+
+.quest-route-glow,
+.quest-route {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.quest-route-glow {
+  stroke: var(--amber);
+  stroke-width: 18px;
+  opacity: 0.16;
+}
+
+.quest-route {
+  stroke: rgba(240, 180, 79, 0.78);
+  stroke-width: 5px;
+  stroke-dasharray: 10 9;
+  filter: drop-shadow(0 0 4px rgba(255, 224, 138, 0.35));
+}
+
+.quest-route.locked {
+  stroke: rgba(74, 83, 104, 0.72);
+  filter: none;
+}
+
+.quest-route-glow.locked {
+  opacity: 0;
+}
+
+.quest-route.completed {
+  stroke: rgba(143, 243, 165, 0.84);
+  stroke-dasharray: 0;
+}
+
+.quest-route.active {
+  stroke: var(--cyan);
+  stroke-dasharray: 8 8;
+  animation: route-pulse 1.1s steps(2) infinite;
+}
+
+.quest-route-glow.active {
+  stroke: var(--cyan);
+  opacity: 0.28;
+}
+
+@keyframes route-pulse {
+  50% { stroke: var(--amber); }
+}
+
+.quest-map-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  max-width: 126px;
+  min-width: 86px;
+  min-height: 40px;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: center;
+  gap: 6px;
+  padding: 5px 7px;
   color: var(--text);
-  background: var(--panel);
-  border: 2px solid var(--line);
-  border-left: 6px solid var(--chapter-tint, var(--line));
-  box-shadow: 0 3px 0 var(--ink);
-  cursor: pointer;
+  background: rgba(7, 13, 29, 0.92);
+  border: 2px solid rgba(140, 197, 255, 0.34);
+  border-left: 5px solid var(--chapter-tint, var(--line));
+  box-shadow: 0 3px 0 var(--ink), 0 0 10px rgba(4, 7, 14, 0.75);
   text-align: left;
 }
 
-.gate-name {
+.quest-map-node:hover:not(:disabled),
+.quest-map-node:focus-visible {
+  border-color: var(--cyan);
+  color: var(--cyan-strong);
+}
+
+.quest-map-sprite {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  background: var(--cyan);
+  border: 2px solid rgba(237, 247, 255, 0.5);
+  box-shadow: inset 2px 2px 0 rgba(255, 255, 255, 0.35), 0 2px 0 var(--ink);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.quest-map-copy {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.quest-map-label,
+.quest-map-subtitle {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.gate-icon {
-  font-size: 1rem;
+.quest-map-label {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  line-height: 1.15;
+  text-shadow: 2px 2px 0 var(--ink);
 }
 
-.map-gate.completed {
-  color: var(--ink);
-  background: var(--green);
+.quest-map-subtitle {
+  font-size: 0.54rem;
+  line-height: 1.1;
+  color: var(--muted);
+}
+
+.quest-map-node.kind-camp .quest-map-sprite {
+  background: #ffb85a;
+}
+
+.quest-map-node.kind-gate .quest-map-sprite {
+  color: var(--amber);
+  background: #1b2337;
+  border-color: var(--amber);
+}
+
+.quest-map-node.kind-windmill .quest-map-sprite,
+.quest-map-node.kind-slope .quest-map-sprite,
+.quest-map-node.kind-sea .quest-map-sprite,
+.quest-map-node.kind-canyon .quest-map-sprite,
+.quest-map-node.kind-oasis .quest-map-sprite {
+  background: #4fa66a;
+}
+
+.quest-map-node.kind-mine .quest-map-sprite,
+.quest-map-node.kind-tower .quest-map-sprite {
+  background: #9a62ff;
+}
+
+.quest-map-node.kind-wasteland .quest-map-sprite,
+.quest-map-node.kind-furnace .quest-map-sprite {
+  background: #d85665;
+}
+
+.quest-map-node.kind-castle .quest-map-sprite {
+  background: var(--cyan);
+}
+
+.quest-map-node.available {
+  border-color: rgba(240, 180, 79, 0.58);
+}
+
+.quest-map-node.completed {
   border-color: var(--green);
+  background: rgba(18, 59, 47, 0.92);
 }
 
-.map-gate.active {
+.quest-map-node.completed .quest-map-sprite {
+  background: var(--green);
+}
+
+.quest-map-node.active {
   color: var(--ink);
   background: var(--amber);
   border-color: var(--amber);
-  animation: gate-pulse 1.2s steps(2) infinite;
+  animation: node-pulse 1.2s steps(2) infinite;
 }
 
-/* active 城门因不可点而 disabled，但它是“当前位置”高亮，不能被调暗 */
-.map-gate.active:disabled {
+.quest-map-node.active .quest-map-label,
+.quest-map-node.active .quest-map-subtitle {
+  color: var(--ink);
+  text-shadow: none;
+}
+
+.quest-map-node.active .quest-map-sprite {
+  color: var(--cyan-strong);
+  background: var(--ink);
+  border-color: var(--cyan);
+}
+
+.quest-map-node.active:disabled {
   opacity: 1;
   cursor: default;
 }
 
-@keyframes gate-pulse {
-  50% { box-shadow: 0 3px 0 var(--ink), 0 0 14px rgba(255, 200, 94, 0.75); }
+@keyframes node-pulse {
+  50% { box-shadow: 0 3px 0 var(--ink), 0 0 16px rgba(255, 200, 94, 0.75); }
 }
 
-.map-gate.locked {
-  opacity: 0.38;
-  cursor: not-allowed;
+.quest-map-node.locked {
+  color: rgba(159, 180, 203, 0.58);
+  background: rgba(7, 13, 29, 0.68);
+  border-color: rgba(74, 83, 104, 0.72);
 }
 
-/* 课程地形区（生物群系）：比喻地名 + 阶段名 + 石砖路 + 承接路标 + 风物志 */
-.biome {
-  position: relative;
-  z-index: 1;
-  flex: 1;
-  padding: 7px 10px 9px;
-  background: color-mix(in srgb, var(--chapter-tint, var(--line)) 7%, var(--panel));
-  border: 2px solid var(--line);
-  border-left: 6px solid var(--chapter-tint, var(--line));
+.quest-map-node.locked .quest-map-sprite {
+  color: rgba(237, 247, 255, 0.4);
+  background: #4a5368;
+  border-color: rgba(140, 197, 255, 0.14);
 }
 
-.biome.locked {
-  opacity: 0.42;
-}
-
-.biome.active {
-  border-color: rgba(255, 200, 94, 0.55);
-  border-left-color: var(--chapter-tint);
-}
-
-.zone-head {
-  margin: 0 0 6px;
-  font-family: var(--mono);
-  font-size: 0.74rem;
-  font-weight: 700;
-  color: var(--text);
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.zone-name {
-  font-weight: 400;
-  color: var(--chapter-tint, var(--muted));
-  font-size: 0.68rem;
-}
-
-.zone-head small {
-  font-weight: 400;
-  color: var(--muted);
-  font-size: 0.66rem;
-}
-
-/* 「◀ 承接」路标：Phase 之间的概念依赖（顺序主线由流线承担） */
-.zone-deps {
-  margin: 6px 0 0;
-  font-family: var(--mono);
-  font-size: 0.64rem;
-  color: var(--amber);
-  opacity: 0.85;
-  line-height: 1.6;
-}
-
-/* 风物志：放大到街道级才看到的一句比喻说明 */
-.zone-flavor {
-  margin: 3px 0 0;
-  font-size: 0.68rem;
-  color: var(--muted);
-  line-height: 1.6;
-}
-
-.tiles {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-
-/* 课程石砖：一课一块，放大后课号可读 */
-.tile {
-  width: 30px;
-  height: 22px;
-  display: grid;
-  place-items: center;
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0;
-  color: var(--muted);
-  background: var(--panel-deep);
-  border: 1px solid var(--line);
-  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.45);
-}
-
-.biome.completed .tile {
-  color: var(--green);
-  background: rgba(143, 243, 165, 0.14);
-  border-color: rgba(143, 243, 165, 0.55);
-}
-
-.biome.active .tile {
-  color: var(--cyan-strong);
-}
-
-/* ---- LOD：地图比例即层级切换（由 ui.js 依 --map-zoom 打 data-lod） ----
-   far  = 大陆视图：石砖缩成色点，只看 Phase 拓扑（城门 + 地形 + 依赖流线）
-   mid  = 地区视图：区名 / 课号域 / ◀承接 路标可读，砖号可辨
-   near = 街道视图：每块 Lesson 石砖 + 风物志全细节 */
-.pixel-map[data-lod="far"] .tile {
-  width: 12px;
-  height: 10px;
-  font-size: 0;
-}
-
-.pixel-map[data-lod="far"] .zone-deps,
-.pixel-map[data-lod="far"] .zone-flavor,
-.pixel-map[data-lod="far"] .zone-name,
-.pixel-map[data-lod="far"] .zone-head small {
-  display: none;
-}
-
-.pixel-map[data-lod="mid"] .zone-flavor {
-  display: none;
+.quest-map-node.locked .quest-map-subtitle {
+  color: rgba(159, 180, 203, 0.48);
 }
 
 .map-caption {

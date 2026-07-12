@@ -5,7 +5,7 @@
 
 import courseSnapshot from "./course-snapshot.generated.js";
 import { QUESTS, XP_PER_LEVEL } from "./data/quests.js";
-import { MAP_ZONES, MAP_LAYOUT } from "./data/worldmap.js";
+import { MAP_CANVAS, MAP_EDGES, MAP_NODES } from "./data/worldmap.js";
 import { drawSprite, SPRITE_BY_QUEST } from "./sprites.js";
 import {
   levelFromXp,
@@ -46,6 +46,16 @@ export const els = {
 };
 
 const HP_CELLS = 10;
+const SVG_NS = "http://www.w3.org/2000/svg";
+const MAP_NODE_BY_ID = new Map(MAP_NODES.map((node) => [node.id, node]));
+const MAP_STEP_COUNT_BY_QUEST = QUESTS.map((_, questIndex) =>
+  Math.max(
+    1,
+    ...MAP_NODES
+      .filter((node) => node.questIndex === questIndex)
+      .map((node) => node.step + 1),
+  ),
+);
 
 // ---- 战斗区 -----------------------------------------------------------------
 
@@ -169,124 +179,160 @@ function nudgeMapZoom(direction) {
 document.getElementById("map-zoom-in")?.addEventListener("click", () => nudgeMapZoom(1));
 document.getElementById("map-zoom-out")?.addEventListener("click", () => nudgeMapZoom(-1));
 
-const lessonCode = (n) => `L${String(n).padStart(2, "0")}`;
-
-// 章节状态 → CSS 类（gate 与其地形区共用同一套 locked/active/completed 视觉）
-function questStateCls(state, unlock, index) {
-  const completed = phaseIsComplete(state, index);
-  const active = index === state.activePhaseIndex;
-  const locked = index > unlock;
-  return { completed, active, locked, cls: `${completed ? " completed" : ""}${active ? " active" : ""}${locked ? " locked" : ""}` };
+function createSvgElement(tagName) {
+  return document.createElementNS(SVG_NS, tagName);
 }
 
-// Boss 城门：保留原节点交互（点击切章、锁定禁用）
-function buildGate(state, unlock, index, onSelectPhase) {
-  const quest = QUESTS[index];
-  const { completed, locked, cls } = questStateCls(state, unlock, index);
-  const gate = document.createElement("button");
-  gate.type = "button";
-  gate.className = `map-gate chapter-${index}${cls}`;
-  gate.title = locked ? "锁定中" : quest.title;
-  gate.setAttribute("aria-label", quest.title);
-  gate.disabled = locked || index === state.activePhaseIndex;
-  const gateIcon = document.createElement("span");
-  gateIcon.className = "gate-icon";
-  gateIcon.textContent = completed ? "🏰" : locked ? "🔒" : "⚔️";
-  const gateName = document.createElement("span");
-  gateName.className = "gate-name";
-  gateName.textContent = index === 0 ? quest.title : `${quest.title}｜${quest.boss}`;
-  gate.append(gateIcon, gateName);
-  gate.addEventListener("click", () => onSelectPhase(index));
-  return gate;
+function questProgressStep(state, questIndex) {
+  const quest = QUESTS[questIndex];
+  const progress = state.phaseProgress[questIndex] ?? 0;
+  const total = Math.max(1, quest?.questions.length ?? 1);
+  const stepCount = MAP_STEP_COUNT_BY_QUEST[questIndex] ?? 1;
+  if (progress >= total) return stepCount;
+  return Math.min(stepCount - 1, Math.floor((progress / total) * stepCount));
 }
 
-// 地形区：比喻地名 + 阶段名 + 课号砖 + 「◀ 承接」依赖注记（体现课程互相关系）
-function buildBiome(state, unlock, zoneKey) {
-  const zone = MAP_ZONES[zoneKey];
-  const { cls } = questStateCls(state, unlock, zone.questIndex);
-  const biome = document.createElement("section");
-  biome.className = `biome chapter-${zone.questIndex}${cls}`;
+function mapNodeStatus(state, mapNode, unlock) {
+  if (mapNode.questIndex > unlock) return "locked";
+  if (phaseIsComplete(state, mapNode.questIndex)) return "completed";
 
-  const head = document.createElement("h3");
-  head.className = "zone-head";
-  head.textContent = `${zone.icon} ${zone.terrain}`;
-  const nameTag = document.createElement("span");
-  nameTag.className = "zone-name";
-  nameTag.textContent = zone.name;
-  const rangeTag = document.createElement("small");
-  rangeTag.textContent = `${lessonCode(zone.range[0])}–${lessonCode(zone.range[1])}`;
-  head.append(nameTag, rangeTag);
+  const progressStep = questProgressStep(state, mapNode.questIndex);
+  if (progressStep > mapNode.step) return "completed";
+  if (state.activePhaseIndex === mapNode.questIndex && progressStep === mapNode.step) {
+    return "active";
+  }
+  return "available";
+}
 
-  const tiles = document.createElement("div");
-  tiles.className = "tiles";
-  for (let n = zone.range[0]; n <= zone.range[1]; n += 1) {
-    const tile = document.createElement("span");
-    tile.className = "tile";
-    tile.textContent = lessonCode(n);
-    tiles.appendChild(tile);
+function mapEdgeStatus(fromStatus, toStatus) {
+  if (toStatus === "locked") return "locked";
+  if (fromStatus === "completed" && toStatus === "completed") return "completed";
+  if (fromStatus === "active" || toStatus === "active") return "active";
+  return "available";
+}
+
+function mapEdgePath(edge) {
+  const from = MAP_NODE_BY_ID.get(edge.from);
+  const to = MAP_NODE_BY_ID.get(edge.to);
+  if (!from || !to) return "";
+
+  const dy = to.y - from.y;
+  if (edge.style === "main") {
+    const midY = from.y + dy / 2;
+    return `M ${from.x} ${from.y} C ${from.x} ${midY} ${to.x} ${midY} ${to.x} ${to.y}`;
   }
 
-  biome.append(head, tiles);
+  const bend = edge.style === "merge" ? 0.38 : 0.28;
+  return `M ${from.x} ${from.y} C ${from.x} ${from.y + dy * bend} ${to.x} ${
+    to.y - dy * bend
+  } ${to.x} ${to.y}`;
+}
 
-  if (zone.deps.length) {
-    const deps = document.createElement("p");
-    deps.className = "zone-deps";
-    deps.textContent = `◀ 承接 ${zone.deps.map((k) => `${MAP_ZONES[k].icon}${MAP_ZONES[k].terrain}`).join(" · ")}`;
-    biome.appendChild(deps);
-  }
-  const flavor = document.createElement("p");
-  flavor.className = "zone-flavor";
-  flavor.textContent = zone.flavor;
-  biome.appendChild(flavor);
-  return biome;
+function renderMapRoutes(svg, nodeStatuses) {
+  MAP_EDGES.forEach((edge) => {
+    const path = mapEdgePath(edge);
+    const status = mapEdgeStatus(nodeStatuses.get(edge.from), nodeStatuses.get(edge.to));
+    const classes = `${edge.style} ${status}`;
+
+    const glow = createSvgElement("path");
+    glow.setAttribute("class", `quest-route-glow ${classes}`);
+    glow.setAttribute("d", path);
+    svg.appendChild(glow);
+
+    const route = createSvgElement("path");
+    route.setAttribute("class", `quest-route ${classes}`);
+    route.setAttribute("d", path);
+    svg.appendChild(route);
+  });
+}
+
+function renderMapNodes(layer, state, onSelectPhase, nodeStatuses) {
+  MAP_NODES.forEach((mapNode) => {
+    const status = nodeStatuses.get(mapNode.id);
+    const quest = QUESTS[mapNode.questIndex];
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `quest-map-node kind-${mapNode.kind} chapter-${mapNode.questIndex} ${status}`;
+    button.style.left = `${(mapNode.x / MAP_CANVAS.width) * 100}%`;
+    button.style.top = `${(mapNode.y / MAP_CANVAS.height) * 100}%`;
+    button.title =
+      status === "locked"
+        ? "锁定中"
+        : `${mapNode.label}｜${mapNode.subtitle}${mapNode.summary ? `｜${mapNode.summary}` : ""}`;
+    button.setAttribute(
+      "aria-label",
+      `${mapNode.label}，${mapNode.subtitle}，${quest.title}`,
+    );
+    button.disabled = status === "locked" || status === "active";
+    button.addEventListener("click", () => onSelectPhase(mapNode.questIndex));
+
+    const sprite = document.createElement("span");
+    sprite.className = "quest-map-sprite";
+    sprite.setAttribute("aria-hidden", "true");
+    sprite.textContent = mapNode.sigil;
+
+    const label = document.createElement("span");
+    label.className = "quest-map-label";
+    label.textContent = `${mapNode.icon} ${mapNode.label}`;
+
+    const subtitle = document.createElement("span");
+    subtitle.className = "quest-map-subtitle";
+    subtitle.textContent = mapNode.subtitle;
+
+    const copy = document.createElement("span");
+    copy.className = "quest-map-copy";
+    copy.append(label, subtitle);
+
+    button.append(sprite, copy);
+    layer.appendChild(button);
+  });
+}
+
+function activeMapLabel(state) {
+  const progressStep = questProgressStep(state, state.activePhaseIndex);
+  const step = Math.min(
+    progressStep,
+    (MAP_STEP_COUNT_BY_QUEST[state.activePhaseIndex] ?? 1) - 1,
+  );
+  const activeNodes = MAP_NODES.filter(
+    (node) => node.questIndex === state.activePhaseIndex && node.step === step,
+  );
+  if (!activeNodes.length) return currentQuest(state).title;
+  return activeNodes
+    .map((node) => `${node.label}${node.subtitle ? ` ${node.subtitle}` : ""}`)
+    .join(" / ");
 }
 
 function renderLevelMap(state, onSelectPhase) {
   const unlock = unlockedIndex(state);
+  const nodeStatuses = new Map(
+    MAP_NODES.map((mapNode) => [mapNode.id, mapNodeStatus(state, mapNode, unlock)]),
+  );
+
   els.roadmapList.innerHTML = "";
 
-  for (const row of MAP_LAYOUT) {
-    if (row.flow) {
-      // 流线行：纯装饰字符，画出汇流/分岔的依赖走向
-      const flow = document.createElement("div");
-      flow.className = "map-flow";
-      flow.setAttribute("aria-hidden", "true");
-      flow.textContent = row.flow;
-      els.roadmapList.appendChild(flow);
-      continue;
-    }
-    if (row.gate !== undefined) {
-      const gateRow = document.createElement("div");
-      gateRow.className = "map-row";
-      gateRow.appendChild(buildGate(state, unlock, row.gate, onSelectPhase));
-      els.roadmapList.appendChild(gateRow);
-      continue;
-    }
-    const zoneRow = document.createElement("div");
-    zoneRow.className = `map-row cols-${row.zones.length}`;
-    for (const zoneKey of row.zones) {
-      const zone = MAP_ZONES[zoneKey];
-      const cell = document.createElement("div");
-      cell.className = "map-cell";
-      // 自带城门的区块（营地/熔炉/三王国/城堡）：城门贴在区块顶部
-      if (zone.gate !== undefined) {
-        cell.appendChild(buildGate(state, unlock, zone.gate, onSelectPhase));
-      }
-      cell.appendChild(buildBiome(state, unlock, zoneKey));
-      zoneRow.appendChild(cell);
-    }
-    els.roadmapList.appendChild(zoneRow);
-  }
+  const svg = createSvgElement("svg");
+  svg.classList.add("quest-map-routes");
+  svg.setAttribute("viewBox", `0 0 ${MAP_CANVAS.width} ${MAP_CANVAS.height}`);
+  svg.setAttribute("preserveAspectRatio", "none");
+  svg.setAttribute("aria-hidden", "true");
+  renderMapRoutes(svg, nodeStatuses);
+
+  const nodeLayer = document.createElement("div");
+  nodeLayer.className = "quest-map-nodes";
+  renderMapNodes(nodeLayer, state, onSelectPhase, nodeStatuses);
+
+  els.roadmapList.append(svg, nodeLayer);
   applyMapZoom();
 
-  // 地图说明：当前章节 + 对应课程里程碑（来自 LEARNING_PLAN 生成的快照——改课程，地图会变）
-  const quest = currentQuest(state);
+  // 地图说明：当前地图节点 + 对应课程里程碑（来自 LEARNING_PLAN 生成的快照）。
   const idx = state.activePhaseIndex;
   const milestone =
     idx === 0
       ? `开场五课 ${courseSnapshot.openingLessons.map((l) => l.code).join(" · ")}`
       : courseSnapshot.monthlyPhases[idx - 1]?.deliverable ?? "";
-  els.mapCaption.textContent = milestone ? `${quest.title} ｜ ${milestone}` : quest.title;
+  const place = activeMapLabel(state);
+  els.mapCaption.textContent = milestone ? `${place} ｜ ${milestone}` : place;
 }
 
 // inventory/log 的字符串来自存档（localStorage 可被手改），
