@@ -29,6 +29,7 @@ export const videoLibrary = {
       "covers": "向量/线性组合/张成空间、矩阵=线性变换、矩阵乘法=变换复合、行列式、逆矩阵/列空间/零空间、点积与叉积、特征值与特征向量、基变换、抽象向量空间",
       "align": "L05–L21（复数几何延伸到线代）",
       "why": "核心命题「矩阵就是线性变换」正是 AURORA「矩阵即滤波（DFT/Mel 矩阵）」思想源头；纯几何推导、零黑箱。Phase 1–2 的直觉总纲。",
+      "id": "1kv5zbe",
       "urls": [
         {
           "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab",
@@ -58,6 +59,7 @@ export const videoLibrary = {
       "covers": "导数的几何本质、切线、幂/指数/三角函数求导、链式法则与乘积法则（可视化）、隐函数求导、极限、积分与微积分基本定理、泰勒级数",
       "align": "L22–L26（微积分）",
       "why": "第 4 集「可视化链式法则」是 AURORA 反向传播（L24–L25）的直觉基石；强调「让你觉得自己本可以发明微积分」，与第一性原理精神一致。",
+      "id": "1jxdilj",
       "urls": [
         {
           "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr",
@@ -87,6 +89,7 @@ export const videoLibrary = {
       "covers": "把信号「绕在圆上」求质心 → 频域分解的几何本质；旋转向量（复指数）叠加逼近任意波形/方波，即「方波 = 正弦叠加」",
       "align": "L07–L08（傅里叶直觉），并在 L35–L42 手写 DFT/FFT 时复看",
       "why": "用旋转向量把「复指数 e^{iθ} + 叠加 = 频谱」讲透，直接对应 AURORA 手写 DFT 前必须建立的直觉；比任何公式推导都更「可复现」。",
+      "id": "12lwttp",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=spUNpyF58BY",
@@ -121,6 +124,7 @@ export const videoLibrary = {
       "covers": "把「数」看作「作用（旋转/缩放）」，理解 e^{iθ} 为何是绕单位圆旋转、e^{iπ}=−1 的几何含义",
       "align": "L05–L06（复数几何=旋转+缩放、欧拉公式）",
       "why": "直击 AURORA 复数模块核心命题「复数乘法 = 旋转 + 缩放」；用「作用」而非死记公式来理解欧拉公式，第一性原理典范。",
+      "id": "1h0c4fw",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=mvmuCPvRoWQ",
@@ -150,6 +154,7 @@ export const videoLibrary = {
       "covers": "向量与线性组合、矩阵与线性方程、点积与投影、零空间/列空间、秩、特征值特征向量、正交化；另有微积分/概率分册",
       "align": "L09–L21（线代）、部分 L22–L31",
       "why": "满足「中文入门梯度」需求；小步骤讲解 + 习题，适合先用母语打通概念再回 3B1B/MIT 深化。",
+      "id": "9w2g63",
       "urls": [
         {
           "url": "https://www.youtube.com/user/KhanAcademyMandarin",
@@ -182,6 +187,7 @@ export const videoLibrary = {
       "covers": "高斯消元、A=LU、列空间/零空间/秩、正交性与投影、Gram-Schmidt/QR、行列式、特征值与对角化 A=PDP⁻¹、对称/正定矩阵、SVD、线性变换",
       "align": "L09–L21（线性代数）",
       "why": "AURORA 手写高斯消元、LU/QR/SVD、特征分解的权威严谨对照；Strang 边推导边讲「为什么」，是把 3B1B 直觉落到可手写实现的桥梁。",
+      "id": "mx905q",
       "urls": [
         {
           "url": "https://www.youtube.com/playlist?list=PL221E2BBF13BECF6C",
@@ -210,6 +216,7 @@ export const videoLibrary = {
       "covers": "SVD 数学概览、矩阵低秩逼近、主导相关性、图像压缩（手写代码）、矩阵补全、PCA 与 SVD 关系、随机化 SVD",
       "align": "L18–L21（特征值/SVD、矩阵分解）",
       "why": "每个概念都配 Python/MATLAB 手撕代码，与 AURORA「NumPy 手写并对齐参考实现」的工作流几乎一模一样。",
+      "id": "134p4yq",
       "urls": [
         {
           "url": "https://www.youtube.com/playlist?list=PLMrJAkhIeNNSVjnsviglFoY2nXildDCcv",
@@ -239,6 +246,7 @@ export const videoLibrary = {
       "covers": "奇异值分解与图像压缩、主成分分析、点积与投影、概率与贝叶斯、softmax/交叉熵、余弦相似度",
       "align": "L11–L21（线代）、L27–L31（概率统计）",
       "why": "擅长用类比/图示把 SVD、softmax 讲到「能自己重写一遍」，是 3B1B 与名校课之间的难度衔接层。",
+      "id": "ru0azo",
       "urls": [
         {
           "url": "https://www.youtube.com/channel/UCgBncpylJ1kiVaPyP-PZauQ",
@@ -268,6 +276,7 @@ export const videoLibrary = {
       "covers": "代价函数曲面、梯度=最速下降方向、梯度下降迭代；反向传播如何按链式法则高效计算梯度",
       "align": "L24–L25（链式法则 / 梯度下降），延伸 L54–L57",
       "why": "把「链式法则 → 反向传播」的可视化讲到极致，是 AURORA 手写训练循环前的必看直觉课。",
+      "id": "1iyga54",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=IHZwWFHWa-w",
@@ -301,6 +310,7 @@ export const videoLibrary = {
       "covers": "偏导数、梯度与方向导数、多元链式法则、拉格朗日乘子、二重/三重积分、向量微积分",
       "align": "L23（梯度/偏导），支撑 L24–L25",
       "why": "为 AURORA 梯度下降与反向传播提供多元微积分的严谨底座；Auroux 的偏导/梯度两讲是把 3B1B 直觉补成可推导实现的关键。",
+      "id": "1ga8fux",
       "urls": [
         {
           "url": "https://www.youtube.com/playlist?list=PLEAYkSg4uSQ2dvsWLz9X6ANX_U-cwtOaX",
@@ -329,6 +339,7 @@ export const videoLibrary = {
       "covers": "直方图/分布、均值/方差/标准差、正态分布、采样与总体参数、协方差与相关、中心极限定理、标准误、概率 vs 似然、最大似然估计、期望值、z-score",
       "align": "L27–L31（概率统计）",
       "why": "「把每个方法拆成最小步骤」的教学法与 AURORA 手写实现同频；均值/方差/z-score/分布采样（L28–L30）用它打底最省力。",
+      "id": "1tjtc5g",
       "urls": [
         {
           "url": "https://www.youtube.com/playlist?list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9",
@@ -357,6 +368,7 @@ export const videoLibrary = {
       "covers": "概率与计数、条件概率/独立性、随机变量与分布（伯努利/二项/几何/泊松/均匀/正态/指数）、期望与线性性、方差/协方差、条件期望、不等式、大数定律与中心极限定理",
       "align": "L27–L31（概率统计）",
       "why": "条件概率/独立性/大数定律（L27）的黄金标准课；Blitzstein 坚持「从定义一步步推、拒绝套公式」。",
+      "id": "1bbf4n4",
       "urls": [
         {
           "url": "https://www.youtube.com/playlist?list=PL2SOU6wwxB0uwwH80KTQ6ht66KWxbzTIo",
@@ -386,6 +398,7 @@ export const videoLibrary = {
       "covers": "ArgMax/SoftMax、SoftMax 导数逐步推导、交叉熵、交叉熵导数与反向传播、神经网络基础到 Transformer",
       "align": "L30–L31（softmax 与交叉熵），延伸 L55–L58",
       "why": "把 softmax 与交叉熵的导数一步步手推，正好对齐 AURORA 手写并验证梯度的要求。",
+      "id": "g0e22l",
       "urls": [
         {
           "url": "https://www.youtube.com/playlist?list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-ME1",
@@ -414,6 +427,7 @@ export const videoLibrary = {
       "covers": "声波与波形、时域/频域特征（RMS、过零率、频谱质心）、傅里叶变换与 STFT、频谱图、Mel 频率尺度与三角滤波器组、Mel 频谱、MFCC 完整流水线；每讲「直觉 + 数学 + Python 实现」三段式，配 GitHub 代码",
       "align": "L32–L53（Audio DSP 全阶段）",
       "why": "与本阶段几乎逐课对应，全网最贴合 AURORA 音频核心的系列；FFT/STFT/Mel/MFCC 全部亲手实现、不套黑箱，是「第一性原理手写」的范本。",
+      "id": "1x7v3sr",
       "urls": [
         {
           "url": "https://www.youtube.com/playlist?list=PL-wATfeyAMNqIee7cH3q1bh4QJFAaeNv0",
@@ -443,6 +457,7 @@ export const videoLibrary = {
       "covers": "单独成篇的 Mel 频谱、Cepstrum 倒谱、MFCC 逐步推导与可视化，及声道/语音生成物理解释",
       "align": "L46–L53（Mel / MFCC）",
       "why": "讲 MFCC 时把「信号→STFT→Mel→log→DCT」每一环拆开手算，直接支撑 L49–L53。⚠️ 单课直链未逐一核实，在该频道搜 \"Mel-Frequency Cepstral Coefficients Explained Easily\"。",
+      "id": "1svidkl",
       "urls": [
         {
           "url": "https://www.youtube.com/channel/UCZPFjMe1uRSirmSpznqvJfQ",
@@ -471,6 +486,7 @@ export const videoLibrary = {
       "covers": "旋转因子 e^{-2πift} 的几何意义、复指数求和逼近周期函数",
       "align": "L35, L37–L42",
       "why": "动手写 DFT 前建立「旋转因子/复指数」几何直觉，让 L35 欧拉公式与 L37 暴力 DFT 的求和不再是死公式。",
+      "id": "w1eq94",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=spUNpyF58BY",
@@ -504,6 +520,7 @@ export const videoLibrary = {
       "covers": "傅里叶级数、复数傅里叶级数、傅里叶变换、DFT、FFT 算法、Gabor 变换/声谱图、小波；含 MATLAB + Python 实操（去噪、求导、解 PDE）",
       "align": "L35–L48",
       "why": "名校教授系统串讲 DFT→FFT 的数学与代码，DFT 矩阵分解视角直接指导 L37 O(N²) 暴力法与 L38–L42 蝶形分治的手写实现。",
+      "id": "4hkj39",
       "urls": [
         {
           "url": "https://www.youtube.com/playlist?list=PLMrJAkhIeNNT_Xh3Oy0Y4LTj0Oxo8GqsC",
@@ -532,6 +549,7 @@ export const videoLibrary = {
       "covers": "从多项式乘法引入，讲 N 次单位根、分治递归、Cooley-Tukey 蝶形结构与 IFFT，动画拆解 O(N log N)",
       "align": "L38–L42",
       "why": "全网讲「为什么 FFT 能分治」最清晰的动画，直接对标 L39–L40「从零手写 FFT」，递归结构可照着改写成 NumPy。",
+      "id": "1m8d0ur",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=h7apO7q16V0",
@@ -560,6 +578,7 @@ export const videoLibrary = {
       "covers": "用 Python/NumPy 对含噪信号做 FFT、看幅度谱、按功率阈值滤波再逆变换的完整代码演示",
       "align": "L40–L42（频谱分析实战）",
       "why": "一支端到端的「手写 FFT 频谱分析 + 幅度谱/功率谱」实操，可作为 AURORA 手写 FFT 后的验证案例。",
+      "id": "7vj452",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=s2K1JfNR7Sc",
@@ -588,6 +607,7 @@ export const videoLibrary = {
       "covers": "用归并排序类比讲奇偶分解，2 点 DFT 化为加减、bit-reversal 重排、twiddle factor 推导，直至可手写实现的蝶形图",
       "align": "L38–L42",
       "why": "把 FFT 拆到「能照着敲代码」的颗粒度，最契合从零实现 FFT（搜 \"Mark Newman Cooley-Tukey FFT\"）。",
+      "id": "419fud",
       "urls": [
         {
           "url": "https://www.youtube.com/c/MarkNewmanEducation",
@@ -617,6 +637,7 @@ export const videoLibrary = {
       "covers": "连续/离散时间信号与系统、傅里叶级数/变换、采样与重建、Laplace/Z 变换",
       "align": "L32–L48",
       "why": "DSP 泰斗、经典教材作者亲授，为 AURORA 的傅里叶与采样章节提供最权威的理论地基与符号规范。",
+      "id": "168rdrq",
       "urls": [
         {
           "url": "https://www.youtube.com/playlist?list=PL41692B571DD0AF9B",
@@ -645,6 +666,7 @@ export const videoLibrary = {
       "covers": "冲激采样、频谱周期化、Nyquist 采样定理证明、混叠成因与频域图解、重建条件",
       "align": "L33–L34（Nyquist 与混叠）",
       "why": "权威推导 Nyquist 定理与混叠，正是 L34 aliasing 一课的理论出处。",
+      "id": "7hhmco",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=P3eLer1edx8",
@@ -673,6 +695,7 @@ export const videoLibrary = {
       "covers": "语音识别总览中的声学特征（MFCC/滤波器组）、frame 切分与特征提取，及后续 LAS/CTC/RNN-T 语音模型",
       "align": "L49–L53（特征工程的中文对应）",
       "why": "顶尖华语名师，用中文把「波形→帧→MFCC/filter bank 特征」讲清，补齐双语课程的中文侧。",
+      "id": "eztr9z",
       "urls": [
         {
           "url": "https://www.youtube.com/playlist?list=PLJV_el3uVTsO07RpBYFsXg-bN5Lu0nhdG",
@@ -701,6 +724,7 @@ export const videoLibrary = {
       "covers": "micrograd 标量自动微分引擎、反向传播、makemore（bigram→MLP→BatchNorm→手推反向 \"Backprop Ninja\"→WaveNet）、Let's build GPT",
       "align": "L54–L58（深度学习），并延伸 L83（LLM）",
       "why": "AURORA「第一性原理/手写实现」的黄金对标——全程从零手写节点、前向反向、训练循环，不用任何 wrapper。本主题必收核心。",
+      "id": "1en8m2u",
       "urls": [
         {
           "url": "https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ",
@@ -731,6 +755,7 @@ export const videoLibrary = {
       "covers": "手写 Value 节点（add/mul/pow/tanh/exp）、构建动态计算图 DAG、链式法则逐层反向、手推梯度、在 micrograd 上搭 MLP 并训练",
       "align": "L54–L56（Value 计算图、算子补全、反向传播手推）",
       "why": "与 L54–L56 几乎逐点对应，最详尽的 \"spelled-out\" 反向传播讲解；配套 makemore Part 2 对齐 L57（MLP），\"Backprop Ninja\" 对齐 L55（手推反向）。",
+      "id": "cqwb1j",
       "urls": [
         {
           "url": "https://youtu.be/VMj-3S1tku0",
@@ -768,6 +793,7 @@ export const videoLibrary = {
       "covers": "什么是神经网络、梯度下降如何学习、反向传播直觉、反向传播微积分（链式法则）",
       "align": "L55–L57",
       "why": "用顶级动画把链式法则/反向传播的几何直觉讲透，是 L55 手推反向前的最佳直觉铺垫，与 Karpathy 的代码实现互补。",
+      "id": "17zfslr",
       "urls": [
         {
           "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi",
@@ -797,6 +823,7 @@ export const videoLibrary = {
       "covers": "神经网络基础、反向传播主线思想、逐参数优化的链式法则、ReLU、CNN 图像分类",
       "align": "L55–L58、L64",
       "why": "\"Backpropagation Details Pt.1/Pt.2\" 把 L55 手推反向拆成最小步骤；CNN 集对齐 L64 音频分类的卷积直觉。",
+      "id": "doky7y",
       "urls": [
         {
           "url": "https://www.youtube.com/playlist?list=PLblh5JKOoLUIxGDQs4LFFD--41Vzf-ME1",
@@ -826,6 +853,7 @@ export const videoLibrary = {
       "covers": "感知机与 MLP、反向传播、训练技巧（正则化/过拟合诊断）、CNN、RNN/Transformer，含 TensorFlow/PyTorch 实验",
       "align": "L54–L65（整体概览）",
       "why": "名校顶配、每年刷新的系统课，给 L54–L65 提供从 MLP 到 CNN、过拟合诊断的权威主线框架。",
+      "id": "vllhvq",
       "urls": [
         {
           "url": "https://www.youtube.com/playlist?list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI",
@@ -860,6 +888,7 @@ export const videoLibrary = {
       "covers": "用 torchaudio 自定义音频 Dataset（__getitem__）、DataLoader 批量加载、提取 Mel 频谱、重采样/mixdown、搭 CNN 在 UrbanSound8K 上训练声音分类器、train loop",
       "align": "L62–L65",
       "why": "与 L62–L65 高度重合——自定义 Dataset/DataLoader + Mel 特征 + CNN 音频分类 + 训练闭环，几乎就是 AURORA 关键词识别任务的 PyTorch 蓝本。",
+      "id": "1og7ilk",
       "urls": [
         {
           "url": "https://www.youtube.com/playlist?list=PL-wATfeyAMNoirN4idjev6aRu8ISZYVWm",
@@ -897,6 +926,7 @@ export const videoLibrary = {
       "covers": "PyTorch Tensor、autograd 与 requires_grad、nn.Module/Linear/Sequential、训练循环、自定义 Dataset、CNN、模型保存/加载",
       "align": "L59–L65",
       "why": "覆盖 L59–L65 全部 PyTorch 主题，可作为 PyTorch 段的系统主教程。",
+      "id": "f7ads4",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=V_xro1bcAuA",
@@ -935,6 +965,7 @@ export const videoLibrary = {
       "covers": "Tensor 基础与 NumPy 互转、autograd 机制、backward 与梯度、手写线性/逻辑回归训练、nn.Module、Dataset & DataLoader、激活函数",
       "align": "L59–L62",
       "why": "短小精悍、逐个概念拆解，先手写训练循环再用 nn 封装，契合「先第一性原理后封装」的节奏。",
+      "id": "kbj1at",
       "urls": [
         {
           "url": "https://www.youtube.com/playlist?list=PLqnslRFeH2UrcDBWF5mfPGpqQDSta6VK4",
@@ -968,6 +999,7 @@ export const videoLibrary = {
       "covers": "从零手写神经元与反向传播 → 声音/波形/傅里叶/STFT/Mel 谱/MFCC → MLP/CNN/RNN-LSTM 音乐流派分类",
       "align": "L54–L55、L63–L64",
       "why": "前几集从零手写神经元+反向传播（呼应 L54–L55），后半系统讲 Mel/MFCC 与 CNN 分类（呼应 L63–L64），把手写 ML 与音频 AI 打通。",
+      "id": "djhi6r",
       "urls": [
         {
           "url": "https://www.youtube.com/@ValerioVelardoTheSoundofAI",
@@ -1002,6 +1034,7 @@ export const videoLibrary = {
       "covers": "训练与部署模型、从零实现 MLP 与反向传播（\"从矩阵乘法搭起\"）、SGD 训练循环、CNN、过拟合诊断",
       "align": "L57–L65",
       "why": "以「先能跑通再拆内部」的工程视角补充 Karpathy；从零实现神经网络与训练循环，对齐 L57–L58 并延伸完整训练评估闭环。",
+      "id": "lpfh2j",
       "urls": [
         {
           "url": "https://www.youtube.com/playlist?list=PLfYUBJiXbdtSvpQjSnJJ_PmDQB_VyT5iU",
@@ -1036,6 +1069,7 @@ export const videoLibrary = {
       "covers": "反向传播、梯度下降与优化、MLP/CNN、训练技巧（过拟合/正则化/批归一化）、深度学习理论",
       "align": "L54–L65",
       "why": "华语圈公认最佳中文深度学习课，反向传播与优化章节直接支撑 L55–L58，可作中文学习者主线。",
+      "id": "rddigs",
       "urls": [
         {
           "url": "https://www.youtube.com/playlist?list=PLJV_el3uVTsPy9oCRY30oBPNLCo89yu49",
@@ -1069,6 +1103,7 @@ export const videoLibrary = {
       "covers": "神经网络与深度学习基础、前向/反向传播、逻辑回归到深层网络、梯度下降、超参数与正则化",
       "align": "L54–L58",
       "why": "最经典的入门权威，把 MLP、前向反向、训练收敛讲得极稳，适合作为 Karpathy 手写实现的理论对照。",
+      "id": "zjte6u",
       "urls": [
         {
           "url": "https://www.youtube.com/playlist?list=PLkDaE6sCZn6FNC6YRfRQc_FbeQrF8BwGI",
@@ -1102,6 +1137,7 @@ export const videoLibrary = {
       "covers": "端到端 ASR 全景；Listen-Attend-Spell、CTC、RNN-T、HMM 对齐、beam search 解码直觉",
       "align": "L66–L75",
       "why": "全网最好的中文语音识别原理课，把 CTC / seq2seq / HMM→E2E 讲成直觉故事，和 AURORA「第一性原理」完全同频。中文置顶首选。",
+      "id": "1mpjiif",
       "urls": [
         {
           "url": "https://speech.ee.ntu.edu.tw/~hylee/dlhlp/2020-spring.php",
@@ -1135,6 +1171,7 @@ export const videoLibrary = {
       "covers": "CTC 前向-后向算法逐步推导、blank 符号、路径求和、CTC beam search；seq2seq/attention 对齐",
       "align": "L67–L69（CTC 对齐 + 前向算法）",
       "why": "名校课程里对 CTC 前向算法数学推导最扎实的一档，正对 AURORA「纯 NumPy 手写 CTC 前向」的目标，可直接照着实现。",
+      "id": "1n8b9nl",
       "urls": [
         {
           "url": "https://www.youtube.com/channel/UC8hYZGEkI2dDO8scT8C5UQA",
@@ -1172,6 +1209,7 @@ export const videoLibrary = {
       "covers": "Whisper 架构（log-Mel + conv + encoder-decoder）、68 万小时弱监督数据、zero-shot 评测、长音频转写",
       "align": "L70–L71（Whisper 架构 + 解码）",
       "why": "「from scratch」教育风格作者，讲论文紧扣工程实现取舍，是理解 Whisper 设计动机的高性价比入口。",
+      "id": "14low9w",
       "urls": [
         {
           "url": "https://www.youtube.com/@AladdinPersson",
@@ -1200,6 +1238,7 @@ export const videoLibrary = {
       "covers": "从零手写 Transformer 解码器（self-attention、causal mask、自回归生成）",
       "align": "L70（Whisper 解码器部分）",
       "why": "Whisper 是 encoder-decoder Transformer，其 GPT 式解码器可直接复用本课手写实现，再叠加音频 encoder 与 cross-attention。",
+      "id": "1iuas9t",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=kCc8FmEb1nY",
@@ -1232,6 +1271,7 @@ export const videoLibrary = {
       "covers": "自监督语音表征、latent masking、contrastive loss、product quantization、微调后超越半监督",
       "align": "L72（进阶：wav2vec 2.0）",
       "why": "Yannic 的招牌逐段读论文，把自监督预训练直觉讲透，是进阶章节 wav2vec 2.0 的权威精读。",
+      "id": "1fphim5",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=aUSXvoWfy3w",
@@ -1264,6 +1304,7 @@ export const videoLibrary = {
       "covers": "CTC 架构（Wav2Vec2/HuBERT）、Whisper encoder-decoder、在 Common Voice/LibriSpeech 上微调 whisper-small、WER 评测",
       "align": "L69、L72（Whisper-small 微调）",
       "why": "直接对齐 L72「Whisper-small 微调」；CTC 章节讲清 encoder-only+CTC 与 Whisper 端到端两条路线的差异，最贴近实操。",
+      "id": "1g73wla",
       "urls": [
         {
           "url": "https://huggingface.co/learn/audio-course",
@@ -1301,6 +1342,7 @@ export const videoLibrary = {
       "covers": "WER 评估、HMM-GMM、CTC/attention 端到端、解码策略、口语处理全景",
       "align": "L66–L75",
       "why": "名校完整口语处理课，系统覆盖 WER→CTC→端到端，讲义可作全章脚手架（注：完整视频多在注册学生 Canvas 内，YouTube 仅部分公开讲座）。",
+      "id": "lhknw",
       "urls": [
         {
           "url": "https://web.stanford.edu/class/cs224s/",
@@ -1338,6 +1380,7 @@ export const videoLibrary = {
       "covers": "音频特征（mel spectrogram/MFCC）、CNN/RNN 声学建模、从设计到部署搭建语音识别 app",
       "align": "L66、L73（音频前端 + 声学建模）",
       "why": "「直觉+数学+代码」三段式，补齐 AURORA ASR 章节所需的音频前端第一性原理。",
+      "id": "ei2el8",
       "urls": [
         {
           "url": "https://www.youtube.com/channel/UCZPFjMe1uRSirmSpznqvJfQ",
@@ -1371,6 +1414,7 @@ export const videoLibrary = {
       "covers": "HMM-GMM 声学模型、维特比解码、WFST、DNN-HMM 混合、直至端到端（CTC/attention）的演变",
       "align": "L75（进阶：传统声学模型→端到端）",
       "why": "讲传统 HMM-GMM→DNN-HMM→端到端演进最权威的公开材料，正对 AURORA「从 HMM-GMM 到端到端」进阶主题。",
+      "id": "xsoh5b",
       "urls": [
         {
           "url": "https://www.inf.ed.ac.uk/teaching/courses/asr/",
@@ -1403,6 +1447,7 @@ export const videoLibrary = {
       "covers": "ASR 流程直觉、Whisper 工作原理、CTC vs seq2seq、实时/流式转写概念",
       "align": "L70、L74（入门 + 流式概念）",
       "why": "轻量入门与全局直觉，适合作 L70 Whisper、L74 流式 ASR 的「预热」层，再进 CMU/李宏毅深水区。",
+      "id": "vilfd3",
       "urls": [
         {
           "url": "https://www.youtube.com/@assemblyai",
@@ -1430,6 +1475,7 @@ export const videoLibrary = {
       "duration": "约 8–10 小时",
       "align": "L76–L78（特征地基）",
       "why": "chromagram/onset 之前必备的特征提取地基；与 AURORA「NumPy 手写音频特征」理念高度一致。",
+      "id": "xs5xbn",
       "urls": [
         {
           "url": "https://www.youtube.com/playlist?list=PL-wATfeyAMNqIee7cH3q1bh4QJFAaeNv0",
@@ -1459,6 +1505,7 @@ export const videoLibrary = {
       "covers": "pitch class / 色度概念、从频谱到 chromagram 的映射、色度在和弦识别与音乐同步/对齐中的作用",
       "align": "L76–L77（chroma）",
       "why": "MIR 领域权威、FMP 教科书作者；强烈建议搭配其开源 FMP Notebooks（纯 Python/Jupyter 参考实现），正是 AURORA「第一性原理手写」的黄金对照。",
+      "id": "ryu2iq",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=PF05xP1NqUM",
@@ -1492,6 +1539,7 @@ export const videoLibrary = {
       "covers": "onset 检测与 spectral novelty（起音包络）、脉冲/周期性分析、tempo 估计与 beat tracking 的核心思路",
       "align": "L78（onset envelope + beat tracking）",
       "why": "直接对应 L78，把「起音包络→自相关/新颖度→节拍」链路讲清，配 FMP C6 Notebook 可逐步手写复现。",
+      "id": "ez1ax8",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=FmwpkdcAXl0",
@@ -1520,6 +1568,7 @@ export const videoLibrary = {
       "covers": "音、八度、半音/全音、音阶与音程、和弦构成——十二平均律下的音高组织直觉",
       "align": "L76（pitch class / chroma wheel / MIDI↔Hz）",
       "why": "为 L76 补齐乐理直觉，帮助纯工程背景者理解为何 chroma 要按 12 个 pitch class 折叠。",
+      "id": "105ekfc",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=rgaTLrZGlk0",
@@ -1548,6 +1597,7 @@ export const videoLibrary = {
       "covers": "自编码器→变分自编码器（VAE）原理与手写实现，在梅尔频谱域学习潜在表示（latent embedding）并重建/生成音频",
       "align": "L79（音乐嵌入模型）",
       "why": "MusicEncoder 的本质就是把音频压进 embedding 空间；本系列逐行实现 VAE 编码器/解码器与潜空间，是理解「音乐嵌入」最贴近手写的桥梁。",
+      "id": "tsjukx",
       "urls": [
         {
           "url": "https://www.youtube.com/playlist?list=PL-wATfeyAMNpEyENTc-tVH5tfLGKtSWPp",
@@ -1576,6 +1626,7 @@ export const videoLibrary = {
       "covers": "anchor/positive/negative 三元组、margin、把同类拉近异类推远的 embedding 学习目标（FaceNet 思路）",
       "align": "L79（triplet loss）",
       "why": "权威名师对 triplet loss 的经典讲解；损失函数与 AURORA MusicEncoder 的 triplet 训练完全通用，公式可直接迁移到 NumPy 手写。",
+      "id": "12q76qk",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=d2XB5-tuCWU",
@@ -1604,6 +1655,7 @@ export const videoLibrary = {
       "covers": "正/负样本对、数据增强、NT-Xent（温度缩放的归一化交叉熵）损失、batch 内负样本机制",
       "align": "L79（NT-Xent 对比学习）",
       "why": "直接对应 L79 的 NT-Xent，把 SimCLR 对比目标拆到公式级，帮助理解音乐嵌入的对比学习分支如何手写。",
+      "id": "1kr1ziz",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=7Id8SPH31UE",
@@ -1632,6 +1684,7 @@ export const videoLibrary = {
       "covers": "语音/音频上的自监督与对比式表示学习（CPC、wav2vec 类思路）、正负样本与预测式目标",
       "align": "L79（对比学习音频嵌入）",
       "why": "少有的高质量中文资源，把「音频如何在无标签下学表示」讲得系统清晰，为 L79 提供中文视角理论补充。",
+      "id": "rxigc7",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=lMIN1iKYNmA",
@@ -1660,6 +1713,7 @@ export const videoLibrary = {
       "covers": "基于最近邻的相似度检索、用户/物品相似度、用 kNN 做 top-k 推荐的实现流程",
       "align": "L80–L81（相似度检索 + 推荐）",
       "why": "直接对应 L80–L81「纯 kNN 相似度检索 + 推荐」，可对照 AURORA 用 NumPy 手写余弦相似度 + top-k（注：社区教程，作实操参考）。",
+      "id": "15m0dmj",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=kccT0FVK6OY",
@@ -1689,6 +1743,7 @@ export const videoLibrary = {
       "covers": "EnCodec 编解码、残差向量量化（RVQ）、codebook 交织模式、文本/旋律条件生成、单一语言模型架构",
       "align": "进阶（MusicGen 音乐生成）",
       "why": "把「音频→离散 token→语言模型生成」核心机制讲清，是理解现代音乐生成范式的高性价比入口。",
+      "id": "1v3ows",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=cbAa7kart-4",
@@ -1717,6 +1772,7 @@ export const videoLibrary = {
       "covers": "FFT/频谱图峰值提取、星座图（constellation map）、峰值配对哈希生成指纹、数据库匹配检索",
       "align": "进阶（音频指纹 / 精确检索）",
       "why": "把 Shazam 指纹算法讲到可复现的程度，是相似度检索之外的另一条「精确检索」思路。",
+      "id": "1lhybpr",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=RRsq9apr5QY",
@@ -1745,6 +1801,7 @@ export const videoLibrary = {
       "covers": "从零逐行手写并训练一个 Transformer（bigram baseline → 自注意力 → 多头 → 位置编码 → 残差/LayerNorm/FFN），最终得到 nanoGPT 核心",
       "align": "L83–L84",
       "why": "全网最经典的「从空文件手写 GPT」，每一步矩阵运算讲透，与 AURORA「不用 wrapper、手写注意力」完全一致。必收第一顺位。",
+      "id": "a6jnlm",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=kCc8FmEb1nY",
@@ -1777,6 +1834,7 @@ export const videoLibrary = {
       "covers": "从空文件复现 GPT-2：搭网络 → 权重加载 → 训练优化（混合精度、梯度累积、学习率调度）→ 采样/评测",
       "align": "L83–L87",
       "why": "把 L83 手写 Transformer 拉通到真实预训练与推理采样，是 L85–L86 KV/采样与 L87 推理的工业级参照。",
+      "id": "9p4b1i",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=l8pRSuU81PU",
@@ -1805,6 +1863,7 @@ export const videoLibrary = {
       "covers": "从零实现 BPE（Byte Pair Encoding）分词器：Unicode/字节编码、训练、encode/decode、正则切分",
       "align": "L87（本地推理前的输入处理）",
       "why": "分词是 LLM 独立且易被忽视的一环，纯手写 BPE 完全契合「第一性原理」。",
+      "id": "1kavgs5",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=zduSFxRajkE",
@@ -1833,6 +1892,7 @@ export const videoLibrary = {
       "covers": "LLM 完整训练栈心智模型：预训练/分词/架构 → SFT → RLHF，含幻觉、工具调用、知识表示",
       "align": "L83–L91（全链路）",
       "why": "少公式、重全局，帮学员在动手手写各模块前后建立端到端认知，串起 L83–L91（含 RAG/Agent 动机）。",
+      "id": "1w83z2f",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=7xTGNNLPyMI",
@@ -1862,6 +1922,7 @@ export const videoLibrary = {
       "covers": "词嵌入与 Transformer 数据流（Ch5）、注意力/QKV 逐步可视化（Ch6）、MLP/事实存储章节",
       "align": "L83",
       "why": "全网最清晰的注意力几何直觉可视化，先建直觉再手写 NumPy，L83 自注意力/多头的「看得见」版。",
+      "id": "bhct2f",
       "urls": [
         {
           "url": "https://www.youtube.com/playlist?list=PLZZWrBYkx7Otcjr3eCLZDCgfpqnxMY29s",
@@ -1900,6 +1961,7 @@ export const videoLibrary = {
       "covers": "逐层手写完整 encoder-decoder Transformer（输入嵌入、位置编码、多头自注意力、投影层）+ 翻译任务训练 + 注意力可视化",
       "align": "L83–L84",
       "why": "「从零编码」路线标杆，逐行 PyTorch 对照论文，与 AURORA 手写哲学高度契合（其整条 from-scratch 系列见频道）。",
+      "id": "ql5snd",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=ISNdQcPhsts",
@@ -1932,6 +1994,7 @@ export const videoLibrary = {
       "covers": "LoRA 数学原理（冻结原权重 + 低秩 B·A 增量）+ MNIST 上从零 PyTorch 实现",
       "align": "L84（LoRA 低秩适配）",
       "why": "直接命中 L84，先讲低秩分解直觉再手写，便于用 NumPy 复刻。",
+      "id": "1worpqe",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=PXWYUTMt-AU",
@@ -1960,6 +2023,7 @@ export const videoLibrary = {
       "covers": "从零手写 LLaMA 2：KV-Cache、旋转位置编码、Grouped-Query Attention、RMSNorm、SwiGLU，并覆盖采样策略（greedy/beam/temperature/top-k/top-p）",
       "align": "L85–L86（KV-Cache + 采样策略）",
       "why": "L85 KV-Cache + L86 采样策略的最佳单一来源，逐行实现让 NumPy 版 KV-Cache 有清晰蓝本。",
+      "id": "bg1aat",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=oM4VmoabDAI",
@@ -1988,6 +2052,7 @@ export const videoLibrary = {
       "covers": "整数/浮点数值表示、对称/非对称量化、量化范围与粒度、动态/静态量化、PTQ 与 QAT、GPU MAC 硬件加速",
       "align": "L87（INT8 量化从零）",
       "why": "L87 的理论+实现底座，把「缩放/零点/取整」讲到硬件层，支撑手写量化内核。",
+      "id": "qfzpr4",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=0VdNflU08yA",
@@ -2017,6 +2082,7 @@ export const videoLibrary = {
       "covers": "RAG 全管线：嵌入、Sentence-BERT、向量数据库与 HNSW 近邻检索、检索拼 prompt 生成",
       "align": "L88–L90",
       "why": "系统讲透 RAG 每一环（chunk→索引→检索→拼 prompt→生成）；学员可将其向量检索替换为 AURORA 的手写 TF-IDF/余弦，理解原理映射。",
+      "id": "19nc9a0",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=rhZgXNdhWDY",
@@ -2045,6 +2111,7 @@ export const videoLibrary = {
       "covers": "词嵌入、位置编码、自注意力、encoder-decoder 与并行计算，及注意力机制单独精讲",
       "align": "L83",
       "why": "极慢极清晰的入门首选，为 L83 手写前打好零基础直觉，配合 Karpathy 形成「直觉→实现」梯度。",
+      "id": "1nathv7",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=zxQyTK8quyY",
@@ -2077,6 +2144,7 @@ export const videoLibrary = {
       "covers": "嵌入、相似度、Keys/Queries/Values 矩阵与注意力的数学推导，三部曲递进到 Transformer",
       "align": "L83",
       "why": "用类比+图解把 QKV 的线性代数讲透，衔接 3B1B 直觉与手写实现之间的数学台阶。",
+      "id": "rdm93d",
       "urls": [
         {
           "url": "https://www.youtube.com/@SerranoAcademy/playlists",
@@ -2110,6 +2178,7 @@ export const videoLibrary = {
       "covers": "Transformer 语言模型组件的可视化叙述：分词、嵌入、自注意力、前馈网络、输出投影",
       "align": "L83",
       "why": "Illustrated Transformer 的视频版讲演，图解直观，是 L83 架构总览的经典补充。",
+      "id": "19mfdfd",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=sMPq4cVS4kg",
@@ -2139,6 +2208,7 @@ export const videoLibrary = {
       "covers": "逐节精读 Vaswani et al. 2017 原论文：纯注意力架构、位置编码、多头注意力、去 RNN/CNN 的动机与实验",
       "align": "L83",
       "why": "回到第一性来源——原始论文，帮学员用原文校准手写实现的每个设计决策。",
+      "id": "lpd4b2",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=iDulhoQ2pro",
@@ -2167,6 +2237,7 @@ export const videoLibrary = {
       "covers": "自注意力动机与 QKV 计算、多头、位置编码，Transformer 的 seq2seq/encoder-decoder 与训练",
       "align": "L83–L84",
       "why": "华语区公认最佳中文 Transformer 讲解，为中文学员提供母语原理入口。",
+      "id": "v784z6",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=hYdO9CscNes",
@@ -2204,6 +2275,7 @@ export const videoLibrary = {
       "covers": "DL 产品全栈——训练基础设施与工具、数据管理/版本化、模型部署为 Web 服务、监控、ML 团队与项目管理、「从 demo 到产品」",
       "align": "L92–L94（整门课即 Aurora v1 capstone 方法论蓝本）",
       "why": "全网公认「从模型到产品」的权威课程，直接对应 L94「Aurora v1 demo + 证据链」与云部署 live demo。必收第一条。",
+      "id": "1f5uy5p",
       "urls": [
         {
           "url": "https://www.youtube.com/playlist?list=PL1T8fO7ArWleMMI8KPJ_5D5XSlovTW_Ur",
@@ -2236,6 +2308,7 @@ export const videoLibrary = {
       "covers": "生产级 ML 设计→数据→模型（训练/追踪/调优/评估/serving）→测试（代码/数据/模型）→复现与版本化→CI/CD→监控",
       "align": "L93–L94",
       "why": "GitHub 顶流 MLOps 开源课，把「第一性原理手写系统」落到工程规范（测试、CI/CD、监控），补足 FSDL 之外的可复制代码骨架。",
+      "id": "ys8r2n",
       "urls": [
         {
           "url": "https://madewithml.com/courses/mlops/",
@@ -2272,6 +2345,7 @@ export const videoLibrary = {
       "covers": "实验跟踪、指标/模型日志、数据集版本化、超参 sweeps、模型评估与协作复现",
       "align": "L93（MLOps 实验跟踪）",
       "why": "L93 明确点名 W&B；官方一手教程，把 Aurora 训练实验的可追溯/可复现做扎实，直接支撑 L94 证据链。",
+      "id": "16yvfij",
       "urls": [
         {
           "url": "https://www.youtube.com/channel/UCBp3w4DCEC64FZr4k9ROxig",
@@ -2305,6 +2379,7 @@ export const videoLibrary = {
       "covers": "纯本地、无云 API 的语音助手——Whisper STT + 本地 LLM + TTS，Python orchestrator 串起 mic→ASR→LLM→TTS 循环，含延迟讨论",
       "align": "aurora.realtime（mic→ASR→LLM→TTS 实时管线）、L92",
       "why": "与 L92/aurora.realtime 目标同构的最小可跑实现，天然「不用 wrapper」路线；可作为 <500ms 目标的起点基线去逐层砍延迟。",
+      "id": "1p0suzb",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=2IffgzB8USw",
@@ -2334,6 +2409,7 @@ export const videoLibrary = {
       "covers": "容器 vs 虚机、Dockerfile 与镜像构建、Docker Hub、网络与存储卷、Docker Compose 多容器编排",
       "align": "L93（Docker 容器化）",
       "why": "为 Aurora 把 realtime/serving 组件打包成可复现镜像、进而上云 GPU 铺路。",
+      "id": "1gk66ol",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=fqMOX6JJhGo",
@@ -2362,6 +2438,7 @@ export const videoLibrary = {
       "covers": "用 GitHub Actions 为 ML 管线做持续集成——PR 触发测试、自动跑训练/评估、把 metrics 回贴 PR，合并后触发部署",
       "align": "L93（CI/CD）",
       "why": "聚焦 ML 的 CI/CD 实战（非泛 DevOps），把 Made With ML 的概念落到 GitHub Actions 具体 workflow。",
+      "id": "c82a9h",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=9I8X-3HIErc",
@@ -2390,6 +2467,7 @@ export const videoLibrary = {
       "covers": "用纯 Python 快速搭交互式 demo 与 Web 界面，音频/文本输入组件、分享链接、托管到 Spaces",
       "align": "L94（live demo）",
       "why": "一手创始人讲解，是 L94「Aurora v1 live demo URL」最省力路径；原生支持麦克风/音频，可直接包住 aurora.realtime 管线。",
+      "id": "bwvf0p",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=97KxA1r184o",
@@ -2418,6 +2496,7 @@ export const videoLibrary = {
       "covers": "把模型封装为 FastAPI 推理服务、容器化、部署到 Fly.io 拿到公网 URL 的完整链路",
       "align": "L93–L94、aurora.realtime 服务化",
       "why": "直接产出 L94 需要的「云上 live demo URL」；FastAPI + Docker 是 realtime 后端 serving 的主流栈。",
+      "id": "1m5g0h9",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=jzGzw98Eikk",
@@ -2446,6 +2525,7 @@ export const videoLibrary = {
       "covers": "训练模型→导出 ONNX→TensorRT 引擎构建与 INT8/FP8 量化标定，GPU 低延迟高吞吐推理",
       "align": "L94（部署优化）、aurora.realtime（<500ms 延迟预算）",
       "why": "aurora.realtime 要压到 <500ms，量化 + ONNX/TensorRT 是把 ASR/TTS 模型提速的关键工程手段。",
+      "id": "jts3n4",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=phmFvMOHt4I",
@@ -2474,6 +2554,7 @@ export const videoLibrary = {
       "covers": "ML 系统设计框架、推荐/检索/排序经典题、真人 mock 与反馈、把业务问题翻译成 ML 方案",
       "align": "L95–L99（ML/系统设计面试）",
       "why": "L96–L98 面试准备核心；「框架化 + mock + 反馈」正对研究工程师岗的 ML System Design 环节，可拿 Aurora 项目做 design 素材。",
+      "id": "68tvfd",
       "urls": [
         {
           "url": "https://www.youtube.com/@hello_interview",
@@ -2507,6 +2588,7 @@ export const videoLibrary = {
       "covers": "NeetCode 150 / Blind 75 按模式（双指针、滑窗、树、图、DP…）递进，每题干净的思路 + 编码讲解",
       "align": "L95–L99（白板/coding 面试）",
       "why": "算法/白板面试事实标准，直接支撑 L96–L98 的 coding 环节与刷题复盘。",
+      "id": "1crdwec",
       "urls": [
         {
           "url": "https://www.youtube.com/c/neetcode",
@@ -2540,6 +2622,7 @@ export const videoLibrary = {
       "covers": "逐段精读 Transformer/BERT/ViT/ResNet/GAN/InstructGPT 等，并示范「如何读论文」方法论",
       "align": "L95–L99（研究技能、复盘）",
       "why": "L95「研究技能」中文首选；示范研究工程师如何拆解论文、提炼贡献与证据链，与 AURORA「第一性原理复现」气质一致。",
+      "id": "1s9itnc",
       "urls": [
         {
           "url": "https://github.com/mli/paper-reading",
@@ -2573,6 +2656,7 @@ export const videoLibrary = {
       "covers": "TTS 总体流水线、深度学习前的做法、端到端思路，Tacotron 的 seq2seq + attention 架构、CBHG、吐出 mel/线性谱、Griffin-Lim",
       "align": "aurora.tts（声学模型）",
       "why": "华语圈最权威的语音深度学习课，从第一性原理讲清「文本→谱」为什么这么设计，是理解声学模型的最佳起点。",
+      "id": "uhivjw",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=DMxKeHW8KdM",
@@ -2603,6 +2687,7 @@ export const videoLibrary = {
       "covers": "Tacotron 痛点与改良、Tacotron2 + WaveNet 声码器、非自回归 FastSpeech、可控合成（speaker/prosody）、对齐与 attention 失败模式",
       "align": "aurora.tts（声学模型 + 声码器衔接）",
       "why": "承接上集，把「为什么要非自回归、为什么要独立声码器」讲透，对应路线图里 FastSpeech/HiFi-GAN 方向的动机。",
+      "id": "rk16or",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=Eau1Fr2x86Y",
@@ -2631,6 +2716,7 @@ export const videoLibrary = {
       "covers": "concatenative→neural 演进、双阶段流水线（声学模型 + 声码器）、mel 谱作桥梁、WaveNet/WaveGlow/HiFi-GAN 声码器、FastSpeech/Glow-TTS 并行架构、VALL-E/AudioLM/SPEAR-TTS 等 codec 生成、声音克隆",
       "align": "aurora.tts（全流水线）",
       "why": "目前 YouTube 上体系最完整的英文 TTS 课，讲解偏「理解内部机制」而非调 API，可作 aurora.tts 主线英文教材。",
+      "id": "yu51zd",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=_MFrEYPdEn8",
@@ -2664,6 +2750,7 @@ export const videoLibrary = {
       "covers": "2016 WaveNet/Tacotron 起点、双阶段流水线、mel 谱桥梁、各类声码器、并行架构、codec 生成",
       "align": "aurora.tts（概念地图）",
       "why": "一集把整个神经 TTS 版图串成时间线，适合作 aurora.tts 的「导航图」，看完再深入各论文不会迷路。",
+      "id": "1z1rqr",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=4Lbox-d0UcE",
@@ -2693,6 +2780,7 @@ export const videoLibrary = {
       "covers": "多阶段 TTS 流水线的问题、对抗训练、端到端训练、判别器/生成器结构、对齐问题与 aligner、谱预测损失、DTW",
       "align": "aurora.tts（端到端/对抗）",
       "why": "把「对齐为何是 TTS 核心难点」讲到公式层面，是理解 VITS 等端到端对抗模型的前置精读。",
+      "id": "t9czp1",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=WTB2p4bqtXU",
@@ -2721,6 +2809,7 @@ export const videoLibrary = {
       "covers": "把 TTS 当条件语言建模、EnCodec 离散音频码替代 mel 谱、自回归 + 非自回归两级解码、3 秒提示做 zero-shot 声音克隆",
       "align": "aurora.tts（zero-shot 声音克隆）",
       "why": "对齐「VALL-E 思路 / zero-shot voice cloning」，讲清 codec-LM 范式与传统 mel 谱路线的分野；建议与论文 arXiv 2301.02111 对照。",
+      "id": "fjj2mx",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=fCtbnhR83UI",
@@ -2749,6 +2838,7 @@ export const videoLibrary = {
       "covers": "文本正规化、字素→音素 (G2P)、词典与发音、韵律/停顿标注，TTS 前端如何把文本变成模型输入",
       "align": "aurora.tts（前端 text→phoneme/G2P）",
       "why": "神经 TTS 视频普遍跳过前端，而 aurora.tts 流水线第一环正是「文本→音素/G2P」；Edinburgh 语音合成组是该领域最权威学派。",
+      "id": "84ukn1",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=6lMs1VcUrYc",
@@ -2780,6 +2870,7 @@ export const videoLibrary = {
       "covers": "从零推导 STFT→mel 谱，正是声学模型输出与声码器输入的公共表示",
       "align": "aurora.tts ↔ aurora.audio 衔接",
       "why": "直接对接「TTS 与 AURORA 已实现的 DSP（Mel 谱/STFT）如何衔接」，是连接两模块的桥梁课。",
+      "id": "6q04f0",
       "urls": [
         {
           "url": "https://www.youtube.com/playlist?list=PL-wATfeyAMNqIee7cH3q1bh4QJFAaeNv0",
@@ -2809,6 +2900,7 @@ export const videoLibrary = {
       "covers": "WaveNet 直接建模原始波形、自回归生成、听感飞跃（概念层）",
       "align": "aurora.tts（声码器概览）",
       "why": "神经声码器起点 WaveNet 的「为什么重要」引子，开课前快速建直觉；深入机制回到李宏毅第 2 集与 Valerio 课程。",
+      "id": "o9knnc",
       "urls": [
         {
           "url": "https://www.youtube.com/watch?v=CqFIVCD1WWo",

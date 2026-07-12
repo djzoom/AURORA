@@ -48,6 +48,15 @@ function parseFieldLine(line, entry) {
   }
 }
 
+// 稳定短 id（djb2 → base36），供打卡存档按条目寻址；标题改字则视为新条目。
+function hashId(text) {
+  let hash = 5381;
+  for (let i = 0; i < text.length; i += 1) {
+    hash = ((hash << 5) + hash + text.charCodeAt(i)) >>> 0;
+  }
+  return hash.toString(36);
+}
+
 function extractUrls(text) {
   return [...new Set(text.match(/https?:\/\/[^\s()<>）｜|]+/g) ?? [])].map((url) =>
     url.replace(/[.,;:：。）」』]+$/, "")
@@ -90,6 +99,7 @@ function parseLibrary(markdown) {
     const language = entry.language ?? "";
     items.push({
       ...entry,
+      id: hashId(`${entry.phase}|${entry.title}`),
       urls: extractUrls(entry.links ?? "").map((url) => ({ url, label: urlLabel(url) })),
       topPick: entry.topPick,
       unverified: /⚠️/.test(Object.values(entry).join(" ")),

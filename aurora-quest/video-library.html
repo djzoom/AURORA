@@ -163,6 +163,79 @@
       .count-line { font-family: var(--mono); font-size: 0.76rem; color: var(--muted); }
       .count-line strong { color: var(--green); }
 
+      /* 打卡 HUD（与 Quest 顶栏同一套像素仪表） */
+      .hud {
+        padding: 12px 18px;
+        margin-bottom: 16px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px 18px;
+      }
+      .hud .stat { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); white-space: nowrap; }
+      .hud .stat strong { color: var(--cyan-strong); font-size: 0.95rem; }
+      .xp-meter {
+        width: 160px;
+        height: 12px;
+        background: var(--panel-deep);
+        border: 2px solid var(--line);
+        padding: 2px;
+      }
+      .xp-meter-fill {
+        width: 0%;
+        height: 100%;
+        background:
+          repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 6px,
+            rgba(4, 7, 14, 0.55) 6px,
+            rgba(4, 7, 14, 0.55) 8px
+          ),
+          linear-gradient(90deg, var(--cyan), var(--amber));
+        transition: width 240ms steps(6);
+      }
+      .medals { font-size: 0.95rem; letter-spacing: 2px; }
+      .medals .locked { opacity: 0.25; filter: grayscale(1); }
+      .hud-hint { flex-basis: 100%; margin: 0; font-family: var(--mono); font-size: 0.72rem; color: var(--muted); }
+      .hud-hint.crown { color: var(--amber); text-shadow: 0 0 10px rgba(255, 200, 94, 0.4); }
+      .hud-actions { margin-left: auto; }
+      .pixel-btn.danger { color: var(--magenta); border-color: var(--magenta); }
+
+      /* 打卡按钮与已看卡片态 */
+      .watch-btn {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        color: var(--muted);
+        background: var(--panel-deep);
+        border: 2px solid var(--line);
+        padding: 4px 9px;
+        cursor: pointer;
+      }
+      .watch-btn:hover { color: var(--green); border-color: var(--green); }
+      .watch-btn[aria-pressed="true"] {
+        color: var(--ink, #04070e);
+        background: var(--green);
+        border-color: var(--green);
+        font-weight: 700;
+      }
+      .card.watched { border-color: rgba(143, 243, 165, 0.55); }
+      .card.watched .card-title::after { content: " ✓"; color: var(--green); }
+      .card.watched .card-covers,
+      .card.watched .card-why { opacity: 0.55; }
+
+      /* 阶段标题里的通关进度 */
+      .phase-title { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+      .phase-progress { font-size: 0.74rem; color: var(--muted); display: inline-flex; align-items: center; gap: 8px; }
+      .phase-progress .bar {
+        width: 90px;
+        height: 8px;
+        background: var(--panel-deep);
+        border: 1px solid var(--line);
+      }
+      .phase-progress .bar i { display: block; height: 100%; background: var(--green); }
+      .phase-progress.done { color: var(--green); }
+
       /* 阶段分组 */
       .phase-block { margin-bottom: 26px; }
       .phase-title {
@@ -244,7 +317,20 @@
         <strong>从正弦波到 Whisper，全程有名师陪你手写。</strong>
         92 条精选 YouTube 教程（Karpathy · 3Blue1Brown · Valerio Velardo · 李宏毅 · MIT · Harvard…），
         逐条对齐 AURORA 课程 <span class="k">L01–L99</span>。在 notebook 里卡住时，按课号回来找对应视频：
-        先看直觉课 → 再看手写实现课 → 回 notebook 自己写一遍。按 <kbd>/</kbd> 快速搜索。
+        先看直觉课 → 再看手写实现课 → 回 notebook 自己写一遍。看完就点卡片上的
+        <span class="k">打卡</span>，目标：全刷一遍。按 <kbd>/</kbd> 快速搜索。
+      </section>
+
+      <section class="hud pixel-panel" aria-label="打卡进度">
+        <span class="stat">已刷 <strong id="hud-count">0</strong><span id="hud-total">/0</span></span>
+        <div class="xp-meter" aria-hidden="true"><div class="xp-meter-fill" id="hud-fill"></div></div>
+        <span class="stat">连续打卡 <strong id="hud-streak">0</strong> 天</span>
+        <span class="stat">阶段通关 <strong id="hud-phases">0</strong><span id="hud-phase-total">/0</span></span>
+        <span class="medals" id="hud-medals" title="里程碑：10 🥉 · 25 🥈 · 50 🥇 · 75 💎 · 全部 👑"></span>
+        <span class="hud-actions">
+          <button class="pixel-btn" id="clear-watched" type="button">清空打卡</button>
+        </span>
+        <p class="hud-hint" id="hud-hint" aria-live="polite"></p>
       </section>
 
       <section class="controls pixel-panel" aria-label="搜索与筛选">
@@ -273,6 +359,12 @@
             <button class="chip" data-value="中文" aria-pressed="false">中文</button>
             <button class="chip" data-value="英文" aria-pressed="false">英文</button>
           </div>
+          <div class="chip-group" id="watch-chips" role="group" aria-label="按打卡状态筛选">
+            <span class="chip-label">打卡</span>
+            <button class="chip" data-value="" aria-pressed="true">全部</button>
+            <button class="chip" data-value="未看" aria-pressed="false">未看</button>
+            <button class="chip" data-value="已看" aria-pressed="false">已看</button>
+          </div>
           <div class="chip-group">
             <button class="chip amber" id="top-pick-chip" aria-pressed="false">🥇 只看首选</button>
           </div>
@@ -297,8 +389,21 @@
 
     <script type="module">
       import { videoLibrary } from "./src/video-library.generated.js";
+      import {
+        loadSave,
+        persist,
+        clearSave,
+        defaultSave,
+        toggleWatched,
+        watchedCount,
+        streakDays,
+        milestones,
+        nextMilestone,
+      } from "./src/video-library-state.js";
 
-      const state = { query: "", phase: "", diff: "", lang: "", topPick: false };
+      const state = { query: "", phase: "", diff: "", lang: "", topPick: false, watch: "" };
+      const validIds = new Set(videoLibrary.items.map((item) => item.id));
+      let save = loadSave(validIds);
 
       const searchInput = document.getElementById("search");
       const phaseSelect = document.getElementById("phase-select");
@@ -318,6 +423,8 @@
         if (state.diff && !item.diffLevels.includes(state.diff)) return false;
         if (state.lang && !item.langTags.includes(state.lang)) return false;
         if (state.topPick && !item.topPick) return false;
+        if (state.watch === "已看" && !save.watched[item.id]) return false;
+        if (state.watch === "未看" && save.watched[item.id]) return false;
         if (state.query) {
           for (const term of state.query.toLowerCase().split(/\s+/)) {
             if (term && !item.searchable.includes(term)) return false;
@@ -344,20 +451,64 @@
               `<a class="link-btn" href="${url}" target="_blank" rel="noopener">▶ ${label}</a>`
           )
           .join("");
-        return `<article class="card pixel-panel${item.topPick ? " top-pick" : ""}">
+        const watchedOn = save.watched[item.id];
+        const watchBtn = watchedOn
+          ? `<button class="watch-btn" data-id="${item.id}" aria-pressed="true" title="点击取消打卡">✓ 已刷 ${watchedOn.slice(5)}</button>`
+          : `<button class="watch-btn" data-id="${item.id}" aria-pressed="false" title="看完了？点击打卡">☐ 打卡</button>`;
+        return `<article class="card pixel-panel${item.topPick ? " top-pick" : ""}${watchedOn ? " watched" : ""}">
           <h3 class="card-title">${item.topPick ? '<span class="medal">🥇</span>' : ""}${item.title}</h3>
           <div class="card-instructor">${item.instructor ?? ""}</div>
           <div class="badges">${badges}</div>
           ${item.covers ? `<p class="card-covers">${item.covers}</p>` : ""}
           ${item.why ? `<p class="card-why">${item.why}</p>` : ""}
-          <div class="card-links">${links}</div>
+          <div class="card-links">${links}${watchBtn}</div>
           ${item.unverified ? '<span class="warn">⚠️ 部分直链未核实，以频道 + 搜索关键词为准</span>' : ""}
         </article>`;
+      }
+
+      function phaseStats(phase) {
+        const items = videoLibrary.items.filter((item) => item.phase === phase);
+        const done = items.filter((item) => save.watched[item.id]).length;
+        return { done, total: items.length };
+      }
+
+      function renderHud() {
+        const count = watchedCount(save);
+        const total = videoLibrary.count;
+        const clearedPhases = videoLibrary.phases.filter((phase) => {
+          const { done, total: t } = phaseStats(phase);
+          return t > 0 && done >= t;
+        }).length;
+
+        document.getElementById("hud-count").textContent = count;
+        document.getElementById("hud-total").textContent = `/${total}`;
+        document.getElementById("hud-fill").style.width = `${Math.round((count / total) * 100)}%`;
+        document.getElementById("hud-streak").textContent = streakDays(save);
+        document.getElementById("hud-phases").textContent = clearedPhases;
+        document.getElementById("hud-phase-total").textContent = `/${videoLibrary.phases.length}`;
+
+        document.getElementById("hud-medals").innerHTML = milestones(total)
+          .map((m) => `<span class="${count >= m.at ? "" : "locked"}" title="${m.at} 条 · ${m.name}">${m.icon}</span>`)
+          .join("");
+
+        const hint = document.getElementById("hud-hint");
+        const next = nextMilestone(total, count);
+        if (!count) {
+          hint.textContent = "看完一条就在卡片上打卡——进度、连击和奖章都存在本机浏览器里。";
+          hint.classList.remove("crown");
+        } else if (next) {
+          hint.textContent = `再刷 ${next.at - count} 条解锁 ${next.icon} ${next.name}；断一天连击就归零，今天也来一条吧。`;
+          hint.classList.remove("crown");
+        } else {
+          hint.textContent = `👑 全通关！${total} 条从正弦波到 Whisper 全部刷完——现在回 notebook，把它们全部亲手写一遍。`;
+          hint.classList.add("crown");
+        }
       }
 
       function render() {
         const visible = videoLibrary.items.filter(matches);
         countLine.innerHTML = `显示 <strong>${visible.length}</strong> / ${videoLibrary.count} 条`;
+        renderHud();
         if (!visible.length) {
           container.innerHTML = '<div class="empty pixel-panel">没有匹配的资源 —— 换个关键词试试？</div>';
           return;
@@ -366,8 +517,15 @@
         for (const phase of videoLibrary.phases) {
           const cards = visible.filter((item) => item.phase === phase);
           if (!cards.length) continue;
+          const { done, total } = phaseStats(phase);
+          const pct = total ? Math.round((done / total) * 100) : 0;
           blocks.push(`<section class="phase-block">
-            <h2 class="phase-title">${phase}</h2>
+            <h2 class="phase-title">${phase}
+              <span class="phase-progress${done >= total ? " done" : ""}">
+                <span class="bar" aria-hidden="true"><i style="width:${pct}%"></i></span>
+                ${done}/${total}${done >= total ? " ✅ 通关" : ""}
+              </span>
+            </h2>
             <div class="cards">${cards.map(renderCard).join("")}</div>
           </section>`);
         }
@@ -397,6 +555,41 @@
       }
       wireChips("diff-chips", "diff");
       wireChips("lang-chips", "lang");
+      wireChips("watch-chips", "watch");
+
+      // 打卡：事件委托（卡片每次筛选都会重建）。改 save → 持久化 → 重渲染。
+      container.addEventListener("click", (event) => {
+        const btn = event.target.closest(".watch-btn");
+        if (!btn) return;
+        toggleWatched(save, btn.dataset.id);
+        persist(save);
+        render();
+      });
+
+      // 清空打卡：两段式确认（第一次点击进入待确认态，3 秒不点自动撤回）。
+      // 与 Quest 的 resetAdventure 同一语义：清空就是清空，新存档等下次打卡再落盘。
+      const clearBtn = document.getElementById("clear-watched");
+      let clearArmed = false;
+      let clearTimer = null;
+      function disarmClear() {
+        clearArmed = false;
+        clearTimeout(clearTimer);
+        clearBtn.textContent = "清空打卡";
+        clearBtn.classList.remove("danger");
+      }
+      clearBtn.addEventListener("click", () => {
+        if (!clearArmed) {
+          clearArmed = true;
+          clearBtn.textContent = "再点一次确认清空";
+          clearBtn.classList.add("danger");
+          clearTimer = setTimeout(disarmClear, 3000);
+          return;
+        }
+        disarmClear();
+        clearSave();
+        save = defaultSave();
+        render();
+      });
 
       const topPickChip = document.getElementById("top-pick-chip");
       topPickChip.addEventListener("click", () => {
