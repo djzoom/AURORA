@@ -439,6 +439,12 @@ button:disabled {
   border-color: var(--cyan);
 }
 
+.choices.suppress-hover button:hover,
+.choices.suppress-hover button:focus-visible {
+  border-color: var(--line);
+  outline: 0;
+}
+
 .choices button:active {
   transform: translateY(3px);
   box-shadow: 0 0 0 var(--ink);
@@ -464,6 +470,12 @@ button:disabled {
 .choices button:focus-visible .choice-key {
   color: var(--cyan-strong);
   border-color: var(--cyan);
+}
+
+.choices.suppress-hover button:hover .choice-key,
+.choices.suppress-hover button:focus-visible .choice-key {
+  color: var(--muted);
+  border-color: var(--line);
 }
 
 /* 反馈锁定期间禁止再次点击 */

@@ -28,7 +28,7 @@ import {
   markChoiceFeedback,
   flashBoss,
   spawnFx,
-} from "./ui.js";
+} from "./ui.js?v=20260713-choice-reset";
 
 let state = loadState() ?? defaultSave();
 let inputLocked = false;

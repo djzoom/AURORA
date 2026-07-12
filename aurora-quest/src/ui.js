@@ -4,7 +4,7 @@
 // handlers 契约：{ onChoice(index), onSelectPhase(phaseIndex) }
 
 import { QUESTS, XP_PER_LEVEL } from "./data/quests.js";
-import { COURSE_INTRO, COURSE_PHASES } from "./data/worldmap.js";
+import { COURSE_INTRO, COURSE_PHASES } from "./data/worldmap.js?v=20260713-choice-reset";
 import { drawSprite, SPRITE_BY_QUEST } from "./sprites.js";
 import {
   levelFromXp,
@@ -44,6 +44,7 @@ export const els = {
 };
 
 const HP_CELLS = 10;
+let cleanupChoiceHoverSuppression = null;
 // ---- 战斗区 -----------------------------------------------------------------
 
 function renderBoss(state) {
@@ -95,7 +96,28 @@ function renderNarrative(quest) {
 }
 
 function renderChoices(question, onChoice) {
+  if (els.choiceList.contains(document.activeElement)) {
+    document.activeElement?.blur?.();
+  }
+  cleanupChoiceHoverSuppression?.();
+  cleanupChoiceHoverSuppression = null;
   els.choiceList.classList.remove("locked");
+  els.choiceList.classList.add("suppress-hover");
+
+  const releaseSuppression = () => {
+    els.choiceList.classList.remove("suppress-hover");
+    window.removeEventListener("pointermove", releaseSuppression);
+    window.removeEventListener("keydown", releaseSuppression);
+    els.choiceList.removeEventListener("pointerdown", releaseSuppression);
+    if (cleanupChoiceHoverSuppression === releaseSuppression) {
+      cleanupChoiceHoverSuppression = null;
+    }
+  };
+  cleanupChoiceHoverSuppression = releaseSuppression;
+  window.addEventListener("pointermove", releaseSuppression, { once: true });
+  window.addEventListener("keydown", releaseSuppression, { once: true });
+  els.choiceList.addEventListener("pointerdown", releaseSuppression, { once: true });
+
   els.choiceList.innerHTML = "";
   question.choices.forEach((choice, index) => {
     const button = document.createElement("button");
