@@ -101,7 +101,7 @@
         </p>
       </footer>
 
-      <!-- 「更多」页：移动端 Tab 独占一屏；桌面隐藏（桌面的等价信息在页脚） -->
+      <!-- 「关于」页：移动端 Tab 独占一屏；桌面隐藏（桌面的等价信息在页脚） -->
       <section class="more-panel pixel-panel" aria-label="关于与链接">
         <h2 class="panel-title">关于 AURORA</h2>
         <p class="more-blurb">
@@ -111,6 +111,10 @@
         <p class="more-blurb">
           前半程补齐复数、线代、微积分、概率和音频特征；后半程进入 ASR、音乐理解、
           LLM/RAG 和 MLOps。每个 Phase 都对应明确产物，最后收束成可展示、可面试、可继续研究的 AURORA 系统。
+        </p>
+        <p class="more-blurb">
+          它把每个知识点都尽量落到可运行的代码、可解释的图和可复盘的实验记录里。
+          学完之后留下的不只是笔记，而是一套能继续扩展到语音助手、检索系统和音频研究原型的工程底座。
         </p>
         <a class="more-author" href="https://0xgarfield.com" target="_blank" rel="noopener" aria-label="访问加菲众个人网站">
           <span class="more-avatar" aria-hidden="true">GF</span>
@@ -127,7 +131,6 @@
           <a class="pixel-btn" href="https://x.com/DJWZ" target="_blank" rel="noopener">X Twitter</a>
           <button class="pixel-btn primary share-action" type="button">分享本页</button>
         </div>
-        <p class="more-note">键盘：1–4 作答 · Enter 下一章 · M 静音 ｜ MIT · 全面开源</p>
       </section>
 
       <!-- 移动端分页 Tab（桌面隐藏）：战斗独占一屏，次要信息分页呈现 -->
@@ -135,7 +138,7 @@
         <button class="tab-btn active" data-tab-target="battle" type="button">⚔️<span>战斗</span></button>
         <button class="tab-btn" data-tab-target="map" type="button">📚<span>课程</span></button>
         <button class="tab-btn" data-tab-target="loot" type="button">🎒<span>战利品</span></button>
-        <button class="tab-btn" data-tab-target="more" type="button">🔗<span>更多</span></button>
+        <button class="tab-btn" data-tab-target="more" type="button">🔗<span>关于</span></button>
       </nav>
     </div>
 
@@ -150,7 +153,7 @@
         }
       });
 
-      // 分享（页脚链接 + 「更多」页按钮共用）：优先系统分享面板，否则复制链接并就地反馈。
+      // 分享（页脚链接 + 「关于」页按钮共用）：优先系统分享面板，否则复制链接并就地反馈。
       for (const trigger of document.querySelectorAll(".share-action")) {
         trigger.addEventListener("click", async (event) => {
         event.preventDefault();
