@@ -70,19 +70,14 @@
         <p class="source-note" id="phase-source"></p>
       </main>
 
-      <!-- 底部：冒险地图 + 战利品 -->
+      <!-- 底部：课程介绍 + 战利品 -->
       <section class="belt">
         <div class="pixel-panel map-panel">
           <div class="map-head">
-            <h2 class="panel-title">冒险地图</h2>
-            <div class="map-zoom" role="group" aria-label="地图缩放">
-              <button class="pixel-btn ghost" id="map-zoom-out" type="button" aria-label="缩小">−</button>
-              <span id="map-zoom-val">100%</span>
-              <button class="pixel-btn ghost" id="map-zoom-in" type="button" aria-label="放大">＋</button>
-            </div>
+            <h2 class="panel-title">课程介绍</h2>
           </div>
           <div class="map-viewport">
-            <div id="roadmap-list" class="pixel-map"></div>
+            <div id="roadmap-list" class="course-outline"></div>
           </div>
           <p class="map-caption" id="map-caption"></p>
         </div>
@@ -94,15 +89,15 @@
 
       <footer class="footer">
         <p>
-          课程改动会刷新地图，游戏玩法独立。键盘：<kbd>1–4</kbd> 作答 · <kbd>Enter</kbd> 下一章 · <kbd>M</kbd> 静音。
-          补充学习 → <a href="./video-library.html">📺 视频资料库</a>。
-          发现 bug？<a href="mailto:dev@0xGarfield.com?subject=AURORA%20Quest%20Bug%20Report">告诉我们</a>。
+          课程介绍会随计划更新，游戏玩法独立。键盘：<kbd>1–4</kbd> 作答 · <kbd>Enter</kbd> 下一章 · <kbd>M</kbd> 静音。
         </p>
         <p>
-          课程入口：<a href="https://github.com/djzoom/AURORA" target="_blank" rel="noopener">GitHub 仓库</a> ·
-          <a href="https://github.com/djzoom/AURORA/tree/main/notebooks" target="_blank" rel="noopener">📚 99 课地图</a> ·
-          <a href="https://github.com/djzoom/AURORA/blob/main/docs/current/course/GETTING_STARTED.md" target="_blank" rel="noopener">🔰 新手上路</a> ·
-          <a href="#" class="share-action" id="share-link">🔗 分享本页</a>
+          课程入口：<a href="https://github.com/djzoom/AURORA/blob/main/docs/current/course/GETTING_STARTED.md" target="_blank" rel="noopener">新手上路</a> ·
+          <a href="https://github.com/djzoom/AURORA/tree/main/notebooks" target="_blank" rel="noopener">99 课地图</a> ·
+          <a href="./video-library.html">视频资料</a> ·
+          <a href="https://github.com/djzoom/AURORA" target="_blank" rel="noopener">GitHub</a> ·
+          <a href="https://x.com/DJWZ" target="_blank" rel="noopener">X Twitter</a> ·
+          <a href="#" class="share-action" id="share-link">分享本页</a>
         </p>
       </footer>
 
@@ -110,25 +105,27 @@
       <section class="more-panel pixel-panel" aria-label="关于与链接">
         <h2 class="panel-title">关于 AURORA</h2>
         <p class="more-blurb">
-          从一条正弦波，到 Whisper 内部——99 课全部亲手写，MIT 全面开源。
-          <strong>No API wrappers.</strong> 这个游戏是课程的 8-bit 陪练。
+          AURORA 是一条从数学直觉、音频 DSP、深度学习到系统交付的 99 课路线。
+          课程目标不是“会调包”，而是能解释公式、能手写核心算法、能把结果跑成作品。
         </p>
-        <div class="more-author">
+        <p class="more-blurb">
+          前半程补齐复数、线代、微积分、概率和音频特征；后半程进入 ASR、音乐理解、
+          LLM/RAG 和 MLOps。每个 Phase 都对应明确产物，最后收束成可展示、可面试、可继续研究的 AURORA 系统。
+        </p>
+        <a class="more-author" href="https://0xgarfield.com" target="_blank" rel="noopener" aria-label="访问加菲众个人网站">
           <span class="more-avatar" aria-hidden="true">GF</span>
           <div class="more-author-body">
             <strong>加菲众 0xGarfield</strong>
             <small>Speech &amp; Audio ML · Building AURORA</small>
           </div>
-        </div>
+        </a>
         <div class="more-links">
-          <a class="pixel-btn" href="https://github.com/djzoom/AURORA" target="_blank" rel="noopener">🐙 GitHub 仓库</a>
-          <a class="pixel-btn" href="https://x.com/DJWZ" target="_blank" rel="noopener">𝕏 作者 Twitter · @DJWZ</a>
-          <a class="pixel-btn" href="https://0xgarfield.com" target="_blank" rel="noopener">🌐 0xgarfield.com</a>
-          <a class="pixel-btn" href="./video-library.html">📺 视频资料库（92 条名师课）</a>
-          <a class="pixel-btn" href="https://github.com/djzoom/AURORA/tree/main/notebooks" target="_blank" rel="noopener">📚 99 课地图</a>
-          <a class="pixel-btn" href="https://github.com/djzoom/AURORA/blob/main/docs/current/course/GETTING_STARTED.md" target="_blank" rel="noopener">🔰 新手上路</a>
-          <button class="pixel-btn primary share-action" type="button">🔗 分享本页</button>
-          <a class="pixel-btn ghost" href="mailto:dev@0xGarfield.com?subject=AURORA%20Quest%20Bug%20Report">🐛 反馈 Bug</a>
+          <a class="pixel-btn" href="https://github.com/djzoom/AURORA/blob/main/docs/current/course/GETTING_STARTED.md" target="_blank" rel="noopener">新手上路</a>
+          <a class="pixel-btn" href="https://github.com/djzoom/AURORA/tree/main/notebooks" target="_blank" rel="noopener">99 课地图</a>
+          <a class="pixel-btn" href="./video-library.html">视频资料</a>
+          <a class="pixel-btn" href="https://github.com/djzoom/AURORA" target="_blank" rel="noopener">GitHub</a>
+          <a class="pixel-btn" href="https://x.com/DJWZ" target="_blank" rel="noopener">X Twitter</a>
+          <button class="pixel-btn primary share-action" type="button">分享本页</button>
         </div>
         <p class="more-note">键盘：1–4 作答 · Enter 下一章 · M 静音 ｜ MIT · 全面开源</p>
       </section>
@@ -136,7 +133,7 @@
       <!-- 移动端分页 Tab（桌面隐藏）：战斗独占一屏，次要信息分页呈现 -->
       <nav class="mobile-tabs pixel-panel" aria-label="页面分区">
         <button class="tab-btn active" data-tab-target="battle" type="button">⚔️<span>战斗</span></button>
-        <button class="tab-btn" data-tab-target="map" type="button">🗺️<span>地图</span></button>
+        <button class="tab-btn" data-tab-target="map" type="button">📚<span>课程</span></button>
         <button class="tab-btn" data-tab-target="loot" type="button">🎒<span>战利品</span></button>
         <button class="tab-btn" data-tab-target="more" type="button">🔗<span>更多</span></button>
       </nav>

@@ -560,9 +560,7 @@ button:disabled {
   padding: 16px 18px 14px;
 }
 
-/* ---- 像素世界地图：Boss 城门 + 课程地形区 + 99 块课程石砖 -------------------
-   依据课程结构（11 阶段 · L01–L99，见 src/data/worldmap.js）绘制；
-   缩放由 --map-zoom 驱动（＋/− 控件），放大后每块石砖的课号清晰可读。 */
+/* ---- 课程介绍：L01-L99 折叠目录 ------------------------------------------ */
 
 .map-head {
   display: flex;
@@ -572,305 +570,203 @@ button:disabled {
   flex-wrap: wrap;
 }
 
-.map-zoom {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--mono);
-  font-size: 0.74rem;
-  color: var(--muted);
-}
-
-.map-zoom .pixel-btn {
-  padding: 2px 10px;
-  font-size: 0.9rem;
-  line-height: 1.2;
-}
-
-#map-zoom-val {
-  min-width: 44px;
-  text-align: center;
-  font-variant-numeric: tabular-nums;
-}
-
 .map-viewport {
   margin-top: 8px;
-  max-height: 400px;
+  max-height: 430px;
   overflow: auto;
   border: 2px solid var(--line);
   background:
-    radial-gradient(circle at 30% 12%, rgba(102, 232, 255, 0.06), transparent 40%),
+    radial-gradient(circle at 22% 6%, rgba(102, 232, 255, 0.07), transparent 30%),
+    radial-gradient(circle at 80% 32%, rgba(255, 200, 94, 0.06), transparent 28%),
     var(--panel-deep);
 }
 
-.pixel-map {
-  --map-zoom: 1;
-  position: relative;
-  width: 640px;
-  aspect-ratio: 2 / 3;
-  overflow: hidden;
-  background:
-    radial-gradient(circle at 50% 8%, rgba(255, 184, 90, 0.14), transparent 18%),
-    radial-gradient(circle at 50% 50%, rgba(102, 232, 255, 0.12), transparent 30%),
-    linear-gradient(180deg, rgba(6, 19, 37, 0.9), rgba(4, 8, 18, 0.98));
-  transform: scale(var(--map-zoom));
-  transform-origin: 0 0;
-  box-shadow: inset 0 0 0 2px rgba(4, 7, 14, 0.55);
-}
-
-.pixel-map::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(rgba(18, 52, 86, 0.28) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(18, 52, 86, 0.28) 1px, transparent 1px);
-  background-size: 16px 16px;
-  opacity: 0.45;
-}
-
-.pixel-map::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 19% 28%, rgba(79, 166, 106, 0.18), transparent 15%),
-    radial-gradient(circle at 76% 28%, rgba(154, 98, 255, 0.18), transparent 15%),
-    radial-gradient(circle at 50% 50%, rgba(102, 232, 255, 0.2), transparent 13%),
-    radial-gradient(circle at 50% 70%, rgba(216, 86, 101, 0.18), transparent 12%),
-    radial-gradient(circle at 79% 81%, rgba(154, 98, 255, 0.16), transparent 13%);
-}
-
-/* 章节色带：城门与地形区共用（border-left 提示所属章节） */
-.chapter-0 { --chapter-tint: var(--cyan); }
-.chapter-1 { --chapter-tint: var(--amber); }
-.chapter-2 { --chapter-tint: var(--magenta); }
-.chapter-3 { --chapter-tint: var(--green); }
-.chapter-4 { --chapter-tint: var(--cyan-strong); }
-.chapter-5 { --chapter-tint: #d9a5ff; }
-.chapter-6 { --chapter-tint: #ff9d5c; }
-
-.quest-map-routes,
-.quest-map-nodes {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.quest-map-routes {
-  z-index: 1;
-}
-
-.quest-map-nodes {
-  z-index: 2;
-}
-
-.quest-route-glow,
-.quest-route {
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
-}
-
-.quest-route-glow {
-  stroke: var(--amber);
-  stroke-width: 18px;
-  opacity: 0.16;
-}
-
-.quest-route {
-  stroke: rgba(240, 180, 79, 0.78);
-  stroke-width: 5px;
-  stroke-dasharray: 10 9;
-  filter: drop-shadow(0 0 4px rgba(255, 224, 138, 0.35));
-}
-
-.quest-route.locked {
-  stroke: rgba(74, 83, 104, 0.72);
-  filter: none;
-}
-
-.quest-route-glow.locked {
-  opacity: 0;
-}
-
-.quest-route.completed {
-  stroke: rgba(143, 243, 165, 0.84);
-  stroke-dasharray: 0;
-}
-
-.quest-route.active {
-  stroke: var(--cyan);
-  stroke-dasharray: 8 8;
-  animation: route-pulse 1.1s steps(2) infinite;
-}
-
-.quest-route-glow.active {
-  stroke: var(--cyan);
-  opacity: 0.28;
-}
-
-@keyframes route-pulse {
-  50% { stroke: var(--amber); }
-}
-
-.quest-map-node {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  width: 30%;
-  max-width: 126px;
-  min-width: 86px;
-  min-height: 40px;
+.course-outline {
   display: grid;
-  grid-template-columns: 28px minmax(0, 1fr);
-  align-items: center;
-  gap: 6px;
-  padding: 5px 7px;
-  color: var(--text);
-  background: rgba(7, 13, 29, 0.92);
-  border: 2px solid rgba(140, 197, 255, 0.34);
-  border-left: 5px solid var(--chapter-tint, var(--line));
-  box-shadow: 0 3px 0 var(--ink), 0 0 10px rgba(4, 7, 14, 0.75);
-  text-align: left;
+  gap: 10px;
+  min-width: 0;
+  padding: 12px;
 }
 
-.quest-map-node:hover:not(:disabled),
-.quest-map-node:focus-visible {
-  border-color: var(--cyan);
+.course-intro,
+.course-phase {
+  background: rgba(7, 13, 29, 0.82);
+  border: 2px solid rgba(140, 197, 255, 0.2);
+  box-shadow: 0 3px 0 var(--ink);
+}
+
+.course-intro {
+  padding: 12px 14px;
+}
+
+.course-eyebrow {
+  margin: 0 0 6px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
   color: var(--cyan-strong);
+  letter-spacing: 0;
 }
 
-.quest-map-sprite {
-  width: 28px;
-  height: 28px;
+.course-intro h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+.course-copy {
+  margin: 0;
+  color: rgba(237, 247, 255, 0.84);
+  font-size: 0.84rem;
+  line-height: 1.75;
+}
+
+.course-thesis {
+  margin: 10px 0 0;
+  padding: 9px 10px;
+  color: var(--amber);
+  background: rgba(255, 200, 94, 0.07);
+  border-left: 4px solid var(--amber);
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+
+.course-phase {
+  overflow: hidden;
+}
+
+.course-phase[open] {
+  border-color: rgba(102, 232, 255, 0.42);
+}
+
+.course-phase-summary {
+  position: relative;
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr) max-content;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 38px 10px 12px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.course-phase-summary::-webkit-details-marker {
+  display: none;
+}
+
+.course-phase-summary::after {
+  content: "+";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--mono);
+  color: var(--cyan);
+}
+
+.course-phase[open] > .course-phase-summary::after {
+  content: "−";
+}
+
+.course-phase-icon {
+  width: 30px;
+  height: 30px;
   display: grid;
   place-items: center;
-  color: var(--ink);
-  background: var(--cyan);
-  border: 2px solid rgba(237, 247, 255, 0.5);
-  box-shadow: inset 2px 2px 0 rgba(255, 255, 255, 0.35), 0 2px 0 var(--ink);
-  font-family: var(--mono);
-  font-size: 0.58rem;
-  font-weight: 700;
-  line-height: 1;
+  background: rgba(102, 232, 255, 0.12);
+  border: 2px solid rgba(102, 232, 255, 0.38);
+  box-shadow: inset 2px 2px 0 rgba(255, 255, 255, 0.08);
 }
 
-.quest-map-copy {
+.course-phase-title {
   min-width: 0;
-  display: grid;
-  gap: 2px;
-}
-
-.quest-map-label,
-.quest-map-subtitle {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  color: var(--text);
 }
 
-.quest-map-label {
+.course-phase-meta {
   font-family: var(--mono);
   font-size: 0.68rem;
-  line-height: 1.15;
-  text-shadow: 2px 2px 0 var(--ink);
-}
-
-.quest-map-subtitle {
-  font-size: 0.54rem;
-  line-height: 1.1;
   color: var(--muted);
+  white-space: nowrap;
 }
 
-.quest-map-node.kind-camp .quest-map-sprite {
-  background: #ffb85a;
+.course-phase-body {
+  display: grid;
+  gap: 10px;
+  padding: 0 12px 12px;
 }
 
-.quest-map-node.kind-gate .quest-map-sprite {
-  color: var(--amber);
-  background: #1b2337;
-  border-color: var(--amber);
+.course-keyideas {
+  padding: 9px 10px;
+  background: rgba(102, 232, 255, 0.06);
+  border: 1px solid rgba(102, 232, 255, 0.2);
 }
 
-.quest-map-node.kind-windmill .quest-map-sprite,
-.quest-map-node.kind-slope .quest-map-sprite,
-.quest-map-node.kind-sea .quest-map-sprite,
-.quest-map-node.kind-canyon .quest-map-sprite,
-.quest-map-node.kind-oasis .quest-map-sprite {
-  background: #4fa66a;
-}
-
-.quest-map-node.kind-mine .quest-map-sprite,
-.quest-map-node.kind-tower .quest-map-sprite {
-  background: #9a62ff;
-}
-
-.quest-map-node.kind-wasteland .quest-map-sprite,
-.quest-map-node.kind-furnace .quest-map-sprite {
-  background: #d85665;
-}
-
-.quest-map-node.kind-castle .quest-map-sprite {
-  background: var(--cyan);
-}
-
-.quest-map-node.available {
-  border-color: rgba(240, 180, 79, 0.58);
-}
-
-.quest-map-node.completed {
-  border-color: var(--green);
-  background: rgba(18, 59, 47, 0.92);
-}
-
-.quest-map-node.completed .quest-map-sprite {
-  background: var(--green);
-}
-
-.quest-map-node.active {
-  color: var(--ink);
-  background: var(--amber);
-  border-color: var(--amber);
-  animation: node-pulse 1.2s steps(2) infinite;
-}
-
-.quest-map-node.active .quest-map-label,
-.quest-map-node.active .quest-map-subtitle {
-  color: var(--ink);
-  text-shadow: none;
-}
-
-.quest-map-node.active .quest-map-sprite {
+.course-keyideas h4 {
+  margin: 0 0 7px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
   color: var(--cyan-strong);
-  background: var(--ink);
-  border-color: var(--cyan);
 }
 
-.quest-map-node.active:disabled {
-  opacity: 1;
-  cursor: default;
+.course-keyideas ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-@keyframes node-pulse {
-  50% { box-shadow: 0 3px 0 var(--ink), 0 0 16px rgba(255, 200, 94, 0.75); }
+.course-keyideas li {
+  padding: 4px 7px;
+  color: rgba(237, 247, 255, 0.88);
+  background: rgba(7, 13, 29, 0.62);
+  border: 1px solid rgba(140, 197, 255, 0.18);
+  font-size: 0.74rem;
+  line-height: 1.45;
 }
 
-.quest-map-node.locked {
-  color: rgba(159, 180, 203, 0.58);
-  background: rgba(7, 13, 29, 0.68);
-  border-color: rgba(74, 83, 104, 0.72);
+.course-lessons {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+  line-height: 1.55;
 }
 
-.quest-map-node.locked .quest-map-sprite {
-  color: rgba(237, 247, 255, 0.4);
-  background: #4a5368;
-  border-color: rgba(140, 197, 255, 0.14);
+.course-lessons th,
+.course-lessons td {
+  padding: 7px 8px;
+  border: 1px solid rgba(140, 197, 255, 0.16);
+  vertical-align: top;
 }
 
-.quest-map-node.locked .quest-map-subtitle {
-  color: rgba(159, 180, 203, 0.48);
+.course-lessons th {
+  color: var(--cyan-strong);
+  background: rgba(102, 232, 255, 0.07);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-align: left;
+}
+
+.course-lessons th:first-child,
+.course-lessons .lesson-code {
+  width: 76px;
+}
+
+.lesson-code {
+  color: var(--amber);
+  font-family: var(--mono);
+  font-weight: 700;
+}
+
+.course-summary {
+  padding-top: 2px;
+  color: rgba(159, 180, 203, 0.9);
 }
 
 .map-caption {
@@ -959,8 +855,15 @@ button:disabled {
   align-items: center;
   gap: 12px;
   padding: 8px 10px;
+  color: inherit;
   background: var(--panel-deep);
   border: 2px solid var(--line);
+  text-decoration: none;
+}
+
+.more-author:hover,
+.more-author:focus-visible {
+  border-color: var(--cyan);
 }
 
 .more-avatar {
@@ -990,13 +893,17 @@ button:disabled {
 
 .more-links {
   display: grid;
-  gap: 7px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
 }
 
 .more-links .pixel-btn {
   text-align: center;
   text-decoration: none;
-  padding: 8px 6px;
+  padding: 7px 5px;
+  min-width: 0;
+  font-size: 0.74rem;
+  line-height: 1.25;
 }
 
 .more-note {
