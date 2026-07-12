@@ -903,8 +903,8 @@ button:disabled {
 
 .more-blurb {
   margin: 0;
-  font-size: 0.88rem;
-  line-height: 1.8;
+  font-size: 0.84rem;
+  line-height: 1.7;
   color: var(--muted);
 }
 
@@ -916,7 +916,7 @@ button:disabled {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 12px;
+  padding: 8px 10px;
   background: var(--panel-deep);
   border: 2px solid var(--line);
 }
@@ -948,13 +948,13 @@ button:disabled {
 
 .more-links {
   display: grid;
-  gap: 8px;
+  gap: 7px;
 }
 
 .more-links .pixel-btn {
   text-align: center;
   text-decoration: none;
-  padding: 10px 8px;
+  padding: 8px 6px;
 }
 
 .more-note {
@@ -1130,11 +1130,11 @@ button:disabled {
   body[data-tab="more"] .more-panel {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 8px;
     flex: 1;
     min-height: 0;
     overflow-y: auto;
-    padding: 14px 14px 18px;
+    padding: 10px 12px;
   }
 
   /* 底部 Tab 栏：像素手柄风，避开 iOS 手势条 */
