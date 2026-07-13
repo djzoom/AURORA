@@ -15,18 +15,13 @@ created: 2026-06-27
 
 - **[[concepts/_lifecycle|术语生命周期总表]]** — 每个术语「第一次出现 → 一路复现 → 最终应用」的时间线（Layer 2/10）。*今天难，是因为以后它还会出现很多次。*
 - **`lessons/L01.md … L99.md`** — 按课反查：本课「首次引入 / 前置术语 / 后续再用」（Layer 1/3）。例：[[lessons/L39]]。
-- **`concepts/`** — 一个术语一页（原子化），含全部 10 层（一句话 / 定义 / 为什么发明 / 生命周期 / 依赖 / 易混淆 / 白板要求 / 面试标签 / 现实系统 / 反查）。**已建 41 个「白板/面试核心」概念页**，例：[[concepts/FFT]] · [[concepts/Backpropagation]] · [[concepts/Self-Attention]] · [[concepts/CTC]] · [[concepts/Mel]] · [[concepts/SVD]] · [[concepts/LoRA]] · [[concepts/RAG]]。
+- **`concepts/`** — 一个术语一页（原子化），含全部 10 层（一句话 / 定义 / 为什么发明 / 生命周期 / 依赖 / 易混淆 / 白板要求 / 面试标签 / 现实系统 / 反查）。**已建 42 个「白板/面试核心」概念页**，例：[[concepts/FFT]] · [[concepts/Backpropagation]] · [[concepts/Self-Attention]] · [[concepts/CTC]] · [[concepts/Mel]] · [[concepts/SVD]] · [[concepts/LoRA]] · [[concepts/RAG]]。
   - 白板 ★★★★★ 术语（面试必推导）：DFT / STFT / Mel / MFCC / DCT / Chain-Rule / Backpropagation / Autograd / CTC / Edit-Distance / Self-Attention / Transformer / LoRA / KV-Cache / RAG / Sampling。
 
 - **[[interview/Audio-AI|🎧 面试冲刺图]]** — 按白板★优先级排的面试清单(★★★★★ 先啃),含一句话+相关公司;另有 [[interview/By-Company|按公司分组]](OpenAI 33 / ElevenLabs 20 …)。**自动生成自 concept 页**(Layer 7)。
 
-> **待建（v2，需策展/agent 批量写）**：其余 ~420 个冷门 concept 页、`roadmaps/`（Speech AI / DSP / LLM / Music 技术主线）。concept 页里指向未建术语的 `[[…]]` 是 Obsidian 的"待创建"链接（正常，随图谱生长自动补齐）。
+> **待建（v2，需策展/agent 批量写）**：其余 ~350 个冷门 concept 页、`roadmaps/`（Speech AI / DSP / LLM / Music 技术主线）。concept 页里指向未建术语的 `[[…]]` 是 Obsidian 的"待创建"链接（正常，随图谱生长自动补齐）。
 > 设计理念：**大量原子化概念页 + 双向链接 + MOC（Map of Content）索引**，而不是单一大词典。
-> Annotation coverage: 795 applied in earlier rounds + ~92 more in the 2026-07-03 pass.
-> Of the audit's 460 tracked term-slots, 430 are now glossed inline; the remaining ~30
-> are **intentional skips** — 量化 in its "quantified" sense (L98/L99), terms that appear
-> only in code cells or H1 titles, and substring-only occurrences (e.g. 偏导 inside 偏导数)
-> that would mis-split if annotated. Not genuine gaps.
 
 ## Course Structure
 
@@ -44,22 +39,22 @@ created: 2026-06-27
 | 9 LLM | LLM | L83–L91 | 45 | Transformer → RAG |
 | 10 Integration | Systems | L92–L99 | 50 | Pipeline → interview |
 
-## Annotation Audit Summary
+## Annotation Status（内联术语标注 · 2026-07-13 复查）
 
-| Domain | Total Terms | ✅ Annotated | ⚠️ Partial | ❌ Missing |
-|--------|------------|------------|-----------|----------|
-| Audio DSP (M0+M1+M5) | 92 | 12 | 14 | 66 |
-| Linear Algebra (M2) | 60 | 7 | 5 | 48 |
-| Calculus (M3) | 35 | 0 | 9 | 26 |
-| Probability (M4) | 35 | 1 | 5 | 29 |
-| Deep Learning (M6) | 60 | 5 | 4 | 51 |
-| ASR (M7) | 50 | 10 | 2 | 38 |
-| Music (M8) | 35 | 7 | 9 | 19 |
-| LLM (M9) | 45 | 10 | 2 | 33 |
-| Integration (M10) | 50 | 8 | 2 | 40 |
-| **Total** | **462** | **60** | **52** | **350** |
+课程正文里的双语内联标注——每个术语首次出现处形如「术语（English，缩写）」。
+历史推进：2026-06-27 初审 462 个词位仅 60 个已标 → 多轮补标（累计 ~890 处）→
+2026-07-13 全库复查（脚本扫全部 99 本 notebook 正文，允许全称或缩写命中）：
 
-See [[annotation-audit]] for the full per-notebook breakdown.
+| 指标 | 数量 |
+|------|-----|
+| 词典独立术语（[[annotation-audit]] 表内去重） | 309 |
+| 正文实际出现 | 293 |
+| ✅ 已内联标注 | 255（**87%**） |
+| ⚠️ 待补 | 38（清单见 [[annotation-audit]] 末尾附录；含少量词典键位误报） |
+
+> [[annotation-audit]] 现在身兼两职：① 初审的逐课缺口清单（历史文档）；
+> ② `build_knowledge_graph.py` 重建图谱时读取的**术语词典**（中文 | 英文 | 缩写 表格）。
+> 修改表格行会直接影响图谱，请谨慎。
 
 ---
 

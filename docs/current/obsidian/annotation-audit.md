@@ -964,3 +964,55 @@ This file lists every term with `annotation_status: "missing"` grouped by the no
 | 基础模型 | foundation model | — | 基础模型（foundation model） |
 | 数据增强 | data augmentation | — | 数据增强（data augmentation） |
 | 流式解码 | streaming decoding | — | 流式解码（streaming decoding） |
+
+---
+
+## 附录 · 2026-07-13 复查：仍未内联标注的 38 词
+
+> 全库扫描（99 本 notebook 正文，全称或缩写命中即算已标）后剩余的缺口，
+> 按首现课排序。列序与上文词典表一致（中文|英文|缩写），可安全重复解析。
+> ⚠️ 其中「频率 → Relative Frequency」是词典键位误报（音频域的 频率（frequency）
+> 早已标注；此行来自概率模块的相对频率），补标时跳过。
+
+| 中文 | 英文 | 缩写 | 首现课 |
+|------|------|------|--------|
+| 采样点 | sampling point | — | L01 |
+| 频率 | Relative Frequency | — | L01（误报，跳过） |
+| 抗混叠滤波器 | anti-aliasing filter | — | L02 |
+| 极坐标 | polar coordinates | — | L05 |
+| 直角坐标 | rectangular coordinates | — | L05 |
+| 傅里叶分析 | Fourier analysis | — | L07 |
+| 傅里叶变换 | Fourier Transform | — | L07 |
+| 时域信号 | time-domain signal | — | L08 |
+| 特征提取 | feature extraction | — | L09 |
+| 最小二乘法 | least squares method | LS | L10 |
+| 数值稳定 | Numerical Stability | — | L15 |
+| 缩放因子 | Scaling Factor | — | L16 |
+| 离散傅里叶变换 | Discrete Fourier Transform | DFT | L18 |
+| 权重更新 | weight update | — | L19 |
+| 解析微分 | analytical differentiation | — | L21 |
+| 梅尔滤波器 | mel filterbank | — | L22 |
+| 收敛曲线 | convergence curve | — | L25 |
+| 局部极小值 | local minimum | — | L26 |
+| 中心极限定理 | Central Limit Theorem | CLT | L27 |
+| 先验 | Prior | — | L27 |
+| KL散度 | KL divergence | KL | L30 |
+| 数值下溢 | numerical underflow | — | L31 |
+| 短时傅里叶变换 | Short-Time Fourier Transform | STFT | L41 |
+| 梯度爆炸 | Gradient Explosion | — | L47 |
+| 倒谱系数 | cepstral coefficients | — | L48 |
+| 离散余弦变换 | Discrete Cosine Transform | DCT | L48 |
+| 欧氏距离 | Euclidean distance | — | L49 |
+| 频谱包络 | spectral envelope | — | L49 |
+| 声学特征 | acoustic features | — | L50 |
+| 超参 | hyperparameter | HP | L50 |
+| 算子 | operator | — | L54 |
+| 线性层 | linear layer | — | L54 |
+| 局部梯度 | local gradient | — | L55 |
+| 全连接层 | fully connected layer | FC | L56 |
+| 自适应学习率 | adaptive learning rate | — | L64 |
+| 弱监督 | weak supervision | — | L66 |
+| 自回归生成 | Autoregressive Generation | AR | L70 |
+| 因果掩码 | Causal Mask | — | L85 |
+| 和弦进行 | chord progression | — | L82 |
+| 幻觉 | Hallucination | — | L72 |
