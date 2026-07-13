@@ -30,3 +30,6 @@ jobs:
 
       - name: Test (pytest)
         run: pytest --cov=aurora --cov-report=term-missing
+
+      - name: Course gate (validate_pipeline)
+        run: python scripts/validate_pipeline.py

@@ -82,7 +82,7 @@ CLAUDE.md / AGENTS.md / CONTRIBUTING.md   工作约定
   notebook / 流水线 / 结构约定，CI 仍绿——门禁目前是「本地手动仪式」。
 - 可复用工具：`audit_drift` `add_nav_cells` `build_knowledge_graph` `build_docs`
   `demo_audio` `sim_students_audit`(多智能体审课，烧 API 额度) `generate_aurora_quest_data`。
-- **6 个 `apply_*.py` 是一次性历史迁移**（7-01 已应用，非幂等，勿盲目重跑）。
+- **6 个 `apply_*.py` 已归档至 `scripts/archive/`**（2026-07-13；一次性历史迁移，7-01 已应用，非幂等，勿重跑）。
 - 工具依赖未声明进 extras：`rich`/`pandoc`/`xhtml2pdf`/`wandb`/Node——`make install` 装不上。
 - `log_ci_metrics.py` 是**孤儿**：其 docstring 描述的 W&B CI 步骤在任何 workflow 里都不存在。
 
@@ -92,7 +92,7 @@ CLAUDE.md / AGENTS.md / CONTRIBUTING.md   工作约定
 - obsidian 是真知识图谱（~462 词/9 域），但 concept 页只建了 42/462（其余 v2 backlog）。
 - **🔴 blog 是最显眼的内容缺口**：只有 `0001-fft-from-scratch.md` 且仍是草稿；
   ROADMAP 有 2 个未勾的 blog TODO。
-- 分区/部分完成：`prose_polish/` 空目录；`sim_students/` 只到 L73；week-checklist 只到第 4 周；video 只有 L01。
+- 分区/部分完成：`sim_students/` 只到 L73；week-checklist 只到第 4 周；video 只有 L01。
 
 ### 2.5 开放模式
 - 本仓库 public、MIT、L01–L99 全部开放，开放原则见 `docs/current/OPENNESS.md`。
@@ -127,7 +127,7 @@ CLAUDE.md / AGENTS.md / CONTRIBUTING.md   工作约定
 |---|---|---|
 | 修 ROADMAP 漂移：FFT blog 已存在 → 勾上；`cloud_gpu_plan` 标注未执行 | 零成本纠错，避免后继者误判 | S |
 | 加 `tests/speech/test_metrics.py` + 从 `speech/__init__` re-export WER | 补齐已知约定违规（无 tests/speech） | S |
-| 验收门进 CI + 归档 6 个 `apply_*.py` 到 `scripts/archive/` + 声明工具 extras | 保护 main、清理 scripts/ | S–M |
+| 声明工具 extras（`rich`/`pandoc`/`xhtml2pdf`/`wandb`/Node）| 清理遗留（验收门已进 CI、`apply_*` 已归档，均 07-13 完成） | S |
 | MFCC vs LibriSpeech 对拍（脚本/notebook，非 src） | Phase 1 收尾 | M |
 | 写第二篇 blog「从线性回归到反向传播」+ 定稿 FFT blog | blog 是显式交付物 | M |
 | 把 `cloud_gpu_plan.md` 真正落进 L93/L64/L72 | 解锁并降险后续两次云训练 | M |
@@ -243,12 +243,12 @@ aurora-quest/src/
 打包完整性/运行时 UX，3 agent；第二轮：接线/修复复核，2 agent），全部发现均已修复并有回归测试。
 
 ### 🔗 链接（可直接点开）
-- **托管可玩版（推荐，立即可分享）**：<https://claude.ai/code/artifact/0d83de66-5121-455a-b358-f1d99341b1e7>
+- **线上正式版（推荐）**：<https://djzoom.github.io/AURORA/>（GitHub Pages，
+  `aurora-quest-pages.yml` 随 main 推送自动部署）
 - 本地多文件版（ES module，需服务器）：
   `python -m http.server -d aurora-quest 8080` → <http://localhost:8080>
 - 本地单文件版（双击即玩）：`node scripts/build_quest_bundle.mjs` → 打开 `aurora-quest/dist/aurora-quest.html`
-- GitHub Pages：`aurora-quest-pages.yml` 已就绪，但部署门 `if repository_visibility == public`——
-  **仓库转公开 + 开 Pages 后**才会上线到 `https://djzoom.github.io/AURORA/`（届时自动）。
+- 历史托管版（claude.ai artifact，已被 Pages 取代）：<https://claude.ai/code/artifact/0d83de66-5121-455a-b358-f1d99341b1e7>
 
 ---
 
@@ -269,5 +269,5 @@ aurora-quest/src/
   （见 §4 铁律）。
 - **Aurora Quest**：Pages 上线；移动端 App 式一屏布局 + 底部 Tab；像素世界地图
   （比喻映射 + 依赖拓扑 + LOD 缩放）；「更多」页 = 关于/作者(@DJWZ)/链接/分享。
-- **注意**：`aurora-quest/dist/` 单文件 bundle 未随本轮重构重建
-  （`scripts/build_quest_bundle.mjs`），需要离线版时先重跑并验证。
+- `aurora-quest/dist/` 单文件 bundle 已于 2026-07-13 重建并验证
+  （`scripts/build_quest_bundle.mjs`，含关于页课时段落）；后续改动 quest 源文件后记得重跑。

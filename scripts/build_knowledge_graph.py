@@ -15,9 +15,9 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 NB = sorted(glob.glob(os.path.join(REPO, "notebooks/*/L*.ipynb")), key=lambda p: int(re.search(r"L(\d\d)", os.path.basename(p)).group(1)))
 OBS = os.path.join(REPO, "docs/current/obsidian")
 
-# --- term dictionary {zh: (en, abbr)} from annotation-audit ---
+# --- term dictionary {zh: (en, abbr)} from terms.md (single source of truth) ---
 term = {}
-for line in open(os.path.join(OBS, "annotation-audit.md"), encoding="utf-8"):
+for line in open(os.path.join(OBS, "terms.md"), encoding="utf-8"):
     if line.startswith("|"):
         c = [x.strip() for x in line.strip().strip("|").split("|")]
         if len(c) >= 3 and c[0] not in ("中文", "------") and not c[0].startswith("---"):

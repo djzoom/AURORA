@@ -7,6 +7,8 @@ created: 2026-06-27
 
 [[INDEX|← Master Index]]
 
+**历史文档**（2026-06-27 初审快照 + 2026-07-13 补标附录）。术语词典已抽为 [[terms]]，`build_knowledge_graph.py` 只读 terms.md——本文件不再被任何脚本解析。
+
 This file lists every term with `annotation_status: "missing"` grouped by the notebook where the gap first matters. For each term: the Chinese name, the English it should have, the abbreviation (if any), and a ready-to-paste annotation string.
 
 **Legend**: The "建议标注格式" column gives the exact bracketed annotation to add inline in the notebook markdown.
@@ -970,7 +972,7 @@ This file lists every term with `annotation_status: "missing"` grouped by the no
 ## 附录 · 2026-07-13 复查：曾未内联标注的 38 词（✅ 同日已全部补标，唯一残余是下述误报行）
 
 > 全库扫描（99 本 notebook 正文，全称或缩写命中即算已标）后剩余的缺口，
-> 按首现课排序。列序与上文词典表一致（中文|英文|缩写），可安全重复解析。
+> 按首现课排序。
 > ⚠️ 其中「频率 → Relative Frequency」是词典键位误报（音频域的 频率（frequency）
 > 早已标注；此行来自概率模块的相对频率），补标时跳过。
 
