@@ -4,11 +4,12 @@ The notebook bootstrap and the visualization helpers in ``aurora`` use this
 module so that course plots can switch between a dark, VS Code-friendly theme
 and a light fallback without duplicating rcParams logic.
 """
+
 from __future__ import annotations
 
-from dataclasses import dataclass
 import os
 import subprocess
+from dataclasses import dataclass
 from functools import wraps
 from typing import Any
 
@@ -98,7 +99,9 @@ def _detect_auto_theme() -> str:
 
 
 def resolve_theme(theme: str | None = None) -> str:
-    candidate = theme if theme is not None else os.environ.get("AURORA_PLOT_THEME", "auto")
+    candidate = (
+        theme if theme is not None else os.environ.get("AURORA_PLOT_THEME", "auto")
+    )
     normalized = _normalize_theme_name(candidate)
     if normalized == "auto":
         return _detect_auto_theme()
@@ -263,10 +266,26 @@ def _apply_origin_cross(ax: Any) -> None:
         ax.xaxis.set_major_formatter(FuncFormatter(_no_zero))
         ax.yaxis.set_major_formatter(FuncFormatter(_no_zero))
         # arrowheads at the positive ends (standard math axes)
-        ax.plot(1, 0, marker=">", ms=6, color=_CURRENT_THEME.axis, clip_on=False,
-                transform=ax.get_yaxis_transform(), zorder=6)
-        ax.plot(0, 1, marker="^", ms=6, color=_CURRENT_THEME.axis, clip_on=False,
-                transform=ax.get_xaxis_transform(), zorder=6)
+        ax.plot(
+            1,
+            0,
+            marker=">",
+            ms=6,
+            color=_CURRENT_THEME.axis,
+            clip_on=False,
+            transform=ax.get_yaxis_transform(),
+            zorder=6,
+        )
+        ax.plot(
+            0,
+            1,
+            marker="^",
+            ms=6,
+            color=_CURRENT_THEME.axis,
+            clip_on=False,
+            transform=ax.get_xaxis_transform(),
+            zorder=6,
+        )
     except Exception:
         pass
 
