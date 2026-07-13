@@ -55,6 +55,43 @@ DARK_THEME = PlotTheme(
 _CURRENT_THEME = DARK_THEME
 _HOOKS_INSTALLED = False
 
+# Effective first-match order shared by the viz modules (duplicates removed
+# from the historical per-module lists; the match result is unchanged).
+_CJK_FONT_CANDIDATES = (
+    "PingFang SC",
+    "Arial Unicode MS",
+    "Source Han Sans CN",
+    "Source Han Sans CN Normal",
+    "Heiti SC",
+    "Noto Sans CJK SC",
+    "SimHei",
+    "WenQuanYi Zen Hei",
+    "Droid Sans Fallback",
+)
+
+
+def find_cjk_font() -> str | None:
+    """Return the first installed CJK font from the shared candidate list."""
+    from matplotlib import font_manager as fm
+
+    have = {f.name for f in fm.fontManager.ttflist}
+    for name in _CJK_FONT_CANDIDATES:
+        if name in have:
+            return name
+    return None
+
+
+def sync_palette(namespace: dict[str, Any], theme: PlotTheme) -> None:
+    """Write the theme palette into a viz module's globals (INK, AXIS, ...)."""
+    namespace["INK"] = theme.ink
+    namespace["AXIS"] = theme.axis
+    namespace["GRID"] = theme.grid
+    namespace["SURFACE"] = theme.surface
+    namespace["SHADOW"] = theme.shadow
+    namespace["LEGEND_FACE"] = theme.legend_face
+    namespace["LEGEND_EDGE"] = theme.legend_edge
+    namespace["PAPER"] = theme.paper
+
 
 def _normalize_theme_name(theme: str) -> str:
     value = theme.strip().lower()

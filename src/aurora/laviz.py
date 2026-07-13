@@ -6,7 +6,7 @@ Usage: from aurora.laviz import style, arrows2d, ...
 import matplotlib.pyplot as plt
 import numpy as np
 
-from aurora._plot_theme import DARK_THEME, apply_theme
+from aurora._plot_theme import DARK_THEME, apply_theme, find_cjk_font, sync_palette
 
 _PAL = ["#2A9D8F", "#E9C46A", "#F4A261", "#E76F51", "#264653", "#A8DADC"]
 _THEME = DARK_THEME
@@ -20,45 +20,12 @@ LEGEND_EDGE = _THEME.legend_edge
 PAPER = _THEME.paper
 
 
-def _cjk_font():
-    from matplotlib import font_manager as fm
-
-    have = {f.name for f in fm.fontManager.ttflist}
-    for name in (
-        "PingFang SC",
-        "Arial Unicode MS",
-        "Source Han Sans CN",
-        "Source Han Sans CN Normal",
-        "Heiti SC",
-        "PingFang SC",
-        "Noto Sans CJK SC",
-        "SimHei",
-        "WenQuanYi Zen Hei",
-        "Droid Sans Fallback",
-    ):
-        if name in have:
-            return name
-    return None
-
-
-def _sync_theme(theme):
-    global INK, AXIS, GRID, SURFACE, SHADOW, LEGEND_FACE, LEGEND_EDGE, PAPER
-    INK = theme.ink
-    AXIS = theme.axis
-    GRID = theme.grid
-    SURFACE = theme.surface
-    SHADOW = theme.shadow
-    LEGEND_FACE = theme.legend_face
-    LEGEND_EDGE = theme.legend_edge
-    PAPER = theme.paper
-
-
 def style(theme: str | None = None):
     """Apply a clean, readable matplotlib style."""
     theme_spec = apply_theme(
-        theme, cjk_font=_cjk_font(), figure_size=(6, 6), font_size=11
+        theme, cjk_font=find_cjk_font(), figure_size=(6, 6), font_size=11
     )
-    _sync_theme(theme_spec)
+    sync_palette(globals(), theme_spec)
     plt.rcParams.update(
         {
             "axes.spines.top": False,
