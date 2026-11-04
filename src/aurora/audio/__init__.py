@@ -14,7 +14,15 @@ Quick start
 """
 
 from .io import chirp, read_wav, sine, write_wav
-from .mel import hz_to_mel, mel_filterbank, mel_spectrogram, mel_to_hz, power_to_db
+from .mel import (
+    hz_to_mel,
+    hz_to_mel_slaney,
+    mel_filterbank,
+    mel_spectrogram,
+    mel_to_hz,
+    mel_to_hz_slaney,
+    power_to_db,
+)
 from .mfcc import dct_ii, mfcc
 from .stft import (
     frame_signal,
@@ -32,6 +40,7 @@ from .transforms import (
     normalize_features,
     rfft,
 )
+from .whisper_frontend import log_mel_whisper, whisper_mel_filterbank
 from .windows import blackman, get_window, hamming, hann
 
 __all__ = [
@@ -62,10 +71,15 @@ __all__ = [
     # mel
     "hz_to_mel",
     "mel_to_hz",
+    "hz_to_mel_slaney",
+    "mel_to_hz_slaney",
     "mel_filterbank",
     "mel_spectrogram",
     "power_to_db",
     # mfcc
     "dct_ii",
     "mfcc",
+    # whisper front end
+    "log_mel_whisper",
+    "whisper_mel_filterbank",
 ]

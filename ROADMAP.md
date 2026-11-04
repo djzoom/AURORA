@@ -37,7 +37,8 @@ Daily detail in [`docs/current/course/week-01-checklist.md`](docs/current/course
 - [x] Mel scale + triangular filterbank, log-mel, MFCC (own DCT-II)
 - [x] WAV I/O from scratch, signal generators, test suite, CI
 - [x] **L32–L53** All Audio DSP notebooks corrected and audited
-- [ ] MFCC on real LibriSpeech audio (cross-checked vs librosa) — practical exercise
+- [x] MFCC on real LibriSpeech audio (cross-checked vs librosa) — `scripts/bench_alignment.py`, see REPORT.md
+- [x] Whisper-compatible front end (`aurora.audio.whisper_frontend`); Whisper `base.en` gives identical transcripts on 200/200 test-clean utterances with Aurora's features — REPORT.md
 - [ ] Blog: "Writing the FFT from scratch"
 
 ## Phase 2 — ML / Deep-Learning Foundations  ·  *First Trained Model*  `notebooks/6_deep_learning/` L54–L65

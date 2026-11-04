@@ -39,7 +39,7 @@ Aurora
 ├── aurora.audio      FFT / STFT / Mel / MFCC / WAV — fully implemented ✅
 ├── aurora.music      chroma / onset / beat / similarity / embed — implemented ✅
 ├── aurora.llm        KV-Cache / sampling / TF-IDF / RAG — implemented ✅
-├── aurora.speech     edit distance / WER — implemented; ASR training planned ▷
+├── aurora.speech     edit distance / WER — implemented ✅; ASR training planned ▷
 ├── aurora.rag        retrieval orchestration over current TF-IDF primitives ▢
 ├── aurora.realtime   mic → ASR → LLM → TTS pipeline — planned ▢
 ├── aurora.tts        speech synthesis / voice cloning — planned ▢
@@ -48,6 +48,16 @@ Aurora
 ```
 
 See [`ROADMAP.md`](ROADMAP.md) for the full six-month plan.
+
+## Does it actually work? — see [`REPORT.md`](REPORT.md)
+
+Aurora's hand-written front end was swapped into OpenAI Whisper in place of
+`torch.stft` + librosa and evaluated on LibriSpeech test-clean. Whisper
+`base.en` produced **identical transcripts on 200 / 200 utterances**
+(corpus WER 3.08 % either way), and every primitive matches librosa /
+`numpy.fft` to floating-point precision on real audio. Full tables, the
+three places where a textbook front end diverges from Whisper's, and the
+two commands that regenerate everything are in the report.
 
 ---
 
@@ -64,12 +74,13 @@ against reference implementations — **no librosa, no SciPy DSP.**
 | Mel scale & filterbank | `aurora.audio.mel` | HTK mel, triangular filters, log-mel (dB) |
 | MFCC & DCT-II | `aurora.audio.mfcc` | orthonormal DCT from scratch |
 | WAV I/O & generators | `aurora.audio.io` | PCM WAV read/write, sine/chirp |
+| Whisper front end | `aurora.audio.whisper_frontend` | 400-point DFT, Slaney mel, Whisper log/clamp — drop-in for `whisper.log_mel_spectrogram` |
 
 ### Quick start
 
 ```bash
 pip install -e ".[dev]"
-pytest                      # 82 tests, FFT validated against numpy
+pytest                      # 92 tests, FFT validated against numpy
 python scripts/demo_audio.py
 ```
 
