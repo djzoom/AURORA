@@ -22,7 +22,8 @@ adds two empirical checks on real LibriSpeech audio:
    replaced by Aurora's — same model weights, same decoder, different DSP —
    Whisper `base.en` produces **identical transcripts on 200/200** LibriSpeech
    test-clean utterances (30 minutes of speech), with a corpus WER of 3.08 %
-   either way. A second model size (`small.en`) is reported below.
+   either way; `small.en` likewise gives 200/200 identical transcripts at
+   1.76 % WER.
 
 The interesting part was not the final table but the three places where a
 "textbook" implementation silently diverges from what a production model was
@@ -89,7 +90,7 @@ Whisper's `EnglishTextNormalizer` before scoring. WER is computed by
 from scratch, pinned to known cases in `tests/speech/`).
 
 Environment: Python 3.13, NumPy 2.5, torch 2.5.1 (CPU), 2 vCPU container.
-Runtime: ≈7 min for 200 utterances with `base.en`.
+Runtime: ≈7 min for 200 utterances with `base.en`, ≈20 min with `small.en`.
 
 ## 3. Results
 
@@ -121,10 +122,10 @@ is consistent with float32 accumulation through a 400-point STFT.
 | Model | Utts | Audio | WER (Whisper front end) | WER (Aurora front end) | Identical transcripts | Max feature Δ |
 |---|---|---|---|---|---|---|
 | `base.en` | 200 | 1 800 s | **3.08 %** | **3.08 %** | **200 / 200** | 2.9e-05 |
-| `small.en` | 200 | 1 800 s | *(running — see `results/small.en/`)* | | | |
+| `small.en` | 200 | 1 800 s | **1.76 %** | **1.76 %** | **200 / 200** | 2.9e-05 |
 
-Not only is the corpus WER identical; every one of the 200 hypothesis strings
-is byte-for-byte identical after normalisation. The 77 utterances on which
+For both model sizes, not only is the corpus WER identical; every one of the
+200 hypothesis strings is byte-for-byte identical after normalisation. The 77 utterances on which
 `base.en` makes errors (e.g. *ardor → order*, *sodality → so dality*) make
 exactly the same errors with Aurora's features. The model cannot tell the
 two front ends apart.
