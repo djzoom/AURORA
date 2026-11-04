@@ -2,7 +2,7 @@
 
 **Swapping Aurora's from-scratch audio front end into OpenAI Whisper, and measuring word error rate on LibriSpeech.**
 
-Garfield Wang · November 2026 · repository: [`djzoom/aurora`](https://github.com/djzoom/aurora)
+Garfield Wang · November 2026 · repository: [`djzoom/AURORA`](https://github.com/djzoom/AURORA)
 
 ---
 
