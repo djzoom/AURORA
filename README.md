@@ -112,15 +112,15 @@ graph and the companion RPG are in this repository under the MIT licence — no
 It is meant as a public good: learn from it, fork it, teach with it, build on it.
 See [`OPENNESS.md`](docs/current/OPENNESS.md).
 
-**Language.** The lessons are currently written in Chinese, with every technical
-term glossed in English on first use; the library, tests and the research
-report are in English. An English map of all 99 lessons is at
-[`notebooks/README.en.md`](notebooks/README.en.md), and translations are welcome
-one lesson at a time.
+**Language.** The lessons here are written in Chinese, with every technical term
+glossed in English on first use; the library, tests and the research report are
+in English. The English edition of the course lives in its own repository,
+**[From a Sine Wave to Whisper](https://github.com/djzoom/from-sine-to-whisper)**
+(L01–L10 available, the rest in translation).
 
 **Start here:** beginners → [`GETTING_STARTED`](docs/current/course/GETTING_STARTED.md) ·
 questions → [`FAQ`](docs/current/course/FAQ.md) ·
-course map → [`notebooks/README.md`](notebooks/README.md) ([English](notebooks/README.en.md)) ·
+course map → [`notebooks/README.md`](notebooks/README.md) ([English edition](https://github.com/djzoom/from-sine-to-whisper)) ·
 knowledge graph → [`docs/current/obsidian/INDEX.md`](docs/current/obsidian/INDEX.md) ·
 video library → [`VIDEO_LIBRARY`](docs/current/course/VIDEO_LIBRARY.md).
 
