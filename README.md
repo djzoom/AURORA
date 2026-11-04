@@ -53,8 +53,8 @@ See [`ROADMAP.md`](ROADMAP.md) for the full six-month plan.
 
 Aurora's hand-written front end was swapped into OpenAI Whisper in place of
 `torch.stft` + librosa and evaluated on LibriSpeech test-clean. Whisper
-`base.en` produced **identical transcripts on 200 / 200 utterances**
-(corpus WER 3.08 % either way), and every primitive matches librosa /
+`base.en` and `small.en` both produced **identical transcripts on 200 / 200
+utterances** (corpus WER 3.08 % and 1.76 % either way), and every primitive matches librosa /
 `numpy.fft` to floating-point precision on real audio. Full tables, the
 three places where a textbook front end diverges from Whisper's, and the
 two commands that regenerate everything are in the report.

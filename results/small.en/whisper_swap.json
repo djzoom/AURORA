@@ -1,0 +1,10 @@
+{
+  "model": "small.en",
+  "n_utts": 200,
+  "total_seconds": 1800.4,
+  "corpus_wer_whisper_frontend": 0.017649591046061126,
+  "corpus_wer_aurora_frontend": 0.017649591046061126,
+  "transcripts_identical": 200,
+  "feature_max_abs_err": 2.8976830267257725e-05,
+  "feature_mean_max_abs_err": 1.1919193601215294e-05
+}
