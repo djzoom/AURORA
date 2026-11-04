@@ -112,9 +112,15 @@ graph and the companion RPG are in this repository under the MIT licence — no
 It is meant as a public good: learn from it, fork it, teach with it, build on it.
 See [`OPENNESS.md`](docs/current/OPENNESS.md).
 
+**Language.** The lessons are currently written in Chinese, with every technical
+term glossed in English on first use; the library, tests and the research
+report are in English. An English map of all 99 lessons is at
+[`notebooks/README.en.md`](notebooks/README.en.md), and translations are welcome
+one lesson at a time.
+
 **Start here:** beginners → [`GETTING_STARTED`](docs/current/course/GETTING_STARTED.md) ·
 questions → [`FAQ`](docs/current/course/FAQ.md) ·
-course map → [`notebooks/README.md`](notebooks/README.md) ·
+course map → [`notebooks/README.md`](notebooks/README.md) ([English](notebooks/README.en.md)) ·
 knowledge graph → [`docs/current/obsidian/INDEX.md`](docs/current/obsidian/INDEX.md) ·
 video library → [`VIDEO_LIBRARY`](docs/current/course/VIDEO_LIBRARY.md).
 

@@ -1,5 +1,7 @@
 # notebooks/ — 99 节交互式音频 AI 课程
 
+[English course map](README.en.md)
+
 
 
 > 🔰 **完全零基础**（没装过 Python / 没用过终端）请先看
