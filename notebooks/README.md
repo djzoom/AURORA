@@ -1,6 +1,6 @@
 # notebooks/ — 99 节交互式音频 AI 课程
 
-[English course map](README.en.md)
+[English edition · From a Sine Wave to Whisper](https://github.com/djzoom/from-sine-to-whisper)
 
 
 
