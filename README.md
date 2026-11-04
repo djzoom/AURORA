@@ -106,6 +106,12 @@ validated to `< 1e-10` against reference implementations. **No API wrappers, no 
 - **Teaching-first** — question → analogy → story, *then* the formula; every term glossed 中文（English）.
 - **You genuinely understand it** — because you've *written* it. So when you need to show that — to a teammate, in an interview, or just to yourself — the derivation is already in your hands.
 
+**Open by design.** All 99 lessons, every reference implementation, the knowledge
+graph and the companion RPG are in this repository under the MIT licence — no
+"first lesson free", no community/pro split, no paywall, nothing to sign up for.
+It is meant as a public good: learn from it, fork it, teach with it, build on it.
+See [`OPENNESS.md`](docs/current/OPENNESS.md).
+
 **Start here:** beginners → [`GETTING_STARTED`](docs/current/course/GETTING_STARTED.md) ·
 questions → [`FAQ`](docs/current/course/FAQ.md) ·
 course map → [`notebooks/README.md`](notebooks/README.md) ·
@@ -133,7 +139,9 @@ pip install -e ".[dev,notebooks]" && jupyter lab   # then open notebooks/0_found
 
 **Aurora 学习轨道**是一套从零开始的音频 AI 课程：**99 节课、6 个月、一条主线**——
 从你亲手生成的第一条正弦波（sine wave），一路走到能听懂 99 种语言的 Whisper，
-再到会检索、会对话的 RAG 系统。它只有一条铁律，写在每一页上：**拒绝黑盒（no black boxes）。**
+再到会检索、会对话的 RAG 系统。**全部 99 课永久免费、完整开源（MIT）**——不是"第一课免费"，
+没有社区版／完整版之分，没有付费墙，不用注册。它是一件公共物品：可学、可改、可教、可商用
+（见 [`OPENNESS.md`](docs/current/OPENNESS.md)）。它只有一条铁律，写在每一页上：**拒绝黑盒（no black boxes）。**
 FFT、STFT、梅尔滤波器（mel filterbank）、MFCC、CTC、多头注意力（multi-head attention）、
 KV-Cache、RAG——**全部用 NumPy 手写**，再与 `numpy.fft`／参考公式逐点比对，误差压到 `< 1e-10`。
 
