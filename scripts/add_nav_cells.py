@@ -53,6 +53,8 @@ def _get_nb_map() -> dict[str, Path]:
     """Return {L01: Path(...), ...} for all L*.ipynb notebooks."""
     nb_map: dict[str, Path] = {}
     for nb in NB_DIR.rglob("L*.ipynb"):
+        if nb.stem.endswith(".en"):  # English translations are not originals
+            continue
         raw = nb.stem.split("_")[0].upper()
         if re.fullmatch(r"L\d{2}", raw):
             nb_map[raw] = nb

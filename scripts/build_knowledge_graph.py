@@ -12,7 +12,7 @@ import json, re, glob, os
 from collections import defaultdict
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-NB = sorted(glob.glob(os.path.join(REPO, "notebooks/*/L*.ipynb")), key=lambda p: int(re.search(r"L(\d\d)", os.path.basename(p)).group(1)))
+NB = sorted((p for p in glob.glob(os.path.join(REPO, "notebooks/*/L*.ipynb")) if not p.endswith(".en.ipynb")), key=lambda p: int(re.search(r"L(\d\d)", os.path.basename(p)).group(1)))
 OBS = os.path.join(REPO, "docs/current/obsidian")
 
 # --- term dictionary {zh: (en, abbr)} from terms.md (single source of truth) ---
