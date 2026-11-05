@@ -49,3 +49,9 @@ python scripts/validate_pipeline.py # notebook acceptance gate (JSON + syntax + 
 
 See `ROADMAP.md`. Each monthly milestone ships a working artifact, a blog post,
 and (often) a reproduced paper. Update the checkboxes there as cores land.
+
+## Attribution
+
+Never add Co-Authored-By, "Generated with Claude", session links or any
+attribution line to commit messages, PR descriptions or files. Commits are
+authored by the repository owner only.
