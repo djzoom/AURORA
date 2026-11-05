@@ -362,7 +362,13 @@ def probe(args) -> None:
 
 # -------------------------------------------------------------------- erase
 class Eraser:
-    """LEACE: x -> x - W^+ P W (x - mu); W = Sigma^{-1/2}, P onto col(W Sigma_xz)."""
+    """LEACE: x -> x - W^+ P W (x - mu); W = Sigma^{-1/2}, P onto col(W Sigma_xz).
+
+    Moments are accumulated in float64 over row chunks, so memory stays at
+    O(chunk x d) whatever the number of frames.
+    """
+
+    CHUNK = 16384
 
     def __init__(
         self,
@@ -371,28 +377,40 @@ class Eraser:
         rank: int | None = None,
         seed: int = 0,
     ):
-        X = X.astype(np.float64)
-        self.mu = X.mean(0)
-        Xc = X - self.mu
-        S = Xc.T @ Xc / len(X)
+        n, d = X.shape
+        self.mu = np.zeros(d)
+        for a in range(0, n, self.CHUNK):
+            self.mu += X[a : a + self.CHUNK].astype(np.float64).sum(0)
+        self.mu /= n
+        S = np.zeros((d, d))
+        zmu = None if Z is None else Z.mean(0)
+        C = None if Z is None else np.zeros((d, Z.shape[1]))
+        for a in range(0, n, self.CHUNK):
+            xc = X[a : a + self.CHUNK].astype(np.float64) - self.mu
+            S += xc.T @ xc
+            if Z is not None:
+                C += xc.T @ (Z[a : a + self.CHUNK] - zmu)
+        S /= n
         ev, V = np.linalg.eigh(S)
         keep = ev > ev.max() * 1e-8
         ev, V = ev[keep], V[:, keep]
         self.W = (V / np.sqrt(ev)) @ V.T
         self.Wp = (V * np.sqrt(ev)) @ V.T
         if Z is not None:
-            Zc = Z - Z.mean(0)
-            U, s, _ = np.linalg.svd(self.W @ (Xc.T @ Zc / len(X)), full_matrices=False)
+            U, s, _ = np.linalg.svd(self.W @ (C / n), full_matrices=False)
             U = U[:, s > s.max() * 1e-6]
         else:  # control: the same number of random directions in whitened space
             rng = np.random.default_rng(seed)
-            U, _ = np.linalg.qr(rng.standard_normal((X.shape[1], rank)))
+            U, _ = np.linalg.qr(rng.standard_normal((d, rank)))
         self.rank = U.shape[1]
         self.M = self.Wp @ U @ U.T @ self.W  # x -> x - (x - mu) @ M.T
 
     def __call__(self, X):
-        Xd = X.astype(np.float64)
-        return (Xd - (Xd - self.mu) @ self.M.T).astype(np.float32)
+        out = np.empty(X.shape, np.float32)
+        for a in range(0, len(X), self.CHUNK):
+            xd = X[a : a + self.CHUNK].astype(np.float64)
+            out[a : a + self.CHUNK] = xd - (xd - self.mu) @ self.M.T
+        return out
 
 
 def erase(args) -> None:
@@ -417,6 +435,7 @@ def erase(args) -> None:
         "wer": {},
     }
     for k, e in erasers.items():
+        Xe = None
         Xe = X if e is None else e(X)
         res["probes"][k] = run_probes(
             lambda Xe=Xe: Xe, y, speech, test_spk, spk_test, folds
@@ -424,18 +443,28 @@ def erase(args) -> None:
         print(f"  {k:>18}  rank {res['ranks'][k]:>3}  {res['probes'][k]}", flush=True)
         (out / "erase.json").write_text(json.dumps(res, indent=1))
 
-    # transcription with the eraser applied to the encoder output
-    model = whisper.load_model(args.model, device="cpu").eval()
-    norm = EnglishTextNormalizer()
-    opts = whisper.DecodingOptions(language="en", without_timestamps=True, fp16=False)
-    n_per = min(
-        sum(1 for u in meta["utts"] if u["spk"] == s)
-        for s in {u["spk"] for u in meta["utts"]}
-    )
+    wer, examples, refs = transcribe(args, meta, erasers)
+    res["wer"], res["examples"] = wer, examples
+    res["n_wer_utts"] = len(refs)
+    res["refs_examples"] = refs[:3]
+    (out / "erase.json").write_text(json.dumps(res, indent=1))
+
+
+def wer_test_utts(meta) -> list[int]:
     by_spk = {}
     for ui, u in enumerate(meta["utts"]):
         by_spk.setdefault(u["spk"], []).append(ui)
-    test_utts = [ui for ids in by_spk.values() for ui in ids[n_per - 3 : n_per]]
+    n_per = min(len(v) for v in by_spk.values())
+    return [ui for ids in by_spk.values() for ui in ids[n_per - 3 : n_per]]
+
+
+def transcribe(args, meta, erasers):
+    """Greedy-decode the WER test utterances with each eraser applied to the
+    encoder output (frames that belong to the utterance; padding untouched)."""
+    model = whisper.load_model(args.model, device="cpu").eval()
+    norm = EnglishTextNormalizer()
+    opts = whisper.DecodingOptions(language="en", without_timestamps=True, fp16=False)
+    test_utts = wer_test_utts(meta)
     state = {"n": 0, "e": None}
 
     def hook(_m, _i, o):
@@ -447,6 +476,7 @@ def erase(args) -> None:
 
     model.encoder.ln_post.register_forward_hook(hook)
     refs = [norm(meta["utts"][ui]["text"]) for ui in test_utts]
+    wer, examples, all_hyps = {}, {}, {}
     for k, e in erasers.items():
         hyps = []
         t0 = time.time()
@@ -460,15 +490,37 @@ def erase(args) -> None:
             )
             with torch.no_grad():
                 hyps.append(norm(whisper.decode(model, mel, opts).text))
-        res["wer"][k] = float(corpus_wer(refs, hyps))
-        res.setdefault("examples", {})[k] = hyps[:3]
+        wer[k] = float(corpus_wer(refs, hyps))
+        examples[k] = hyps[:3]
+        all_hyps[k] = hyps
         print(
-            f"  WER {k:>18}: {res['wer'][k] * 100:.2f} %  ({time.time() - t0:.0f}s)",
+            f"  WER {k:>18}: {wer[k] * 100:.2f} %  ({time.time() - t0:.0f}s)",
             flush=True,
         )
-        (out / "erase.json").write_text(json.dumps(res, indent=1))
-    res["n_wer_utts"] = len(test_utts)
-    res["refs_examples"] = refs[:3]
+    hyp_file = Path(args.out) / "hyps.json"
+    old = json.loads(hyp_file.read_text()) if hyp_file.exists() else {}
+    old.update({"refs": refs, **all_hyps})
+    hyp_file.write_text(json.dumps(old, indent=1))
+    return wer, examples, refs
+
+
+def wer_seeds(args) -> None:
+    """Re-run the random-direction control with more seeds."""
+    out = Path(args.out)
+    y, speech, _t, spk_test, _f = splits(out)
+    meta = json.loads((out / "utts.json").read_text())
+    res = json.loads((out / "erase.json").read_text())
+    X = np.load(out / "X_out.npy").astype(np.float32)
+    fit = speech & ~spk_test
+    rank = res["ranks"]["speaker_leace"]
+    erasers = {
+        f"random_seed{s}": Eraser(X[fit], None, rank=rank, seed=s) for s in (1, 2)
+    }
+    del X
+    wer, _ex, _r = transcribe(args, meta, erasers)
+    res["wer_random_seeds"] = {"0": res["wer"]["random_same_rank"]} | {
+        k.removeprefix("random_seed"): v for k, v in wer.items()
+    }
     (out / "erase.json").write_text(json.dumps(res, indent=1))
 
 
@@ -508,7 +560,9 @@ def erase_cv(args) -> None:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    ap.add_argument("stage", choices=["extract", "probe", "erase", "erase_cv", "all"])
+    ap.add_argument(
+        "stage", choices=["extract", "probe", "erase", "erase_cv", "wer_seeds", "all"]
+    )
     ap.add_argument("--model", default="base.en")
     ap.add_argument("--librispeech", required=True)
     ap.add_argument("--alignments", required=True)
@@ -518,7 +572,7 @@ def main() -> None:
         "--no-random", action="store_true", help="skip the random-init control"
     )
     args = ap.parse_args()
-    for stage in ("extract", "probe", "erase", "erase_cv"):
+    for stage in ("extract", "probe", "erase", "erase_cv", "wer_seeds"):
         if args.stage in (stage, "all"):
             print(f"== {stage}", flush=True)
             globals()[stage](args)
