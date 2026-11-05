@@ -103,6 +103,8 @@ class LessonStatus:
 def _iter_lessons() -> list[LessonStatus]:
     statuses = []
     for nb_path in sorted(NB_DIR.rglob("L*.ipynb")):
+        if nb_path.stem.endswith(".en"):  # English translations are not originals
+            continue
         stem = nb_path.stem
         lnum_raw = stem.split("_")[0]
         if not (lnum_raw.startswith("L") and lnum_raw[1:].isdigit()):

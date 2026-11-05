@@ -2,12 +2,12 @@
 
 > ⚠️ 请先独立完成练习，再查看参考实现。
 
-本课以 mock 函数演示 mic → ASR → RAG → LLM 的集成模式，无需 GPU 或外部模型即可跑通。练习点集中在两处：Section 5 的参数实验（`n_trials`）与 Section 6 的思考题。
+本课以 mock 函数演示 mic → ASR → RAG → LLM 的集成模式，无需 GPU 或外部模型即可跑通。练习点集中在两处：Section 4 之后的「参数实验」（`n_trials`）与 Section 6 的思考题。
 
-## 参考实现 1 — Section 5 参数实验：`n_trials` 改为 5
+## 参考实现 1 — 「参数实验」（Section 4 之后）：`n_trials = 5`
 
 ```python
-# ✏️ TODO 原为 n_trials = 3，改成 5 以观察各阶段耗时的波动
+# notebook 默认 n_trials = 5，可自行调大/调小，观察各阶段耗时的波动
 n_trials = 5
 all_timings = []
 

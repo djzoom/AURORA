@@ -39,7 +39,7 @@ Aurora
 ├── aurora.audio      FFT / STFT / Mel / MFCC / WAV — fully implemented ✅
 ├── aurora.music      chroma / onset / beat / similarity / embed — implemented ✅
 ├── aurora.llm        KV-Cache / sampling / TF-IDF / RAG — implemented ✅
-├── aurora.speech     edit distance / WER — implemented; ASR training planned ▷
+├── aurora.speech     edit distance / WER — implemented ✅; ASR training planned ▷
 ├── aurora.rag        retrieval orchestration over current TF-IDF primitives ▢
 ├── aurora.realtime   mic → ASR → LLM → TTS pipeline — planned ▢
 ├── aurora.tts        speech synthesis / voice cloning — planned ▢
@@ -48,6 +48,16 @@ Aurora
 ```
 
 See [`ROADMAP.md`](ROADMAP.md) for the full six-month plan.
+
+## Does it actually work? — see [`REPORT.md`](REPORT.md)
+
+Aurora's hand-written front end was swapped into OpenAI Whisper in place of
+`torch.stft` + librosa and evaluated on LibriSpeech test-clean. Whisper
+`base.en` and `small.en` both produced **identical transcripts on 200 / 200
+utterances** (corpus WER 3.08 % and 1.76 % either way), and every primitive matches librosa /
+`numpy.fft` to floating-point precision on real audio. Full tables, the
+three places where a textbook front end diverges from Whisper's, and the
+two commands that regenerate everything are in the report.
 
 ---
 
@@ -64,12 +74,13 @@ against reference implementations — **no librosa, no SciPy DSP.**
 | Mel scale & filterbank | `aurora.audio.mel` | HTK mel, triangular filters, log-mel (dB) |
 | MFCC & DCT-II | `aurora.audio.mfcc` | orthonormal DCT from scratch |
 | WAV I/O & generators | `aurora.audio.io` | PCM WAV read/write, sine/chirp |
+| Whisper front end | `aurora.audio.whisper_frontend` | 400-point DFT, Slaney mel, Whisper log/clamp — drop-in for `whisper.log_mel_spectrogram` |
 
 ### Quick start
 
 ```bash
 pip install -e ".[dev]"
-pytest                      # 82 tests, FFT validated against numpy
+pytest                      # 92 tests, FFT validated against numpy
 python scripts/demo_audio.py
 ```
 
@@ -95,9 +106,21 @@ validated to `< 1e-10` against reference implementations. **No API wrappers, no 
 - **Teaching-first** — question → analogy → story, *then* the formula; every term glossed 中文（English）.
 - **You genuinely understand it** — because you've *written* it. So when you need to show that — to a teammate, in an interview, or just to yourself — the derivation is already in your hands.
 
+**Open by design.** All 99 lessons, every reference implementation, the knowledge
+graph and the companion RPG are in this repository under the MIT licence — no
+"first lesson free", no community/pro split, no paywall, nothing to sign up for.
+It is meant as a public good: learn from it, fork it, teach with it, build on it.
+See [`OPENNESS.md`](docs/current/OPENNESS.md).
+
+**Language.** The lessons here are written in Chinese, with every technical term
+glossed in English on first use; the library, tests and the research report are
+in English. The English edition of the course lives in its own repository,
+**[From a Sine Wave to Whisper](https://github.com/djzoom/from-sine-to-whisper)**
+— all 99 lessons, adapted for English-speaking readers.
+
 **Start here:** beginners → [`GETTING_STARTED`](docs/current/course/GETTING_STARTED.md) ·
 questions → [`FAQ`](docs/current/course/FAQ.md) ·
-course map → [`notebooks/README.md`](notebooks/README.md) ·
+course map → [`notebooks/README.md`](notebooks/README.md) ([English edition](https://github.com/djzoom/from-sine-to-whisper)) ·
 knowledge graph → [`docs/current/obsidian/INDEX.md`](docs/current/obsidian/INDEX.md) ·
 video library → [`VIDEO_LIBRARY`](docs/current/course/VIDEO_LIBRARY.md).
 
@@ -122,7 +145,9 @@ pip install -e ".[dev,notebooks]" && jupyter lab   # then open notebooks/0_found
 
 **Aurora 学习轨道**是一套从零开始的音频 AI 课程：**99 节课、6 个月、一条主线**——
 从你亲手生成的第一条正弦波（sine wave），一路走到能听懂 99 种语言的 Whisper，
-再到会检索、会对话的 RAG 系统。它只有一条铁律，写在每一页上：**拒绝黑盒（no black boxes）。**
+再到会检索、会对话的 RAG 系统。**全部 99 课永久免费、完整开源（MIT）**——不是"第一课免费"，
+没有社区版／完整版之分，没有付费墙，不用注册。它是一件公共物品：可学、可改、可教、可商用
+（见 [`OPENNESS.md`](docs/current/OPENNESS.md)）。它只有一条铁律，写在每一页上：**拒绝黑盒（no black boxes）。**
 FFT、STFT、梅尔滤波器（mel filterbank）、MFCC、CTC、多头注意力（multi-head attention）、
 KV-Cache、RAG——**全部用 NumPy 手写**，再与 `numpy.fft`／参考公式逐点比对，误差压到 `< 1e-10`。
 

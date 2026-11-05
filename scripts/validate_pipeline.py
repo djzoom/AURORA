@@ -410,7 +410,9 @@ def check_structure(notebooks: list[Path]) -> list[str]:
                 n = int(lnum[1:])  # numeric part of filename, e.g. 1 for L01
                 old_ok = lnum in upper_line
                 new_ok = f"第{n}课" in first_line or f"第{n:02d}课" in first_line
-                if not old_ok and not new_ok:
+                # English translations (L##_*.en.ipynb): "# Lesson 1 · ..."
+                en_ok = re.search(rf"\bLESSON 0?{n}\b", upper_line) is not None
+                if not old_ok and not new_ok and not en_ok:
                     failures.append(
                         f"{nb_path.name}: title L-number mismatch "
                         f"(filename={lnum}, title='{first_line[:60]}')"
@@ -426,7 +428,8 @@ def check_structure(notebooks: list[Path]) -> list[str]:
 
         # 5c: derivation lessons must have a 闭卷推导 cell
         if lnum in _DERIVATION_LESSONS:
-            if "闭卷推导" not in all_md and "推导检查" not in all_md:
+            markers = ("闭卷推导", "推导检查", "Closed-book derivation")
+            if not any(m in all_md for m in markers):
                 failures.append(
                     f"{nb_path.name}: derivation lesson missing "
                     f"'闭卷推导' or '推导检查' markdown cell"

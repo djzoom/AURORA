@@ -1,0 +1,91 @@
+[
+  {
+    "primitive": "mel_filterbank (HTK, norm=None) vs librosa",
+    "n": 1,
+    "max_abs": 2.9730883754908177e-08,
+    "max_rel": 2.9763012919066115e-08,
+    "shape": [
+      80,
+      513
+    ]
+  },
+  {
+    "primitive": "mel_filterbank (Slaney) vs librosa",
+    "n": 1,
+    "max_abs": 1.3318024842667864e-09,
+    "max_rel": 5.145932482854655e-08,
+    "shape": [
+      80,
+      201
+    ]
+  },
+  {
+    "primitive": "whisper_mel_filterbank vs whisper mel_filters.npz",
+    "n": 1,
+    "max_abs": 1.3318024842667864e-09,
+    "max_rel": 5.145932482854655e-08,
+    "shape": [
+      80,
+      201
+    ]
+  },
+  {
+    "primitive": "rfft (1024) vs numpy.fft.rfft",
+    "n": 20,
+    "max_abs": 3.3306690738754696e-16,
+    "max_rel": 3.474346819462775e-16,
+    "shape": [
+      513
+    ]
+  },
+  {
+    "primitive": "|STFT| (1024/256) vs librosa.stft",
+    "n": 20,
+    "max_abs": 1.5883128146043646e-14,
+    "max_rel": 3.9891318095015794e-16,
+    "shape": [
+      513,
+      653
+    ]
+  },
+  {
+    "primitive": "mel_spectrogram (HTK) vs librosa.melspectrogram",
+    "n": 20,
+    "max_abs": 6.858502774775843e-05,
+    "max_rel": 2.8356497145692726e-08,
+    "shape": [
+      80,
+      653
+    ]
+  },
+  {
+    "primitive": "mfcc (13) vs librosa.mfcc",
+    "n": 20,
+    "max_abs": 2.814296486963741e-07,
+    "max_rel": 7.785674759736315e-10,
+    "shape": [
+      13,
+      653
+    ]
+  },
+  {
+    "primitive": "dct_ii (ortho) vs scipy via librosa",
+    "n": 20,
+    "max_abs": 2.814296486963741e-07,
+    "max_rel": 7.785674759736315e-10,
+    "shape": [
+      653,
+      13
+    ]
+  },
+  {
+    "primitive": "log_mel_whisper vs whisper.log_mel_spectrogram",
+    "n": 20,
+    "max_abs": 2.6960023049804605e-05,
+    "max_rel": 2.231066395071143e-05,
+    "shape": [
+      80,
+      3000
+    ]
+  }
+]

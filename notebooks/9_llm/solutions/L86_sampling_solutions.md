@@ -60,5 +60,3 @@ def top_p_sample(logits, p=0.9, temperature=1.0):
 
 3. **p = 0.9 的 nucleus**：cumsum 第一个 ≥ 0.9 的位置是排名 4（cumsum=0.972），
    所以 nucleus = 排名 1~4 的 token = **{0, 1, 2, 3}**（排除 token 4）。
-</content>
-</invoke>
