@@ -829,6 +829,49 @@ button:disabled {
   line-height: 1.5;
 }
 
+/* 可选支线卡（星之守望者） */
+.loot-card.side-quest {
+  margin-top: 12px;
+  align-items: flex-start;
+  border-style: dashed;
+  border-color: rgba(255, 200, 94, 0.45);
+}
+
+.loot-card.side-quest.claimed {
+  border-style: solid;
+  border-color: rgba(143, 243, 165, 0.55);
+}
+
+.loot-card.side-quest.claimed .loot-icon {
+  color: var(--green);
+  border-color: var(--green);
+}
+
+.side-quest-tag {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--amber);
+  border: 1px solid var(--amber);
+  padding: 1px 5px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.side-quest-done {
+  color: var(--green);
+}
+
+.side-quest-actions {
+  margin-top: 8px;
+}
+
+.side-quest-actions .pixel-btn {
+  font-size: 0.78rem;
+  padding: 7px 11px;
+}
+
 /* ---- 页脚 ------------------------------------------------------------------ */
 
 .footer {
@@ -840,6 +883,24 @@ button:disabled {
 
 .footer p {
   margin: 0;
+}
+
+.footer-star {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+}
+
+.footer-star .pixel-btn {
+  font-size: 0.78rem;
+  padding: 7px 11px;
+}
+
+.topbar-star .pixel-btn {
+  font-size: 0.8rem;
 }
 
 /* ---- 响应式 ------------------------------------------------------------------ */
@@ -918,6 +979,11 @@ button:disabled {
   line-height: 1.25;
 }
 
+.more-star {
+  display: flex;
+  justify-content: center;
+}
+
 .more-note {
   margin: 0;
   font-family: var(--mono);
@@ -975,6 +1041,10 @@ button:disabled {
     flex: 1;
     padding: 7px 4px;
     font-size: 0.72rem;
+  }
+
+  .topbar-star {
+    display: none; /* 手机顶栏放不下第五个按钮；Star 按钮在「关于」页与支线卡里 */
   }
 
   /* 战斗屏占满剩余高度；各块收紧到一屏放得下，超长内容在块内滚动兜底 */

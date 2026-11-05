@@ -1,0 +1,149 @@
+<!doctype html>
+<!-- 社交预览图模板（1200×630）：由 scripts/build_growth_assets.py 用 Playwright 渲染成 og/quest.png。
+     不部署、不引外部资源；像素风与 index.html 同一套调色板。 -->
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      :root {
+        --ink: #04070e;
+        --panel: #0b1428;
+        --panel-deep: #070d1d;
+        --line: rgba(140, 197, 255, 0.35);
+        --text: #edf7ff;
+        --muted: #9fb4cb;
+        --cyan: #66e8ff;
+        --cyan-strong: #b8fbff;
+        --amber: #ffc85e;
+        --magenta: #ff6f91;
+        --green: #8ff3a5;
+        --mono: "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        --sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC",
+          "Noto Sans CJK SC", system-ui, sans-serif;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+      body {
+        position: relative;
+        color: var(--text);
+        font-family: var(--sans);
+        background:
+          radial-gradient(circle at 20% 15%, rgba(102, 232, 255, 0.16), transparent 32%),
+          radial-gradient(circle at 85% 85%, rgba(255, 111, 145, 0.14), transparent 30%),
+          linear-gradient(180deg, #050814 0%, #081223 55%, #04070e 100%);
+      }
+      body::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: repeating-linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.035),
+          rgba(255, 255, 255, 0.035) 2px,
+          transparent 2px,
+          transparent 6px
+        );
+      }
+      .frame {
+        position: absolute;
+        inset: 28px;
+        border: 4px solid var(--line);
+        box-shadow: 0 0 0 4px var(--ink), 10px 10px 0 rgba(0, 0, 0, 0.5);
+        background: rgba(11, 20, 40, 0.75);
+        display: grid;
+        grid-template-columns: 1fr 360px;
+        padding: 56px 64px;
+        gap: 32px;
+      }
+      .copy { display: flex; flex-direction: column; justify-content: center; gap: 18px; }
+      .eyebrow {
+        font-family: var(--mono);
+        font-size: 24px;
+        letter-spacing: 0.3em;
+        color: var(--cyan);
+        text-shadow: 4px 4px 0 var(--ink), 0 0 18px rgba(102, 232, 255, 0.55);
+      }
+      h1 {
+        margin: 0;
+        font-size: 60px;
+        line-height: 1.2;
+        font-weight: 700;
+        text-shadow: 5px 5px 0 var(--ink);
+      }
+      h1 em { font-style: normal; color: var(--amber); }
+      .hook { margin: 0; font-size: 27px; line-height: 1.55; color: var(--muted); text-shadow: 3px 3px 0 var(--ink); }
+      .pills { display: flex; gap: 12px; flex-wrap: wrap; }
+      .pill {
+        font-family: var(--mono);
+        font-size: 20px;
+        padding: 8px 14px;
+        border: 3px solid var(--line);
+        background: var(--panel-deep);
+        box-shadow: 0 4px 0 var(--ink);
+        color: var(--text);
+      }
+      .pill.amber { color: var(--amber); border-color: var(--amber); }
+      .pill.green { color: var(--green); border-color: var(--green); }
+      .url {
+        margin-top: 6px;
+        font-family: var(--mono);
+        font-size: 22px;
+        color: var(--cyan-strong);
+        text-shadow: 3px 3px 0 var(--ink);
+      }
+      .boss {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+      }
+      canvas {
+        width: 272px;
+        height: 272px;
+        image-rendering: pixelated;
+        filter: drop-shadow(8px 8px 0 rgba(0, 0, 0, 0.6));
+      }
+      .boss-name {
+        font-family: var(--mono);
+        font-size: 22px;
+        letter-spacing: 0.2em;
+        color: var(--magenta);
+        text-shadow: 3px 3px 0 var(--ink);
+      }
+      .hp { display: flex; gap: 6px; }
+      .hp span { width: 22px; height: 16px; background: var(--magenta); box-shadow: 0 3px 0 var(--ink); }
+      .hp span.empty { background: var(--panel-deep); border: 2px solid var(--line); }
+    </style>
+  </head>
+  <body>
+    <div class="frame">
+      <div class="copy">
+        <div class="eyebrow">AURORA QUEST · 8-BIT</div>
+        <h1>把 99 课音频 AI 课程<br />打成一场 <em>8-bit 冒险</em></h1>
+        <p class="hook">答题打败 7 个黑盒 Boss，<br />顺手复习 FFT、梅尔、注意力、CTC。</p>
+        <div class="pills">
+          <span class="pill amber">99 课</span>
+          <span class="pill green">免费 · MIT</span>
+          <span class="pill">NumPy 手写</span>
+          <span class="pill">不用注册</span>
+        </div>
+        <div class="url">github.com/djzoom/AURORA</div>
+      </div>
+      <div class="boss">
+        <canvas id="boss" width="16" height="16"></canvas>
+        <div class="boss-name">黑盒守门人</div>
+        <div class="hp">
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          <span class="empty"></span><span class="empty"></span><span class="empty"></span>
+        </div>
+      </div>
+    </div>
+    <script type="module">
+      import { drawSprite } from "../../src/sprites.js";
+      drawSprite(document.getElementById("boss"), "blackbox");
+      document.body.dataset.ready = "1";
+    </script>
+  </body>
+</html>
