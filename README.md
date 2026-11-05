@@ -116,7 +116,7 @@ See [`OPENNESS.md`](docs/current/OPENNESS.md).
 glossed in English on first use; the library, tests and the research report are
 in English. The English edition of the course lives in its own repository,
 **[From a Sine Wave to Whisper](https://github.com/djzoom/from-sine-to-whisper)**
-(L01–L10 available, the rest in translation).
+— all 99 lessons, adapted for English-speaking readers.
 
 **Start here:** beginners → [`GETTING_STARTED`](docs/current/course/GETTING_STARTED.md) ·
 questions → [`FAQ`](docs/current/course/FAQ.md) ·
