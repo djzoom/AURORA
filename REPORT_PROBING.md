@@ -24,7 +24,7 @@ voiceprint leaks identity to anything downstream.
 - **Representations.** For every frame: the log-mel input (two 10 ms frames
   stacked), the conv stem, the output of each Transformer block, and the final
   `ln_post` output that the decoder cross-attends to.
-- **Probes.** Linear softmax regression (Adam, 12 epochs, weight decay 1e-4)
+- **Probes.** Linear softmax regression (Adam, 12 epochs or 6 for gender, weight decay 1e-4)
   on standardised features, one per layer and task:
   - *phone*: 39 ARPAbet classes, **speaker-disjoint** split (8 held-out speakers, 4 F + 4 M);
   - *speaker*: 40-way, **utterance-disjoint** split (each speaker's last 3 of 10 utterances held out);
@@ -92,7 +92,9 @@ the eraser refitted inside every fold, goes from 75.1% → 52.7% (base.en) and
 | 39 random directions, 3 seeds | 14.56 / 10.74 / 5.95% | 3.21 / 3.39 / 3.53% |
 
 Removing gender costs nothing. Removing the full speaker subspace costs
-{BOOT_SENTENCE}
++1.66 WER points on base.en (paired bootstrap over utterances, 10,000
+resamples, 2,774 words: 95% CI +0.92 to +2.50) and +0.68 points on small.en
+(95% CI −0.04 to +1.80, borderline). The larger model pays less.
 
 The random control does **not** support a stronger claim. An early single-seed
 run suggested that the speaker subspace is far less important to the decoder
@@ -119,7 +121,8 @@ reproducible statement.
 Whisper encoder states are a de facto audio embedding. These results say the
 final layer is a weaker voiceprint than the early layers, but not an anonymised
 one; and that a rank-39 linear edit, fitted on about a minute of audio per
-speaker, removes linearly available identity for 0.7–1.7 points of WER. That is
+speaker, removes linearly available identity for 0.7–1.7 points of WER (clearly
+non-zero on base.en, borderline on small.en). That is
 a concrete, cheap safeguard and a concrete measurement of its cost.
 
 ## Reproduce
@@ -133,10 +136,12 @@ for m in base.en small.en; do
     --out results/probing/$m        # add --no-random for small.en to save memory
 done
 python scripts/plot_probing.py results/probing/base.en results/probing/small.en
+python scripts/bootstrap_wer.py results/probing/base.en results/probing/small.en
 ```
 
 Raw numbers: `results/probing/<model>/{probe,erase,erase_cv}.json`;
-hypotheses for the paired WER comparison: `results/probing/<model>/hyps.json`.
+hypotheses for the paired WER comparison: `results/probing/<model>/hyps.json`;
+bootstrap: `results/probing/bootstrap.json`.
 
 ## References
 
