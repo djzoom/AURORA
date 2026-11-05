@@ -1,0 +1,97 @@
+{
+ "ranks": {
+  "none": 0,
+  "speaker_leace": 39,
+  "gender_leace": 1,
+  "random_same_rank": 39
+ },
+ "probes": {
+  "none": {
+   "phone": 0.8042676795888728,
+   "speaker": 0.3929397220759598,
+   "gender": 0.6989411838377595,
+   "gender_folds": [
+    0.6278255688377462,
+    0.70731435367576,
+    0.681387296361469,
+    0.7057576147024804,
+    0.7724210856113417
+   ]
+  },
+  "speaker_leace": {
+   "phone": 0.8011022976948572,
+   "speaker": 0.047892676449714976,
+   "gender": 0.5183221579937546,
+   "gender_folds": [
+    0.5088072096227609,
+    0.5208503679476697,
+    0.5208889141170461,
+    0.507775350212055,
+    0.533288948069241
+   ]
+  },
+  "gender_leace": {
+   "phone": 0.804379398949838,
+   "speaker": 0.3588287813923674,
+   "gender": 0.32521028726489176,
+   "gender_folds": [
+    0.30551521245298474,
+    0.33951534973611835,
+    0.2841573480161208,
+    0.31114252666752346,
+    0.38572099945171145
+   ]
+  },
+  "random_same_rank": {
+   "phone": 0.7993520277064016,
+   "speaker": 0.37995925001716996,
+   "gender": 0.6936084847590883,
+   "gender_folds": [
+    0.6296503184001787,
+    0.7078346837136699,
+    0.6739512970426292,
+    0.6883755301375145,
+    0.768230594501449
+   ]
+  }
+ },
+ "wer": {
+  "none": 0.03316510454217736,
+  "speaker_leace": 0.04001441961067051,
+  "gender_leace": 0.03316510454217736,
+  "random_same_rank": 0.03208363374188897
+ },
+ "examples": {
+  "none": [
+   "sister nell do you hear these marvels",
+   "take your place and let us see what the crystal can show to you",
+   "like as not young master though i am an old man"
+  ],
+  "speaker_leace": [
+   "sister nell do you hear these marvels",
+   "take your place and let us see what the crystal can show to you",
+   "like as not young master though i am an old man"
+  ],
+  "gender_leace": [
+   "sister nell do you hear these marvels",
+   "take your place and let us see what the crystal can show to you",
+   "like as not young master though i am an old man"
+  ],
+  "random_same_rank": [
+   "sister nell do you hear these marvels",
+   "take your place and let us see what the crystal can show to you",
+   "like as not young master though i am an old man"
+  ]
+ },
+ "n_wer_utts": 120,
+ "refs_examples": [
+  "sister nell do you hear these marvels",
+  "take your place and let us see what the crystal can show to you",
+  "like as not young master though i am an old man"
+ ],
+ "wer_random_seeds": {
+  "0": 0.03208363374188897,
+  "1": 0.033886085075702954,
+  "2": 0.035328046142754144
+ }
+}
