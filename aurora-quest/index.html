@@ -12,7 +12,35 @@
     />
     <meta name="theme-color" content="#08111f" />
     <title>Aurora Quest | AURORA 辅助课程 RPG</title>
+    <link rel="canonical" href="https://djzoom.github.io/AURORA/" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' fill='%23060b18'/%3E%3Cpath fill='%23edf7ff' d='M3 2h10v1H3zM2 3h1v10H2zM13 3h1v10h-1zM3 13h10v1H3z'/%3E%3Cpath fill='%23ffc85e' d='M5 5h2v2H5zM9 5h2v2H9z'/%3E%3Cpath fill='%23ff6f91' d='M5 9h1v1H5zM10 9h1v1h-1zM6 10h4v1H6z'/%3E%3C/svg%3E"
+    />
+    <!-- 社交预览卡（微博 / 微信外链 / X 等爬虫需要绝对地址） -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AURORA" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:url" content="https://djzoom.github.io/AURORA/" />
+    <meta property="og:title" content="Aurora Quest · 把 99 课音频 AI 课程打成一场 8-bit 冒险" />
+    <meta
+      property="og:description"
+      content="答题打败 7 个黑盒 Boss，顺手复习 FFT、梅尔、注意力、CTC。课程 99 课全部免费、MIT 开源、NumPy 手写，不用注册。"
+    />
+    <meta property="og:image" content="https://djzoom.github.io/AURORA/og/quest.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Aurora Quest 像素风预览图：黑盒守门人 Boss 与课程标题" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Aurora Quest · 把 99 课音频 AI 课程打成一场 8-bit 冒险" />
+    <meta
+      name="twitter:description"
+      content="答题打败 7 个黑盒 Boss，顺手复习 FFT、梅尔、注意力、CTC。课程 99 课全部免费、MIT 开源、NumPy 手写，不用注册。"
+    />
+    <meta name="twitter:image" content="https://djzoom.github.io/AURORA/og/quest.png" />
     <link rel="stylesheet" href="./styles.css?v=20260713-choice-reset" />
+    <link rel="stylesheet" href="./growth.css?v=20261105-growth" />
   </head>
   <body data-tab="battle">
     <div class="page-shell">
@@ -34,6 +62,7 @@
           <button class="pixel-btn" id="resume-button" type="button">继续存档</button>
           <button class="pixel-btn ghost" id="reset-button" type="button">清空进度</button>
           <button class="pixel-btn ghost" id="mute-button" type="button" aria-pressed="true">音效：开</button>
+          <span class="topbar-star" data-star-slot="pixel-btn"></span>
         </div>
       </header>
 
@@ -84,6 +113,29 @@
         <div class="pixel-panel loot-panel">
           <h2 class="panel-title">战利品</h2>
           <div id="inventory-list" class="loot-grid"></div>
+          <!-- 可选支线「星之守望者」：点 Star 不是游戏的任何前置条件，只是顺手的事 -->
+          <article class="loot-card side-quest" id="stargazer-card" aria-labelledby="stargazer-title">
+            <div class="loot-icon" aria-hidden="true">★</div>
+            <div class="loot-body">
+              <h3 id="stargazer-title">支线 · 星之守望者 <small class="side-quest-tag">可选</small></h3>
+              <p class="side-quest-open">
+                觉得这门课有用？去 GitHub 给 djzoom/AURORA 点个 Star，能让更多人找到它。
+                这条支线完全可选，游戏不会因此锁住任何章节；点了按钮就直接发放，+20 XP。
+              </p>
+              <p class="side-quest-done" hidden>✓ 已领取「星之守望者」。谢谢你帮别人找到这门课。</p>
+              <div class="side-quest-actions">
+                <a
+                  class="pixel-btn primary star-btn"
+                  id="stargazer-button"
+                  href="https://github.com/djzoom/AURORA"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="在 GitHub 上给 djzoom/AURORA 点 Star（新窗口打开），并领取支线战利品"
+                  ><span class="star-icon" aria-hidden="true">⭐</span><span class="star-label">Star on GitHub</span><span class="star-count" hidden></span></a
+                >
+              </div>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -96,7 +148,10 @@
           <a href="https://github.com/djzoom/AURORA/tree/main/notebooks" target="_blank" rel="noopener">99 课地图</a> ·
           <a href="./video-library.html">视频资料</a> ·
           <a href="https://github.com/djzoom/AURORA" target="_blank" rel="noopener">GitHub</a> ·
-          <a href="#" class="share-action" id="share-link">分享本页</a>
+          <a href="#" class="share-action" id="share-link" data-share-trigger aria-haspopup="dialog">分享本页</a>
+        </p>
+        <p class="footer-star">
+          课程 99 课全部免费、MIT 开源。如果它帮到了你，点个 Star 能让更多人找到它：<span data-star-slot="pixel-btn"></span>
         </p>
       </footer>
 
@@ -131,8 +186,10 @@
           <a class="pixel-btn" href="https://github.com/djzoom/AURORA/tree/main/notebooks" target="_blank" rel="noopener">99 课地图</a>
           <a class="pixel-btn" href="./video-library.html">视频资料</a>
           <a class="pixel-btn" href="https://github.com/djzoom/AURORA" target="_blank" rel="noopener">GitHub</a>
-          <button class="pixel-btn primary share-action" type="button">分享本页</button>
+          <button class="pixel-btn primary share-action" type="button" data-share-trigger aria-haspopup="dialog">分享本页</button>
         </div>
+        <p class="more-note">课程全部免费、MIT 开源。觉得有用的话，给仓库点个 Star 能让更多人找到它：</p>
+        <div class="more-star" data-star-slot="pixel-btn"></div>
       </section>
 
       <!-- 移动端分页 Tab（桌面隐藏）：战斗独占一屏，次要信息分页呈现 -->
@@ -155,30 +212,11 @@
         }
       });
 
-      // 分享（页脚链接 + 「关于」页按钮共用）：优先系统分享面板，否则复制链接并就地反馈。
-      for (const trigger of document.querySelectorAll(".share-action")) {
-        trigger.addEventListener("click", async (event) => {
-        event.preventDefault();
-        const link = event.currentTarget;
-        const data = {
-          title: document.title,
-          text: "Aurora Quest：把 99 课音频 AI 课程打成一场 8-bit 冒险。",
-          url: location.href,
-        };
-        try {
-          if (navigator.share) {
-            await navigator.share(data);
-            return;
-          }
-          await navigator.clipboard.writeText(data.url);
-          const original = link.textContent;
-          link.textContent = "✓ 已复制链接";
-          setTimeout(() => (link.textContent = original), 2000);
-        } catch {
-          /* 用户取消系统分享等，静默即可 */
-        }
-        });
-      }
+    </script>
+    <!-- 分享面板 + Star 按钮（页脚链接与「关于」页按钮共用；文案在 src/growth.js 顶部） -->
+    <script type="module">
+      import { initGrowth } from "./src/growth.js?v=20261105-growth";
+      initGrowth({ page: "quest" });
     </script>
     <script type="module" src="./src/app.js?v=20260713-choice-reset"></script>
   </body>

@@ -5,7 +5,13 @@
 // 反馈窗口（答题后 460/820ms）内 inputLocked=true，所有改状态的动作都被挡住，
 // 保证延迟结算 commitAnswer 时世界没有被切章/重置/读档改变。
 
-import { QUESTS, XP_PER_QUESTION, XP_PER_PHASE_CLEAR } from "./data/quests.js";
+import {
+  QUESTS,
+  XP_PER_QUESTION,
+  XP_PER_PHASE_CLEAR,
+  XP_STARGAZER,
+  STARGAZER_ARTIFACT,
+} from "./data/quests.js";
 import { playSfx } from "./audio.js";
 import {
   defaultSave,
@@ -171,6 +177,21 @@ function commitAnswer(choiceIndex, question) {
   persist();
 }
 
+// ---- 可选支线：星之守望者 ----------------------------------------------------
+
+// 点 Star 按钮（链接本身会在新窗口打开 GitHub）就发放战利品。
+// 刻意不验证 Star 是否真的点了：验证做不到，也不该做——这是可选的顺手事，不是门槛。
+function claimStargazer() {
+  if (inputLocked) return;
+  if (state.inventory.some((entry) => entry.name === STARGAZER_ARTIFACT.name)) return;
+  ensureInventory(state, STARGAZER_ARTIFACT);
+  state.xp += XP_STARGAZER;
+  addLog(state, "支线", `领取「${STARGAZER_ARTIFACT.name}」。谢谢你帮更多人找到这门课。 +${XP_STARGAZER} XP。`);
+  playSfx("clear", state.muted);
+  render();
+  persist();
+}
+
 // ---- 静音与键盘 -------------------------------------------------------------
 
 function toggleMute() {
@@ -227,6 +248,7 @@ function wireEvents() {
   els.resetButton?.addEventListener("click", resetAdventure);
   els.muteButton?.addEventListener("click", toggleMute);
   els.nextButton?.addEventListener("click", advancePhase);
+  els.stargazerButton?.addEventListener("click", claimStargazer);
   window.addEventListener("keydown", handleKeydown);
 }
 

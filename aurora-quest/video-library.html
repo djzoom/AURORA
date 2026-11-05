@@ -9,6 +9,34 @@
     />
     <meta name="theme-color" content="#08111f" />
     <title>视频资料库 | AURORA Video Library</title>
+    <link rel="canonical" href="https://djzoom.github.io/AURORA/video-library.html" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' fill='%23060b18'/%3E%3Cpath fill='%23edf7ff' d='M2 3h12v1H2zM2 4h1v8H2zM13 4h1v8h-1zM2 12h12v1H2z'/%3E%3Cpath fill='%2366e8ff' d='M6 6h1v4H6zM7 7h1v2H7zM8 7h1v2H8zM9 8h1v1H9z'/%3E%3Cpath fill='%23ffc85e' d='M4 13h8v1H4z'/%3E%3C/svg%3E"
+    />
+    <!-- 社交预览卡（微博 / 微信外链 / X 等爬虫需要绝对地址） -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AURORA" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:url" content="https://djzoom.github.io/AURORA/video-library.html" />
+    <meta property="og:title" content="AURORA 视频资料库 · 92 条名师课，逐条对齐 L01–L99" />
+    <meta
+      property="og:description"
+      content="Karpathy · 3Blue1Brown · 李宏毅 · MIT… 从正弦波刷到 Whisper，可按课号、难度、语言筛选，看完打卡。课程 99 课全部免费、MIT 开源。"
+    />
+    <meta property="og:image" content="https://djzoom.github.io/AURORA/og/videos.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="AURORA 视频资料库像素风预览图：92 格通关地图与标题" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AURORA 视频资料库 · 92 条名师课，逐条对齐 L01–L99" />
+    <meta
+      name="twitter:description"
+      content="Karpathy · 3Blue1Brown · 李宏毅 · MIT… 从正弦波刷到 Whisper，可按课号、难度、语言筛选，看完打卡。课程 99 课全部免费、MIT 开源。"
+    />
+    <meta name="twitter:image" content="https://djzoom.github.io/AURORA/og/videos.png" />
+    <link rel="stylesheet" href="./growth.css?v=20261105-growth" />
     <style>
       /* 与 Aurora Quest 同一设计语言：深空 CRT + 霓虹调色板，硬直角 + 像素描边。
          独立成页（不依赖 styles.css），避免和游戏样式互相牵连。 */
@@ -105,6 +133,10 @@
       }
       .pixel-btn:hover { color: var(--cyan-strong); border-color: var(--cyan); transform: translate(-1px, -1px); }
       .pixel-btn:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5); }
+      .pixel-btn.primary { background: rgba(102, 232, 255, 0.14); border-color: var(--cyan); }
+      .pixel-btn.ghost { opacity: 0.85; }
+      .pixel-btn:disabled { cursor: not-allowed; opacity: 0.5; }
+      .topbar-links .star-btn { border-color: rgba(255, 200, 94, 0.5); }
 
       /* 简介条 */
       .intro {
@@ -199,7 +231,7 @@
       .medals .locked { opacity: 0.25; filter: grayscale(1); }
       .hud-hint { flex-basis: 100%; margin: 0; font-family: var(--mono); font-size: 0.72rem; color: var(--muted); }
       .hud-hint.crown { color: var(--amber); text-shadow: 0 0 10px rgba(255, 200, 94, 0.4); }
-      .hud-actions { margin-left: auto; }
+      .hud-actions { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
       .pixel-btn.danger { color: var(--magenta); border-color: var(--magenta); }
 
       /* 打卡按钮与已看卡片态 */
@@ -288,6 +320,7 @@
 
       .footer { margin-top: 34px; text-align: center; color: var(--muted); font-size: 0.76rem; font-family: var(--mono); line-height: 1.8; }
       .footer a { color: var(--cyan); }
+      .footer-star { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px 10px; margin-top: 8px; }
       kbd {
         font-family: var(--mono);
         border: 1px solid var(--line);
@@ -317,7 +350,8 @@
             rel="noopener"
             >源文档 (Markdown)</a
           >
-          <button class="pixel-btn" id="share-button" type="button">🔗 分享</button>
+          <button class="pixel-btn" id="share-button" type="button" data-share-trigger aria-haspopup="dialog">🔗 分享</button>
+          <span data-star-slot="pixel-btn"></span>
         </nav>
       </header>
 
@@ -336,6 +370,7 @@
         <span class="stat">阶段通关 <strong id="hud-phases">0</strong><span id="hud-phase-total">/0</span></span>
         <span class="medals" id="hud-medals" title="里程碑：10 🥉 · 25 🥈 · 50 🥇 · 75 💎 · 全部 👑"></span>
         <span class="hud-actions">
+          <button class="pixel-btn" id="progress-card" type="button" title="把进度画成一张图保存，适合发小红书 / 朋友圈">📸 保存进度卡</button>
           <button class="pixel-btn" id="clear-watched" type="button">清空打卡</button>
         </span>
         <p class="hud-hint" id="hud-hint" aria-live="polite"></p>
@@ -392,6 +427,9 @@
           >（改 Markdown 后跑 <kbd>node scripts/generate_video_library_data.mjs</kbd> 重新生成）。
           ⚠️ = 单视频直链未逐一核实，以频道 + 搜索关键词为准。
         </p>
+        <p class="footer-star">
+          课程 99 课全部免费、MIT 开源。如果它帮到了你，点个 Star 能让更多人找到它：<span data-star-slot="pixel-btn"></span>
+        </p>
       </footer>
     </div>
 
@@ -408,6 +446,8 @@
         milestones,
         nextMilestone,
       } from "./src/video-library-state.js";
+      import { initGrowth, maybeStarToast } from "./src/growth.js?v=20261105-growth";
+      import { downloadProgressCard } from "./src/progress-card.js?v=20261105-growth";
 
       const state = { query: "", phase: "", diff: "", lang: "", topPick: false, watch: "" };
       const validIds = new Set(videoLibrary.items.map((item) => item.id));
@@ -572,6 +612,8 @@
         toggleWatched(save, btn.dataset.id);
         persist(save);
         render();
+        // 刷到 5 条 / 20 条时各提示一次「点个 Star」；关过就不再出现（见 growth.js）。
+        maybeStarToast(watchedCount(save));
       });
 
       // 清空打卡：两段式确认（第一次点击进入待确认态，3 秒不点自动撤回）。
@@ -613,26 +655,44 @@
         }
       });
 
-      // 分享：优先系统分享面板（移动端），否则复制链接到剪贴板并给出反馈。
-      const shareBtn = document.getElementById("share-button");
-      shareBtn.addEventListener("click", async () => {
-        const data = {
-          title: document.title,
-          text: "AURORA 视频资料库：92 条名师名校教程，逐条对齐 L01–L99，从正弦波刷到 Whisper。",
-          url: location.href,
-        };
+      // 分享面板 + Star 按钮（文案在 src/growth.js 顶部的 GROWTH 数据块里）。
+      initGrowth({ page: "videos" });
+
+      // 进度卡：把 N/总数、连续天数、奖章和 92 格通关地图画成 1080×1350 的 PNG 下载。
+      const cardBtn = document.getElementById("progress-card");
+      cardBtn.addEventListener("click", async () => {
+        const count = watchedCount(save);
+        const total = videoLibrary.count;
+        const original = cardBtn.textContent;
+        cardBtn.disabled = true;
+        cardBtn.textContent = "绘制中…";
         try {
-          if (navigator.share) {
-            await navigator.share(data);
-            return;
-          }
-          await navigator.clipboard.writeText(data.url);
-          const original = shareBtn.textContent;
-          shareBtn.textContent = "✓ 已复制链接";
-          setTimeout(() => (shareBtn.textContent = original), 2000);
+          await downloadProgressCard({
+            count,
+            total,
+            streak: streakDays(save),
+            phasesDone: videoLibrary.phases.filter((phase) => {
+              const { done, total: t } = phaseStats(phase);
+              return t > 0 && done >= t;
+            }).length,
+            phasesTotal: videoLibrary.phases.length,
+            medals: milestones(total).map((m) => ({ ...m, unlocked: count >= m.at })),
+            cells: videoLibrary.items.map((item) => Boolean(save.watched[item.id])),
+            nextHint: (() => {
+              const next = nextMilestone(total, count);
+              if (!count) return "还没开始——看完第一条就回来打卡。";
+              if (next) return `再刷 ${next.at - count} 条解锁 ${next.icon} ${next.name}`;
+              return "👑 全通关：现在回 notebook，把它们全部亲手写一遍。";
+            })(),
+          });
+          cardBtn.textContent = "✓ 已保存";
         } catch {
-          /* 用户取消系统分享等，静默即可 */
+          cardBtn.textContent = "保存失败";
         }
+        setTimeout(() => {
+          cardBtn.textContent = original;
+          cardBtn.disabled = false;
+        }, 2000);
       });
 
       render();

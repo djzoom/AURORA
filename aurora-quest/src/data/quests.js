@@ -6,6 +6,14 @@ export const XP_PER_QUESTION = 30;
 export const XP_PER_PHASE_CLEAR = 60;
 export const XP_PER_LEVEL = 120;
 
+// 可选支线「星之守望者」：点 Star 按钮（跳转 GitHub）即发放，不验证、不作为任何前置条件。
+export const XP_STARGAZER = 20;
+export const STARGAZER_ARTIFACT = {
+  icon: "★",
+  name: "星之守望者",
+  desc: "你给 AURORA 点了 Star，让更多人能找到这门课。可选支线，谢谢。",
+};
+
 const q = (prompt, choices, answer, hint, note) => ({
   prompt,
   choices,

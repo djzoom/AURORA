@@ -1,0 +1,170 @@
+<!doctype html>
+<!-- 社交预览图模板（1200×630）：由 scripts/build_growth_assets.py 用 Playwright 渲染成 og/videos.png。
+     不部署、不引外部资源；像素风与 video-library.html 同一套调色板。 -->
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      :root {
+        --ink: #04070e;
+        --panel: #0b1428;
+        --panel-deep: #070d1d;
+        --line: rgba(140, 197, 255, 0.35);
+        --text: #edf7ff;
+        --muted: #9fb4cb;
+        --cyan: #66e8ff;
+        --cyan-strong: #b8fbff;
+        --amber: #ffc85e;
+        --magenta: #ff6f91;
+        --green: #8ff3a5;
+        --mono: "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        --sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC",
+          "Noto Sans CJK SC", system-ui, sans-serif;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+      body {
+        position: relative;
+        color: var(--text);
+        font-family: var(--sans);
+        background:
+          radial-gradient(circle at 20% 15%, rgba(102, 232, 255, 0.16), transparent 32%),
+          radial-gradient(circle at 85% 85%, rgba(255, 111, 145, 0.14), transparent 30%),
+          linear-gradient(180deg, #050814 0%, #081223 55%, #04070e 100%);
+      }
+      body::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: repeating-linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.035),
+          rgba(255, 255, 255, 0.035) 2px,
+          transparent 2px,
+          transparent 6px
+        );
+      }
+      .frame {
+        position: absolute;
+        inset: 28px;
+        border: 4px solid var(--line);
+        box-shadow: 0 0 0 4px var(--ink), 10px 10px 0 rgba(0, 0, 0, 0.5);
+        background: rgba(11, 20, 40, 0.75);
+        display: grid;
+        grid-template-columns: 1fr 400px;
+        padding: 52px 64px;
+        gap: 32px;
+      }
+      .copy { display: flex; flex-direction: column; justify-content: center; gap: 18px; }
+      .eyebrow {
+        font-family: var(--mono);
+        font-size: 24px;
+        letter-spacing: 0.3em;
+        color: var(--cyan);
+        text-shadow: 4px 4px 0 var(--ink), 0 0 18px rgba(102, 232, 255, 0.55);
+      }
+      h1 {
+        margin: 0;
+        font-size: 58px;
+        line-height: 1.2;
+        font-weight: 700;
+        text-shadow: 5px 5px 0 var(--ink);
+      }
+      h1 em { font-style: normal; color: var(--amber); }
+      .hook { margin: 0; font-size: 26px; line-height: 1.55; color: var(--muted); text-shadow: 3px 3px 0 var(--ink); }
+      .pills { display: flex; gap: 12px; flex-wrap: wrap; }
+      .pill {
+        font-family: var(--mono);
+        font-size: 20px;
+        padding: 8px 14px;
+        border: 3px solid var(--line);
+        background: var(--panel-deep);
+        box-shadow: 0 4px 0 var(--ink);
+        color: var(--text);
+      }
+      .pill.amber { color: var(--amber); border-color: var(--amber); }
+      .pill.green { color: var(--green); border-color: var(--green); }
+      .url {
+        margin-top: 6px;
+        font-family: var(--mono);
+        font-size: 22px;
+        color: var(--cyan-strong);
+        text-shadow: 3px 3px 0 var(--ink);
+      }
+      .map {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 16px;
+      }
+      .map-title {
+        font-family: var(--mono);
+        font-size: 18px;
+        letter-spacing: 0.18em;
+        color: var(--muted);
+        text-shadow: 3px 3px 0 var(--ink);
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(12, 26px);
+        gap: 7px;
+        padding: 16px;
+        background: var(--panel-deep);
+        border: 3px solid var(--line);
+        box-shadow: 0 0 0 3px var(--ink), 8px 8px 0 rgba(0, 0, 0, 0.5);
+        width: max-content;
+      }
+      .grid i {
+        display: block;
+        width: 26px;
+        height: 26px;
+        background: var(--panel);
+        border: 2px solid var(--line);
+      }
+      .grid i.on { background: var(--green); border-color: var(--green); box-shadow: 0 0 8px rgba(143, 243, 165, 0.5); }
+      .grid i.top { background: var(--amber); border-color: var(--amber); }
+      .legend { display: flex; gap: 18px; font-family: var(--mono); font-size: 17px; color: var(--muted); }
+      .legend b { display: inline-block; width: 14px; height: 14px; margin-right: 6px; vertical-align: -1px; }
+      .legend .g { background: var(--green); }
+      .legend .a { background: var(--amber); }
+      .legend .n { background: var(--panel); border: 2px solid var(--line); box-sizing: border-box; }
+    </style>
+  </head>
+  <body>
+    <div class="frame">
+      <div class="copy">
+        <div class="eyebrow">AURORA · VIDEO LIBRARY</div>
+        <h1>92 条名师课<br />逐条对齐 <em>L01–L99</em></h1>
+        <p class="hook">Karpathy · 3Blue1Brown · 李宏毅 · MIT…<br />从正弦波刷到 Whisper，看完打卡。</p>
+        <div class="pills">
+          <span class="pill amber">92 条视频</span>
+          <span class="pill green">课程免费 · MIT</span>
+          <span class="pill">按课号筛选</span>
+        </div>
+        <div class="url">github.com/djzoom/AURORA</div>
+      </div>
+      <div class="map">
+        <div class="map-title">通关地图 · 每格一条视频</div>
+        <div class="grid" id="grid"></div>
+        <div class="legend">
+          <span><b class="g"></b>已刷</span>
+          <span><b class="a"></b>首选</span>
+          <span><b class="n"></b>待刷</span>
+        </div>
+      </div>
+    </div>
+    <script>
+      // 92 格；前 37 格点亮当作“刷了一部分”的示意，少量金格表示首选课。
+      const grid = document.getElementById("grid");
+      const topPicks = new Set([2, 9, 17, 23, 31, 44, 58, 66, 79, 88]);
+      for (let i = 0; i < 92; i += 1) {
+        const cell = document.createElement("i");
+        if (topPicks.has(i)) cell.className = "top";
+        else if (i < 37) cell.className = "on";
+        grid.appendChild(cell);
+      }
+      document.body.dataset.ready = "1";
+    </script>
+  </body>
+</html>

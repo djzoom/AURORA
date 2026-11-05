@@ -3,7 +3,7 @@
 //
 // handlers 契约：{ onChoice(index), onSelectPhase(phaseIndex) }
 
-import { QUESTS, XP_PER_LEVEL } from "./data/quests.js";
+import { QUESTS, XP_PER_LEVEL, STARGAZER_ARTIFACT } from "./data/quests.js";
 import { COURSE_INTRO, COURSE_PHASES } from "./data/worldmap.js?v=20260713-choice-reset";
 import { drawSprite, SPRITE_BY_QUEST } from "./sprites.js";
 import {
@@ -41,6 +41,8 @@ export const els = {
   inventoryList: document.getElementById("inventory-list"),
   roadmapList: document.getElementById("roadmap-list"),
   mapCaption: document.getElementById("map-caption"),
+  stargazerCard: document.getElementById("stargazer-card"),
+  stargazerButton: document.getElementById("stargazer-button"),
 };
 
 const HP_CELLS = 10;
@@ -312,6 +314,18 @@ function renderInventory(state) {
     card.appendChild(body);
     els.inventoryList.appendChild(card);
   });
+  renderStargazer(state);
+}
+
+// 可选支线卡：领过就切到「已领取」态（按钮仍可点，照常跳 GitHub）。
+function renderStargazer(state) {
+  if (!els.stargazerCard) return;
+  const claimed = state.inventory.some((item) => item.name === STARGAZER_ARTIFACT.name);
+  els.stargazerCard.classList.toggle("claimed", claimed);
+  const open = els.stargazerCard.querySelector(".side-quest-open");
+  const done = els.stargazerCard.querySelector(".side-quest-done");
+  if (open) open.hidden = claimed;
+  if (done) done.hidden = !claimed;
 }
 
 function renderLog(state) {

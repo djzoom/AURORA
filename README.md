@@ -126,6 +126,10 @@ video library → [`VIDEO_LIBRARY`](docs/current/course/VIDEO_LIBRARY.md).
 
 - companion RPG → **[Aurora Quest（在线可玩）](https://djzoom.github.io/AURORA/)** · 8-bit 辅助教学站点，含像素世界地图（99 课 · 依赖拓扑 · 缩放看细节）与[交互版视频资料库](https://djzoom.github.io/AURORA/video-library.html)（92 条名师课 + 打卡）；推送 `main` 自动部署。
 
+**If this helped you, star the repo** — it is how other people find a free course on GitHub.
+**Share:** the two companion pages have ready-made share text and QR codes →
+[Aurora Quest](https://djzoom.github.io/AURORA/) · [Video Library](https://djzoom.github.io/AURORA/video-library.html).
+
 ```bash
 pip install -e ".[dev,notebooks]" && jupyter lab   # then open notebooks/0_foundation/L01_motivation.ipynb
 ```
@@ -197,6 +201,10 @@ pip install -e ".[dev,notebooks]" && jupyter lab
 > 📺 **视频资料库**：[`docs/current/course/VIDEO_LIBRARY.md`](docs/current/course/VIDEO_LIBRARY.md)
 > —— 92 条名师名校 YouTube 教程（Karpathy · 3Blue1Brown · 李宏毅 · MIT…），逐条对齐
 > L01–L99；卡住时按课号回查。可交互筛选版随 Aurora Quest 一起部署（`video-library.html`）。
+
+> ⭐ **如果这门课帮到了你，给仓库点个 Star**——免费课程在 GitHub 上被更多人找到，靠的就是这个。
+> **分享**：两个伴生页面都备好了推荐语和二维码（小红书 / 微信 / B 站不带外链，直接「GitHub 搜 djzoom/AURORA」）→
+> [Aurora Quest](https://djzoom.github.io/AURORA/) · [视频资料库](https://djzoom.github.io/AURORA/video-library.html)。
 
 带上好奇心就够了。我们白板见。 🎧
 
