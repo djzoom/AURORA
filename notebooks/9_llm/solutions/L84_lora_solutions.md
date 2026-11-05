@@ -26,8 +26,8 @@ class LoRALinear(nn.Module):
 **要点**：
 
 - `base.weight.requires_grad = False` 冻结预训练权重，可训练参数只剩 `lora_A` + `lora_B`，
-  合计 `rank * in_features + out_features * rank`（cell 12 检查 1：`2×64×4 = 512`）。
+  合计 `rank * in_features + out_features * rank`（练习后的检查格，检查 1：`2×64×4 = 512`）。
 - `lora_B` 零初始化保证训练起点 `ΔW = B·A = 0`，输出与预训练完全一致（无扰动启动）。
 - `(x @ lora_A.T) @ lora_B.T` 先降维到 `rank` 再升回 `out_features`，对 2D `(batch, d)`
-  和 3D `(batch, seq, d)` 输入都通过广播自动兼容（cell 12 检查 2/4）。
-- `scale = alpha / rank`；当 `alpha=8, rank=4` 时 `scale=2.0`（cell 12 检查 5）。
+  和 3D `(batch, seq, d)` 输入都通过广播自动兼容（检查格中的检查 2/4）。
+- `scale = alpha / rank`；当 `alpha=8, rank=4` 时 `scale=2.0`（检查格中的检查 5）。
